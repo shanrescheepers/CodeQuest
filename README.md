@@ -11,7 +11,7 @@
 ![Github language count](https://img.shields.io/github/languages/count/shanrescheepers/CodeQuest)
 ![Github code size in bytes](https://img.shields.io/github/languages/code-size/shanrescheepers/CodeQuest)
 ![Github repo stars](https://img.shields.io/github/stars/shanrescheepers/CodeQuest?style=social)
-![Github forks](https://img.shields.io/github/forks/shanrescheepers/CodeQuest?style=social)aawg1.png
+![Github forks](https://img.shields.io/github/forks/shanrescheepers/CodeQuest?style=social)
 ![Github top language](https://img.shields.io/github/languages/top/shanrescheepers/CodeQuest)
 
 
