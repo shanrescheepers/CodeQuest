@@ -6,6 +6,7 @@
 
 <br/>
 
+![Github label](https://img.shields.io/badge/CodeQuest-2022-orange)
 ![Github repo size](https://img.shields.io/github/repo-size/shanrescheepers/CodeQuest&color=<orange>)
 ![Github watchers](https://img.shields.io/github/watchers/shanrescheepers/CodeQuest?style=social)
 ![Github language count](https://img.shields.io/github/languages/count/shanrescheepers/CodeQuest)
