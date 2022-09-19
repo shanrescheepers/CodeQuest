@@ -6,14 +6,14 @@
 //     checkUser = (email, password) => {
 //     }
 // } 
-import Navigation from '../components/Navigation';
+// import Navigation from '../components/Navigation';
 import React from 'react';
 
 const FeedPage = () => {
     return (
         <div>
-            <Navigation/>
-            
+            {/* <Navigation/> */}
+
         </div>
     );
 };
