@@ -10,6 +10,7 @@ import ProfilePage from './pages/ProfilePage';
 import IndividualQuestion from './pages/IndividualQuestion';
 import QuestionsPage from './pages/QuestionsPage';
 
+
 function App() {
   return (
     <div className="App">
