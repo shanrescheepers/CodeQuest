@@ -28,7 +28,7 @@
 <p align="center">
 
 <a href="https://github.com/shanrescheepers/CodeQuest">
-<!-- <img src="https://github.com/shanrescheepers/21100387_dv200_online_shop/blob/master/client/src/assets/logo.svg" alt="Logo" width="140" height="140"> -->
+<img src="https://github.com/shanrescheepers/CodeQuest/blob/master/client/src/assets/logo2.jpg" alt="Logo" width="140" height="140">
 
 </a>
 
