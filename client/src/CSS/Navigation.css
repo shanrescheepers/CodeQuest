@@ -1,0 +1,147 @@
+.Logo{
+    float: left;
+    width: 120px;
+    padding: 20px;
+    padding-left: 85px;
+    margin-right: 50px;
+}
+
+.logButton button{
+    background-color: #2b2b2b;
+    text-transform: lowercase;
+    font-weight: 900;
+}
+
+.sideNav{
+    width: 250px;
+    height: 90vh;
+   left:0;
+   margin-left: 10px;
+}
+
+.profile-section{
+    float: left;
+    text-align: center;
+    margin-left:60px;
+    margin-top: 25px;
+    
+}
+.profile-section h5{
+    font-family: 'Open Sans';
+    margin-top: 0px;
+    font-weight: 300;
+}
+
+.profile-section h3{
+    font-family: 'Open Sans';
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-size: 22px;
+  
+}
+
+.profile-Img{
+    width: 90px;
+    margin-bottom: 0;
+}
+
+.Navigation{
+    margin-top: 20px;
+    float: left;
+    margin-left: 0px;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+}
+
+li{
+   list-style: none; 
+   margin-left: -10px;
+}
+
+
+li button{
+    font-family: 'Open Sans';
+    background: none;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    margin-bottom: 17px;
+    width: 100%;
+    
+ }
+ a{
+    padding: 12px;
+    width: 100%;
+    width: 300px;
+    background: none;
+ }
+
+ .icon{
+    padding-right: 30px;
+    left: 0;
+    margin-left: 60px;
+    position: absolute;
+ }
+
+ .text{
+    padding-left: 50px;
+    text-align: left;
+    margin-left: 50px;
+ }
+
+
+ .active{
+    background-color: #F6F6FA;
+    border-left: 7px solid #2b2b2b;
+    padding-left: 5px;
+ }
+
+ /*Discord Block*/
+
+ .discordBlock{
+    background-color: #2b2b2b;
+    color: #F6F6FA;
+    padding: 20px;
+    width: 170px;
+    border-radius: 20px;
+    height: 80px;
+    float: left;
+    margin-top: -130px;
+    text-align: center;
+    margin-left: 30px;
+    box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+ }
+
+ .discordBlock h6{
+    margin:0;
+    font-weight: 300;
+ }
+
+ .discordBlock h4{
+    margin:0;
+    margin-top:2px;
+    margin-bottom: 5px;
+    
+ }
+
+ .discordBlock button{
+    margin:0;
+    margin-top:10px;
+    height: 28px;
+    text-transform: capitalize;
+    
+    
+ }
+
+ .topNavBar button{
+    text-transform: capitalize;
+
+
+ }
+
+ .MuiButtonBase-root .MuiButton-root .MuiButton-outlined .MuiButton-outlinedPrimary .MuiButton-sizeMedium .MuiButton-outlinedSizeMedium .css-1rwt2y5-MuiButtonBase-root-MuiButton-root{
+    border: none;
+    outline: none;
+    color: #2b2b2b;
+ }

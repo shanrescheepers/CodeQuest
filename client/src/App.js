@@ -1,23 +1,32 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Router } from 'react-router-dom';
 
+//Import Pages
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import AdminPage from './pages/AdminPage';
+import FeedPage from './pages/FeedPage';
+import ProfilePage from './pages/ProfilePage';
+import IndividualQuestion from './pages/IndividualQuestion';
+import QuestionsPage from './pages/QuestionsPage';
+
 function App() {
   return (
     <div className="App">
-      <TopNavBar />
+  
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<AdminLogin />} />
-          <Route path="/adminmanager" element={<AdminPage />} />
-          <Route path="/" element={<Homepage />} />
-          {/* {/* <Route path="/printshop" element={<Homepage />} /> */}
-          <Route path="/printshop" element={<ShopImages />} />
-          <Route path="/productpage" element={<ProductPage />} />
-          <Route path="/theartists" element={<Artists />} />
-          <Route path="/cartpage" element={<CartPage />} />
+          <Route path="/LoginPage" element={<LoginPage />} />
+          <Route path="/RegisterPage" element={<RegisterPage/>} />
+          <Route path="/AdminPage" element={<AdminPage />} />
+          <Route path="/" element={<FeedPage />} />
+          <Route path="/FeedPage" element={<FeedPage/>} />
+          <Route path="/ProfilePage" element={<ProfilePage />} />
+          <Route path="/IndividualQuestion" element={<IndividualQuestion />} />
+          <Route path="/QuestionsPage" element={<QuestionsPage />} />
         </Routes>
       </BrowserRouter>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
