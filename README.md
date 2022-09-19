@@ -5,7 +5,7 @@
 
 
 <br/>
-![Github top language]https://img.shields.io/static/v1?label=<CodeQuest>&message=<2022>&color=<orange>
+![Github top language](https://img.shields.io/static/v1?label=<CodeQuest>&message=<2022>&color=<orange>)
 ![Github repo size](https://img.shields.io/github/repo-size/shanrescheepers/CodeQuest&color=<orange>)
 ![Github watchers](https://img.shields.io/github/watchers/shanrescheepers/CodeQuest?style=social)
 ![Github language count](https://img.shields.io/github/languages/count/shanrescheepers/CodeQuest)
