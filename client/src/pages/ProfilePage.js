@@ -92,6 +92,19 @@ const ProfilePage = () => {
                     </div>
                 </div>
 
+
+                <div className='pp_activity_con'>
+                    <p>Questions</p>
+                    <p>Answers</p>
+
+                    <div className='pp_userInput_card_con'>
+                        <div className='pp_UserInput_card'></div>
+                    </div>
+    
+
+                </div>
+
+
             </div>
 
         </div>
