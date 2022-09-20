@@ -147,3 +147,9 @@ li button{
     outline: none;
     color: #2b2b2b;
  }
+
+ .signIn-Op{
+    text-align: center;
+    margin-top: 20px;
+    color: #2b2b2b;
+ }
