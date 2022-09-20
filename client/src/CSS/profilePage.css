@@ -17,7 +17,7 @@
     padding-bottom: 10%;
 }
 
-.pp_main_card::-webkit-scrollbar { 
+.pp_main_card::-webkit-scrollbar {
     display: none;
 }
 
@@ -50,17 +50,17 @@ p {
     text-align: left;
 }
 
-.pp_welcome_banner_img{
-width: 40%;
-height: 100%;
-/* background-color: aquamarine; */
-position: relative;
-/* left: 50%; */
-float: right;
-background-image: url('../assets/profilePageAssets/PPImage.png');
-background-position: center;
-background-size: contain;
-background-repeat: no-repeat;
+.pp_welcome_banner_img {
+    width: 40%;
+    height: 100%;
+    /* background-color: aquamarine; */
+    position: relative;
+    /* left: 50%; */
+    float: right;
+    background-image: url('../assets/profilePageAssets/PPImage.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 
@@ -119,7 +119,7 @@ background-repeat: no-repeat;
 }
 
 .pp_rank_img {
-    width: 70%;
+    width: 60%;
     height: 45%;
     position: relative;
     left: 50%;
@@ -213,7 +213,7 @@ h2 {
     padding-left: 10px;
 }
 
-.pp_badge_card_slide::-webkit-scrollbar { 
+.pp_badge_card_slide::-webkit-scrollbar {
     display: none;
 }
 
@@ -262,12 +262,37 @@ h2 {
     -moz-box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
 }
 
+.pp_badge_card img{
+    width: 30%;
+    height: 30%;
+    position: relative;
+    left: 50%;
+    top: 10%;
+    transform: translateX(-50%);
+    margin: 0%;
+}
+
+.pp_badge_heading {
+    color: black;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 15%;
+}
+
+.pp_badge_desc {
+    width: 60%;
+    color: black;
+    text-align: center;
+    margin: 0 auto;
+    /* justify-content: center; */
+}
+
 
 
 
 /* Activity Section  */
 
-.pp_activity_con{
+.pp_activity_con {
     width: 90%;
     height: auto;
     position: relative;
@@ -278,26 +303,46 @@ h2 {
     /* background-color: #2b2b2b; */
 }
 
-.pp_activity_con p{
-  display: inline-block;
-  color: black;
-  margin-right: 5px;
-  text-align: center;
-  /* background-color: gray; */
-  width: 20%;
-  height: 3%;
-  cursor: pointer;
-  margin-bottom: 20px;
+
+
+.pp_questions_btn{
+    display: inline-block;
+    color: black;
+    margin-right: 5px;
+    text-align: center;
+    /* background-color: gray; */
+    width: 15%;
+    height: 25px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    margin-left: 50px;
 }
 
-.pp_activity_con p:hover{
+.pp_questions_btn:hover {
     border-bottom: black solid 5px;
-  }
+}
+
+.pp_answers_btn{
+    display: inline-block;
+    color: black;
+    margin-right: 5px;
+    text-align: center;
+    /* background-color: gray; */
+    width: 15%;
+    height: 25px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.pp_answers_btn:hover {
+    border-bottom: black solid 5px;
+}
+
 
 
 /* Button Click, Check to see what is being displayed ( Answer or Question) */
 
-.pp_question_active{
+.pp_question_active {
     border-bottom: #FF7900 solid 5px;
 }
 
@@ -305,7 +350,7 @@ h2 {
 
 /* Question and Answers */
 
-.pp_userInput_card_con{
+.pp_userInput_card_con {
     width: 100%;
     min-height: 220px;
     height: auto;
@@ -317,13 +362,14 @@ h2 {
     padding-top: 20px;
 }
 
-.pp_userInput_card_con::-webkit-scrollbar { 
+.pp_userInput_card_con::-webkit-scrollbar {
     display: none;
 }
 
-.pp_UserInput_card{
+.pp_UserInput_card {
     width: 90%;
-    height: 200px;
+    min-height: 250px;
+    height: auto;
     /* background-color: white; */
     position: relative;
     left: 50%;
@@ -334,4 +380,131 @@ h2 {
     box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
     -webkit-box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
     -moz-box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
+}
+
+.pp_profile_picture{
+    float: left;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 10%;
+    left: 2%;
+}
+
+.pp_username{
+    float: left;
+    padding: 0;
+    margin: 0;
+    /* height: 5px; */
+    position: absolute;
+    top: 35px;
+    left: 75px;
+    font-size: 11pt;
+    /* background-color: #FF7900; */
+    color: black;
+}
+
+.pp_date{
+    /* float: left; */
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 53px;
+    left: 75px;
+    font-size: 8pt;
+    /* background-color: #FF7900; */
+    color: black;
+}
+
+.pp_question_con{
+    width: 95%;
+    max-height: 80px;
+    /* background-color: #FF7900; */
+    position: relative;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border-bottom: #b7b7b7 solid 1px;
+}
+
+.pp_question_con::-webkit-scrollbar {
+    display: none;
+}
+
+.pp_question_con p{
+    position: relative;
+    /* top: 50%;
+    transform: translateY(-50%); */
+    color: black;
+}
+
+.pp_delete{
+    padding: 0%;
+    margin: 0%;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    /* background-color: #2b2b2b; */
+    top: 13%;
+    left: 92%;
+    cursor: pointer;
+}
+
+.pp_up_Vote_img{
+    padding: 0%;
+    margin: 0%;
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    /* background-color: #2b2b2b; */
+    top: 80%;
+    left: 3%;
+}
+
+.pp_up_Votes_text{
+ color: black;
+ padding: 0%;
+ margin: 0%;
+ position: absolute;
+ /* background-color: #2b2b2b; */
+ top: 81%;
+ left: 7%;
+ font-size: 14pt;
+}
+
+.pp_down_Vote_img{
+    padding: 0%;
+    margin: 0%;
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    /* background-color: #2b2b2b; */
+    top: 80%;
+    left: 15%;
+}
+
+.pp_down_Votes_text{
+    color: black;
+    padding: 0%;
+    margin: 0%;
+    position: absolute;
+    /* background-color: #2b2b2b; */
+    top: 81%;
+    left: 19%;
+    font-size: 14pt;
+}
+
+.answers{
+    color: black;
+    padding: 0%;
+    margin: 0%;
+    position: absolute;
+    /* background-color: #2b2b2b; */
+    top: 81%;
+    right: 3%;
+    /* left: 19%; */
+    float: right;
+    font-size: 14pt; 
 }
