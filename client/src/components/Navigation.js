@@ -1,4 +1,6 @@
 import React from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 import axios from "axios";
 import { NavLink } from 'react-router-dom';
 import logo from '../assets/logo.png';
@@ -12,12 +14,21 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
+
 // import Stack from '@mui/material/Stack';
 
 
 const Navigation = () => {
+  // const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
-
+  const getAdminPermission = (rankId) => {
+    if (rankId === '1') {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
 
   const Search = styled('div')(({ theme }) => ({
@@ -61,14 +72,9 @@ const Navigation = () => {
         width: '60ch',
       },
     },
-
-
   }));
 
   return (
-
-
-
     <div>
       <div className="navContainer">
 
@@ -104,16 +110,27 @@ const Navigation = () => {
           </div>
 
 
-
           <div className='Navigation'>
-            <div className="list">
-              <li><NavLink exact activeclassname="active" to="/FeedPage"><button><HomeOutlinedIcon className='icon' /><div className="text">Feed</div></button></NavLink></li>
-              <li><NavLink activeclassname="active" to="/QuestionsPage"><button><QuestionAnswerOutlinedIcon className='icon' /><div className="text">Questions</div></button></NavLink></li>
-              <li><NavLink activeclassname="active" to="/ProfilePage"><button><PersonOutlineOutlinedIcon className='icon' /><div className="text">Profile</div></button></NavLink></li>
-              <li><NavLink activeclassname="active" to="/AdminPage"><button><AdminPanelSettingsOutlinedIcon className='icon' /><div className="text">Admin</div></button></NavLink></li>
+            {loggedIn ?
+              <div className="list">
 
-            </div>
+                <li><NavLink exact activeclassname="active" to="/FeedPage"><button><HomeOutlinedIcon className='icon' /><div className="text">Feed</div></button></NavLink></li>
+                <li><NavLink activeclassname="active" to="/QuestionsPage"><button><QuestionAnswerOutlinedIcon className='icon' /><div className="text">Questions</div></button></NavLink></li>
+                <li><NavLink activeclassname="active" to="/ProfilePage"><button><PersonOutlineOutlinedIcon className='icon' /><div className="text">Profile</div></button></NavLink></li>
 
+                {/* BELOW: This will allow for ONLY the ADMIN (based on rank from DB) to view the admin nav icon, and navigate onto the AdminPage */}
+                {/* ipv 1 this will be a useState. useState update from axios call that's being plled from the user's ID */}
+                {getAdminPermission('1') ?
+                  <li><NavLink activeclassname="active" to="/AdminPage">
+                    <button><AdminPanelSettingsOutlinedIcon className='icon' />
+                      <div className="text">Admin</div>
+                    </button>
+                  </NavLink>
+                  </li>
+                  : <span></span>}
+              </div>
+              : <span></span>
+            }
           </div>
 
 
