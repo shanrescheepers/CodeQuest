@@ -24,10 +24,14 @@ const ProfilePage = () => {
                             }
                         }} variant="contained">Button</Button>
                     </div>
+
+                        <div className='pp_welcome_banner_img'></div>
+
                 </div>
 
 
                 <div className='pp_rank_score_con'>
+
                     <div className='pp_rank_con'>
                         <h2>Your Rank:</h2>
                         <div className='pp_rank_img_con'>
@@ -57,10 +61,35 @@ const ProfilePage = () => {
                                 <img src={fishLockImage} className='pp_rank_img'></img>
                                 <p>Diamond</p>
                             </div>
-                       
+
                         </div>
                     </div>
-                    <div className='pp_score_con'></div>
+
+
+                    <div className='pp_score_con'>
+                        <p>Your</p>
+                        <h2>Reliability Score:</h2>
+                        <div className='pp_score_con_score'>
+                            <h1>23</h1>
+                            <p>/100</p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div className='pp_badges_con'>
+                    <h2>Your Badges:</h2>
+                    <div className='pp_badge_card_slide'>
+                        <div className='pp_badge_card'></div>
+                        <div className='pp_badge_card'></div>
+                        <div className='pp_badge_card'></div>
+                        <div className='pp_badge_card'></div>
+                        <div className='pp_badge_card'></div>
+                        <div className='pp_badge_card'></div>
+                        <div className='pp_badge_card'></div>
+                    </div>
                 </div>
 
             </div>
