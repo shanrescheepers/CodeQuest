@@ -1,4 +1,4 @@
-body{
+.SignIn{
     width: 100%;
     min-height: 100vh;
     background: linear-gradient(
@@ -10,17 +10,57 @@ body{
     );
     height: 100vh;
     overflow-y: hidden;
+    top:0;
 }
 
 .SignIn-container{
     position: absolute;
     width: 400px;
-    height:420px;
+    height:550px;
     background-color: #F1F1FC;
     box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
     border-radius: 30px;
     top:0;
     left: 32%;
-    top:15%;
+    top:10%;
     padding: 50px;
 }
+
+.registerImg{
+    position: absolute;
+    width: 420px;
+    margin-top: 350px;
+    margin-left: 900px;
+}
+
+.SignIn-container h1{
+    margin-bottom: 0px;
+    margin-top: 2px;
+}
+
+.SignIn-container h4{
+    margin-bottom: 0px;
+    margin-top: 5px;
+    font-weight: 400;
+}
+
+.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root{
+    border-radius: 50px;
+
+    background-color: #ffffff;
+
+    margin-bottom: 0px;
+    float: left;
+    height: 50px;
+  }
+
+  .SignIn-container button{
+    margin:0;
+    float: left;
+    background-color: #FF7900;
+    margin-top:20px;
+    height:50px;
+    text-transform: capitalize;
+    border-radius: 50px;
+    margin-bottom: 25px;
+  }

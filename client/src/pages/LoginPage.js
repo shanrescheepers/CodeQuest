@@ -4,11 +4,14 @@ import loginImg from '../assets/loginImg.png';
 import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
 
-const LoginPage = () => {
+const LoginPage = (props) => {
 
+//Hide Navigation
+    props.funcNav(false);
     
-
+//Theme
     const theme = createTheme({
         palette: {
           primary: {
@@ -23,7 +26,8 @@ const LoginPage = () => {
       });
 
     return (
-        <ThemeProvider theme={theme}>
+        <div className="Login">
+        <ThemeProvider theme={theme} >
             <div className='login-container'>
                 <h1>Hey...</h1>
                 <h1>We missed you.</h1>
@@ -52,7 +56,7 @@ const LoginPage = () => {
                     borderBlock: 'none',
                     borderBlockColor: '#f1f1f1'
                 }}
-                id="outlined-basic" color='primary' label="Password" variant="outlined" />
+                id="outlined-basic" color='primary'  type="password" label="Password" variant="outlined" />
 
                 <a href='' className='link'><p>Forgot your password?</p></a>
 
@@ -63,13 +67,14 @@ const LoginPage = () => {
             }
           }} variant="contained" backgroundColor="primary">Log In</Button>
           
-          <p className='signIn-Op'>Don't have an account?<a href=''>Sign in</a></p>
+          <p className='signIn-Op'>Don't have an account?<a href='/RegisterPage'>Sign in</a></p>
 
             </div>
 
             <img src={loginImg} className="loginImg"></img>
             
         </ThemeProvider>
+        </div>
     );
 };
 

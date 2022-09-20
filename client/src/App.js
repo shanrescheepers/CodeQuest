@@ -10,17 +10,23 @@ import ProfilePage from './pages/ProfilePage';
 import IndividualQuestion from './pages/IndividualQuestion';
 import QuestionsPage from './pages/QuestionsPage';
 import Navigation from './components/Navigation';
-
+import { useState } from 'react';
 
 function App() {
+
+   const [showNav, setShowNav]= useState(true);
   return (
     <div className="App">
 
       <BrowserRouter>
-        <Navigation />
+      {   showNav &&
+          <nav>
+            <Navigation />
+          </nav>
+   } 
         <Routes>
-          <Route path="/LoginPage" element={<LoginPage />} />
-          <Route path="/RegisterPage" element={<RegisterPage />} />
+          <Route path="/LoginPage" element={<LoginPage funcNav={setShowNav} />} />
+          <Route path="/RegisterPage" element={<RegisterPage funcNav={setShowNav}/>} />
           <Route path="/AdminPage" element={<AdminPage />} />
           <Route path="/" element={<FeedPage />} />
           <Route path="/FeedPage" element={<FeedPage />} />
@@ -29,6 +35,8 @@ function App() {
           <Route path="/QuestionsPage" element={<QuestionsPage />} />
         </Routes>
       </BrowserRouter>
+
+      
       {/* <Footer /> */}
     </div>
   );
