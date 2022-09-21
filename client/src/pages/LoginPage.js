@@ -5,12 +5,18 @@ import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import Axios from 'axios';
+
 
 const LoginPage = (props) => {
 
+//=====================================================================================
 //Hide Navigation
     props.funcNav(false);
-    
+
+
+//=====================================================================================
 //Theme
     const theme = createTheme({
         palette: {
@@ -25,6 +31,56 @@ const LoginPage = (props) => {
         },
       });
 
+//=====================================================================================
+//Login functionality
+
+const navigate = useNavigate();
+
+//get form values
+let formVals = ["email", "password"];
+const [formValues, setFormValues] = useState(formVals);
+
+const getValues = (e) =>{
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+}
+
+//Login user function
+const loginUser = (e) => {
+    e.preventDefault(); 
+
+    let payload = {
+        email: formValues['email'],
+        password: formValues['password']
+    }
+
+    console.log(payload);
+
+    Axios.post('http://localhost:5000/api/loginUser', payload)
+    .then((res)=>{
+      console.log(res.data);
+      if(!res.data){
+        alert('Bad request');
+      }else{
+        if(res.data.user){
+        
+          sessionStorage.setItem('token', res.data.user);
+          sessionStorage.setItem('email', formValues['email']);
+          navigate("/Home");
+        }else{
+        //   setEditModal(
+        //   <UhOh close={setEditModal}/>
+        //     )
+        console.log("can't log in");
+        }
+      }
+    })
+    .catch(function(error){
+      console.log(error);
+    })
+
+}
+
     return (
         <div className="Login">
         <ThemeProvider theme={theme} >
@@ -32,6 +88,8 @@ const LoginPage = (props) => {
                 <h1>Hey...</h1>
                 <h1>We missed you.</h1>
                 <h4>Let's make some magic.</h4>
+                
+                <form onSubmit={loginUser}>              
 
                 <TextField sx={{
                     backgroundColor: '#ffffff',
@@ -43,7 +101,7 @@ const LoginPage = (props) => {
                     marginTop: '30px'
                     
                 }}
-                id="outlined-basic" color='primary' label="Email Address" variant="outlined" />
+                id="outlined-basic" onChange={getValues} name="email" color='primary' label="Email Address" variant="outlined" />
 
                 <TextField sx={{
                     backgroundColor: '#ffffff',
@@ -56,7 +114,7 @@ const LoginPage = (props) => {
                     borderBlock: 'none',
                     borderBlockColor: '#f1f1f1'
                 }}
-                id="outlined-basic" color='primary'  type="password" label="Password" variant="outlined" />
+                id="outlined-basic" onChange={getValues} name="password" color='primary'  type="password" label="Password" variant="outlined" />
 
                 <a href='' className='link'><p>Forgot your password?</p></a>
 
@@ -65,10 +123,11 @@ const LoginPage = (props) => {
             '&:hover': {
               backgroundColor: '#FF983A',
             }
-          }} variant="contained" backgroundColor="primary">Log In</Button>
+          }} variant="contained" type="submit" backgroundColor="primary">Log In</Button>
           
           <p className='signIn-Op'>Don't have an account?<a href='/RegisterPage'>Sign in</a></p>
 
+            </form>
             </div>
 
             <img src={loginImg} className="loginImg"></img>

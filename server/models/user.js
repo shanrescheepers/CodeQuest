@@ -19,19 +19,19 @@ const UserSchema = mongoose.Schema({
     },
     rank: {
         type: String,
-        required: true,
+        // required: true,
     },
     questionsAnswered: {
         type: int,
-        required: true,
+        // required: true,
     },
     questionsAsked: {
         type: int,
-        required: true,
+        // required: true,
     },
     profileimage: {
-        type: String,
-        required: true
+        type: int,
+        // required: true
     }
 });
 

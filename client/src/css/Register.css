@@ -16,21 +16,21 @@
 .SignIn-container{
     position: absolute;
     width: 400px;
-    height:550px;
+    height:560px;
     background-color: #F1F1FC;
     box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
     border-radius: 30px;
     top:0;
     left: 32%;
-    top:10%;
+    top:6%;
     padding: 50px;
 }
 
 .registerImg{
     position: absolute;
-    width: 420px;
+    width: 500px;
     margin-top: 350px;
-    margin-left: 900px;
+    margin-left: 820px;
 }
 
 .SignIn-container h1{
@@ -44,17 +44,61 @@
     font-weight: 400;
 }
 
-.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root{
+.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root, .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.css-1ve0e3f-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root, .selectDp{
     border-radius: 50px;
-
     background-color: #ffffff;
-
     margin-bottom: 0px;
     float: left;
     height: 50px;
   }
 
-  .SignIn-container button{
+/* .selectDp{
+    width: 100%;
+    margin-top: 20px;
+    border: 1px solid #b2b2b2;
+}
+
+.selectDp p{
+    float: left;
+} */
+
+/* .dpOptions{
+    border-radius: 50px;
+    background-color: #f1f1f5;
+    background-color: #2b2b2b;
+    width: 250px;
+    height: 90%;
+    float: left;
+    margin-top: 2px;
+    margin-left: 2px;
+} */
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.css-1ve0e3f-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root{
+  margin-top: 20px;
+  color: #2b2b2b;
+  width: 100%;
+}
+
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.css-1ve0e3f-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root{
+    width: 100%;
+  
+}
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiPaper-root.MuiMenu-paper.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper{
+    position: absolute;
+    left:0;
+    margin-left: -0px;
+    width: 28%;
+}
+
+.ubey-RecordingScreen-count-down.ubey-RecordingScreen-count-down-container{
+    position:relative;
+}
+
+#demo-simple-select-autowidth-label{
+    margin-top: 20px;
+}
+
+  .SignIn-container .signInBtn{
     margin:0;
     float: left;
     background-color: #FF7900;
@@ -63,4 +107,42 @@
     text-transform: capitalize;
     border-radius: 50px;
     margin-bottom: 25px;
+  }
+
+.avatar{
+   
+    height:60px;
+    width: 60px;
+    border-radius: 60px;
+    background-repeat: no-repeat ;
+    background-size: contain;
+    float: left;
+    margin-top: 15px;
+    margin-left: 20px;
+    border: 50px;
+    background-color: none;
+    overflow: hidden;
+    margin-bottom: -15px;
+    background-color: #ffffff;
+    cursor: pointer;
+  }
+
+  .avatar:hover{
+    outline: 1px solid #2b2b2b;
+  }
+
+  .avatar img{
+    width: 40px;
+    margin-left: 5px;
+    margin-top: 10px;
+  }
+
+
+  .Dp{
+    background-color: none;
+    margin-left: 70px;
+  }
+
+  .avatar.active{
+    background-color: #FF7900;
   }
