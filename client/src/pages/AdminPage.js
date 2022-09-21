@@ -4,9 +4,13 @@ import { useEffect } from 'react';
 import { Button } from '@mui/material';
 import '../scss/adminPage.scss';
 import bosscatimage from '../assets/adminpage_cat.svg';
-
+import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
+import FlaggedPosts from '../components/AdminComponents/FlaggedPosts';
 
 const AdminPage = () => {
+
+
     // const [loggedIn, setLoggedIn] = useState(true);
     let navigate = useNavigate();
 
@@ -45,9 +49,41 @@ const AdminPage = () => {
                 </div>
 
                 <div className='admin__top__header__catimage'>
-                    <img src={bosscatimage} alt="bosscatimage" className='admin__top__header__catimage' />
+                    <img src={bosscatimage} alt="bosscatimage" className='admin__top__header__maincatimage' style={{ height: "250px", paddingTop: "40px" }} />
                 </div>
+            </div>
+            <div className='admin__links' >
 
+                <Box className='admin__links__link'>
+                    <Link href="#" color="inherit"  >
+                        {'Flagged Posts'}
+                    </Link>
+                    <Link href="#" color="inherit" >
+                        {'Flagged Answers'}
+                    </Link>
+                    <Link href="#" color="inherit" >
+                        {'Badly Rated Posts'}
+                    </Link>
+                    <Link href="#" color="inherit" >
+                        {'Badly Rated Answers'}
+                    </Link>
+                </Box>
+            </div>
+            {/* flagged posts
+            answers
+            bad posts
+            bad ansers */}
+            <div className='admin__flagged__and__bad'>
+                <FlaggedPosts />
+
+                {/* <div className='admin__flagged__and__bad__flaggedpost'>
+                </div>
+                <div className='admin__flagged__and__bad__flaggedanswers'>
+                </div>
+                <div className='admin__flagged__and__bad__badratedposts'>
+                </div>
+                <div className='admin__flagged__and__bad__badratedanswers'>
+                </div> */}
             </div>
         </div>
     );
