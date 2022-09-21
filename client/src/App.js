@@ -11,7 +11,6 @@ import IndividualQuestion from './pages/IndividualQuestion';
 import QuestionsPage from './pages/QuestionsPage';
 import Navigation from './components/Navigation';
 
-
 function App() {
   return (
     <div className="App">
