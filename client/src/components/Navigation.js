@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import axios from "axios";
 import { NavLink } from 'react-router-dom';
 import logo from '../assets/logo.png';
-import '../CSS/Navigation.css';
+import '../css/Navigation.css';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';

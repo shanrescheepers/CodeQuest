@@ -1,6 +1,6 @@
 import React from 'react';
 import Navigation from '../components/Navigation';
-import '../CSS/profilePage.css';
+import '../css/profilePage.css';
 import Button from '@mui/material/Button';
 
 import fishUnlockImage from '../assets/profilePageAssets/fishUnlock.png';
@@ -208,18 +208,18 @@ const ProfilePage = () => {
 
                             <p className='answers'>00 Answers</p>
                         </div>
-                        
+
 
                     </div>
 
                 </div>
 
                 <Button sx={{
-                            backgroundColor: '#2b2b2b', float: 'right', borderRadius: '20px', marginTop: "150px", marginRight: "50px", width: '200px', fontFamily: 'Open Sans', 
-                            '&:hover': {
-                                backgroundColor: '#2b2b2b',
-                            }
-                        }} variant="contained">Delete my Account</Button>
+                    backgroundColor: '#2b2b2b', float: 'right', borderRadius: '20px', marginTop: "150px", marginRight: "50px", width: '200px', fontFamily: 'Open Sans',
+                    '&:hover': {
+                        backgroundColor: '#2b2b2b',
+                    }
+                }} variant="contained">Delete my Account</Button>
 
             </div>
 
