@@ -82,7 +82,7 @@ const Navigation = () => {
           <img src={logo} className="Logo" width="150px"></img>
 
 
-          <Search>
+          <Search style={{ marginLeft: "100px", width: "390px" }}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -93,7 +93,7 @@ const Navigation = () => {
           </Search>
 
           <Button sx={{
-            backgroundColor: '#2b2b2b', borderRadius: '20px', marginTop: "20px", width: '140px', fontFamily: 'Open Sans', marginLeft: '600px',
+            backgroundColor: '#2b2b2b', borderRadius: '20px', marginTop: "20px", width: '140px', fontFamily: 'Open Sans', marginLeft: '470px',
             '&:hover': {
               backgroundColor: '#4A4A4A',
             }
