@@ -1,10 +1,9 @@
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
-// const productRoute = require('./routes/product');
-// const artistRoute = require('./routes/artist');
+
 // const userRoute = require('./routes/user');
-// const ordersRoute = require('./routes/orders');
+
 require('dotenv/config');
 
 const app = express();
