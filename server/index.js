@@ -20,15 +20,15 @@ app.use(express.urlencoded({ extended: false }));
 // app.use(userRoute);
 // app.use(ordersRoute);
 
-// mongoose.connect(process.env.DB_CONNECTION, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     dbName: 'wildlife',
-// }).then(() => console.log("Connected to wildlife DB"))
-//     .catch((err) => {
-//         console.log("No Connection. Reason: " + err);
-//     });
+mongoose.connect(process.env.DB_CONNECTION, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    dbName: 'CodeQuest',
+}).then(() => console.log("Connected to CodeQuest DB"))
+    .catch((err) => {
+        console.log("No Connection. Reason: " + err);
+    });
 
-// const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
-// app.listen(PORT, () => { console.log(`Server started on port: ${PORT}`) });
+app.listen(PORT, () => { console.log(`Server started on port: ${PORT}`) });
