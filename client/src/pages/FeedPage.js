@@ -8,10 +8,10 @@
 // } 
 // import Navigation from '../components/Navigation';
 
-import '../CSS/HomeFeed.css';
+import '../css/HomeFeed.css';
 import React from 'react';
 import { Button } from '@mui/material';
-import headerImg from '../Assets/homeAssets/header-img.png';
+import headerImg from '../assets/homeAssets/header-img.png';
 import QuestionCard from '../components/QuestionCard';
 
 const FeedPage = () => {
