@@ -23,6 +23,7 @@ p {
 .q_img {
   width: 100%;
   border-radius: 20px;
+  
 }
 .question {
   padding: 10px;
@@ -103,6 +104,7 @@ p {
     margin-left: 50px!important;
     margin-top: 30px;
     margin-bottom: -30px;
+    cursor: pointer;
   }
 
 .questionTitle {

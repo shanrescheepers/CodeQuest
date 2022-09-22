@@ -10,6 +10,7 @@ import returnIcon from "../Assets/individualPageAssets/returnIcon.png"
 import flagQuestion from "../Assets/individualPageAssets/questionFlag.png"
 import infoIcon from "../Assets/individualPageAssets/infoIcon.png"
 import { Label } from '@mui/icons-material';
+import { NavLink } from 'react-router-dom';
 
 
 const IndividualQuestion = () => {
@@ -25,7 +26,7 @@ const IndividualQuestion = () => {
     return (
         <div>
             <div className="pp_main_card">
-            <img className='returnIcon' src={returnIcon}/>
+            <NavLink activeclassname="active" to="/FeedPage"><img className='returnIcon' src={returnIcon}/></NavLink>
 
         <div className="display_question">
           <div className="qq_and_title">
