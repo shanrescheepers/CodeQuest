@@ -11,7 +11,17 @@ import flagQuestion from "../Assets/individualPageAssets/questionFlag.png"
 import infoIcon from "../Assets/individualPageAssets/infoIcon.png"
 import { Label } from '@mui/icons-material';
 
+
 const IndividualQuestion = () => {
+    function AnswerQuestion() {
+        console.log("something");
+        $(".answer_question").fadeIn();
+      }
+      const HideAnswer = () => {
+        console.log("something");
+        $(".answer_question").fadeOut();
+      };
+
     return (
         <div>
             <div className="pp_main_card">
@@ -62,7 +72,7 @@ const IndividualQuestion = () => {
               <img src={flagQuestion} className="flagQuestion"></img>
             </div>
             <button
-              
+              onClick={() => AnswerQuestion()}
               className="btn_answer_question"
             >
               {" "}
@@ -90,7 +100,7 @@ const IndividualQuestion = () => {
 
           <div className="answer-btn">
             <button className="btn_answered">Answer Question</button>
-            <p>Cancel</p>
+            <p onClick={() => HideAnswer() }>Cancel</p>
           </div>
         </div>
       </div>
