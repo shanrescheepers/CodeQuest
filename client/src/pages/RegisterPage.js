@@ -86,7 +86,8 @@ const addNewUser = (e) => {
         username: formValues['username'],
         email: formValues['email'],
         password: formValues['password'],
-        yearlevel: subject
+        yearlevel: subject,
+        profileimage: activeButton,
     }
 
     console.log(payload);
@@ -117,14 +118,15 @@ const addNewUser = (e) => {
                 <h1>Welcome to CodeQuest!</h1>
                 <h4>Let's make some magic.</h4>
            
-                <form onSubmit={addNewUser}>
+              
 
             <div className='Dp'>
-                <button className={`avatar one ${activeButton === "1" && "active"}`} value="1" onClick={e => profilePicValue(e.target.value)}><img src={One} className="dpImg"></img></button>
-                <button className={`avatar one ${activeButton === "2" && "active"}`} value="2" onClick={e => profilePicValue(e.target.value)}><img src={Two} className="dpImg"></img></button>
-                <button className={`avatar one ${activeButton === "3" && "active"}`} value="3" onClick={e => profilePicValue(e.target.value)}><img src={Three} className="dpImg"></img></button>
+                <button className={`avatar one ${activeButton === "1" && "activeBtn"}`} value="1" onClick={e => profilePicValue(e.target.value)}></button>
+                <button className={`avatar two ${activeButton === "2" && "activeBtn"}`} value="2" onClick={e => profilePicValue(e.target.value)}></button>
+                <button className={`avatar three ${activeButton === "3" && "activeBtn"}`} value="3" onClick={e => profilePicValue(e.target.value)}></button>
             </div>
 
+            <form onSubmit={addNewUser}>
 
 
             <TextField sx={{

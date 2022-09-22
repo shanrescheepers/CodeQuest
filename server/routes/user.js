@@ -1,7 +1,7 @@
 // EXAMPLE
 // const express = require('express');
 // const router = express();
-// const { User } = require('../models/user');
+const { User } = require('../models/user');
 
 
 // router.get('/login', async (req, res) => {
@@ -14,14 +14,14 @@
 //         .catch(error => res.status(500).json(error));
 // });
 
-// module.exports = router;
+
 
 
 //import dependencies
 const express = require('express');
 
 //link schema
-const clientSchema = require('./models/clients');
+const UserSchema = require('../models/user');
 
 //user handling dependenxies
 const jwt = require('jsonwebtoken');
@@ -35,11 +35,18 @@ const router = express();
 
 router.post('/api/adduser', (req, res) =>{
 
-    const newUser = new clientSchema({
+    console.log(req.body);
+    const newUser = new UserSchema({
         username: req.body.username, 
         email: req.body.email, 
         password: req.body.password, 
-        yearlevel: req.body.yearlevel, 
+        yearlevel: +req.body.yearlevel, 
+        profileimage: req.body.profileimage,
+        rank: "",
+        questionsAnswered: 0,
+        questionsAsked: 0
+
+
     }); 
 
     newUser.save()
@@ -57,7 +64,7 @@ router.post('/api/adduser', (req, res) =>{
 
 router.post('/api/loginuser', async (req,res) => {
 
-    const findUser = await clientSchema.findOne({
+    const findUser = await UserSchema.findOne({
         email: req.body.email
     });
 
@@ -90,7 +97,7 @@ router.post('/api/verifytoken', async (req,res) =>{
     const decode = jwt.verify(token, '883Xc7F@1dkK');
 
     
-    const findUser = await clientSchema.findOne({
+    const findUser = await UserSchema.findOne({
         email: decode.email
     });
 
@@ -101,4 +108,6 @@ router.post('/api/verifytoken', async (req,res) =>{
 
     }
 });
+
+module.exports = router;
 

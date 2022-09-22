@@ -110,32 +110,45 @@
   }
 
 .avatar{
-   
     height:60px;
     width: 60px;
     border-radius: 60px;
+    background-size: 42px;
+    background-position: 10px;
     background-repeat: no-repeat ;
-    background-size: contain;
     float: left;
     margin-top: 15px;
     margin-left: 20px;
     border: 50px;
-    background-color: none;
     overflow: hidden;
     margin-bottom: -15px;
     background-color: #ffffff;
     cursor: pointer;
   }
 
+  .avatar.one{
+    background-image: url(../assets//Avatars/1.png);
+  }
+
+  .avatar.two{
+    background-image: url(../assets//Avatars/2.png);
+  }
+
+  .avatar.three{
+    background-image: url(../assets//Avatars/3.png);
+  }
+
   .avatar:hover{
     outline: 1px solid #2b2b2b;
   }
 
-  .avatar img{
-    width: 40px;
+  /* .avatar img{
+    width: 100%;
     margin-left: 5px;
     margin-top: 10px;
-  }
+    padding: 0;
+    margin: 0;
+  } */
 
 
   .Dp{
@@ -143,6 +156,6 @@
     margin-left: 70px;
   }
 
-  .avatar.active{
+  .avatar.activeBtn{
     background-color: #FF7900;
   }

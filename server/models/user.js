@@ -14,7 +14,7 @@ const UserSchema = mongoose.Schema({
         required: true
     },
     yearlevel: {
-        type: String,
+        type: Number,
         required: true
     },
     rank: {
@@ -22,18 +22,19 @@ const UserSchema = mongoose.Schema({
         // required: true,
     },
     questionsAnswered: {
-        type: int,
+        type: Number,
         // required: true,
     },
     questionsAsked: {
-        type: int,
+        type: Number,
         // required: true,
     },
     profileimage: {
-        type: int,
+        type: String,
         // required: true
     }
 });
 
-const User = mongoose.model("User", UserSchema);
-module.exports = { User };
+// const User = mongoose.model("User", UserSchema);
+// module.exports = { User };
+module.exports = mongoose.model("User", UserSchema);
