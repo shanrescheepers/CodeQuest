@@ -2,6 +2,7 @@ import '../CSS/QuestionCard.css';
 import profilePic from '../Assets/homeAssets/profile-pic.png'
 import { DeleteOutline } from '@mui/icons-material';
 import { ForwardOutlined } from '@mui/icons-material';
+import { NavLink } from 'react-router-dom';
 
 const QuestionCard = () => {
     return (  
@@ -22,10 +23,11 @@ const QuestionCard = () => {
 
                 </div>
 
+                <NavLink activeclassname="active" to="/IndividualQuestion">
                 <div className='question'>
                     <h2>Q: Is this a question?</h2>
                 </div>
-
+                </NavLink>
                 <div className='divider'></div>
 
                 <div className='bottom-block'>
