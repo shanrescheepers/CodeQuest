@@ -40,12 +40,13 @@ p {
 
 .btn_answer_question {
   background: none;
-  border-radius: 10px;
+  border-radius: 50px;
   padding: 20px;
   background-color: #FF7900;
   color: white;
   border: none;
   font-weight: bold;
+  width: 220px;
 }
 
 .answer_question_btn {
@@ -62,12 +63,14 @@ p {
 }
 .answer_description {
   margin: 30px;
+  
 }
 .answer_description input {
-  width: 98%;
-  border-radius: 20px;
-  border: none;
-  padding: 10px;
+    width: 98%;
+    border-radius: 30px;
+    border: none;
+    padding: 10px;
+    height: 30px;
 }
 .save_image {
   background-color: white;
@@ -83,13 +86,16 @@ p {
   }
 
 .btn_answered {
-    width: 100%;
-    border-radius: 20px;
-    padding: 7px;
+
     background-color: #FF7900;
     color: white;
+    width: 100%;
+    border-radius: 30px;
     border: none;
     padding: 10px;
+    height: 30px;
+    font-weight: 600;
+    height: 55px;
   }
 
 .returnIcon {
@@ -138,3 +144,30 @@ p {
 .flagQuestion {
     margin-left: 25px;
 }
+
+.answer_question {
+    box-shadow: 0px 0px 15px -6px rgb(0 0 0 / 59%);
+    margin: 50px;
+    border-radius: 20px;
+
+    
+  }
+
+  .questionAns {
+    font-size: 30px;
+    margin-top: 25px;
+    margin-bottom: -25px;
+    font-weight: 500;
+  }
+
+  .infoIcon {
+    width: 30px;
+    margin-top: 25px;
+  }
+
+  .answer-btn {
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }

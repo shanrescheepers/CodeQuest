@@ -8,6 +8,7 @@ import UpVote from "../Assets/profilePageAssets/upVote.png";
 import DownVote from "../Assets/profilePageAssets/downVote.png";
 import returnIcon from "../Assets/individualPageAssets/returnIcon.png"
 import flagQuestion from "../Assets/individualPageAssets/questionFlag.png"
+import infoIcon from "../Assets/individualPageAssets/infoIcon.png"
 import { Label } from '@mui/icons-material';
 
 const IndividualQuestion = () => {
@@ -70,8 +71,32 @@ const IndividualQuestion = () => {
           </div>
         </div>
 
+        {/* */}
+        <div className="answer_question">
+          <div className="title_show_answer">
+            <p className='questionAns' >Your Answer</p>
+            <img src={infoIcon} className="infoIcon"></img>
+          </div>
+          <div className="answer_description">
+            <input placeholder="Description" type="text"></input>
+          </div>
+          <div className="save_image">
+            <p>Image</p>
+          </div>
+
+          <div className="answer_description">
+            <input placeholder="Tags" type="text"></input>
+          </div>
+
+          <div className="answer-btn">
+            <button className="btn_answered">Answer Question</button>
+            <p>Cancel</p>
+          </div>
         </div>
-        </div>
+      </div>
+    </div>
+
+        
     
     );
 };
