@@ -3,30 +3,32 @@
     background-color: #F1F1FC;
     border-radius: 20px;
     position: absolute;
-    width: 1000px;
+    width: 70%;
     height: 68vh;
     left: 25%;
     top: 12%;
     box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
     -webkit-box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
     -moz-box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
-    overflow-y: scroll;
+    overflow-x: hidden;
     padding-bottom: 10%;
 
     &__top__header {
-        width: fit-content;
-        height: 325px;
+        width: 100%;
+        height: 330px;
         background-color: #2b2b2b;
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
         display: grid;
         grid-template-columns: 50% 50%;
         grid-gap: 40px;
+        top: 60%;
+        left: 6%;
 
         &__catimage,
         img {
             display: grid;
-            margin-right: 100px;
+            margin-left: 60px;
             grid-gap: 32px;
 
 
@@ -34,19 +36,20 @@
 
         &__heyboss {
             width: 70%;
-            height: 80%;
+            height: 100px;
             padding-left: 40px;
             color: #F1F1FC;
-            display: grid;
+            margin-left: 10px;
+            margin-top: 60px;
 
             &__h1 {
-                font-size: 50px;
                 font-family: 'Open Sans';
+                text-align: left;
+                font-size: 30px;
             }
 
             &__p {
                 color: #F1F1FC;
-                font-size: 20px;
                 font-family: 'Open Sans';
             }
         }
@@ -55,15 +58,20 @@
     &__links {
         display: grid;
         text-decoration: none;
+        height: auto;
+        padding: 8px;
+
+
 
         &__link {
             display: grid;
-            grid-template-columns: 200px 200px 200px 200px;
             font-family: 'Open Sans';
-            padding: 8px;
-            grid-gap: 8px;
+            padding: 16px;
+            grid-gap: 32px !important;
             font-size: 17px;
             font-weight: 450;
+            grid-template-columns: auto;
+            justify-content: center;
             color: #2b2b2b;
         }
 
@@ -72,9 +80,37 @@
 
     &__flagged__and__bad {
         display: grid;
-        height: 400px;
-        background-color: aqua;
+        height: auto;
         padding: 8px;
+
     }
 
+    .css-1aquho2-MuiTabs-indicator {
+        position: absolute;
+        height: 2px;
+        bottom: 0;
+        width: 100%;
+        -webkit-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+        transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+        background-color: #FF7900;
+    }
+
+    .css-1aquho2-MuiTabs-indicator {
+        position: absolute;
+        height: 2px;
+        bottom: 0;
+        width: 100%;
+        -webkit-transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+        transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+        background-color: #FF7900;
+    }
+
+    .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
+        color: #2b2b2b;
+    }
+
+    .css-1gsv261 {
+        border-bottom: 0px solid !important;
+        border-color: rgba(0, 0, 0, 0) !important;
+    }
 }
