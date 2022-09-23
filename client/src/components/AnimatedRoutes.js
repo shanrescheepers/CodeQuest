@@ -21,10 +21,9 @@ function AnimatedRoutes() {
   return (
     <AnimatePresence exitBeforeEnter>
       <Routes location={location} key={location.pathname} >
-        <Route path="/LoginPage" element={<LoginPage />} />
+        <Route path="/" element={<LoginPage />} />
         <Route path="/RegisterPage" element={<RegisterPage />} />
         <Route path="/AdminPage" element={<AdminPage />} />
-        <Route path="/" element={<FeedPage />} />
         <Route path="/FeedPage" element={<FeedPage />} />
         <Route path="/ProfilePage" element={<ProfilePage />} />
         <Route path="/IndividualQuestion" element={<IndividualQuestion />} />

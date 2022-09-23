@@ -3,6 +3,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 
 // const userRoute = require('./routes/user');
+const userRoute = require('./routes/user');
 
 require('dotenv/config');
 
@@ -16,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // app.use(productRoute);
 // app.use(artistRoute);
-// app.use(userRoute);
+app.use(userRoute);
 // app.use(ordersRoute);
 
 mongoose.connect(process.env.DB_CONNECTION, {

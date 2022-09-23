@@ -126,15 +126,15 @@
   }
 
   .avatar.one{
-    background-image: url(../assets//Avatars/1.png);
+    background-image: url(../assets/Avatars/1.png);
   }
 
   .avatar.two{
-    background-image: url(../assets//Avatars/2.png);
+    background-image: url(../assets/Avatars/2.png);
   }
 
   .avatar.three{
-    background-image: url(../assets//Avatars/3.png);
+    background-image: url(../assets/Avatars/3.png);
   }
 
   .avatar:hover{

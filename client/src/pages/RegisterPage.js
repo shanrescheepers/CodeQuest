@@ -15,7 +15,7 @@ import { useState } from 'react';
 import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const RegisterPage = (props) => {
+const RegisterPage = () => {
 
 //=====================================================================================
 //Get Subject Value (ie DV100)
@@ -28,8 +28,8 @@ const RegisterPage = (props) => {
     
 //=====================================================================================
 //Hide Navigation
-    props.funcNav(false);
-
+ //   props.funcNav(false);
+// 
 
 //=====================================================================================
 //Theme
