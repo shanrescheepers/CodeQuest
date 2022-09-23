@@ -1,15 +1,15 @@
-import '../CSS/QuestionCard.css';
+import '../css/QuestionCard.css';
 import profilePic from '../assets/homeAssets/profile-pic.png'
 import { DeleteOutline } from '@mui/icons-material';
 import { ForwardOutlined } from '@mui/icons-material';
 
 const QuestionCard = () => {
-    return (  
+    return (
         <div className='question-con'>
             <div className='question-con-content'>
                 <div className='top-block'>
                     <div className='user-info-block'>
-                        <img className='profile-pic' src={profilePic}/>
+                        <img className='profile-pic' src={profilePic} />
                         <div className='user-info'>
                             <h4>Username</h4>
                             <p>00 September 2022</p>
@@ -17,7 +17,7 @@ const QuestionCard = () => {
                     </div>
 
                     <div className='delete-button'>
-                        <DeleteOutline fontSize='large' sx={{margin: 'auto'}}/>
+                        <DeleteOutline fontSize='large' sx={{ margin: 'auto' }} />
                     </div>
 
                 </div>
@@ -31,13 +31,13 @@ const QuestionCard = () => {
                 <div className='bottom-block'>
                     <div className='arrow-con'>
                         <div className='upvote'>
-                            <ForwardOutlined fontSize='large' sx={{margin: 'auto'}}/>
+                            <ForwardOutlined fontSize='large' sx={{ margin: 'auto' }} />
                         </div>
 
                         <small>00</small>
 
                         <div className='downvote'>
-                            <ForwardOutlined fontSize='large' sx={{margin: 'auto'}}/>
+                            <ForwardOutlined fontSize='large' sx={{ margin: 'auto' }} />
                         </div>
                         <small>00</small>
 
@@ -49,5 +49,5 @@ const QuestionCard = () => {
         </div>
     );
 }
- 
+
 export default QuestionCard;
