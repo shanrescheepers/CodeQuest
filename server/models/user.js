@@ -22,11 +22,11 @@ const UserSchema = mongoose.Schema({
         required: true,
     },
     questionsAnswered: {
-        type: int,
+        type: Number,
         required: true,
     },
     questionsAsked: {
-        type: int,
+        type: Number,
         required: true,
     },
     profileimage: {
