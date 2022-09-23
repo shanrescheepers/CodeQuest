@@ -2,12 +2,19 @@ import { BrowserRouter } from 'react-router-dom';
 import { Router } from 'react-router-dom';
 
 //Import Pages
+import { Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
-<<<<<<< HEAD
+import { Routes } from 'react-router-dom';
 import AnimatedRoutes from './components/AnimatedRoutes';
-=======
 import NewQuestionPage from './pages/NewQuestionPage';
->>>>>>> 9012839 (created new question page)
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import AdminPage from './pages/AdminPage';
+import FeedPage from './pages/FeedPage';
+import ProfilePage from './pages/ProfilePage';
+import IndividualQuestion from './pages/IndividualQuestion';
+import QuestionsPage from './pages/QuestionsPage';
+
 
 function App() {
 
@@ -16,9 +23,7 @@ function App() {
 
       <BrowserRouter>
         <Navigation />
-<<<<<<< HEAD
-        <AnimatedRoutes/>
-=======
+
         <Routes>
           <Route path="/LoginPage" element={<LoginPage />} />
           <Route path="/RegisterPage" element={<RegisterPage />} />
@@ -28,13 +33,14 @@ function App() {
           <Route path="/ProfilePage" element={<ProfilePage />} />
           <Route path="/IndividualQuestion" element={<IndividualQuestion />} />
           <Route path="/QuestionsPage" element={<QuestionsPage />} />
-          <Route path='/newquestion' element={<NewQuestionPage/>}></Route>
+          <Route path='/newquestion' element={<NewQuestionPage />}></Route>
         </Routes>
->>>>>>> 9012839 (created new question page)
+
       </BrowserRouter>
       {/* <Footer /> */}
     </div>
   );
 }
+
 
 export default App;
