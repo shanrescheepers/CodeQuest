@@ -48,9 +48,11 @@ router.post('/api/adduser', (req, res) =>{
 
 
     }); 
+    console.log("new user", newUser);
 
     newUser.save()
     .then(item => {
+        console.log("Item log:", item);
         res.json(item)
     })
     .catch(err => {
@@ -62,7 +64,7 @@ router.post('/api/adduser', (req, res) =>{
 //============================================================================================
 //login user
 
-router.post('/api/loginuser', async (req,res) => {
+router.post('/api/loginUser', async (req,res) => {
 
     const findUser = await UserSchema.findOne({
         email: req.body.email

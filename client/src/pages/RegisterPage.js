@@ -75,6 +75,8 @@ const RegisterPage = (props) => {
     const getValues = (e) =>{
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
+
+    // if(formValues.name !== ''){setLastError();}
 }
 
 //Add new user
@@ -104,6 +106,8 @@ const addNewUser = (e) => {
     });
 } 
 
+//============================================================================================
+//Validation
 
 
 
@@ -139,7 +143,8 @@ const addNewUser = (e) => {
                     borderBlock: 'none',
                     borderBlockColor: '#f1f1f1'
                 }}
-                id="outlined-basic" color='primary' onChange={getValues} name="username" label="Username" variant="outlined" />
+                id="outlined-basic" validators={['required']}
+                errorMessages={['this field is required']}  color='primary' onChange={getValues} name="username" label="Username" variant="outlined" />
 
 
 
@@ -174,7 +179,8 @@ const addNewUser = (e) => {
                     borderBlock: 'none',
                     borderBlockColor: '#f1f1f1'
                 }}
-                id="outlined-basic" name="email" onChange={getValues} type="email" color='primary' label="Email Address" variant="outlined" />
+                id="outlined-basic" name="email" validators={['required', 'isEmail']}
+                errorMessages={['this field is required', 'email is not valid']} onChange={getValues} type="email" color='primary' label="Email Address" variant="outlined" />
 
                 <TextField sx={{
                     backgroundColor: '#ffffff',
@@ -187,8 +193,10 @@ const addNewUser = (e) => {
                     borderBlock: 'none',
                     borderBlockColor: '#f1f1f1'
                 }}
-                id="outlined-basic" name="password" onChange={getValues} type="password" color='primary' label="Password" variant="outlined" />
+                id="outlined-basic" name="password" validators={['required', 'matchRegexp:/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/']}
+                errorMessages={['this field is required', 'email is not valid']} onChange={getValues} type="password" color='primary' label="Password" variant="outlined" />
 
+  
 
             <Button type="submit" className='signInBtn' sx={{
                 backgroundColor: '#2b2b2b', borderRadius: '20px', marginTop: "20px", width: '100%', fontFamily: 'Open Sans', marginLeft: '0px',
@@ -198,7 +206,7 @@ const addNewUser = (e) => {
                     Sign In
             </Button>
           
-          <p className='signIn-Op'>Already have an account?<a href='/LoginPage'>Log in</a></p>
+          <p className='signIn-Op'>Already have an account?<a href='/'>Log in</a></p>
 
 
           </form>

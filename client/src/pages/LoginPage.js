@@ -66,7 +66,7 @@ const loginUser = (e) => {
         
           sessionStorage.setItem('token', res.data.user);
           sessionStorage.setItem('email', formValues['email']);
-          navigate("/Home");
+          navigate("/FeedPage");
         }else{
         //   setEditModal(
         //   <UhOh close={setEditModal}/>

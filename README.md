@@ -19,7 +19,7 @@
 
 <!-- HEADER SECTION -->
 <h3 align="center" style="padding:1;margin:0;"> Designed & Developed by:</3>
-<h5 align="center" style="padding:1;margin:0;">Alexa Pettit</5>
+<h5 align="center" style="padding:1;margin:0;">Alexa Pettitt</5>
 <h5 align="center" style="padding:1;margin:0;">Shanré Scheepers</5>
 <h5 align="center" style="padding:1;margin:0;">Simon Riley</5>
 <h5 align="center" style="padding:1;margin:0;">Priscilla Tabethe</5>
