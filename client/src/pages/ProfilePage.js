@@ -1,17 +1,17 @@
 import React from 'react';
 import Navigation from '../components/Navigation';
-import '../CSS/profilePage.css';
+import '../css/profilePage.css';
 import Button from '@mui/material/Button';
 
-import fishUnlockImage from '../Assets/profilePageAssets/fishUnlock.png';
-import fishLockImage from '../Assets/profilePageAssets/fishLock.png';
-import yarn from '../Assets/profilePageAssets/yarn.png';
-import wizard from '../Assets/profilePageAssets/wizard.png';
-import star from '../Assets/profilePageAssets/star.png';
-import profilePicture from '../Assets/placeholderPP.png';
-import Delete from '../Assets/profilePageAssets/delete.png';
-import UpVote from '../Assets/profilePageAssets/upVote.png';
-import DownVote from '../Assets/profilePageAssets/downVote.png';
+import fishUnlockImage from '../assets/profilePageAssets/fishUnlock.png';
+import fishLockImage from '../assets/profilePageAssets/fishLock.png';
+import yarn from '../assets/profilePageAssets/yarn.png';
+import wizard from '../assets/profilePageAssets/wizard.png';
+import star from '../assets/profilePageAssets/star.png';
+import profilePicture from '../assets/placeholderPP.png';
+import Delete from '../assets/profilePageAssets/delete.png';
+import UpVote from '../assets/profilePageAssets/upVote.png';
+import DownVote from '../assets/profilePageAssets/downVote.png';
 
 const ProfilePage = () => {
     return (

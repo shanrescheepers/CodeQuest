@@ -1,14 +1,14 @@
 import React from 'react';
 import Navigation from "../components/Navigation";
-import "../CSS/IndividualQuestion.css";
-import "../CSS/profilePage.css";
+import "../css/IndividualQuestion.css";
+import "../css/profilePage.css";
 import $ from "jquery";
-import questionImage from "../Assets/individualPageAssets/QuestionImg.png";
-import UpVote from "../Assets/profilePageAssets/upVote.png";
-import DownVote from "../Assets/profilePageAssets/downVote.png";
-import returnIcon from "../Assets/individualPageAssets/returnIcon.png"
-import flagQuestion from "../Assets/individualPageAssets/questionFlag.png"
-import infoIcon from "../Assets/individualPageAssets/infoIcon.png"
+import questionImage from "../assets/individualPageAssets/QuestionImg.png";
+import UpVote from "../assets/profilePageAssets/upVote.png";
+import DownVote from "../assets/profilePageAssets/downVote.png";
+import returnIcon from "../assets/individualPageAssets/returnIcon.png"
+import flagQuestion from "../assets/individualPageAssets/questionFlag.png"
+import infoIcon from "../assets/individualPageAssets/infoIcon.png"
 import { Label } from '@mui/icons-material';
 import { NavLink } from 'react-router-dom';
 

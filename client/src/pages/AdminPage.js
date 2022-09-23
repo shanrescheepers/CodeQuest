@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { useEffect } from 'react';
 import { Button } from '@mui/material';
 import '../scss/adminPage.scss';
-import bosscatimage from '../Assets/adminpage_cat.svg';
+import bosscatimage from '../assets/adminpage_cat.svg';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import FlaggedPosts from '../components/AdminComponents/FlaggedPosts';

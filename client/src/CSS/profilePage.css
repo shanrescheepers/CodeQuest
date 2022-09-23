@@ -57,7 +57,7 @@ p {
     position: relative;
     /* left: 50%; */
     float: right;
-    background-image: url('../Assets/profilePageAssets/PPImage.png');
+    background-image: url('../assets/profilePageAssets/PPImage.png');
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
