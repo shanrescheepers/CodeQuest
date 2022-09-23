@@ -18,6 +18,8 @@ import ReportedUserCard from '../components/AdminComponents/ReportedUsers';
 import PromotionRequests from '../components/AdminComponents/PromotionRequests';
 import QuestionCard from '../components/QuestionCard';
 
+import { motion } from "framer-motion";
+
 const AdminPage = () => {
     // Links function
     const [value, setValue] = React.useState('1');
@@ -51,7 +53,11 @@ const AdminPage = () => {
 
 
     return (
-        <div className='admin'>
+        <motion.div className='admin'
+            intital={{ width: 0 }}
+            animate={{ width: "70%" }}
+            exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
+        >
             <div className='admin__top__header'>
 
                 <div className='admin__top__header__heyboss'>
@@ -106,7 +112,7 @@ const AdminPage = () => {
                     <TabPanel value="7"><QuestionCard /></TabPanel>
                 </TabContext>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

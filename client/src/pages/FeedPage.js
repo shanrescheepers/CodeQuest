@@ -8,11 +8,13 @@
 // } 
 // import Navigation from '../components/Navigation';
 
-import '../css/HomeFeed.css';
+import '../CSS/HomeFeed.css';
 import React from 'react';
 import { Button } from '@mui/material';
 import headerImg from '../assets/homeAssets/header-img.png';
 import QuestionCard from '../components/QuestionCard';
+
+import { motion} from "framer-motion";
 
 const FeedPage = () => {
 
@@ -44,8 +46,11 @@ const FeedPage = () => {
     }
 
     return (
-        <div className='home-con'>
-
+        <motion.div className='home-con'
+        intital={{width: 0}}
+        animate={{width:"70%"}}
+        exit={{x: window.innerWidth, transition: {duration: 0.5}}}
+>
             <div className='feed-header'>
                 <div className='header-con'>
                     <div className='home-header-text'>
@@ -69,7 +74,7 @@ const FeedPage = () => {
 
             </div>
 
-        </div>
+        </motion.div>
     );
 };
 

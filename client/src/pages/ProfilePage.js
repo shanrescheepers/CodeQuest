@@ -1,6 +1,5 @@
 import React from 'react';
-import Navigation from '../components/Navigation';
-import '../css/profilePage.css';
+import '../CSS/profilePage.css';
 import Button from '@mui/material/Button';
 
 import fishUnlockImage from '../assets/profilePageAssets/fishUnlock.png';
@@ -13,12 +12,16 @@ import Delete from '../assets/profilePageAssets/delete.png';
 import UpVote from '../assets/profilePageAssets/upVote.png';
 import DownVote from '../assets/profilePageAssets/downVote.png';
 
+import { motion } from "framer-motion";
+
 const ProfilePage = () => {
     return (
-        <div>
-            {/* <Navigation/> */}
+       
 
-            <div className='pp_main_card'>
+            <motion.div className='pp_main_card'
+            intital={{ width: 0 }}
+            animate={{ width: "70%" }}
+            exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}>
 
                 <div className='pp_welcome_con'>
                     <div className='pp_welcome_banner'>
@@ -45,27 +48,27 @@ const ProfilePage = () => {
 
                             <div className='pp_rank'>
                                 {/* <div className='pp_rank_img'></div> */}
-                                <img src={fishUnlockImage} className='pp_rank_img'></img>
+                                <img src={fishUnlockImage} alt="img" className='pp_rank_img'></img>
                                 <p>Bronze</p>
                             </div>
 
                             <div className='pp_rank'>
-                                <img src={fishLockImage} className='pp_rank_img'></img>
+                                <img src={fishLockImage} alt="img" className='pp_rank_img'></img>
                                 <p>Silver</p>
                             </div>
 
                             <div className='pp_rank'>
-                                <img src={fishLockImage} className='pp_rank_img'></img>
+                                <img src={fishLockImage} alt="img" className='pp_rank_img'></img>
                                 <p>Gold</p>
                             </div>
 
                             <div className='pp_rank'>
-                                <img src={fishLockImage} className='pp_rank_img'></img>
+                                <img src={fishLockImage} alt="img" className='pp_rank_img'></img>
                                 <p>Platinum</p>
                             </div>
 
                             <div className='pp_rank'>
-                                <img src={fishLockImage} className='pp_rank_img'></img>
+                                <img src={fishLockImage} alt="img" className='pp_rank_img'></img>
                                 <p>Diamond</p>
                             </div>
 
@@ -91,25 +94,25 @@ const ProfilePage = () => {
                     <div className='pp_badge_card_slide'>
 
                         <div className='pp_badge_card'>
-                            <img src={yarn}></img>
+                            <img src={yarn} alt="img"></img>
                             <p className='pp_badge_heading'>Bronze Ball of Yarn</p>
                             <p className='pp_badge_desc'>Congratulations! You've answered 10 questions!</p>
                         </div>
 
                         <div className='pp_badge_card'>
-                            <img src={star}></img>
+                            <img src={star} alt="img"></img>
                             <p className='pp_badge_heading'>Gold Star</p>
                             <p className='pp_badge_desc'>What a champ! You've answered 10 questions!</p>
                         </div>
 
                         <div className='pp_badge_card'>
-                            <img src={wizard}></img>
+                            <img src={wizard} alt="img"></img>
                             <p className='pp_badge_heading'>A Hat for Our Wiz</p>
                             <p className='pp_badge_desc'>Congratulations! You've answered 10 questions!</p>
                         </div>
 
                         <div className='pp_badge_card'>
-                            <img src={yarn}></img>
+                            <img src={yarn} alt="img"></img>
                             <p className='pp_badge_heading'>Bronze Ball of Yarn</p>
                             <p className='pp_badge_desc'>Congratulations! You've answered 10 questions!</p>
                         </div>
@@ -125,85 +128,85 @@ const ProfilePage = () => {
                     <div className='pp_userInput_card_con'>
 
                         <div className='pp_UserInput_card'>
-                            <img src={profilePicture} className='pp_profile_picture'></img>
+                            <img src={profilePicture} alt="img" className='pp_profile_picture'></img>
                             <p className='pp_username'>Username</p>
                             <p className='pp_date'>00 September 2022</p>
-                            <img src={Delete} className='pp_delete'></img>
+                            <img src={Delete} alt="img" className='pp_delete'></img>
                             <div className='pp_question_con'>
                                 <p>Q: Question One?</p>
                             </div>
 
-                            <img src={UpVote} className='pp_up_Vote_img'></img>
+                            <img src={UpVote} alt="img" className='pp_up_Vote_img'></img>
                             <p className='pp_up_Votes_text'>00</p>
-                            <img src={DownVote} className='pp_down_Vote_img'></img>
+                            <img src={DownVote} alt="img" className='pp_down_Vote_img'></img>
                             <p className='pp_down_Votes_text'>00</p>
 
                             <p className='answers'>00 Answers</p>
                         </div>
 
                         <div className='pp_UserInput_card'>
-                            <img src={profilePicture} className='pp_profile_picture'></img>
+                            <img src={profilePicture} alt="img" className='pp_profile_picture'></img>
                             <p className='pp_username'>Username</p>
                             <p className='pp_date'>00 September 2022</p>
-                            <img src={Delete} className='pp_delete'></img>
+                            <img src={Delete} alt="img" className='pp_delete'></img>
                             <div className='pp_question_con'>
                                 <p>Q: Question Two?</p>
                             </div>
 
-                            <img src={UpVote} className='pp_up_Vote_img'></img>
+                            <img src={UpVote} alt="img" className='pp_up_Vote_img'></img>
                             <p className='pp_up_Votes_text'>00</p>
-                            <img src={DownVote} className='pp_down_Vote_img'></img>
+                            <img src={DownVote} alt="img" className='pp_down_Vote_img'></img>
                             <p className='pp_down_Votes_text'>00</p>
 
                             <p className='answers'>00 Answers</p>
                         </div>
 
                         <div className='pp_UserInput_card'>
-                            <img src={profilePicture} className='pp_profile_picture'></img>
+                            <img src={profilePicture} alt="img" className='pp_profile_picture'></img>
                             <p className='pp_username'>Username</p>
                             <p className='pp_date'>00 September 2022</p>
-                            <img src={Delete} className='pp_delete'></img>
+                            <img src={Delete} alt="img" className='pp_delete'></img>
                             <div className='pp_question_con'>
                                 <p>Q: Question Three?</p>
                             </div>
 
-                            <img src={UpVote} className='pp_up_Vote_img'></img>
+                            <img src={UpVote} alt="img" className='pp_up_Vote_img'></img>
                             <p className='pp_up_Votes_text'>00</p>
-                            <img src={DownVote} className='pp_down_Vote_img'></img>
+                            <img src={DownVote} alt="img" className='pp_down_Vote_img'></img>
                             <p className='pp_down_Votes_text'>00</p>
 
                             <p className='answers'>00 Answers</p>
                         </div>
 
                         <div className='pp_UserInput_card'>
-                            <img src={profilePicture} className='pp_profile_picture'></img>
+                            <img src={profilePicture} alt="img" className='pp_profile_picture'></img>
                             <p className='pp_username'>Username</p>
                             <p className='pp_date'>00 September 2022</p>
-                            <img src={Delete} className='pp_delete'></img>
+                            <img src={Delete} alt="img" className='pp_delete'></img>
                             <div className='pp_question_con'>
                                 <p>Q: Question Four?</p>
                             </div>
 
-                            <img src={UpVote} className='pp_up_Vote_img'></img>
+                            <img src={UpVote} alt="img" className='pp_up_Vote_img'></img>
                             <p className='pp_up_Votes_text'>00</p>
-                            <img src={DownVote} className='pp_down_Vote_img'></img>
+                            <img src={DownVote} alt="img" className='pp_down_Vote_img'></img>
                             <p className='pp_down_Votes_text'>00</p>
 
                             <p className='answers'>00 Answers</p>
                         </div>
 
                         <div className='pp_UserInput_card'>
-                            <img src={profilePicture} className='pp_profile_picture'></img>
+                            <img src={profilePicture} alt="img" className='pp_profile_picture'></img>
                             <p className='pp_username'>Username</p>
                             <p className='pp_date'>00 September 2022</p>
-                            <img src={Delete} className='pp_delete'></img>
+                            <img src={Delete} alt="img" className='pp_delete'></img>
                             <div className='pp_question_con'>
                                 <p>Q: Question Five?</p>
                             </div>
 
-                            <img src={UpVote} className='pp_up_Vote_img'></img>
+                            <img src={UpVote} alt="img" className='pp_up_Vote_img'></img>
                             <p className='pp_up_Votes_text'>00</p>
-                            <img src={DownVote} className='pp_down_Vote_img'></img>
+                            <img src={DownVote} alt="img" className='pp_down_Vote_img'></img>
                             <p className='pp_down_Votes_text'>00</p>
 
                             <p className='answers'>00 Answers</p>
@@ -221,9 +224,7 @@ const ProfilePage = () => {
                     }
                 }} variant="contained">Delete my Account</Button>
 
-            </div>
-
-        </div>
+        </motion.div>
     );
 };
 
