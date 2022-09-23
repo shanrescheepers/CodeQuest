@@ -81,7 +81,7 @@ const AdminPage = () => {
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 
                         <TabList onChange={handleChange} aria-label="lab API tabs example" >
-                            <Tab label="Flagged Users" value="1" indicatorColor="secondary" />
+                            <Tab label="All Users" value="1" indicatorColor="secondary" />
                             <Tab label="Reported Users" value="2" />
                             <Tab label="Promotion Requests" value="3" />
                         </TabList>
