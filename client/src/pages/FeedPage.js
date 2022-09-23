@@ -54,7 +54,7 @@ props.funcNav(true);
     return (
         <motion.div className='home-con'
             intital={{ width: 0 }}
-            animate={{ width: "70%" }}
+            animate={{ width: "76%" }}
             exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
         >
             <div className='feed-header'>

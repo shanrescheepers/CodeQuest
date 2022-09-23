@@ -14,6 +14,7 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
+import { useNavigate } from 'react-router-dom';
 
 // import Stack from '@mui/material/Stack';
 
@@ -74,6 +75,17 @@ const Navigation = () => {
     },
   }));
 
+  //================================================================================================
+  //Log out
+  const navigate = useNavigate();
+
+  const logOut = (event) => {
+  
+        navigate('/');
+        sessionStorage.clear();
+      }
+      
+
   return (
     <div>
       <div className="navContainer">
@@ -82,7 +94,7 @@ const Navigation = () => {
           <img src={logo} className="Logo" width="150px"></img>
 
 
-          <Search style={{ marginLeft: "100px", width: "390px" }}>
+          <Search style={{ marginLeft: "100px", width: "390px" , marginTop: "25px" , marginLeft: "15px"}}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -93,11 +105,11 @@ const Navigation = () => {
           </Search>
 
           <Button sx={{
-            backgroundColor: '#2b2b2b', borderRadius: '20px', marginTop: "20px", width: '140px', fontFamily: 'Open Sans', marginLeft: '470px',
+            backgroundColor: '#2b2b2b', borderRadius: '20px', marginTop: "25px", width: '140px', fontFamily: 'Open Sans', marginLeft: '510px',
             '&:hover': {
               backgroundColor: '#4A4A4A',
             }
-          }} variant="contained" backgroundColor="primary">Log Out</Button>
+          }} variant="contained" backgroundColor="primary" onClick={logOut}>Log Out</Button>
         </div>
 
         <div className='sideNav'>

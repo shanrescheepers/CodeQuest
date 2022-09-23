@@ -55,7 +55,7 @@ const AdminPage = () => {
     return (
         <motion.div className='admin'
             intital={{ width: 0 }}
-            animate={{ width: "70%" }}
+            animate={{ width: "76%" }}
             exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
         >
             <div className='admin__top__header'>

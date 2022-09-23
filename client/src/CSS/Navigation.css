@@ -4,8 +4,9 @@
     float: left;
     width: 120px;
     padding: 20px;
-    padding-left: 85px;
+    padding-left: 103px;
     margin-right: 50px;
+    margin-top: 5px;
 }
 
 .logButton button{
@@ -15,7 +16,7 @@
 }
 
 .sideNav{
-    width: 250px;
+    width: 280px;
     height: 90vh;
    left:0;
    margin-left: 10px;
@@ -24,7 +25,7 @@
 .profile-section{
     float: left;
     text-align: center;
-    margin-left:60px;
+    margin-left:75px;
     margin-top: 25px;
     
 }
@@ -111,7 +112,7 @@ li button{
     float: left;
     margin-top: -130px;
     text-align: center;
-    margin-left: 30px;
+    margin-left: 45px;
     box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
  }
 

@@ -12,6 +12,7 @@ import ProfilePage from '../pages/ProfilePage';
 import IndividualQuestion from '../pages/IndividualQuestion';
 import QuestionsPage from '../pages/QuestionsPage';
 import Navigation from './Navigation';
+import NewQuestionPage from '../pages/NewQuestionPage';
 import { useState } from 'react';
 import { AnimatePresence } from "framer-motion";
 
@@ -37,6 +38,7 @@ function AnimatedRoutes() {
         <Route path="/ProfilePage" element={<ProfilePage />} />
         <Route path="/IndividualQuestion" element={<IndividualQuestion />} />
         <Route path="/QuestionsPage" element={<QuestionsPage />} />
+        <Route path="/NewQuestionsPage" element={<NewQuestionPage />} />
       </Routes>
     </AnimatePresence>
 
