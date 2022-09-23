@@ -1,4 +1,4 @@
-import '../css/QuestionCard.css';
+import '../CSS/QuestionCard.css';
 import profilePic from '../assets/homeAssets/profile-pic.png'
 import { DeleteOutline } from '@mui/icons-material';
 import { ForwardOutlined } from '@mui/icons-material';
