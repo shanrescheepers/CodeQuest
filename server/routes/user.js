@@ -1,22 +1,3 @@
-// EXAMPLE
-// const express = require('express');
-// const router = express();
-const { User } = require('../models/user');
-
-
-// router.get('/login', async (req, res) => {
-
-//     await User.findOne({
-//         email: req.body.email,
-//         password: req.body.password,
-//     })
-//         .then(user => res.json(user))
-//         .catch(error => res.status(500).json(error));
-// });
-
-
-
-
 //import dependencies
 const express = require('express');
 
@@ -52,12 +33,18 @@ router.post('/api/adduser', (req, res) =>{
 
     newUser.save()
     .then(item => {
-        console.log("Item log:", item);
+        // console.log("Item log:", item);
         res.json(item)
     })
     .catch(err => {
        res.status(400).json({msg:"Can't add user, there is an error", err}); 
     });
+});
+
+router.get('/api/getUser', async(req, res) => {
+    const user = await UserSchema.find();
+    console.log("Get Users", user);
+    res.send(user);
 });
 
 

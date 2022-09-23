@@ -28,7 +28,7 @@ function App() {
           <Route path="/" element={<LoginPage funcNav={setShowNav} />} />
           <Route path="/RegisterPage" element={<RegisterPage funcNav={setShowNav}/>} />
           <Route path="/AdminPage" element={<AdminPage />} />
-          <Route path="/FeedPage" element={<FeedPage />} />
+          <Route path="/FeedPage" element={<FeedPage funcNav={setShowNav}/>} />
           <Route path="/ProfilePage" element={<ProfilePage />} />
           <Route path="/IndividualQuestion" element={<IndividualQuestion />} />
           <Route path="/QuestionsPage" element={<QuestionsPage />} />
