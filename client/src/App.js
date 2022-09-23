@@ -10,6 +10,7 @@ import ProfilePage from './pages/ProfilePage';
 import IndividualQuestion from './pages/IndividualQuestion';
 import QuestionsPage from './pages/QuestionsPage';
 import Navigation from './components/Navigation';
+import NewQuestionPage from './pages/NewQuestionPage';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/ProfilePage" element={<ProfilePage />} />
           <Route path="/IndividualQuestion" element={<IndividualQuestion />} />
           <Route path="/QuestionsPage" element={<QuestionsPage />} />
+          <Route path='/newquestion' element={<NewQuestionPage/>}></Route>
         </Routes>
       </BrowserRouter>
       {/* <Footer /> */}

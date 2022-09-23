@@ -1,0 +1,118 @@
+.new-question-con {
+    width: 70%;
+    height: 85vh;
+    background-color: #F1F1FC;
+    border-radius: 20px;
+    position: absolute;
+    left: 25%;
+    top: 12%;
+    box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
+    -webkit-box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
+    -moz-box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
+    overflow: hidden;
+    overflow-y: scroll;
+    z-index: 2;
+}
+
+.new-question-con::-webkit-scrollbar {
+    display: none;
+}
+
+.main-form-con {
+    padding: 4rem;
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    background-color: #F1F1FC;
+}
+
+.back-arrow {
+    width: 40px;
+    height: 40px;
+}
+
+.kitty-img {
+    width: 22%;
+    height: auto;
+    position: absolute;
+    z-index: 0;
+    right: 6rem;
+    top: 0rem;
+}
+
+.form-con h1 {
+    text-align: center;
+    margin: 0;
+}
+
+
+.form-con p {
+    text-align: center;
+    color: #000000;
+}
+
+.form-con {
+    width: 100%;
+    height: auto;
+    background-color: #F1F1FC;
+    border-radius: 20px;
+    box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.56);
+    padding: 2rem 4rem 4rem;
+    box-sizing: border-box;
+    overflow: scroll;
+    margin-top: 2rem;
+}
+
+.question-rules {
+    width: 100%;
+    height: auto;
+    background-color: #FFF;
+    border-radius: 20px;
+    margin: 2rem 0;
+    overflow: hidden;
+}
+
+.form-con::-webkit-scrollbar {
+    display: none;
+}
+
+.screenshot-preview {
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+    background-color: #FFFFFF;
+    margin-top: 16px;
+    border-radius: 40px;
+    padding-top: 0.1px;
+}
+
+.screenshot-preview p {
+    margin-left: 16px;
+    text-align: left;
+    color: #A2A2A2;
+}
+
+.question-rules-title {
+    width: 100%;
+    height: auto;
+    background-color: #2B2B2B;
+    padding: 2rem 4rem;
+    box-sizing: border-box;
+}
+
+.question-rules-title h2 {
+    margin: 0;
+    text-align: left;
+}
+
+.question-rules-list {
+    width: 100%;
+    height: auto;
+    padding: 0 4rem 2rem;
+    box-sizing: border-box;
+}
+
+
+.question-rules-list li {
+    list-style: inherit;
+}
