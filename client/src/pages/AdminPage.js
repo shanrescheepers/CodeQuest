@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { useNavigate } from 'react-router';
 import { useEffect } from 'react';
 import { Button } from '@mui/material';
@@ -7,9 +7,26 @@ import bosscatimage from '../assets/adminpage_cat.svg';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import FlaggedPosts from '../components/AdminComponents/FlaggedPosts';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
+import UserprofileCard from '../components/AdminComponents/UserProfileCard';
+import { deepOrange } from '@mui/material/colors';
+import ReportedUserCard from '../components/AdminComponents/ReportedUsers';
+import PromotionRequests from '../components/AdminComponents/PromotionRequests';
+import QuestionCard from '../components/QuestionCard';
+
+import { motion } from "framer-motion";
 
 const AdminPage = () => {
+    // Links function
+    const [value, setValue] = React.useState('1');
 
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
     // const [loggedIn, setLoggedIn] = useState(true);
     let navigate = useNavigate();
@@ -33,8 +50,14 @@ const AdminPage = () => {
         // 2)here we'll give rank through based on axios call. 1)Session == bad, hackers etc
     })
 
+
+
     return (
-        <div className='admin'>
+        <motion.div className='admin'
+            intital={{ width: 0 }}
+            animate={{ width: "70%" }}
+            exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
+        >
             <div className='admin__top__header'>
 
                 <div className='admin__top__header__heyboss'>
@@ -52,40 +75,44 @@ const AdminPage = () => {
                     <img src={bosscatimage} alt="bosscatimage" className='admin__top__header__maincatimage' style={{ height: "250px", paddingTop: "40px" }} />
                 </div>
             </div>
-            <div className='admin__links' >
+            <div className='admin__links users' >
 
-                <Box className='admin__links__link'>
-                    <Link href="#" color="inherit"  >
-                        {'Flagged Posts'}
-                    </Link>
-                    <Link href="#" color="inherit" >
-                        {'Flagged Answers'}
-                    </Link>
-                    <Link href="#" color="inherit" >
-                        {'Badly Rated Posts'}
-                    </Link>
-                    <Link href="#" color="inherit" >
-                        {'Badly Rated Answers'}
-                    </Link>
-                </Box>
-            </div>
-            {/* flagged posts
-            answers
-            bad posts
-            bad ansers */}
-            <div className='admin__flagged__and__bad'>
-                <FlaggedPosts />
+                <TabContext value={value}>
+                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 
-                {/* <div className='admin__flagged__and__bad__flaggedpost'>
-                </div>
-                <div className='admin__flagged__and__bad__flaggedanswers'>
-                </div>
-                <div className='admin__flagged__and__bad__badratedposts'>
-                </div>
-                <div className='admin__flagged__and__bad__badratedanswers'>
-                </div> */}
+                        <TabList onChange={handleChange} aria-label="lab API tabs example" >
+                            <Tab label="All Users" value="1" indicatorColor="secondary" />
+                            <Tab label="Reported Users" value="2" />
+                            <Tab label="Promotion Requests" value="3" />
+                        </TabList>
+
+                    </Box>
+                    <TabPanel value="1"><UserprofileCard /></TabPanel>
+                    <TabPanel value="2"><ReportedUserCard /></TabPanel>
+                    <TabPanel value="3"><PromotionRequests /></TabPanel>
+
+                </TabContext>
+
+
             </div>
-        </div>
+            <div className='admin__flagged__and__bad posts'>
+                <TabContext value={value}>
+                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+
+                        <TabList onChange={handleChange} aria-label="lab API tabs example" >
+                            <Tab label="Flagged Posts" value="4" indicatorColor="secondary" />
+                            <Tab label="Flagged Answers" value="5" />
+                            <Tab label="Badly Rated Posts" value="6" />
+                            <Tab label="Badly Rated Answers" value="7" />
+                        </TabList>
+                    </Box>
+                    <TabPanel value="4"><QuestionCard /></TabPanel>
+                    <TabPanel value="5"><QuestionCard /></TabPanel>
+                    <TabPanel value="6"><QuestionCard /></TabPanel>
+                    <TabPanel value="7"><QuestionCard /></TabPanel>
+                </TabContext>
+            </div>
+        </motion.div>
     );
 };
 

@@ -15,31 +15,33 @@ import headerImg from '../assets/homeAssets/header-img.png';
 import QuestionCard from '../components/QuestionCard';
 import { useNavigate } from 'react-router';
 
+import { motion } from "framer-motion";
+
 const FeedPage = () => {
 
     const buttonStyle = {
-        backgroundColor: '#FF7900', 
+        backgroundColor: '#FF7900',
         borderRadius: '50px',
-        marginTop: '16px', 
+        marginTop: '16px',
         width: 'auto',
         padding: '16px 24px',
         fontFamily: 'Open Sans',
         textTransform: 'capitalize',
         '&:hover': {
-            background: 'FF7900', 
+            background: 'FF7900',
             color: '#2B2B2B'
         }
     }
 
     const secondaryButtonStyle = {
-        backgroundColor: '#2B2B2B', 
+        backgroundColor: '#2B2B2B',
         borderRadius: '50px',
         width: 'auto',
         padding: '16px 24px',
         fontFamily: 'Open Sans',
         textTransform: 'capitalize',
         '&:hover': {
-            background: 'FF7900', 
+            background: 'FF7900',
             color: '#2B2B2B'
         }
     }
@@ -51,8 +53,11 @@ const FeedPage = () => {
     }
 
     return (
-        <div className='home-con'>
-
+        <motion.div className='home-con'
+            intital={{ width: 0 }}
+            animate={{ width: "70%" }}
+            exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
+        >
             <div className='feed-header'>
                 <div className='header-con'>
                     <div className='home-header-text'>
@@ -60,7 +65,7 @@ const FeedPage = () => {
                         <p>Struggling with your code? Don't worry, we've all been there before. The CodeQuest community is here to help!</p>
                         <Button variant='contained' disableElevation style={buttonStyle} onClick={askQuestion}>Ask a Question</Button>
                     </div>
-                    <img className='home-header-image' src={headerImg}/>
+                    <img className='home-header-image' src={headerImg} />
                 </div>
             </div>
 
@@ -70,13 +75,13 @@ const FeedPage = () => {
             </div>
 
             <div className='question-card-con'>
-                <QuestionCard/>
-                <QuestionCard/>
-                <QuestionCard/>
+                <QuestionCard />
+                <QuestionCard />
+                <QuestionCard />
 
             </div>
 
-        </div>
+        </motion.div>
     );
 };
 

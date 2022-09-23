@@ -1,0 +1,82 @@
+.profilecard {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: auto auto;
+    grid-template-columns: repeat(6, calc(30% - 67px));
+    grid-template-rows: minmax(218px, 1fr);
+    margin-top: 7px;
+    overflow-y: scroll;
+    width: auto;
+    padding-left: 16px;
+    height: auto;
+    border-radius: 20px;
+
+    // background-color: #3f3fde;
+    // border-radius: 20px;
+    // width: 200px;
+    // height: 28vh;
+    // justify-self: center;
+    // box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
+    // -webkit-box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
+    // -moz-box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
+    // grid-template-rows: 1fr 1fr 1fr 1fr;
+
+    &__card {
+        margin-top: -20px;
+        display: grid;
+        background-color: #f7f7f9 !important;
+        border-radius: 20px !important;
+        width: 170px;
+        height: 270px;
+        box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
+        -webkit-box-shadow: 1px 1px 9px -7px rgba(0, 0, 0, 0.454);
+        -moz-box-shadow: 1px 0px 5px -6px rgba(0, 0, 0, 0.59);
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+        &__useravatar {
+            display: grid;
+            align-self: center;
+            background-image: url(../assets/placeholderPP.png);
+
+            &__logo {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .css-4vb5ob-MuiAvatar-root {
+            display: grid !important;
+            margin-left: 33%;
+            align-self: center !important;
+            grid-template-columns: 1fr !important;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            -webkit-align-items: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-flex-shrink: 0;
+            -ms-flex-negative: 0;
+            flex-shrink: 0;
+            width: 60px;
+            height: 60px;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 1.25rem;
+            line-height: 1;
+            border-radius: 50%;
+            overflow: hidden;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            color: #fff;
+            background-color: #bdbdbd;
+            background-color: #2196f3;
+        }
+    }
+}
