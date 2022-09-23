@@ -3,11 +3,8 @@ import { ArrowBackRounded } from '@mui/icons-material';
 import kitty from '../assets/newQuestionAssets/kitty.png';
 import { useNavigate } from 'react-router';
 import { alpha, styled } from '@mui/material/styles';
-import InputBase from '@mui/material/InputBase';
-import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
 import FormControl from '@mui/material/FormControl';
-import { withTheme } from '@emotion/react';
 import { Button } from '@mui/material';
 
 const NewQuestionPage = () => {
@@ -57,6 +54,10 @@ const NewQuestionPage = () => {
         navigate(-1);
     }
 
+    //set initial form values
+
+
+
     return (  
         <div className='new-question-con'>
             <div className='main-form-con'>
@@ -71,11 +72,12 @@ const NewQuestionPage = () => {
                     <p>Strictly related to dev though, questions deemed inappropriate will be removed</p>
                     <CssTextField name='title' placeholder="Title" id="custom-css-outlined-input" />
                     <CssTextField name='description' multiline placeholder="Description" id="custom-css-outlined-input" />
-                    <div className='screenshot-preview'>
+                    <div name='screenshots' className='screenshot-preview'>
                         <p>Screenshot(s)</p>
                     </div>
                     <CssTextField name='code' multiline placeholder="Code Snippet" id="custom-css-outlined-input" />
-                    <CssTextField name='tags' multiline placeholder="Tags" id="custom-css-outlined-input" />
+                    <CssTextField name='
+                    ' multiline placeholder="Tags" id="custom-css-outlined-input" />
                     <Button variant='contained' disableElevation style={buttonStyle}>Post Question</Button>
                 </form>
 
