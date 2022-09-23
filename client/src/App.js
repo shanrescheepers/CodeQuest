@@ -13,7 +13,6 @@ function App() {
     <div className="App">
 
       <BrowserRouter>
-        <Navigation />
             <AnimatedRoutes/>
       </BrowserRouter>
       {/* <Footer /> */}

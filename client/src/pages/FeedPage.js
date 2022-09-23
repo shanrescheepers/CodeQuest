@@ -16,7 +16,7 @@ import QuestionCard from '../components/QuestionCard';
 
 import { motion } from "framer-motion";
 
-const FeedPage = () => {
+const FeedPage = (props) => {
 
     const buttonStyle = {
         backgroundColor: '#FF7900',
@@ -44,6 +44,12 @@ const FeedPage = () => {
             color: '#2B2B2B'
         }
     }
+
+//=====================================================================================
+//Show Navigation
+props.funcNav(true);
+
+
 
     return (
         <motion.div className='home-con'

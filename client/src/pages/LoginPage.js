@@ -9,11 +9,11 @@ import { useState, useEffect } from 'react';
 import Axios from 'axios';
 
 
-const LoginPage = () => {
+const LoginPage = (props) => {
 
 //=====================================================================================
 //Hide Navigation
-    // props.funcNav(false);
+    props.funcNav(false);
 
 
 //=====================================================================================
