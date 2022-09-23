@@ -39,14 +39,14 @@ const PromotionRequests = () => {
                     </Typography>
                 </CardContent>
                 <Button sx={{
-                    backgroundColor: '#2b2b2b', borderRadius: '20px', height: "33px", width: '140px', fontFamily: 'Open Sans', fontSize: "12px", marginLeft: "15px", padding: "8px",
+                    backgroundColor: '#FF7900', borderRadius: '20px', height: "33px", width: '140px', fontFamily: 'Open Sans', fontSize: "12px", marginLeft: "15px", padding: "8px",
                     '&:hover': {
                         backgroundColor: '#FF7900',
                     }
-                }} variant="contained" ><DeleteIcon style={{ height: "20px" }} />Delete User</Button>
+                }} variant="contained" ><DeleteIcon style={{ height: "20px" }} />Accept User</Button>
                 <Button>
                     <Typography variant="subtitle2" gutterBottom style={{ color: "#2b2b2b", fontSize: "10px", fontVariant: "small-caps", marginTop: "8px" }}>
-                        Remove from list
+                        Remove Request
                     </Typography>
                 </Button>
             </Card>
@@ -70,14 +70,14 @@ const PromotionRequests = () => {
                     </Typography>
                 </CardContent>
                 <Button sx={{
-                    backgroundColor: '#2b2b2b', borderRadius: '20px', height: "33px", width: '140px', fontFamily: 'Open Sans', fontSize: "12px", marginLeft: "15px", padding: "8px",
+                    backgroundColor: '#FF7900', borderRadius: '20px', height: "33px", width: '140px', fontFamily: 'Open Sans', fontSize: "12px", marginLeft: "15px", padding: "8px",
                     '&:hover': {
                         backgroundColor: '#FF7900',
                     }
-                }} variant="contained" ><DeleteIcon style={{ height: "20px" }} />Delete User</Button>
+                }} variant="contained" ><DeleteIcon style={{ height: "20px" }} />Accept User</Button>
                 <Button>
                     <Typography variant="subtitle2" gutterBottom style={{ color: "#2b2b2b", fontSize: "10px", fontVariant: "small-caps", marginTop: "8px" }}>
-                        Remove from list
+                        Remove Request
                     </Typography>
                 </Button>
             </Card>
@@ -101,14 +101,14 @@ const PromotionRequests = () => {
                     </Typography>
                 </CardContent>
                 <Button sx={{
-                    backgroundColor: '#2b2b2b', borderRadius: '20px', height: "33px", width: '140px', fontFamily: 'Open Sans', fontSize: "12px", marginLeft: "15px", padding: "8px",
+                    backgroundColor: '#FF7900', borderRadius: '20px', height: "33px", width: '140px', fontFamily: 'Open Sans', fontSize: "12px", marginLeft: "15px", padding: "8px",
                     '&:hover': {
                         backgroundColor: '#FF7900',
                     }
-                }} variant="contained" ><DeleteIcon style={{ height: "20px" }} />Delete User</Button>
+                }} variant="contained" ><DeleteIcon style={{ height: "20px" }} />Accept User</Button>
                 <Button>
                     <Typography variant="subtitle2" gutterBottom style={{ color: "#2b2b2b", fontSize: "10px", fontVariant: "small-caps", marginTop: "8px" }}>
-                        Remove from list
+                        Remove Request
                     </Typography>
                 </Button>
             </Card>
