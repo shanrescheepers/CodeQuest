@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import axios from "axios";
+import Axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import '../css/Navigation.css';
@@ -85,6 +85,28 @@ const Navigation = () => {
         sessionStorage.clear();
       }
       
+//======================================================
+//verify User
+
+useEffect(()=>{
+
+    let verifyUser = {token: sessionStorage.getItem('token')};
+    if(!verifyUser.token){
+      navigate('/');
+      sessionStorage.clear();
+    }else{
+      Axios.post('http://localhost:5000/api/verifytoken', verifyUser)
+      .then(res =>{
+        console.log(res.data);
+        if(res.data.verified === false){
+          navigate('/');
+          sessionStorage.clear();
+  
+        }
+      })
+    }
+  
+  }, []);
 
   return (
     <div>
