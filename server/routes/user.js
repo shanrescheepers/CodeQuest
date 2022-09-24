@@ -10,6 +10,15 @@ const bcrypt = require('bcrypt');
 
 const router = express();
 
+//============================================================================================
+//Get Current user info
+
+router.get('/api/userInfo/:id', async (req, res) =>{
+    const findUser = await UserSchema.findById(req.params.id);
+    res.json(findUser);
+});
+
+
 
 //============================================================================================
 //Add user

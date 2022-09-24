@@ -64,6 +64,7 @@ const loginUser = (e) => {
       }else{
         if(res.data.user){
         
+          sessionStorage.setItem('token', res.data.id);
           sessionStorage.setItem('token', res.data.user);
           sessionStorage.setItem('email', formValues['email']);
           navigate("/FeedPage");

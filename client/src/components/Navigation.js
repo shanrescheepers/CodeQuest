@@ -88,25 +88,25 @@ const Navigation = () => {
 //======================================================
 //verify User
 
-useEffect(()=>{
+// useEffect(()=>{
 
-    let verifyUser = {token: sessionStorage.getItem('token')};
-    if(!verifyUser.token){
-      navigate('/');
-      sessionStorage.clear();
-    }else{
-      Axios.post('http://localhost:5000/api/verifytoken', verifyUser)
-      .then(res =>{
-        console.log(res.data);
-        if(res.data.verified === false){
-          navigate('/');
-          sessionStorage.clear();
+//     let verifyUser = {token: sessionStorage.getItem('token')};
+//     if(!verifyUser.token){
+//       navigate('/');
+//       sessionStorage.clear();
+//     }else{
+//       Axios.post('http://localhost:5000/api/verifytoken', verifyUser)
+//       .then(res =>{
+//         console.log(res.data);
+//         if(res.data.verified === false){
+//           navigate('/');
+//           sessionStorage.clear();
   
-        }
-      })
-    }
+//         }
+//       })
+//     }
   
-  }, []);
+//   }, []);
 
   return (
     <div>
