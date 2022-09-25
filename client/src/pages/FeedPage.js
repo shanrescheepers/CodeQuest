@@ -33,7 +33,7 @@ const FeedPage = (props) => {
     }
 
     const secondaryButtonStyle = {
-        backgroundColor: '#2B2B2B',
+        backgroundColor: '#2B2B2B', 
         borderRadius: '50px',
         width: 'auto',
         padding: '16px 24px',
@@ -48,8 +48,6 @@ const FeedPage = (props) => {
 //=====================================================================================
 //Show Navigation
 props.funcNav(true);
-
-
 
     return (
         <motion.div className='home-con'
@@ -77,7 +75,6 @@ props.funcNav(true);
                 <QuestionCard />
                 <QuestionCard />
                 <QuestionCard />
-
             </div>
 
         </motion.div>

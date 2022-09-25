@@ -103,3 +103,12 @@
 .bottom-block small {
     color: #000000;
 }
+
+.user-question {
+    width: 100%;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+}
