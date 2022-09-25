@@ -31,11 +31,13 @@
 }
 
 .delete-button {
-    width: 50px;
-    height: 50px;
-    display: flex;
+    width: 60px;
+    height: 60px;
+    padding: 12px;
+    box-sizing: border-box;
     align-items: center;
     text-align: center;
+    border-radius: 50px;
 }
 
 .profile-pic {
@@ -78,19 +80,28 @@
 }
 
 .upvote {
-    width: auto;
-    height: auto;
-    margin-right: 4px;
-    transform: rotate(-90deg);
+    width: 40px;
+    height: 40px;
+    padding: 4px;
+    box-sizing: border-box;
+    border-radius: 0px;
 }
 
 .downvote {
-    width: auto;
-    height: auto;
-    margin-right: 4px;
-    margin-left: 8px;
-    transform: rotate(90deg);
-    align-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 4px;
+    box-sizing: border-box;
+    border-radius: 0px;
+}
+
+.vote-count {
+    margin: 4px;
+}
+
+.question-card-icon:hover {
+    border-radius: 50px;
+    background-color: #EEEEEE;
 }
 
 .arrow-con {
@@ -107,6 +118,12 @@
 .user-question {
     width: 100%;
     height: auto;
+}
+
+.upvote-con {
+    margin-right: 16px;
+    align-items: center;
+    display: flex;
 }
 
 a {

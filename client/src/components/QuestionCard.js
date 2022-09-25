@@ -1,10 +1,24 @@
 import '../css/QuestionCard.css';
 import profilePic from '../assets/homeAssets/profile-pic.png'
-import { DeleteOutline } from '@mui/icons-material';
-import { ForwardOutlined } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import upvote from '../assets/questionCardAssets/upvote.png';
+import downvote from '../assets/questionCardAssets/downvote.png';
+import deleteIcon from '../assets/questionCardAssets/delete.png';
 
 const QuestionCard = () => {
+
+    const deleteQuestion = () => {
+        //delete question functionality
+    }
+
+    const addVote = () => {
+        //add vote functionality
+    }
+
+    const subtractVote = () => {
+        //subtract vote functionality
+    }
+
     return (
         <Link to='/IndividualQuestion'>
             <div className='question-con'>
@@ -18,9 +32,7 @@ const QuestionCard = () => {
                             </div>
                         </div>
 
-                        <div className='delete-button'>
-                            <DeleteOutline fontSize='large' sx={{ margin: 'auto' }} />
-                        </div>
+                        <img className='delete-button question-card-icon' onClick={deleteQuestion} src={deleteIcon}/>
                     </div>
 
                     <div className='user-question'>
@@ -30,18 +42,12 @@ const QuestionCard = () => {
                     <div className='divider'></div>
 
                     <div className='bottom-block'>
-                        <div className='arrow-con'>
-                            <div className='upvote'>
-                                <ForwardOutlined fontSize='large' sx={{ margin: 'auto' }} />
-                            </div>
+                        <div className='arrow-con'>                         
+                            <img className='upvote question-card-icon' onClick={addVote} src={upvote}/>
+                            <small className='upvote-count vote-count'>00</small>
 
-                            <small>00</small>
-
-                            <div className='downvote'>
-                                <ForwardOutlined fontSize='large' sx={{ margin: 'auto' }} />
-                            </div>
-                            <small>00</small>
-
+                            <img className='downvote question-card-icon' onClick={subtractVote} src={downvote}/>
+                            <small className='downvote-count vote-count'>00</small>
                         </div>
 
                         <small><p>00 Answers</p></small>
