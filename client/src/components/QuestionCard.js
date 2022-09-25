@@ -36,7 +36,7 @@ const QuestionCard = () => {
                     </div>
 
                     <div className='user-question'>
-                        <h2>Q: Is this a question?</h2>
+                        <h3>Q: Is this a question?</h3>
                     </div>
 
                     <div className='divider'></div>
