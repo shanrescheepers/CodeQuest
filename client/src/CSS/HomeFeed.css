@@ -19,7 +19,7 @@
 }
 
 .feed-header {
-    padding: 4rem;
+    padding: 2rem 4rem;
     box-sizing: border-box;
     width: 100%;
     height: auto;
@@ -38,19 +38,19 @@
 
 .header-con {
     width: 100%;
-    height: 32vh;
+    height: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
 .home-header-text {
-    width: 45%;
+    width: 70%;
     height: auto;
 }
 
 .home-header-image {
-    width: 45%;
+    width: 256px;
     height: auto;
 }
 
