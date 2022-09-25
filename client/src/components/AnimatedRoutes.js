@@ -38,7 +38,7 @@ function AnimatedRoutes() {
         <Route path="/ProfilePage" element={<ProfilePage />} />
         <Route path="/IndividualQuestion" element={<IndividualQuestion />} />
         <Route path="/QuestionsPage" element={<QuestionsPage />} />
-        <Route path="/NewQuestionsPage" element={<NewQuestionPage />} />
+        <Route path="/newquestion" element={<NewQuestionPage />} />
       </Routes>
     </AnimatePresence>
 

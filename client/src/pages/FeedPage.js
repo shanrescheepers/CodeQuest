@@ -15,6 +15,7 @@ import headerImg from '../assets/homeAssets/header-img.png';
 import QuestionCard from '../components/QuestionCard';
 
 import { motion } from "framer-motion";
+import { useNavigate } from 'react-router';
 
 const FeedPage = (props) => {
 
@@ -47,6 +48,13 @@ const FeedPage = (props) => {
 
 //=====================================================================================
 //Show Navigation
+
+    const navigate = useNavigate();
+
+    const askNewQuestion = () => {
+        navigate('/newquestion')
+    }
+
 props.funcNav(true);
 
     return (
@@ -60,7 +68,7 @@ props.funcNav(true);
                     <div className='home-header-text'>
                         <h1>The Quest for Code Awaits...</h1>
                         <p>Struggling with your code? Don't worry, we've all been there before. The CodeQuest community is here to help! </p>
-                        <Button variant='contained' disableElevation style={buttonStyle}>Ask a Question</Button>
+                        <Button variant='contained' disableElevation style={buttonStyle} onClick={askNewQuestion}>Ask a Question</Button>
                     </div>
                     <img className='home-header-image' src={headerImg} />
                 </div>
@@ -68,7 +76,7 @@ props.funcNav(true);
 
             <div className='title-con'>
                 <h2>Questions</h2>
-                <Button variant='contained' disableElevation style={secondaryButtonStyle}>Ask a Question</Button>
+                <Button variant='contained' disableElevation style={secondaryButtonStyle} onClick={askNewQuestion}>Ask a Question</Button>
             </div>
 
             <div className='question-card-con'>
