@@ -30,7 +30,6 @@ const Navigation = () => {
     }
   }
 
-
   const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     float: 'left',

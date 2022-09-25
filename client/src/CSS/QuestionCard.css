@@ -103,3 +103,8 @@
 .bottom-block small {
     color: #000000;
 }
+
+.question {
+    width: 100%;
+    height: auto;
+}
