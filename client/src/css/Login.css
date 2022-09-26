@@ -79,6 +79,7 @@
   .signIn-Op{
     text-align: center;
     font-size: 15px;
+    cursor: pointer;
  }
  .signIn-Op a{
     color: rgb(141, 141, 141);
@@ -86,3 +87,5 @@
     margin: 0;
     margin-left: 5px;
  }
+
+ 

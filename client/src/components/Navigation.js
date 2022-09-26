@@ -9,12 +9,15 @@ import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
-import pp from "../assets/placeholderPP.png";
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
 import { useNavigate } from 'react-router-dom';
+// import pp1 from '../../public/Avatars';
+// import pp2 from '../assets/Avatars/2.png';
+// import pp3 from '../assets/Avatars/3.png';
+
 
 // import Stack from '@mui/material/Stack';
 
@@ -112,6 +115,45 @@ const Navigation = () => {
   
 //   }, []);
 
+  //================================================================================================
+  //Add User Info
+
+  const [username, setUsername] = useState();
+  const [rank, setRank] = useState();
+  const [profileImg, setprofileImg] = useState();
+  const [year, setYear] = useState();
+
+  useEffect(()=>{
+
+
+    const userId = sessionStorage.getItem("id");
+    // localStorage.clear();
+      Axios.get('http://localhost:5000/api/userInfo/' + userId)
+      .then(res => {
+          let data = res.data;
+          setUsername(data.username);
+          setRank(data.rank);
+          setprofileImg(data.profileimage);
+          setYear(data.yearlevel);
+      })
+
+  }, []);
+
+
+//get profile image path
+ const imgURL = ('Avatars/'+profileImg+'.png');
+
+console.log(year);
+let bgColor='';
+
+  if(year === 1){
+    bgColor = '#59ffa0'
+  }else if(year === 2){
+    bgColor = '#6CD4FF'
+  }else{
+    bgColor = '#FF7900'
+  };
+
   return (
     <div>
       <div className="navContainer">
@@ -142,9 +184,9 @@ const Navigation = () => {
 
 
           <div className='profile-section'>
-            <img src={pp} className="profile-Img"></img>
-            <h3>Username</h3>
-            <h5>Rank | Reliability Score: </h5>
+            <div className='profileCircle' style={{backgroundColor: bgColor}}><img src={imgURL} className="profile-Img"></img></div>
+            <h3>{username}</h3>
+            <h5>{rank} | Reliability Score: </h5>
           </div>
 
 

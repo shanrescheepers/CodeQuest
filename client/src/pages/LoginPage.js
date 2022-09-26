@@ -31,10 +31,19 @@ const LoginPage = (props) => {
         },
       });
 
+
+//====================================================================================
+//To register
+
+const navigate = useNavigate();
+
+const toRegister =()=>{
+  navigate('/RegisterPage');
+}
 //=====================================================================================
 //Login functionality
 
-const navigate = useNavigate();
+
 
 //get form values
 let formVals = ["email", "password"];
@@ -63,8 +72,8 @@ const loginUser = (e) => {
         alert('Bad request');
       }else{
         if(res.data.user){
-        
-          sessionStorage.setItem('token', res.data.id);
+        console.log(res);
+          sessionStorage.setItem('id', res.data.id);
           sessionStorage.setItem('token', res.data.user);
           sessionStorage.setItem('email', formValues['email']);
           navigate("/FeedPage");
@@ -126,7 +135,7 @@ const loginUser = (e) => {
             }
           }} variant="contained" type="submit" backgroundColor="primary">Log In</Button>
           
-          <p className='signIn-Op'>Don't have an account?<a href='/RegisterPage'>Sign in</a></p>
+          <p className='signIn-Op' onClick={toRegister}>Don't have an account?Sign in</p>
 
             </form>
             </div>

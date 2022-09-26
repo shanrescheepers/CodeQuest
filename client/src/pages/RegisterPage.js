@@ -98,6 +98,10 @@ const addNewUser = (e) => {
     .then((res)=> {
         if(res){
         console.log("User Successfully Added");
+        console.log(res);
+        sessionStorage.setItem('id', res.data._id);
+        sessionStorage.setItem('token', res.data.username);
+        sessionStorage.setItem('email', formValues['email']);
         navigate("/FeedPage"); 
         }
     })
@@ -106,12 +110,13 @@ const addNewUser = (e) => {
     });
 } 
 
-//============================================================================================
-//Validation
+//====================================================================================
+//To register
 
 
-
-
+const toLogin =()=>{
+  navigate('/');
+}
 
 
 
@@ -206,7 +211,7 @@ const addNewUser = (e) => {
                     Sign In
             </Button>
           
-          <p className='signIn-Op'>Already have an account?<a href='/'>Log in</a></p>
+          <p className='signIn-Op' onClick={toLogin}>Already have an account?Log in</p>
 
 
           </form>
