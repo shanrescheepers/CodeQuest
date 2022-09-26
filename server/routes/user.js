@@ -32,7 +32,7 @@ router.post('/api/adduser', (req, res) =>{
         password: req.body.password, 
         yearlevel: +req.body.yearlevel, 
         profileimage: req.body.profileimage,
-        rank: "",
+        rank: "Bronze",
         questionsAnswered: 0,
         questionsAsked: 0
 
@@ -61,17 +61,20 @@ router.get('/api/getUser', async(req, res) => {
 
 router.post('/api/loginUser', async (req,res) => {
 
+  
     const findUser = await UserSchema.findOne({
-        email: req.body.email
+        email: req.body.email,
     });
+    console.log(findUser);
 
+    let userId= findUser._id;
     if(findUser){
         if(await bcrypt.compare(req.body.password, findUser.password)){
             const userToken = jwt.sign({
                 email: req.body.email
             }, '883Xc7F@1dkK') //this is our secret key
 
-            return res.json({status: "Ok", user: userToken});
+            return res.json({status: "Ok", user: userToken, id: userId});
 
 
         }else{
