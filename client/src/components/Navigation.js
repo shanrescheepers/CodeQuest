@@ -147,7 +147,7 @@ console.log(year);
 let bgColor='';
 
   if(year === 1){
-    bgColor = '#59ffa0'
+    bgColor = '#6EEB83'
   }else if(year === 2){
     bgColor = '#6CD4FF'
   }else{
