@@ -31,6 +31,10 @@ const Navigation = () => {
     }
   }
 
+  const goToDiscord = () => {
+    window.open('https://discord.gg/GpqtG8dHpn', '_blank');
+  }
+
 
   const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -180,7 +184,7 @@ const Navigation = () => {
             '&:hover': {
               backgroundColor: '#F6F6FA',
             }
-          }} variant="contained" backgroundColor="primary">Join</Button>
+          }} variant="contained" backgroundColor="primary" onClick={goToDiscord}>Join</Button>
         </div>
 
 
