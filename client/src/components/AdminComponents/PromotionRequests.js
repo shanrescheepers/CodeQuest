@@ -17,18 +17,11 @@ import pp from "../../assets/placeholderPP.png";
 const PromotionRequests = () => {
     return (
         // this will be a prop injected onto the admin page whenever link is clicked on, similar workings to permissions ui etc...maybe, kinda
-        <div className='profilecard'>
+        <div className='prprofilecard'>
 
-            <Card className='profilecard__card'>
-                {/* Must this be clickable? */}
-                {/* <Button style={{ height: "25px", width: "30px", borderRadius: "20px", backgroundColor: "rgba(255, 0, 0, 0.2)", padding: "8px", margin: "8px" }}>
-                    <TourTwoToneIcon style={{ height: "20px", color: "#E03F3F" }} />
-                    <Typography variant="body2" color="text.secondary" style={{ textAlign: "center", color: "#E03F3F" }}>
-                        2
-                    </Typography>
-                </Button> */}
-                <Avatar sx={{ bgcolor: blue[500] }} aria-label="userprofilepicture" className='profilecard__card__useravatar'>
-                    <img src={pp} className="profilecard__card__useravatar__logo" width="150px"></img>
+            <Card className='prprofilecard__card'>
+                <Avatar sx={{ bgcolor: blue[500] }} aria-label="userprofilepicture" className='profilecard__card__useravatar' style={{ marginTop: "12px" }}>
+                    <img src={pp} className="prprofilecard__card__useravatar__logo" width="150px"></img>
                 </Avatar>
                 <CardContent>
                     <Typography gutterBottom variant="body1" component="div" style={{ textAlign: "center" }}>
@@ -50,16 +43,10 @@ const PromotionRequests = () => {
                     </Typography>
                 </Button>
             </Card>
-            <Card className='profilecard__card'>
-                {/* Must this be clickable? */}
-                {/* <Button style={{ height: "25px", width: "30px", borderRadius: "20px", backgroundColor: "rgba(255, 0, 0, 0.2)", padding: "8px", margin: "8px" }}>
-                    <TourTwoToneIcon style={{ height: "20px", color: "#E03F3F" }} />
-                    <Typography variant="body2" color="text.secondary" style={{ textAlign: "center", color: "#E03F3F" }}>
-                        2
-                    </Typography>
-                </Button> */}
-                <Avatar sx={{ bgcolor: blue[500] }} aria-label="userprofilepicture" className='profilecard__card__useravatar'>
-                    <img src={pp} className="profilecard__card__useravatar__logo" width="150px"></img>
+
+            <Card className='prprofilecard__card'>
+                <Avatar sx={{ bgcolor: blue[500] }} aria-label="userprofilepicture" className='profilecard__card__useravatar' style={{ marginTop: "12px" }}>
+                    <img src={pp} className="prprofilecard__card__useravatar__logo" width="150px"></img>
                 </Avatar>
                 <CardContent>
                     <Typography gutterBottom variant="body1" component="div" style={{ textAlign: "center" }}>
@@ -81,16 +68,11 @@ const PromotionRequests = () => {
                     </Typography>
                 </Button>
             </Card>
-            <Card className='profilecard__card'>
-                {/* Must this be clickable? */}
-                {/* <Button style={{ height: "25px", width: "30px", borderRadius: "20px", backgroundColor: "rgba(255, 0, 0, 0.2)", padding: "8px", margin: "8px" }}>
-                    <TourTwoToneIcon style={{ height: "20px", color: "#E03F3F" }} />
-                    <Typography variant="body2" color="text.secondary" style={{ textAlign: "center", color: "#E03F3F" }}>
-                        2
-                    </Typography>
-                </Button> */}
-                <Avatar sx={{ bgcolor: blue[500] }} aria-label="userprofilepicture" className='profilecard__card__useravatar'>
-                    <img src={pp} className="profilecard__card__useravatar__logo" width="150px"></img>
+
+
+            <Card className='prprofilecard__card'>
+                <Avatar sx={{ bgcolor: blue[500] }} aria-label="userprofilepicture" className='profilecard__card__useravatar' style={{ marginTop: "12px" }}>
+                    <img src={pp} className="prprofilecard__card__useravatar__logo" width="150px"></img>
                 </Avatar>
                 <CardContent>
                     <Typography gutterBottom variant="body1" component="div" style={{ textAlign: "center" }}>
