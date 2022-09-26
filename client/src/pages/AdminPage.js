@@ -75,8 +75,7 @@ const AdminPage = () => {
                     <img src={bosscatimage} alt="bosscatimage" className='admin__top__header__maincatimage' style={{ height: "250px", paddingTop: "40px" }} />
                 </div>
             </div>
-            <div className='admin__links users' >
-
+            <div className='admin__links' >
                 <TabContext value={value}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 

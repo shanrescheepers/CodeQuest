@@ -1,16 +1,14 @@
-.profilecard {
+.ruprofilecard {
     display: grid;
-    grid-template-rows: 1fr;
+    grid-template-rows: auto;
     grid-template-columns: auto auto;
-    grid-template-columns: repeat(6, calc(30% - 67px));
-    grid-template-rows: minmax(218px, 1fr);
+    grid-template-columns: repeat(200, calc(17% - 100px)) !important;
     margin-top: 7px;
     overflow-y: scroll;
-    width: auto;
-    padding-left: 16px;
-    height: auto;
+    width: max-content;
+    height: 300px !important;
     border-radius: 20px;
-
+    grid-gap: 8px !important;
     // background-color: #3f3fde;
     // border-radius: 20px;
     // width: 200px;
@@ -22,21 +20,32 @@
     // grid-template-rows: 1fr 1fr 1fr 1fr;
 
     &__card {
-        margin-top: -20px;
         display: grid;
         background-color: #f7f7f9 !important;
         border-radius: 20px !important;
         width: 170px;
-        height: 270px;
+        // height of card itself
+        height: 280px !important;
         box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
         -webkit-box-shadow: 1px 1px 9px -7px rgba(0, 0, 0, 0.454);
         -moz-box-shadow: 1px 0px 5px -6px rgba(0, 0, 0, 0.59);
         grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
 
+        &__flagbutton {
+            height: 20px !important;
+            width: 5px !important;
+            border-radius: 20px;
+            background-color: #ff000011;
+            margin: 8px;
+            margin-left: 8px;
+        }
+
         &__useravatar {
             display: grid;
             align-self: center;
             background-image: url(../assets/placeholderPP.png);
+            // color: #ff000011;
+            height: 20px;
 
             &__logo {
                 width: 100%;
