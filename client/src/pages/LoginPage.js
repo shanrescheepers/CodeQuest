@@ -11,140 +11,169 @@ import Axios from 'axios';
 
 const LoginPage = (props) => {
 
-//=====================================================================================
-//Hide Navigation
-    props.funcNav(false);
+  //=====================================================================================
+  //Hide Navigation
+  props.funcNav(false);
 
 
-//=====================================================================================
-//Theme
-    const theme = createTheme({
-        palette: {
-          primary: {
-            // Purple and green play nicely together.
-            main:'#2b2b2b',
-          },
-          secondary: {
-            // This is green.A700 as hex.
-            main: '#11cb5f',
-          },
-        },
-      });
+  //=====================================================================================
+  //Theme
+  const theme = createTheme({
+    palette: {
+      primary: {
+        // Purple and green play nicely together.
+        main: '#2b2b2b',
+      },
+      secondary: {
+        // This is green.A700 as hex.
+        main: '#11cb5f',
+      },
+    },
+  });
 
 
-//====================================================================================
-//To register
+  //====================================================================================
+  //To register
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
-const toRegister =()=>{
-  navigate('/RegisterPage');
-}
-//=====================================================================================
-//Login functionality
+  const toRegister = () => {
+    navigate('/RegisterPage');
+  }
+  //=====================================================================================
+  //Login functionality
 
 
 
-//get form values
-let formVals = ["email", "password"];
-const [formValues, setFormValues] = useState(formVals);
+  //get form values
+  let formVals = ["email", "password"];
+  const [formValues, setFormValues] = useState(formVals);
 
-const getValues = (e) =>{
+  const getValues = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
-}
+  }
 
-//Login user function
-const loginUser = (e) => {
-    e.preventDefault(); 
+
+
+
+  // ======================Open Window Email Validation===========================
+
+  const [emailValidStyling, setEmailValidStyling] = useState(false);
+  const [emailValidErrorText, setEmailValidErrorText] = useState("Email Address(Open Window Registered Email)");
+
+
+
+  const ValidateEmail = () => {
+    let isValid = formValues['email'];
+
+    if (!isValid.includes('virtualwindow.co.za')) {
+      setEmailValidStyling(true);
+      setEmailValidErrorText("This is not a registered Open Window email address")
+      // alert("Please use an Open Window registered email address");
+    } else {
+      setEmailValidStyling(false);
+      setEmailValidErrorText("Email Address")
+    }
+  }
+  // ==============================================================================
+
+
+
+
+  //Login user function
+  const loginUser = (e) => {
+    e.preventDefault();
 
     let payload = {
-        email: formValues['email'],
-        password: formValues['password']
+      email: formValues['email'],
+      password: formValues['password']
     }
 
     console.log(payload);
 
     Axios.post('http://localhost:5000/api/loginUser', payload)
-    .then((res)=>{
-      console.log(res.data);
-      if(!res.data){
-        alert('Bad request');
-      }else{
-        if(res.data.user){
-        console.log(res);
-          sessionStorage.setItem('id', res.data.id);
-          sessionStorage.setItem('token', res.data.user);
-          sessionStorage.setItem('email', formValues['email']);
-          navigate("/FeedPage");
-        }else{
-        //   setEditModal(
-        //   <UhOh close={setEditModal}/>
-        //     )
-        console.log("can't log in");
+      .then((res) => {
+        console.log(res.data);
+        if (!res.data) {
+          alert('Bad request');
+        } else {
+          if (res.data.user) {
+            console.log(res);
+            sessionStorage.setItem('id', res.data.id);
+            sessionStorage.setItem('token', res.data.user);
+            sessionStorage.setItem('email', formValues['email']);
+            navigate("/FeedPage");
+          } else {
+            //   setEditModal(
+            //   <UhOh close={setEditModal}/>
+            //     )
+            console.log("can't log in");
+          }
         }
-      }
-    })
-    .catch(function(error){
-      console.log(error);
-    })
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
 
-}
+  }
 
-    return (
-        <div className="Login">
-        <ThemeProvider theme={theme} >
-            <div className='login-container'>
-                <h1>Hey...</h1>
-                <h1>We missed you.</h1>
-                <h4>Let's make some magic.</h4>
-                
-                <form onSubmit={loginUser}>              
+  return (
+    <div className="Login">
+      <ThemeProvider theme={theme} >
+        <div className='login-container'>
+          <h1>Hey...</h1>
+          <h1>We missed you.</h1>
+          <h4>Let's make some magic.</h4>
 
-                <TextField sx={{
-                    backgroundColor: '#ffffff',
-                    border: 'none',
-                    outlineColor: '#ffffff',
-                    borderRadius: '30px',
-                    width: '100%',
-                    height: '50px',
-                    marginTop: '30px'
-                    
-                }}
-                id="outlined-basic" onChange={getValues} name="email" color='primary' label="Email Address" variant="outlined" />
+          <form onSubmit={loginUser}>
 
-                <TextField sx={{
-                    backgroundColor: '#ffffff',
-                    border: '0',
-                    outline: '0',
-                    borderRadius: '30px',
-                    width: '100%',
-                    height: '50px',
-                    marginTop: '30px',
-                    borderBlock: 'none',
-                    borderBlockColor: '#f1f1f1'
-                }}
-                id="outlined-basic" onChange={getValues} name="password" color='primary'  type="password" label="Password" variant="outlined" />
+            <TextField
+              error={emailValidStyling}
+              sx={{
+                backgroundColor: '#ffffff',
+                border: 'none',
+                outlineColor: '#ffffff',
+                borderRadius: '30px',
+                width: '100%',
+                height: '50px',
+                marginTop: '30px'
 
-                <a href='' className='link'><p>Forgot your password?</p></a>
+              }}
+              id="outlined-basic" onChange={getValues} name="email" color='primary' label={emailValidErrorText} variant="outlined" onBlur={ValidateEmail}/>
 
-                <Button sx={{
-            backgroundColor: '#2b2b2b', borderRadius: '20px', marginTop: "20px", width: '100%', fontFamily: 'Open Sans', marginLeft: '0px',
-            '&:hover': {
-              backgroundColor: '#FF983A',
-            }
-          }} variant="contained" type="submit" backgroundColor="primary">Log In</Button>
-          
-          <p className='signIn-Op' onClick={toRegister}>Don't have an account?Sign in</p>
+            <TextField sx={{
+              backgroundColor: '#ffffff',
+              border: '0',
+              outline: '0',
+              borderRadius: '30px',
+              width: '100%',
+              height: '50px',
+              marginTop: '30px',
+              borderBlock: 'none',
+              borderBlockColor: '#f1f1f1'
+            }}
+              id="outlined-basic" onChange={getValues} name="password" color='primary' type="password" label="Password" variant="outlined" />
 
-            </form>
-            </div>
+            <a href='' className='link'><p>Forgot your password?</p></a>
 
-            <img src={loginImg} className="loginImg"></img>
-            
-        </ThemeProvider>
+            <Button sx={{
+              backgroundColor: '#2b2b2b', borderRadius: '20px', marginTop: "20px", width: '100%', fontFamily: 'Open Sans', marginLeft: '0px',
+              '&:hover': {
+                backgroundColor: '#FF983A',
+              }
+            }} variant="contained" type="submit" backgroundColor="primary">Log In</Button>
+
+            <p className='signIn-Op' onClick={toRegister}>Don't have an account?Sign in</p>
+
+          </form>
         </div>
-    );
+
+        <img src={loginImg} className="loginImg"></img>
+
+      </ThemeProvider>
+    </div>
+  );
 };
 
 export default LoginPage;
