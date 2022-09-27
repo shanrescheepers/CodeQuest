@@ -1,5 +1,7 @@
 //import dependencies
 const express = require('express');
+const session = require('express-session');
+const passport = require('passport');
 
 //link schema
 const UserSchema = require('../models/user');
@@ -9,6 +11,35 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const router = express();
+
+
+function isLoggedIn(req, res, next) {
+    req.user ? next() : res.sendStatus(401);
+  }
+  
+//   router.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
+  router.use(passport.initialize());
+  router.use(passport.session());
+
+
+
+  
+  router.get('/auth/google',
+    passport.authenticate('google', { scope: [ 'email', 'profile' ] }
+  ));
+
+
+  router.get( '/google/callback',
+  passport.authenticate( 'google', {
+    successRedirect: '/FeedPage',
+    failureRedirect: '/auth/google/failure'
+  })
+);
+
+
+router.get('/auth/google/failure', (req, res) => {
+    res.send('Failed to authenticate..');
+  });
 
 //============================================================================================
 //Get Current user info

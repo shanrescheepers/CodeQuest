@@ -1,6 +1,8 @@
 const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth2').Strategy;
 
 // const userRoute = require('./routes/user');
 const userRoute = require('./routes/user');
@@ -28,6 +30,28 @@ mongoose.connect(process.env.DB_CONNECTION, {
     .catch((err) => {
         console.log("No Connection. Reason: " + err);
     });
+
+
+
+    passport.use(new GoogleStrategy({
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: "http://localhost:5000/google/callback",
+        passReqToCallback: true,
+      },
+      function(request, accessToken, refreshToken, profile, done) {
+        return done(null, profile);
+      }));
+      
+      passport.serializeUser(function(user, done) {
+        done(null, user);
+      });
+      
+      passport.deserializeUser(function(user, done) {
+        done(null, user);
+      });
+
+
 
 const PORT = process.env.PORT || 5000;
 

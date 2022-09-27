@@ -212,6 +212,7 @@ const toLogin =()=>{
             </Button>
           
           <p className='signIn-Op' onClick={toLogin}>Already have an account?Log in</p>
+          <p className='signIn-Op'>Sign up with Google? <a href='/auth/google'>Sign up</a> </p>
 
 
           </form>
