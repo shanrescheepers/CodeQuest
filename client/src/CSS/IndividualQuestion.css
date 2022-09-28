@@ -7,6 +7,7 @@ p {
   padding: 10px;
   background-color: #FFFFFF;
   margin: 50px;
+  margin-top: 80px;
   border-radius: 20px;
 }
 .qq_and_title {
@@ -173,4 +174,10 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .backArrow{
+    margin-top: 40px;
+    margin-left: 40px;
+    position: absolute;
   }

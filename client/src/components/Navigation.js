@@ -164,7 +164,7 @@ let bgColor='';
           <img src={logo} className="Logo" width="150px"></img>
 
 
-          <Search style={{ marginLeft: "100px", width: "390px" , marginTop: "25px" , marginLeft: "15px"}}>
+          <Search style={{ marginLeft: "100px", width: "390px" , height: "42px", marginTop: "25px" , marginLeft: "15px"}}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -175,7 +175,7 @@ let bgColor='';
           </Search>
 
           <Button sx={{
-            backgroundColor: '#2b2b2b', borderRadius: '20px', marginTop: "25px", width: '140px', fontFamily: 'Open Sans', marginLeft: '510px',
+            backgroundColor: '#2b2b2b', borderRadius: '20px', height: '42px', marginTop: "25px", width: '140px', fontFamily: 'Open Sans', marginLeft: '510px',
             '&:hover': {
               backgroundColor: '#4A4A4A',
             }
@@ -224,7 +224,7 @@ let bgColor='';
           <h4>Discord Server</h4>
 
           <Button sx={{
-            backgroundColor: '#FFFFFF', color: '#2b2b2b', fontWeight: 'bold', borderRadius: '20px', marginTop: "20px", width: '140px', fontFamily: 'Open Sans', marginLeft: '600px',
+            backgroundColor: '#FFFFFF',  height: '42px',color: '#2b2b2b', fontWeight: 'bold', borderRadius: '20px', marginTop: "20px", width: '140px', fontFamily: 'Open Sans', marginLeft: '600px',
             '&:hover': {
               backgroundColor: '#F6F6FA',
             }

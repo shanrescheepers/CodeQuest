@@ -4,7 +4,7 @@
 
 .pp_main_card {
     width: 75%;
-    height: 66vh;
+    height: 58vh;
     /* height: 150vh; */
     background-color: #F1F1FC;
     border-radius: 20px;
@@ -38,11 +38,11 @@
 }
 
 .pp_welcome_banner {
-    width: 30%;
+    width: 60%;
     height: 80%;
     /* background-color: aqua; */
     position: absolute;
-    top: 60%;
+    top: 53%;
     left: 5%;
     transform: translateY(-50%);
     /* padding: 10px; */
@@ -91,15 +91,12 @@
     border-radius: 20px;
     position: absolute;
     left: 0%;
-    /* background-color: #2b2b2b; */
+    background-color: #ffffff;
 
-    box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
-    -webkit-box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
-    -moz-box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
 }
 
 .pp_rank_con h2 {
-    color: black;
+    color: #2b2b2b;
     position: absolute;
     left: 10%;
     top: 5%;
@@ -131,7 +128,7 @@
 }
 
 .pp_rank p {
-    color: black;
+    color: #2b2b2b;
     text-align: center;
     /* background-color: #2b2b2b; */
     position: relative;
@@ -230,17 +227,13 @@ h2 {
     left: 50%;
     transform: translateX(-50%);
     border-radius: 20px;
-
-    box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
-    -webkit-box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
-    -moz-box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
     /* padding: 10px; */
     padding-left: 30px;
 }
 
 
 .pp_badges_con h2 {
-    color: black;
+    color: #2b2b2b;
     width: auto;
     /* background-color: blue; */
     margin-bottom: 3%;
@@ -252,17 +245,13 @@ h2 {
 .pp_badge_card {
     width: 30%;
     height: 90%;
-    /* background-color: #FF7900; */
+    background-color: #ffffff;
     border-radius: 20px;
     float: left;
     margin-right: 10px;
     margin-top: 10px;
     position: relative;
     flex: 0 0 auto;
-
-    box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
-    -webkit-box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
-    -moz-box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
 }
 
 .pp_badge_card img{
@@ -276,7 +265,7 @@ h2 {
 }
 
 .pp_badge_heading {
-    color: black;
+    color: #2b2b2b;
     text-align: center;
     font-weight: bold;
     margin-top: 15%;
@@ -284,7 +273,7 @@ h2 {
 
 .pp_badge_desc {
     width: 60%;
-    color: black;
+    color: #2b2b2b;
     text-align: center;
     margin: 0 auto;
     /* justify-content: center; */
@@ -310,7 +299,7 @@ h2 {
 
 .pp_questions_btn{
     display: inline-block;
-    color: black;
+    color: #2b2b2b;
     margin-right: 5px;
     text-align: center;
     /* background-color: gray; */
@@ -322,12 +311,12 @@ h2 {
 }
 
 .pp_questions_btn:hover {
-    border-bottom: black solid 5px;
+    border-bottom: #2b2b2b solid 5px;
 }
 
 .pp_answers_btn{
     display: inline-block;
-    color: black;
+    color: #2b2b2b;
     margin-right: 5px;
     text-align: center;
     /* background-color: gray; */
@@ -338,7 +327,7 @@ h2 {
 }
 
 .pp_answers_btn:hover {
-    border-bottom: black solid 5px;
+    border-bottom: #2b2b2b solid 5px;
 }
 
 
@@ -404,7 +393,7 @@ h2 {
     left: 75px;
     font-size: 11pt;
     /* background-color: #FF7900; */
-    color: black;
+    color: #2b2b2b;
 }
 
 .pp_date{
@@ -416,7 +405,7 @@ h2 {
     left: 75px;
     font-size: 8pt;
     /* background-color: #FF7900; */
-    color: black;
+    color: #2b2b2b;
 }
 
 .pp_question_con{
@@ -440,7 +429,7 @@ h2 {
     position: relative;
     /* top: 50%;
     transform: translateY(-50%); */
-    color: black;
+    color: #2b2b2b;
 }
 
 .pp_delete{
@@ -467,7 +456,7 @@ h2 {
 }
 
 .pp_up_Votes_text{
- color: black;
+ color: #2b2b2b;
  padding: 0%;
  margin: 0%;
  position: absolute;
@@ -489,7 +478,7 @@ h2 {
 }
 
 .pp_down_Votes_text{
-    color: black;
+    color: #2b2b2b;
     padding: 0%;
     margin: 0%;
     position: absolute;
@@ -500,7 +489,7 @@ h2 {
 }
 
 .answers{
-    color: black;
+    color: #2b2b2b;
     padding: 0%;
     margin: 0%;
     position: absolute;
