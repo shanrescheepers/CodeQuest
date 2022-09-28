@@ -13,7 +13,6 @@ import React from 'react';
 import { Button } from '@mui/material';
 import headerImg from '../assets/homeAssets/header-img.png';
 import QuestionCard from '../components/QuestionCard';
-
 import { motion } from "framer-motion";
 import { useNavigate } from 'react-router';
 
@@ -58,11 +57,13 @@ const FeedPage = (props) => {
 props.funcNav(true);
 
     return (
+        <>
         <motion.div className='home-con'
             intital={{ width: 0 }}
             animate={{ width: "76%" }}
             exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
         >
+        
             <div className='feed-header'>
                 <div className='header-con'>
                     <div className='home-header-text'>
@@ -86,6 +87,7 @@ props.funcNav(true);
             </div>
 
         </motion.div>
+        </>
     );
 };
 
