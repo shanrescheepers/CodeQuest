@@ -61,7 +61,7 @@ const NewQuestionPage = () => {
         <div className='new-question-con'>
             <div className='main-form-con'>
                 <div className='back-arrow' onClick={goBack}>
-                    <ArrowBackRounded fontSize='large'/>
+                    <ArrowBackRounded sx={{fontSize:'40px'}}/>
                 </div>
             
                 <img className='kitty-img' src={kitty}></img>

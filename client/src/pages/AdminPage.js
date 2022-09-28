@@ -64,7 +64,7 @@ const AdminPage = () => {
                     <h1 className='admin__top__header__heyboss__h1'>Hey Boss,</h1>
                     <p className='admin__top__header__heyboss__p'>Everything you need to see has been displayed below. </p>
                     <Button sx={{
-                        backgroundColor: '#FF7900', borderRadius: '20px', marginTop: "20px", width: '140px', fontFamily: 'Open Sans',
+                        backgroundColor: '#FF7900', borderRadius: '20px', marginTop: "20px", width: '140px', fontFamily: 'Open Sans', textTransform: 'capitalize',
                         '&:hover': {
                             backgroundColor: '#FF7900',
                         }

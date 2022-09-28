@@ -13,6 +13,7 @@ import UpVote from '../assets/profilePageAssets/upVote.png';
 import DownVote from '../assets/profilePageAssets/downVote.png';
 
 import { motion } from "framer-motion";
+import QuestionCard from '../components/QuestionCard';
 
 const ProfilePage = () => {
     return (
@@ -26,13 +27,13 @@ const ProfilePage = () => {
             <div className='pp_welcome_con'>
                 <div className='pp_welcome_banner'>
                     <h1>Hi Friend,</h1>
-                    <p>We love that you've joined us! Lets take a look at all things YOU!</p>
+                    <p>We love that you've joined us! Lets take a look at all things YOU! View your rank, badges, questions and more! </p>
                     <Button sx={{
-                        backgroundColor: '#FF7900', borderRadius: '20px', marginTop: "20px", width: '140px', fontFamily: 'Open Sans',
+                        backgroundColor: '#FF7900', height: '42px',borderRadius: '20px', marginTop: "20px", width: 'auto', fontFamily: 'Open Sans', textTransform: 'capitalize',
                         '&:hover': {
                             backgroundColor: '#FF7900',
                         }
-                    }} variant="contained">Button</Button>
+                    }} variant="contained">View Questions</Button>
                 </div>
 
                 <div className='pp_welcome_banner_img'></div>
@@ -126,99 +127,17 @@ const ProfilePage = () => {
                 <p className='pp_answers_btn'>Answers</p>
 
                 <div className='pp_userInput_card_con'>
-
-                    <div className='pp_UserInput_card'>
-                        <img src={profilePicture} alt="img" className='pp_profile_picture'></img>
-                        <p className='pp_username'>Username</p>
-                        <p className='pp_date'>00 September 2022</p>
-                        <img src={Delete} alt="img" className='pp_delete'></img>
-                        <div className='pp_question_con'>
-                            <p>Q: Question One?</p>
-                        </div>
-
-                        <img src={UpVote} alt="img" className='pp_up_Vote_img'></img>
-                        <p className='pp_up_Votes_text'>00</p>
-                        <img src={DownVote} alt="img" className='pp_down_Vote_img'></img>
-                        <p className='pp_down_Votes_text'>00</p>
-
-                        <p className='answers'>00 Answers</p>
-                    </div>
-
-                    <div className='pp_UserInput_card'>
-                        <img src={profilePicture} alt="img" className='pp_profile_picture'></img>
-                        <p className='pp_username'>Username</p>
-                        <p className='pp_date'>00 September 2022</p>
-                        <img src={Delete} alt="img" className='pp_delete'></img>
-                        <div className='pp_question_con'>
-                            <p>Q: Question Two?</p>
-                        </div>
-
-                        <img src={UpVote} alt="img" className='pp_up_Vote_img'></img>
-                        <p className='pp_up_Votes_text'>00</p>
-                        <img src={DownVote} alt="img" className='pp_down_Vote_img'></img>
-                        <p className='pp_down_Votes_text'>00</p>
-
-                        <p className='answers'>00 Answers</p>
-                    </div>
-
-                    <div className='pp_UserInput_card'>
-                        <img src={profilePicture} alt="img" className='pp_profile_picture'></img>
-                        <p className='pp_username'>Username</p>
-                        <p className='pp_date'>00 September 2022</p>
-                        <img src={Delete} alt="img" className='pp_delete'></img>
-                        <div className='pp_question_con'>
-                            <p>Q: Question Three?</p>
-                        </div>
-
-                        <img src={UpVote} alt="img" className='pp_up_Vote_img'></img>
-                        <p className='pp_up_Votes_text'>00</p>
-                        <img src={DownVote} alt="img" className='pp_down_Vote_img'></img>
-                        <p className='pp_down_Votes_text'>00</p>
-
-                        <p className='answers'>00 Answers</p>
-                    </div>
-
-                    <div className='pp_UserInput_card'>
-                        <img src={profilePicture} alt="img" className='pp_profile_picture'></img>
-                        <p className='pp_username'>Username</p>
-                        <p className='pp_date'>00 September 2022</p>
-                        <img src={Delete} alt="img" className='pp_delete'></img>
-                        <div className='pp_question_con'>
-                            <p>Q: Question Four?</p>
-                        </div>
-
-                        <img src={UpVote} alt="img" className='pp_up_Vote_img'></img>
-                        <p className='pp_up_Votes_text'>00</p>
-                        <img src={DownVote} alt="img" className='pp_down_Vote_img'></img>
-                        <p className='pp_down_Votes_text'>00</p>
-
-                        <p className='answers'>00 Answers</p>
-                    </div>
-
-                    <div className='pp_UserInput_card'>
-                        <img src={profilePicture} alt="img" className='pp_profile_picture'></img>
-                        <p className='pp_username'>Username</p>
-                        <p className='pp_date'>00 September 2022</p>
-                        <img src={Delete} alt="img" className='pp_delete'></img>
-                        <div className='pp_question_con'>
-                            <p>Q: Question Five?</p>
-                        </div>
-
-                        <img src={UpVote} alt="img" className='pp_up_Vote_img'></img>
-                        <p className='pp_up_Votes_text'>00</p>
-                        <img src={DownVote} alt="img" className='pp_down_Vote_img'></img>
-                        <p className='pp_down_Votes_text'>00</p>
-
-                        <p className='answers'>00 Answers</p>
-                    </div>
-
+                        <QuestionCard/>
+                        <QuestionCard/>
+                        <QuestionCard/>
+                    
 
                 </div>
 
             </div>
 
             <Button sx={{
-                backgroundColor: '#2b2b2b', float: 'right', borderRadius: '20px', marginTop: "150px", marginRight: "50px", width: '200px', fontFamily: 'Open Sans',
+                backgroundColor: '#2b2b2b', float: 'right', borderRadius: '20px', height:'45px', marginTop: "150px", textTransform: 'capitalize', marginRight: "50px", width: '200px', fontFamily: 'Open Sans',
                 '&:hover': {
                     backgroundColor: '#2b2b2b',
                 }

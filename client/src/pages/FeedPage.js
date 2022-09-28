@@ -21,6 +21,7 @@ const FeedPage = (props) => {
     const buttonStyle = {
         backgroundColor: '#FF7900',
         borderRadius: '50px',
+        height: '42px',
         marginTop: '16px',
         width: 'auto',
         padding: '16px 24px',
@@ -35,6 +36,7 @@ const FeedPage = (props) => {
     const secondaryButtonStyle = {
         backgroundColor: '#2B2B2B', 
         borderRadius: '50px',
+        height: '45px',
         width: 'auto',
         padding: '16px 24px',
         fontFamily: 'Open Sans',
@@ -76,7 +78,7 @@ props.funcNav(true);
             </div>
 
             <div className='title-con'>
-                <h2>Questions</h2>
+                <h2>Recent Questions</h2>
                 <Button variant='contained' disableElevation style={secondaryButtonStyle} onClick={askNewQuestion}>Ask a Question</Button>
             </div>
 
