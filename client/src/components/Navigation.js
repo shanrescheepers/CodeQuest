@@ -14,10 +14,7 @@ import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlin
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
 import { useNavigate } from 'react-router-dom';
-// import pp1 from '../../public/Avatars';
-// import pp2 from '../assets/Avatars/2.png';
-// import pp3 from '../assets/Avatars/3.png';
-
+import LogOutModal from '../modals/LogOutModal';
 
 // import Stack from '@mui/material/Stack';
 
@@ -86,10 +83,10 @@ const Navigation = () => {
   //Log out
   const navigate = useNavigate();
 
-  const logOut = (event) => {
-  
-        navigate('/');
-        sessionStorage.clear();
+  const logOut = () => {
+        setEditModal(<LogOutModal
+          close={setEditModal}
+        />)
       }
       
 //======================================================
@@ -116,7 +113,7 @@ const Navigation = () => {
 //   }, []);
 
   //================================================================================================
-  //Add User Info
+  //User Info
 
   const [username, setUsername] = useState();
   const [rank, setRank] = useState();
@@ -154,8 +151,13 @@ let bgColor='';
     bgColor = '#FF7900'
   };
 
+  //=====================================================================================
+  //Log out modal
+     // Handle Modal
+     const [editModal, setEditModal] = useState();
   return (
     <div>
+      {editModal}
       <div className="navContainer">
 
         <div className='topNavBar'>

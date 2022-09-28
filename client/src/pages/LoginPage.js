@@ -7,6 +7,8 @@ import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Axios from 'axios';
+import CantLoginModal from '../modals/CantLoginModal';
+
 
 
 const LoginPage = (props) => {
@@ -53,6 +55,8 @@ const getValues = (e) =>{
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
 }
+   // Handle Modal
+   const [editModal, setEditModal] = useState();
 
 //Login user function
 const loginUser = (e) => {
@@ -78,9 +82,9 @@ const loginUser = (e) => {
           sessionStorage.setItem('email', formValues['email']);
           navigate("/FeedPage");
         }else{
-        //   setEditModal(
-        //   <UhOh close={setEditModal}/>
-        //     )
+          setEditModal(
+          <CantLoginModal close={setEditModal}/>
+            )
         console.log("can't log in");
         }
       }
@@ -92,6 +96,8 @@ const loginUser = (e) => {
 }
 
     return (
+      <>
+      {editModal}
         <div className="Login">
         <ThemeProvider theme={theme} >
             <div className='login-container'>
@@ -144,6 +150,7 @@ const loginUser = (e) => {
             
         </ThemeProvider>
         </div>
+        </>
     );
 };
 
