@@ -92,8 +92,7 @@ const NewQuestionPage = () => {
 
         const payloadData = new FormData();
 
-        // var UserID = sessionStorage.getItem('id');
-        var UserID = '65REVDGFHBGVFCDRE56';
+        var UserID = sessionStorage.getItem('id');
         var Upvotes = 0;
         var Downvotes = 0;
 
