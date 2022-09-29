@@ -80,19 +80,26 @@
 
 .screenshot-preview {
     width: 100%;
-    height: auto;
-    min-height: 400px;
+    min-height: 200px;
+    max-height: auto;
     background-color: #FFFFFF;
     margin-top: 16px;
-    border-radius: 40px;
-    padding-top: 0.1px;
+    border-radius: 20px;   
+    display: flex;
+    overflow: hidden;
 }
 
-.screenshot-preview p {
+.screenshot {
+    width: 100%;
+    background-size: contain;
+    background-position: center;
+}
+
+/* .screenshot-preview p {
     margin-left: 16px;
     text-align: left;
     color: #A2A2A2;
-}
+} */
 
 .question-rules-title {
     width: 100%;
@@ -118,3 +125,13 @@
 .question-rules-list li {
     list-style: inherit;
 }
+
+.css-5e166l-MuiInputBase-root-MuiOutlinedInput-root {
+    border-radius: 50px !important;
+}
+
+.css-1o9sxo0-MuiInputBase-root-MuiOutlinedInput-root {
+    border-radius: 50px !important;
+}
+
+ 
