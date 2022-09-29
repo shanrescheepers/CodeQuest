@@ -15,6 +15,7 @@ import Navigation from './Navigation';
 import NewQuestionPage from '../pages/NewQuestionPage';
 import { useState } from 'react';
 import { AnimatePresence } from "framer-motion";
+import Footer from '../components/Footer'
 
 function AnimatedRoutes() {
 
@@ -41,7 +42,11 @@ function AnimatedRoutes() {
         <Route path="/newquestion" element={<NewQuestionPage />} />
       </Routes>
     </AnimatePresence>
-
+    {   showNav &&
+          <footer>
+            <Footer />
+          </footer>
+   } 
     </>
   )
 }

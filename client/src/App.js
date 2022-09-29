@@ -6,7 +6,7 @@ import Navigation from './components/Navigation';
 
 
 import AnimatedRoutes from './components/AnimatedRoutes';
-import Footer from './components/Footer';
+
 
 function App() {
 
@@ -16,7 +16,7 @@ function App() {
         <BrowserRouter>
             <AnimatedRoutes/>
         </BrowserRouter>
-        <Footer/>
+
     </div>
   );
 }
