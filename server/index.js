@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 
 // const userRoute = require('./routes/user');
 const userRoute = require('./routes/user');
+const questionRoute = require('./routes/question')
 
 require('dotenv/config');
 
@@ -13,12 +14,14 @@ app.use(cors({
     origin: 'http://localhost:3000'
 }));
 
+app.use(express.static('questionScreenshots'));
+app.use('./questionScreenshots', express.static('questionScreenshots'));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use(productRoute);
-// app.use(artistRoute);
+
+app.use(questionRoute);
 app.use(userRoute);
-// app.use(ordersRoute);
 
 mongoose.connect(process.env.DB_CONNECTION, {
     useNewUrlParser: true,
