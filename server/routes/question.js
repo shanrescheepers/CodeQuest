@@ -9,22 +9,24 @@ const newQuestionModel = require('../models/newQuestion');
 //multer middleware, make file for screenshot image storage
 const questionScreenshotStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, '../questionScreenshots');
+        console.log('multer running, slay')
+        cb(null, './questionScreenshots');
       },
       filename: (req, file, cb) => {
+        console.log('multer running, another slay')
         console.log(file);
-        cb(null, Date.now() + '_' + path.extname(file.originalname));
+        cb(null, Date.now() + path.extname(file.originalname));
     }
 })
 
-const uploadQuestionScreenshots = multer({ questionScreenshotStorage });
+const uploadQuestionScreenshots = multer({ storage: questionScreenshotStorage });
 
 //add new question to database
-router.post('/api/newquestion', uploadQuestionScreenshots.single('image'), (req, res) => {
+router.post('/api/newquestion', uploadQuestionScreenshots.single('screenshots'), (req, res) => {
 
     let data = JSON.parse(req.body.information);
     console.log(data);
-    console.log(req.file);
+    console.log(req.file.filename);
 
     const newQuestion = new newQuestionModel({
         userId: data.userId,
@@ -35,7 +37,7 @@ router.post('/api/newquestion', uploadQuestionScreenshots.single('image'), (req,
         upvotes: data.upvotes,
         downvotes: data.downvotes,
         datePosted: data.datePosed,
-        image: req.file,
+        screenshots: req.file.filename,
     });
 
     newQuestion.save()

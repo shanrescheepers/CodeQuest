@@ -76,7 +76,6 @@ const NewQuestionPage = () => {
         let value = e.target.value;
         let imgName = value.substring(12);
         setScreenshotNames(imgName);
-        // console.log(imgName);
       
         let reader = new FileReader();
         reader.onload = () => {
@@ -107,7 +106,7 @@ const NewQuestionPage = () => {
         }
 
         payloadData.append('information', JSON.stringify(payload));
-        payloadData.append('image', screenshots);
+        payloadData.append('screenshots', screenshots);
 
         console.log(payload);
         console.log(screenshots);
@@ -137,7 +136,7 @@ const NewQuestionPage = () => {
                     <p>Strictly related to dev though, questions deemed inappropriate will be removed</p>
 
                     <Button variant="contained" component="label"> Upload File 
-                        <input name='image' type="file" hidden onChange={getScreenshots}/>
+                        <input name='screenshots' type="file" hidden onChange={getScreenshots}/>
                     </Button>
 
                     <div className='screenshot-preview'>

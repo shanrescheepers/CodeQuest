@@ -14,8 +14,7 @@ app.use(cors({
     origin: 'http://localhost:3000'
 }));
 
-app.use(express.static('questionScreenshots'));
-app.use('./questionScreenshots', express.static('questionScreenshots'));
+app.use('/questionScreenshots', express.static('questionScreenshots'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
