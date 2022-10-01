@@ -64,18 +64,17 @@ const NewQuestionPage = () => {
         setFormValues({ ...formValues, [name]: value });
     }
 
-    //screenshot file names
-    const [screenshotNames, setScreenshotNames] = useState('Name of File will appear here');
-    const [screenshots, setScreenshots] = useState();
+    //screenshot names
+    const [screenshots, setScreenshots] = useState([]);
 
     //get screenshots
     const getScreenshots = (e) => {
-        let imageFile = e.target.files[0];
+        let imageFile = e.target.files;
         setScreenshots(imageFile);
-      
-        let value = e.target.value;
-        let imgName = value.substring(12);
-        setScreenshotNames(imgName);
+
+        for(let i = 0; i < imageFile.length; i++){
+            console.log(imageFile[i]);
+        }
       
         let reader = new FileReader();
         reader.onload = () => {
@@ -86,6 +85,7 @@ const NewQuestionPage = () => {
         reader.readAsDataURL(e.target.files[0]); 
     }
 
+    //add new question to database
     const addNewQuestion = (e) => {
         e.preventDefault();
 
@@ -106,11 +106,15 @@ const NewQuestionPage = () => {
         }
 
         payloadData.append('information', JSON.stringify(payload));
-        payloadData.append('screenshots', screenshots);
+        for(let i = 0; i < screenshots.length; i++){
+            console.log(screenshots[i]);
+            const element = screenshots[i];
+            payloadData.append('screenshots', element);
+        }
 
-        console.log(payload);
-        console.log(screenshots);
+        // console.log(payload);
 
+        //send payload to database
         Axios.post('http://localhost:5000/api/newquestion', payloadData)
         .then((res)=> {
           if(res){
@@ -135,17 +139,17 @@ const NewQuestionPage = () => {
                     <h1>Ask us Anything</h1>
                     <p>Strictly related to dev though, questions deemed inappropriate will be removed</p>
 
+                    <TextField name='title' placeholder='Title' color='grey' fullWidth sx={{backgroundColor: 'white', borderRadius: '50px', marginTop: '16px'}} onChange={getFormValues}/>
+                    <TextField name='description' placeholder='Description' multiline color='grey' fullWidth sx={{backgroundColor: 'white', borderRadius: '50px', marginTop: '16px'}} onChange={getFormValues}/>
+
                     <Button variant="contained" component="label"> Upload File 
-                        <input name='screenshots' type="file" hidden onChange={getScreenshots}/>
+                        <input name='screenshots' type="file" hidden multiple onChange={getScreenshots}/>
                     </Button>
 
                     <div className='screenshot-preview'>
                         <img className='screenshot' id="screenshot-preview"/>
                     </div>
-                    <p>{screenshotNames}</p>
 
-                    <TextField name='title' placeholder='Title' color='grey' fullWidth sx={{backgroundColor: 'white', borderRadius: '50px', marginTop: '16px'}} onChange={getFormValues}/>
-                    <TextField name='description' placeholder='Description' multiline color='grey' fullWidth sx={{backgroundColor: 'white', borderRadius: '50px', marginTop: '16px'}} onChange={getFormValues}/>
                     <TextField name='code' placeholder='Code' color='grey' multiline fullWidth sx={{backgroundColor: 'white', borderRadius: '50px', marginTop: '16px'}} onChange={getFormValues}/>
                     <TextField name='tags' placeholder='Tags' color='grey' fullWidth sx={{backgroundColor: 'white', borderRadius: '50px', marginTop: '16px'}} onChange={getFormValues}/>
                                         
@@ -168,8 +172,6 @@ const NewQuestionPage = () => {
                         </ul>
                     </div>
                 </div>
-
-                
                 
             </div>
         </div>
