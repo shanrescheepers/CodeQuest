@@ -84,33 +84,33 @@ const Navigation = () => {
   const navigate = useNavigate();
 
   const logOut = () => {
-        setEditModal(<LogOutModal
-          close={setEditModal}
-        />)
-      }
-      
-//======================================================
-//verify User
+    setEditModal(<LogOutModal
+      close={setEditModal}
+    />)
+  }
 
-// useEffect(()=>{
+  //======================================================
+  //verify User
 
-//     let verifyUser = {token: sessionStorage.getItem('token')};
-//     if(!verifyUser.token){
-//       navigate('/');
-//       sessionStorage.clear();
-//     }else{
-//       Axios.post('http://localhost:5000/api/verifytoken', verifyUser)
-//       .then(res =>{
-//         console.log(res.data);
-//         if(res.data.verified === false){
-//           navigate('/');
-//           sessionStorage.clear();
-  
-//         }
-//       })
-//     }
-  
-//   }, []);
+  // useEffect(()=>{
+
+  //     let verifyUser = {token: sessionStorage.getItem('token')};
+  //     if(!verifyUser.token){
+  //       navigate('/');
+  //       sessionStorage.clear();
+  //     }else{
+  //       Axios.post('http://localhost:5000/api/verifytoken', verifyUser)
+  //       .then(res =>{
+  //         console.log(res.data);
+  //         if(res.data.verified === false){
+  //           navigate('/');
+  //           sessionStorage.clear();
+
+  //         }
+  //       })
+  //     }
+
+  //   }, []);
 
   //================================================================================================
   //User Info
@@ -120,41 +120,45 @@ const Navigation = () => {
   const [profileImg, setprofileImg] = useState();
   const [year, setYear] = useState();
 
-  useEffect(()=>{
+  useEffect(() => {
 
 
     const userId = sessionStorage.getItem("id");
-    // localStorage.clear();
+
+    if (userId !== null) {
       Axios.get('http://localhost:5000/api/userInfo/' + userId)
-      .then(res => {
+        .then(res => {
           let data = res.data;
           setUsername(data.username);
           setRank(data.rank);
           setprofileImg(data.profileimage);
           setYear(data.yearlevel);
-      })
-
+        })
+    } else {
+      console.log("User not logged in")
+    }
+    // localStorage.clear();
   }, []);
 
 
-//get profile image path
- const imgURL = ('Avatars/'+profileImg+'.png');
+  //get profile image path
+  const imgURL = ('Avatars/' + profileImg + '.png');
 
-console.log(year);
-let bgColor='';
+  console.log(year);
+  let bgColor = '';
 
-  if(year === 1){
+  if (year === 1) {
     bgColor = '#6EEB83'
-  }else if(year === 2){
+  } else if (year === 2) {
     bgColor = '#6CD4FF'
-  }else{
+  } else {
     bgColor = '#FF7900'
   };
 
   //=====================================================================================
   //Log out modal
-     // Handle Modal
-     const [editModal, setEditModal] = useState();
+  // Handle Modal
+  const [editModal, setEditModal] = useState();
   return (
     <div>
       {editModal}
@@ -164,7 +168,7 @@ let bgColor='';
           <img src={logo} className="Logo" width="150px"></img>
 
 
-          <Search style={{ marginLeft: "100px", width: "390px" , height: "42px", marginTop: "25px" , marginLeft: "15px"}}>
+          <Search style={{ marginLeft: "100px", width: "390px", height: "42px", marginTop: "25px", marginLeft: "15px" }}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -186,7 +190,7 @@ let bgColor='';
 
 
           <div className='profile-section'>
-            <div className='profileCircle' style={{backgroundColor: bgColor}}><img src={imgURL} className="profile-Img"></img></div>
+            <div className='profileCircle' style={{ backgroundColor: bgColor }}><img src={imgURL} className="profile-Img"></img></div>
             <h3>{username}</h3>
             <h5>{rank} | Reliability Score: </h5>
           </div>
@@ -224,7 +228,7 @@ let bgColor='';
           <h4>Discord Server</h4>
 
           <Button sx={{
-            backgroundColor: '#FFFFFF',  height: '42px',color: '#2b2b2b', fontWeight: 'bold', borderRadius: '20px', marginTop: "20px", width: '140px', fontFamily: 'Open Sans', marginLeft: '600px',
+            backgroundColor: '#FFFFFF', height: '42px', color: '#2b2b2b', fontWeight: 'bold', borderRadius: '20px', marginTop: "20px", width: '140px', fontFamily: 'Open Sans', marginLeft: '600px',
             '&:hover': {
               backgroundColor: '#F6F6FA',
             }

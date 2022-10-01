@@ -69,10 +69,13 @@ const AdminPage = () => {
                             backgroundColor: '#FF7900',
                         }
                     }} variant="contained">Button</Button>
-                </div>
 
-                <div className='admin__top__header__catimage'>
-                    <img src={bosscatimage} alt="bosscatimage" className='admin__top__header__maincatimage' style={{ height: "250px", paddingTop: "40px" }} />
+
+
+
+                </div>
+                <div className='admin__top__header__cat'>
+                    <img src={bosscatimage} alt="bosscatimage" className='admin__top__header__heyboss__maincatimage' style={{ height: "250px", paddingTop: "40px" }} />
                 </div>
             </div>
             <div className='admin__links' >
