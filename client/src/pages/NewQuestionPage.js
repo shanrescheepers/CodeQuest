@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import Axios from 'axios';
 import { useState } from 'react';
+import upload from '../assets/newQuestionAssets/upload.png'
 
 const NewQuestionPage = () => {
     
@@ -71,6 +72,9 @@ const NewQuestionPage = () => {
     const getScreenshots = (e) => {
         let imageFile = e.target.files;
         setScreenshots(imageFile);
+
+        //hide screenshots upload thingie
+        document.getElementById('upload-image-con').style.opacity = '0';
 
         // for(let i = 0; i < imageFile.length; i++){
         //     console.log(imageFile[i]);
@@ -159,13 +163,22 @@ const NewQuestionPage = () => {
                     <TextField name='title' placeholder='Title' color='grey' fullWidth sx={{backgroundColor: 'white', borderRadius: '50px', marginTop: '16px'}} onChange={getFormValues}/>
                     <TextField name='description' placeholder='Description' multiline color='grey' fullWidth sx={{backgroundColor: 'white', borderRadius: '50px', marginTop: '16px'}} onChange={getFormValues}/>
 
-                    <Button variant="contained" component="label"> Upload File 
-                        <input name='screenshots' type="file" hidden multiple onChange={getScreenshots}/>
-                    </Button>
-
                     <div className='screenshot-preview'>
+
+                        <div className='upload-image-con' id='upload-image-con'>
+                            <img className='img-picture' src={upload} alt='image placeholder'/>
+
+                            <p>Click here to add new images.</p>
+                            <input name='screenshots' className='image-input' type="file" multiple onChange={getScreenshots}/>
+                        </div>
+
                         <img className='screenshot' id="screenshot-preview"/>
+                        {/* replace image with carousel */}
                     </div>
+
+                    {/* <Button variant="contained" component="label"> Upload File 
+                        <input name='screenshots' type="file" hidden multiple onChange={getScreenshots}/>
+                    </Button> */}
 
                     <TextField name='code' placeholder='Code' color='grey' multiline fullWidth sx={{backgroundColor: 'white', borderRadius: '50px', marginTop: '16px'}} onChange={getFormValues}/>
                     <TextField name='tags' placeholder='Tags' color='grey' fullWidth sx={{backgroundColor: 'white', borderRadius: '50px', marginTop: '16px'}} onChange={getFormValues}/>
