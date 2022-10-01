@@ -24,7 +24,7 @@ const Navigation = () => {
   const [loggedIn, setLoggedIn] = useState(true);
 
   const getAdminPermission = (rankId) => {
-    if (rankId === '1') {
+    if (rankId === 'Diamond') {
       return true;
     } else {
       return false;
@@ -125,7 +125,11 @@ const Navigation = () => {
 
     const userId = sessionStorage.getItem("id");
 
-    if (userId !== null) {
+    if (userId == null) {
+      console.log("User not logged in")
+
+    } else {
+      console.log("user logged in")
       Axios.get('http://localhost:5000/api/userInfo/' + userId)
         .then(res => {
           let data = res.data;
@@ -133,9 +137,8 @@ const Navigation = () => {
           setRank(data.rank);
           setprofileImg(data.profileimage);
           setYear(data.yearlevel);
+          console.log(data.rank)
         })
-    } else {
-      console.log("User not logged in")
     }
     // localStorage.clear();
   }, []);
@@ -206,7 +209,7 @@ const Navigation = () => {
 
                 {/* BELOW: This will allow for ONLY the ADMIN (based on rank from DB) to view the admin nav icon, and navigate onto the AdminPage */}
                 {/* ipv 1 this will be a useState. useState update from axios call that's being plled from the user's ID */}
-                {getAdminPermission('1') ?
+                {getAdminPermission(rank) ?
                   <li><NavLink activeclassname="active" to="/AdminPage">
                     <button><AdminPanelSettingsOutlinedIcon className='icon' />
                       <div className="text">Admin</div>

@@ -17,8 +17,8 @@ import { deepOrange } from '@mui/material/colors';
 import ReportedUserCard from '../components/AdminComponents/ReportedUsers';
 import PromotionRequests from '../components/AdminComponents/PromotionRequests';
 import QuestionCard from '../components/QuestionCard';
-
 import { motion } from "framer-motion";
+import Axios from 'axios';
 
 const AdminPage = () => {
     // Links function
@@ -28,27 +28,30 @@ const AdminPage = () => {
         setValue(newValue);
     };
 
-    // const [loggedIn, setLoggedIn] = useState(true);
-    let navigate = useNavigate();
+    // // const [loggedIn, setLoggedIn] = useState(true);
+    // let navigate = useNavigate();
 
-    const getAdminPermission = (rankId) => {
-        if (rankId === '1') {
-            console.log("navigate true because rank is 1")
-            return true;
-        } else {
-            navigate("/FeedPage", { replace: true });
-            localStorage.clear();
-            console.log("navigate false because rank admin permission is not 1")
-            return false;
-        }
-    }
-    // This manner will be used in the navigation side as well. 
-    // security options: 1) session storage || 2) axios call that will check user's permission. Everytime page reloads, it will check user permission, along with using session storage but just to GET the User's ID.
-    // ID= rank, based on rank, pull permissions through
-    useEffect(() => {
-        { getAdminPermission("1") }
-        // 2)here we'll give rank through based on axios call. 1)Session == bad, hackers etc
-    })
+    // const getAdminPermission = (rankId) => {
+    //     if (rankId === 'Diamond') {
+    //         console.log("navigate true because rank is Diamond, Admint Rights Granted")
+    //         return true;
+    //     } else {
+    //         navigate("/FeedPage", { replace: true });
+    //         localStorage.clear();
+    //         console.log("navigate false because rank admin permission is not 1")
+    //         return false;
+    //     }
+    // }
+
+    // // Admin Rights Permission
+    // useEffect(() => {
+    //     const userId = sessionStorage.getItem("id");
+    //     Axios.get('http://localhost:5000/api/userInfo/' + userId)
+    //         .then(res => {
+    //             console.log(res.data.rank)
+    //             { getAdminPermission(res.data.rank) }
+    //         })
+    // })
 
 
 
