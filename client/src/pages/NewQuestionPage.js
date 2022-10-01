@@ -166,9 +166,11 @@ const NewQuestionPage = () => {
                     <div className='screenshot-preview'>
 
                         <div className='upload-image-con' id='upload-image-con'>
-                            <img className='img-picture' src={upload} alt='image placeholder'/>
-
-                            <p>Click here to add new images.</p>
+                            <div className='things'>
+                                <img className='img-picture' src={upload} alt='image placeholder'/>
+                                <p>Click here to add new images.</p>
+                            </div>
+                            
                             <input name='screenshots' className='image-input' type="file" multiple onChange={getScreenshots}/>
                         </div>
 
