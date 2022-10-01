@@ -49,7 +49,7 @@ router.post('/api/adduser', (req, res) => {
             res.status(400).json({ msg: "Can't add user, there is an error", err });
         });
 });
-
+// get all users
 router.get('/api/getUser', async (req, res) => {
     const user = await UserSchema.find();
     console.log("Get Users", user);
@@ -58,10 +58,7 @@ router.get('/api/getUser', async (req, res) => {
 
 //============================================================================================
 //login user
-
 router.post('/api/loginUser', async (req, res) => {
-
-
     const findUser = await UserSchema.findOne({
         email: req.body.email,
     });
