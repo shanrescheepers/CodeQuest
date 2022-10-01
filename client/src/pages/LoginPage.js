@@ -8,150 +8,150 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Axios from 'axios';
 import CantLoginModal from '../modals/CantLoginModal';
-
+import CatLottie from '../components/lotties/HeyCatLottie';
 
 
 const LoginPage = (props) => {
 
-//=====================================================================================
-//Hide Navigation
-    props.funcNav(false);
+  //=====================================================================================
+  //Hide Navigation
+  props.funcNav(false);
+  //=====================================================================================
+  //Theme
+  const theme = createTheme({
+    palette: {
+      primary: {
+        // Purple and green play nicely together.
+        main: '#2b2b2b',
+      },
+      secondary: {
+        // This is green.A700 as hex.
+        main: '#11cb5f',
+      },
+    },
+  });
+  //====================================================================================
+  //To register
 
+  const navigate = useNavigate();
 
-//=====================================================================================
-//Theme
-    const theme = createTheme({
-        palette: {
-          primary: {
-            // Purple and green play nicely together.
-            main:'#2b2b2b',
-          },
-          secondary: {
-            // This is green.A700 as hex.
-            main: '#11cb5f',
-          },
-        },
-      });
+  const toRegister = () => {
+    navigate('/RegisterPage');
+  }
+  //=====================================================================================
+  //Login functionality
 
+  //get form values
+  let formVals = ["email", "password"];
+  const [formValues, setFormValues] = useState(formVals);
 
-//====================================================================================
-//To register
-
-const navigate = useNavigate();
-
-const toRegister =()=>{
-  navigate('/RegisterPage');
-}
-//=====================================================================================
-//Login functionality
-
-
-
-//get form values
-let formVals = ["email", "password"];
-const [formValues, setFormValues] = useState(formVals);
-
-const getValues = (e) =>{
+  const getValues = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
-}
-   // Handle Modal
-   const [editModal, setEditModal] = useState();
+  }
+  // Handle Modal
+  const [editModal, setEditModal] = useState();
 
-//Login user function
-const loginUser = (e) => {
-    e.preventDefault(); 
+  // LOTTIE Routing
+  const [isClicked, setIsClicked] = useState(false);
 
+
+  //Login user function
+  const loginUser = (e) => {
+    e.preventDefault();
     let payload = {
-        email: formValues['email'],
-        password: formValues['password']
+      email: formValues['email'],
+      password: formValues['password']
     }
-
     console.log(payload);
 
     Axios.post('http://localhost:5000/api/loginUser', payload)
-    .then((res)=>{
-      console.log(res.data);
-      if(!res.data){
-        alert('Bad request');
-      }else{
-        if(res.data.user){
-        console.log(res);
-          sessionStorage.setItem('id', res.data.id);
-          sessionStorage.setItem('token', res.data.user);
-          sessionStorage.setItem('email', formValues['email']);
-          navigate("/FeedPage");
-        }else{
-          setEditModal(
-          <CantLoginModal close={setEditModal}/>
+      .then((res) => {
+        console.log(res.data);
+        if (!res.data) {
+          alert('Bad request');
+        } else {
+          if (res.data.user) {
+            console.log(res);
+            sessionStorage.setItem('id', res.data.id);
+            sessionStorage.setItem('token', res.data.user);
+            sessionStorage.setItem('email', formValues['email']);
+            // navigate("/FeedPage");
+            setIsClicked(!isClicked)
+          } else {
+            setEditModal(
+              <CantLoginModal close={setEditModal} />
             )
-        console.log("can't log in");
+            console.log("can't log in");
+          }
         }
-      }
-    })
-    .catch(function(error){
-      console.log(error);
-    })
-
-}
-
-    return (
-      <>
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+  }
+  return (
+    <>
       {editModal}
-        <div className="Login">
-        <ThemeProvider theme={theme} >
-            <div className='login-container'>
-                <h1>Hey...</h1>
-                <h1>We missed you.</h1>
-                <h4>Let's make some magic.</h4>
-                
-                <form onSubmit={loginUser}>              
+      <div className="Login">
+        {!isClicked && <ThemeProvider theme={theme} >
+          <div className='login-container'>
+            <h1>Hey...</h1>
+            <h1>We missed you.</h1>
+            <h4>Let's make some magic.</h4>
 
-                <TextField sx={{
-                    backgroundColor: '#ffffff',
-                    border: 'none',
-                    outlineColor: '#ffffff',
-                    borderRadius: '30px',
-                    width: '100%',
-                    height: '50px',
-                    marginTop: '30px'
-                    
-                }}
+            <form onSubmit={loginUser} >
+
+              <TextField sx={{
+                backgroundColor: '#ffffff',
+                border: 'none',
+                outlineColor: '#ffffff',
+                borderRadius: '30px',
+                width: '100%',
+                height: '50px',
+                marginTop: '30px'
+
+              }}
                 id="outlined-basic" onChange={getValues} name="email" color='primary' label="Email Address" variant="outlined" />
 
-                <TextField sx={{
-                    backgroundColor: '#ffffff',
-                    border: '0',
-                    outline: '0',
-                    borderRadius: '30px',
-                    width: '100%',
-                    height: '50px',
-                    marginTop: '30px',
-                    borderBlock: 'none',
-                    borderBlockColor: '#f1f1f1'
-                }}
-                id="outlined-basic" onChange={getValues} name="password" color='primary'  type="password" label="Password" variant="outlined" />
+              <TextField sx={{
+                backgroundColor: '#ffffff',
+                border: '0',
+                outline: '0',
+                borderRadius: '30px',
+                width: '100%',
+                height: '50px',
+                marginTop: '30px',
+                borderBlock: 'none',
+                borderBlockColor: '#f1f1f1'
+              }}
+                id="outlined-basic" onChange={getValues} name="password" color='primary' type="password" label="Password" variant="outlined" />
 
-                <a href='' className='link'><p>Forgot your password?</p></a>
+              <a href='' className='link'><p>Forgot your password?</p></a>
 
-                <Button sx={{
-            backgroundColor: '#2b2b2b', borderRadius: '20px', marginTop: "20px", width: '100%', fontFamily: 'Open Sans', marginLeft: '0px',
-            '&:hover': {
-              backgroundColor: '#FF983A',
-            }
-          }} variant="contained" type="submit" backgroundColor="primary">Log In</Button>
-          
-          <p className='signIn-Op' onClick={toRegister}>Don't have an account?Sign in</p>
+              <Button sx={{
+                backgroundColor: '#2b2b2b', borderRadius: '20px', marginTop: "20px", width: '100%', fontFamily: 'Open Sans', marginLeft: '0px',
+                '&:hover': {
+                  backgroundColor: '#FF983A',
+                }
+              }} variant="contained" type="submit" backgroundColor="primary">Log In</Button>
+
+              <p className='signIn-Op' onClick={toRegister}>Don't have an account? <span style={{ fontWeight: 'bold' }}> Register now </span></p>
 
             </form>
-            </div>
 
-            <img src={loginImg} className="loginImg"></img>
-            
-        </ThemeProvider>
-        </div>
-        </>
-    );
+          </div>
+
+          <img src={loginImg} className="loginImg"></img>
+
+        </ThemeProvider>}
+
+        {isClicked && <CatLottie />}
+
+
+      </div >
+    </>
+  );
 };
 
 export default LoginPage;
