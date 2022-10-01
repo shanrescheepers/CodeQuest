@@ -23,11 +23,15 @@ import Axios from 'axios';
 const AdminPage = () => {
     // Links function
     const [value, setValue] = React.useState('1');
+    const [valueTwo, setValueTwo] = React.useState('1');
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
+    const handleChangeTwo = (event, newValueTwo) => {
+        setValueTwo(newValueTwo);
+    };
     // // const [loggedIn, setLoggedIn] = useState(true);
     // let navigate = useNavigate();
 
@@ -62,7 +66,6 @@ const AdminPage = () => {
             exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
         >
             <div className='admin__top__header'>
-
                 <div className='admin__top__header__heyboss'>
                     <h1 className='admin__top__header__heyboss__h1'>Hey Boss,</h1>
                     <p className='admin__top__header__heyboss__p'>Everything you need to see has been displayed below. </p>
@@ -72,15 +75,17 @@ const AdminPage = () => {
                             backgroundColor: '#FF7900',
                         }
                     }} variant="contained">Button</Button>
-
-
-
-
                 </div>
                 <div className='admin__top__header__cat'>
                     <img src={bosscatimage} alt="bosscatimage" className='admin__top__header__heyboss__maincatimage' style={{ height: "250px", paddingTop: "40px" }} />
                 </div>
             </div>
+
+
+
+
+
+
             <div className='admin__links' >
                 <TabContext value={value}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -101,20 +106,20 @@ const AdminPage = () => {
 
             </div>
             <div className='admin__flagged__and__bad posts'>
-                <TabContext value={value}>
+                <TabContext value={valueTwo}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 
-                        <TabList onChange={handleChange} aria-label="lab API tabs example" >
-                            <Tab label="Flagged Posts" value="4" indicatorColor="secondary" />
-                            <Tab label="Flagged Answers" value="5" />
-                            <Tab label="Badly Rated Posts" value="6" />
-                            <Tab label="Badly Rated Answers" value="7" />
+                        <TabList onChange={handleChangeTwo} aria-label="lab API tabs example" >
+                            <Tab label="Flagged Posts" value="1" indicatorColor="secondary" />
+                            <Tab label="Flagged Answers" value="2" />
+                            <Tab label="Badly Rated Posts" value="3" />
+                            <Tab label="Badly Rated Answers" value="4" />
                         </TabList>
                     </Box>
+                    <TabPanel value="1"><QuestionCard /></TabPanel>
+                    <TabPanel value="2"><QuestionCard /></TabPanel>
+                    <TabPanel value="3"><QuestionCard /></TabPanel>
                     <TabPanel value="4"><QuestionCard /></TabPanel>
-                    <TabPanel value="5"><QuestionCard /></TabPanel>
-                    <TabPanel value="6"><QuestionCard /></TabPanel>
-                    <TabPanel value="7"><QuestionCard /></TabPanel>
                 </TabContext>
             </div>
         </motion.div>

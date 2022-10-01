@@ -36,10 +36,10 @@ const PromotionRequests = () => {
                     '&:hover': {
                         backgroundColor: '#FF7900',
                     }
-                }} variant="contained" ><DeleteIcon style={{ height: "20px" }} />Accept User</Button>
+                }} variant="contained" >Promote User</Button>
                 <Button>
                     <Typography variant="subtitle2" gutterBottom style={{ color: "#2b2b2b", fontSize: "10px", fontVariant: "small-caps", marginTop: "8px" }}>
-                        Remove Request
+                        Delete Request
                     </Typography>
                 </Button>
             </Card>
@@ -61,14 +61,13 @@ const PromotionRequests = () => {
                     '&:hover': {
                         backgroundColor: '#FF7900',
                     }
-                }} variant="contained" ><DeleteIcon style={{ height: "20px" }} />Accept User</Button>
+                }} variant="contained" >Promote User</Button>
                 <Button>
                     <Typography variant="subtitle2" gutterBottom style={{ color: "#2b2b2b", fontSize: "10px", fontVariant: "small-caps", marginTop: "8px" }}>
-                        Remove Request
+                        Delete Request
                     </Typography>
                 </Button>
             </Card>
-
 
             <Card className='prprofilecard__card'>
                 <Avatar sx={{ bgcolor: blue[500] }} aria-label="userprofilepicture" className='profilecard__card__useravatar' style={{ marginTop: "12px" }}>
@@ -87,13 +86,14 @@ const PromotionRequests = () => {
                     '&:hover': {
                         backgroundColor: '#FF7900',
                     }
-                }} variant="contained" ><DeleteIcon style={{ height: "20px" }} />Accept User</Button>
+                }} variant="contained" >Promote User</Button>
                 <Button>
                     <Typography variant="subtitle2" gutterBottom style={{ color: "#2b2b2b", fontSize: "10px", fontVariant: "small-caps", marginTop: "8px" }}>
-                        Remove Request
+                        Delete Request
                     </Typography>
                 </Button>
             </Card>
+
         </div >
     );
 };

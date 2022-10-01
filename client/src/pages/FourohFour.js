@@ -8,7 +8,7 @@ const FourOhFour = () => {
     return (
         <div>
 
-            <motion.div className='home-con'
+            <motion.div className='fourohfour-container'
                 intital={{ width: 0 }}
                 animate={{ width: "76%" }}
                 exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
