@@ -72,9 +72,9 @@ const NewQuestionPage = () => {
         let imageFile = e.target.files;
         setScreenshots(imageFile);
 
-        for(let i = 0; i < imageFile.length; i++){
-            console.log(imageFile[i]);
-        }
+        // for(let i = 0; i < imageFile.length; i++){
+        //     console.log(imageFile[i]);
+        // }
       
         let reader = new FileReader();
         reader.onload = () => {
@@ -89,6 +89,25 @@ const NewQuestionPage = () => {
     const addNewQuestion = (e) => {
         e.preventDefault();
 
+        //turn every character to a lowercase charater
+        const lowercaseTags = formValues.tags.toLowerCase();
+        //split tags string by comma or space
+        let seperateLowercaseTags = lowercaseTags.split(/[ ,]+/);
+
+        //make a tags array
+        let tagsArray = [];
+
+        //capatalise the first letter of every word then put it into an array
+        for(let i = 0; i < seperateLowercaseTags.length; i++){
+            const firstLetter = seperateLowercaseTags[i].charAt(0);
+            const firstLetterCap = firstLetter.toUpperCase();
+            const remainingLetters = seperateLowercaseTags[i].slice(1);  
+            const capitalisedWord = firstLetterCap + remainingLetters;
+
+            const tags = capitalisedWord;
+            tagsArray.push(tags);
+        }
+
         const payloadData = new FormData();
 
         var UserID = sessionStorage.getItem('id');
@@ -100,21 +119,19 @@ const NewQuestionPage = () => {
             title: formValues['title'],
             description: formValues['description'],
             code: formValues['code'],
-            tags: formValues['tags'],
+            tags: tagsArray,
             upvotes: +Upvotes,
             downvotes: +Downvotes,
         }
 
         payloadData.append('information', JSON.stringify(payload));
         for(let i = 0; i < screenshots.length; i++){
-            console.log(screenshots[i]);
+            // console.log(screenshots[i]);
             const element = screenshots[i];
             payloadData.append('screenshots', element);
         }
 
-        // console.log(payload);
-
-        //send payload to database
+        // send payload to database
         Axios.post('http://localhost:5000/api/newquestion', payloadData)
         .then((res)=> {
           if(res){
