@@ -86,40 +86,64 @@ const AdminPage = () => {
 
 
 
-            <div className='admin__links' >
-                <TabContext value={value}>
-                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <div className='admin__con'  >
+                <TabContext value={value} className='admin__links'>
+                    <div className='admin__links__tablinks'>
+                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                            <TabList onChange={handleChange} aria-label="lab API tabs example" >
+                                <Tab label="All Users" value="1" indicatorColor="secondary" />
+                                <Tab label="Reported Users" value="2" />
+                                <Tab label="Promotion Requests" value="3" />
+                            </TabList>
+                        </Box>
+                    </div>
 
-                        <TabList onChange={handleChange} aria-label="lab API tabs example" >
-                            <Tab label="All Users" value="1" indicatorColor="secondary" />
-                            <Tab label="Reported Users" value="2" />
-                            <Tab label="Promotion Requests" value="3" />
-                        </TabList>
 
-                    </Box>
-                    <TabPanel value="1"><UserprofileCard /></TabPanel>
-                    <TabPanel value="2"><ReportedUserCard /></TabPanel>
-                    <TabPanel value="3"><PromotionRequests /></TabPanel>
+                    <TabPanel value="1" className='admin__links__card' style={{ gridTemplateColumns: 'repeat(20, calc(100%))' }}><UserprofileCard /></TabPanel>
+                    <TabPanel value="2" className='admin__links__card'><ReportedUserCard /></TabPanel>
+                    <TabPanel value="3" className='admin__links__card'><PromotionRequests /></TabPanel>
 
                 </TabContext>
 
 
             </div>
-            <div className='admin__flagged__and__bad posts'>
-                <TabContext value={valueTwo}>
-                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 
-                        <TabList onChange={handleChangeTwo} aria-label="lab API tabs example" >
-                            <Tab label="Flagged Posts" value="1" indicatorColor="secondary" />
-                            <Tab label="Flagged Answers" value="2" />
-                            <Tab label="Badly Rated Posts" value="3" />
-                            <Tab label="Badly Rated Answers" value="4" />
-                        </TabList>
-                    </Box>
-                    <TabPanel value="1"><QuestionCard /></TabPanel>
-                    <TabPanel value="2"><QuestionCard /></TabPanel>
-                    <TabPanel value="3"><QuestionCard /></TabPanel>
-                    <TabPanel value="4"><QuestionCard /></TabPanel>
+            <div className='admin__flagged__and__bad'>
+                <TabContext value={valueTwo} className='admin__flagged__and__bad__tabs'>
+                    <div className='admin__flagged__and__bad__tabs__tablinks'>
+                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+
+                            <TabList onChange={handleChangeTwo} aria-label="lab API tabs example" >
+                                <Tab label="Flagged Posts" value="1" indicatorColor="secondary" />
+                                <Tab label="Flagged Answers" value="2" />
+                                <Tab label="Badly Rated Posts" value="3" />
+                                <Tab label="Badly Rated Answers" value="4" />
+                            </TabList>
+                        </Box>
+                    </div>
+                    <div className='admin__flagged__and__bad__tabs__tabpanel'>
+                        <TabPanel value="1" >
+                            <QuestionCard />
+                            <QuestionCard />
+                            <QuestionCard />
+                        </TabPanel>
+                        <TabPanel value="2">
+                            <QuestionCard />
+                            <QuestionCard />
+                            <QuestionCard />
+                            <QuestionCard />
+                        </TabPanel>
+                        <TabPanel value="3">
+                            <QuestionCard />
+                            <QuestionCard />
+                            <QuestionCard />
+                        </TabPanel>
+                        <TabPanel value="4">
+                            <QuestionCard />
+                            <QuestionCard />
+                            <QuestionCard />
+                        </TabPanel>
+                    </div>
                 </TabContext>
             </div>
         </motion.div>
