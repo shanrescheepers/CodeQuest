@@ -55,7 +55,7 @@ p {
   display: flex;
 
   justify-content: space-between;
-  margin: 30px;
+  margin: 30px; 
 }
 
 .title_show_answer {
@@ -65,7 +65,6 @@ p {
 }
 .answer_description {
   margin: 30px;
-  
 }
 .answer_description input {
     width: 98%;
