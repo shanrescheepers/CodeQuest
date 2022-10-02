@@ -68,7 +68,7 @@ const RegisterPage = (props) => {
 
 
     //Get Form values
-    let formVals = ["username", "email", "password"];
+    let formVals = ["username", "email", "password", "subject"];
 
     const [formValues, setFormValues] = useState(formVals);
 
@@ -86,9 +86,13 @@ const RegisterPage = (props) => {
     const [emailValidStyling, setEmailValidStyling] = useState(false);
     const [emailValidErrorText, setEmailValidErrorText] = useState("Email Address(Open Window Registered Email)");
 
+    const [passValidStyling, setPassValidStyling] = useState(false);
+    const [passValidErrorText, setPassValidErrorText] = useState("Password must contain");
+
 
 
     const ValidateEmail = () => {
+        const mailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
         let isValid = formValues['email'];
 
         if (!isValid.includes('virtualwindow.co.za')) {
@@ -97,12 +101,28 @@ const RegisterPage = (props) => {
             // alert("Please use an Open Window registered email address");
         } else {
             setEmailValidStyling(false);
-            setEmailValidErrorText("Email Address")
+            setEmailValidErrorText("Email Address Valid")
         }
     }
     // ==============================================================================
 
 
+    // ======================Password Validation===========================
+
+    const ValidatePass = () => {
+        const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(\W|_)).{5,}$/;
+        let isValid = formValues['password'];
+
+        if (!isValid.match(passRegex)) {
+            setPassValidStyling(true);
+            setPassValidErrorText("Password invalid. ")
+        } else {
+            setPassValidStyling(false);
+            setPassValidErrorText("Password Valid. ")
+        }
+    }
+
+    // ==============================================================================
 
 
     //Add new user
@@ -120,20 +140,33 @@ const RegisterPage = (props) => {
 
         console.log(payload);
 
-        Axios.post('http://localhost:5000/api/adduser', payload)
-            .then((res) => {
-                if (res) {
-                    console.log("User Successfully Added");
-                    console.log(res);
-                    sessionStorage.setItem('id', res.data._id);
-                    sessionStorage.setItem('token', res.data.username);
-                    sessionStorage.setItem('email', formValues['email']);
-                    navigate("/FeedPage");
-                }
-            })
-            .catch(function (error) {
-                console.log("Could not add user: Error is:" + error);
-            });
+        if (formValues['password', 'password', 'username', 'subject'] == null) {
+            alert("Please fill out all fields")
+
+            setEmailValidStyling(true);
+            setEmailValidErrorText("Field is Required")
+
+            setPassValidStyling(true);
+            setPassValidErrorText("Field is Required")
+
+        } else {
+            Axios.post('http://localhost:5000/api/adduser', payload)
+                .then((res) => {
+                    if (res) {
+                        console.log("User Successfully Added");
+                        console.log(res);
+                        sessionStorage.setItem('id', res.data._id);
+                        sessionStorage.setItem('token', res.data.username);
+                        sessionStorage.setItem('email', formValues['email']);
+                        navigate("/FeedPage");
+                    }
+                })
+                .catch(function (error) {
+                    console.log("Could not add user: Error is:" + error);
+                });
+        }
+
+
     }
 
     //====================================================================================
@@ -188,6 +221,7 @@ const RegisterPage = (props) => {
                                 onChange={handleChange}
                                 autoWidth
                                 label="subject"
+                                name="subject"
                             >
                                 <MenuItem value="">
                                     <em>Select your subject</em>
@@ -215,19 +249,21 @@ const RegisterPage = (props) => {
                             id="outlined-basic" className='emailInput' name="email" validators={['required', 'isEmail']}
                             errorMessages={['this field is required', 'email is not valid']} onChange={getValues} type="email" color="primary" label={emailValidErrorText} variant="outlined" onBlur={ValidateEmail} />
 
-                        <TextField sx={{
-                            backgroundColor: '#ffffff',
-                            border: '0',
-                            outline: '0',
-                            borderRadius: '30px',
-                            width: '100%',
-                            height: '50px',
-                            marginTop: '30px',
-                            borderBlock: 'none',
-                            borderBlockColor: '#f1f1f1'
-                        }}
+                        <TextField
+                            error={passValidStyling}
+                            sx={{
+                                backgroundColor: '#ffffff',
+                                border: '0',
+                                outline: '0',
+                                borderRadius: '30px',
+                                width: '100%',
+                                height: '50px',
+                                marginTop: '30px',
+                                borderBlock: 'none',
+                                borderBlockColor: '#f1f1f1'
+                            }}
                             id="outlined-basic" name="password" validators={['required', 'matchRegexp:/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/']}
-                            errorMessages={['this field is required', 'email is not valid']} onChange={getValues} type="password" color='primary' label="Password" variant="outlined" />
+                            errorMessages={['this field is required', 'email is not valid']} onChange={getValues} type="password" color='primary' label={passValidErrorText} variant="outlined" onBlur={ValidatePass} />
 
 
 

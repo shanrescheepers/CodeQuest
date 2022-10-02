@@ -62,6 +62,8 @@ const LoginPage = (props) => {
   const [emailValidStyling, setEmailValidStyling] = useState(false);
   const [emailValidErrorText, setEmailValidErrorText] = useState("Email Address(Open Window Registered Email)");
 
+  const [passValidStyling, setPassValidStyling] = useState(false);
+  const [passValidErrorText, setPassValidErrorText] = useState("Password must contain");
 
 
   const ValidateEmail = () => {
@@ -79,6 +81,22 @@ const LoginPage = (props) => {
   // ==============================================================================
 
 
+  // ======================Password Validation===========================
+
+  const ValidatePass = () => {
+    const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(\W|_)).{5,}$/;
+    let isValid = formValues['password'];
+
+    if (!isValid.match(passRegex)) {
+      setPassValidStyling(true);
+      setPassValidErrorText("Password invalid. ")
+    } else {
+      setPassValidStyling(false);
+      setPassValidErrorText("Password Valid. ")
+    }
+  }
+
+  // ==============================================================================
 
 
   //Login user function
@@ -92,7 +110,11 @@ const LoginPage = (props) => {
 
     console.log(payload);
 
-    Axios.post('http://localhost:5000/api/loginUser', payload)
+    if(emailValidStyling == false || passValidStyling == false){
+        alert("Email or Password Incorrect")
+    } else {
+
+      Axios.post('http://localhost:5000/api/loginUser', payload)
       .then((res) => {
         console.log(res.data);
         if (!res.data) {
@@ -115,6 +137,8 @@ const LoginPage = (props) => {
       .catch(function (error) {
         console.log(error);
       })
+
+    }
 
   }
 
@@ -140,20 +164,22 @@ const LoginPage = (props) => {
                 marginTop: '30px'
 
               }}
-              id="outlined-basic" onChange={getValues} name="email" color='primary' label={emailValidErrorText} variant="outlined" onBlur={ValidateEmail}/>
+              id="outlined-basic" onChange={getValues} name="email" color='primary' label={emailValidErrorText} variant="outlined" onBlur={ValidateEmail} />
 
-            <TextField sx={{
-              backgroundColor: '#ffffff',
-              border: '0',
-              outline: '0',
-              borderRadius: '30px',
-              width: '100%',
-              height: '50px',
-              marginTop: '30px',
-              borderBlock: 'none',
-              borderBlockColor: '#f1f1f1'
-            }}
-              id="outlined-basic" onChange={getValues} name="password" color='primary' type="password" label="Password" variant="outlined" />
+            <TextField
+              error={passValidStyling}
+              sx={{
+                backgroundColor: '#ffffff',
+                border: '0',
+                outline: '0',
+                borderRadius: '30px',
+                width: '100%',
+                height: '50px',
+                marginTop: '30px',
+                borderBlock: 'none',
+                borderBlockColor: '#f1f1f1'
+              }}
+              id="outlined-basic" onChange={getValues} name="password" color='primary' type="password" label={passValidErrorText} variant="outlined" onBlur={ValidatePass} />
 
             <a href='' className='link'><p>Forgot your password?</p></a>
 
