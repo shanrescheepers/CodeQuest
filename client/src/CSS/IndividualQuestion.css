@@ -1,5 +1,5 @@
 .display_question,
-h1,
+.question
 p {
   color: #2b2b2b;
 }
@@ -181,3 +181,49 @@ p {
     margin-left: 40px;
     position: absolute;
   }
+
+  .MuiOutlinedInput-notchedOutline {
+    border: none !important;
+  }
+
+  .dropdown_con {
+    display: flex;
+    margin-left: 31px;
+    margin-right: 53px;
+    justify-content: space-between;
+  }
+  .dropdowns {
+    display: flex;
+  }
+
+  .pp_welcome_banner-img {
+    background-image: url("../assets/questionpageimg.png");
+    width: 40%;
+    height: 100%;
+    /* background-color: aquamarine; */
+    position: relative;
+    /* left: 50%; */
+    float: right;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+  
+  }
+
+  .pp_welcome_banner1 h1, .pp_welcome_banner1 p{
+    color: white;
+    text-align: left;
+    float: left;
+}
+
+.pp_welcome_banner1 {
+  width: 50%;
+    height: 80%;
+    /* background-color: aqua; */
+    position: absolute;
+    top: 53%;
+    left: 5%;
+    transform: translateY(-50%);
+    /* padding: 10px; */
+}
