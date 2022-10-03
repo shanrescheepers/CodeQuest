@@ -23,14 +23,14 @@ const CantLoginModal = (props) => {
                 <div className='modal-img'><img src={picture}></img></div>
 
                 <Button sx={{
-                backgroundColor: '#2b2b2b', borderRadius: '20px', marginTop: "25px", width: '95%', height: '45px', fontFamily: 'Open Sans', marginLeft: '0px',
+                backgroundColor: '#2b2b2b', borderRadius: '20px', textTransform: 'capitalize',marginTop: "25px", width: '95%', height: '45px', fontFamily: 'Open Sans', marginLeft: '0px',
                 '&:hover': {
                 backgroundColor: '#4A4A4A',
                 }
             }} variant="contained" type="submit" onClick={closeModal}  backgroundColor="primary">Try Again</Button>
 
             <Button sx={{
-                backgroundColor: '#f1f1f1', color:"#2b2b2b",  borderRadius: '20px', marginTop: "15px", width: '95%', height: '45px', fontFamily: 'Open Sans', marginLeft: '0px',
+                backgroundColor: '#f1f1f1', color:"#2b2b2b",  textTransform: 'capitalize',borderRadius: '20px', marginTop: "15px", width: '95%', height: '45px', fontFamily: 'Open Sans', marginLeft: '0px',
                 '&:hover': {
                 backgroundColor: '#4A4A4A',
                 color:"#f1f1f1"

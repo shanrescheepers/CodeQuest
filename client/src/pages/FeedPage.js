@@ -17,6 +17,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from 'react-router';
 import Helmet from "react-helmet";
 
+
 const FeedPage = (props) => {
 
     const buttonStyle = {
