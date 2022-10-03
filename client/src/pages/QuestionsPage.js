@@ -33,7 +33,9 @@ const QuestionsPage = () => {
               sx={{
                 backgroundColor: "#FF7900",
                 borderRadius: "20px",
-                marginTop: "50px",
+                height: "43px",
+                textTransform: 'capitalize',
+                marginTop: "20px",
                 width: "140px",
                 fontFamily: "Open Sans",
                 "&:hover": {
@@ -105,6 +107,8 @@ const QuestionsPage = () => {
                 borderRadius: "20px",
                 marginTop: "20px",
                 width: "150 px",
+                textTransform: 'capitalize',
+                height: '45px',
                 fontFamily: "Open Sans",
                 "text-transform": "none",
                 "&:hover": {
