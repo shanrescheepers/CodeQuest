@@ -6,7 +6,7 @@
     z-index: 999999;
     top: 0;
     left: 0;
-
+    
   }
 
   .modal{
@@ -20,6 +20,7 @@
     padding: 25px;
     border-radius: 30px;
     text-align: center;
+    color: #2b2b2b;
   }
 
   .modal img{
@@ -30,6 +31,7 @@
   .modal h1{
     margin-bottom: 0px;
     margin-top: 15px;
+    color: #2b2b2b;
   }
 
   .modal h4{
