@@ -11,7 +11,7 @@ import profilePicture from '../assets/placeholderPP.png';
 import Delete from '../assets/profilePageAssets/delete.png';
 import UpVote from '../assets/profilePageAssets/upVote.png';
 import DownVote from '../assets/profilePageAssets/downVote.png';
-
+import Helmet from "react-helmet";
 import { motion } from "framer-motion";
 import QuestionCard from '../components/QuestionCard';
 
@@ -23,7 +23,9 @@ const ProfilePage = () => {
             intital={{ width: 0 }}
             animate={{ width: "76%" }}
             exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}>
-
+            <Helmet>
+                <title>Profile</title>
+            </Helmet>
             <div className='pp_welcome_con'>
                 <div className='pp_welcome_banner'>
                     <h1>Hi Friend,</h1>

@@ -19,6 +19,7 @@ import PromotionRequests from '../components/AdminComponents/PromotionRequests';
 import QuestionCard from '../components/QuestionCard';
 import { motion } from "framer-motion";
 import Axios from 'axios';
+import Helmet from "react-helmet";
 
 const AdminPage = () => {
     // Links function
@@ -65,6 +66,10 @@ const AdminPage = () => {
             animate={{ width: "76%" }}
             exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
         >
+            <Helmet>
+                <title>Admin</title>
+            </Helmet>
+
             <div className='admin__top__header'>
                 <div className='admin__top__header__heyboss'>
                     <h1 className='admin__top__header__heyboss__h1'>Hey Boss,</h1>

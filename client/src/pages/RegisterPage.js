@@ -14,6 +14,7 @@ import Three from '../assets/Avatars/3.png'
 import { useState } from 'react';
 import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Helmet from "react-helmet";
 
 const RegisterPage = (props) => {
 
@@ -122,6 +123,9 @@ const toLogin =()=>{
 
     return (
         <div className='SignIn'>
+            <Helmet>
+                <title>Register</title>
+            </Helmet>
         <ThemeProvider theme={theme}>
             <div className='SignIn-container'>
                 <h1>Welcome to CodeQuest!</h1>

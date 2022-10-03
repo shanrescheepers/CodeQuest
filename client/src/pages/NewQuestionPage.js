@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import Axios from 'axios';
 import { useState } from 'react';
-
+import Helmet from "react-helmet";
 const NewQuestionPage = () => {
     
     // const CssTextField = styled(TextField)({
@@ -145,6 +145,9 @@ const NewQuestionPage = () => {
 
     return (  
         <div className='new-question-con'>
+            <Helmet>
+                <title>Ask</title>
+            </Helmet>
             <div className='main-form-con'>
                 <div className='back-arrow' onClick={goBack}>
                     <ArrowBackRounded sx={{fontSize:'40px'}}/>

@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react';
 import Axios from 'axios';
 import CantLoginModal from '../modals/CantLoginModal';
 import CatLottie from '../components/lotties/HeyCatLottie';
-
+import Helmet from "react-helmet";
 
 const LoginPage = (props) => {
 
@@ -92,6 +92,9 @@ const LoginPage = (props) => {
   }
   return (
     <>
+      <Helmet>
+        <title>Login</title>
+    </Helmet>
       {editModal}
       <div className="Login">
         {!isClicked && <ThemeProvider theme={theme} >

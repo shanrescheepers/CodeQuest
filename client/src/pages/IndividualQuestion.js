@@ -12,7 +12,7 @@ import infoIcon from "../assets/individualPageAssets/infoIcon.png"
 import { Label } from '@mui/icons-material';
 import { NavLink } from 'react-router-dom';
 import { ArrowBackRounded } from '@mui/icons-material';
-
+import Helmet from "react-helmet";
 
 const IndividualQuestion = () => {
     function AnswerQuestion() {
@@ -26,6 +26,10 @@ const IndividualQuestion = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Question Expand</title>
+            </Helmet>
+
             <div className="pp_main_card">
             <NavLink activeclassname="active" to="/FeedPage"> <ArrowBackRounded sx={{fontSize:'40px', color:'#2b2b2b'}} className="backArrow"/></NavLink>
 

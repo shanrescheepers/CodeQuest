@@ -15,6 +15,7 @@ import headerImg from '../assets/homeAssets/header-img.png';
 import QuestionCard from '../components/QuestionCard';
 import { motion } from "framer-motion";
 import { useNavigate } from 'react-router';
+import Helmet from "react-helmet";
 
 const FeedPage = (props) => {
 
@@ -65,6 +66,9 @@ props.funcNav(true);
             animate={{ width: "76%" }}
             exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
         >
+            <Helmet>
+                <title>Home</title>
+            </Helmet>
         
             <div className='feed-header'>
                 <div className='header-con'>

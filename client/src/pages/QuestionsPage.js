@@ -3,7 +3,7 @@ import React from "react";
 import Button from "@mui/material/Button";
 
 import QuestionCard from '../components/QuestionCard';
-
+import Helmet from "react-helmet";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -21,6 +21,9 @@ const QuestionsPage = () => {
     };
     return (
         <div>
+           <Helmet>
+                <title>Questions</title>
+            </Helmet>
             {/* <Navigation/> */}
             <div className="pp_main_card">
         <div className="pp_welcome_con">

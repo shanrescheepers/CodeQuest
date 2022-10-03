@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import '../scss/fourohfour.scss';
 import FourOhFourLottie from "../components/lotties/FourOhFourLottie";
+import Helmet from "react-helmet";
 
 
 const FourOhFour = () => {
@@ -13,6 +14,10 @@ const FourOhFour = () => {
                 animate={{ width: "76%" }}
                 exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
             >
+
+            <Helmet>
+                <title>404</title>
+            </Helmet>
 
                 <div className="fourohfour">
                     <div className='fourohfour__coolcat'>
