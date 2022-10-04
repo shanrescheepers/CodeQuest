@@ -1,7 +1,5 @@
 import React from "react";
-
 import Button from "@mui/material/Button";
-
 import QuestionCard from '../components/QuestionCard';
 import Helmet from "react-helmet";
 import Box from "@mui/material/Box";
@@ -9,7 +7,8 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-// import Navigation from '../components/Navigation';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 
 const QuestionsPage = () => {
@@ -19,6 +18,30 @@ const QuestionsPage = () => {
       setAge(event.target.value);
     
     };
+
+
+//========================================================================================
+//Display All Questions
+//read products
+const [questions, setQuestions] = useState();
+const [updateQuestions, setUpdateQuestions] = useState();
+
+useEffect(()=>{
+
+  axios.get('http://localhost:5000/api/readquestions')
+  .then(res =>{
+
+    let questionData = res.data;
+    let renderQuestions = questionData.map((item) => <QuestionCard key={item._id} questionId={item._id} date={item.datePosted} title={item.title} description={item.description} upvotes={item.upvotes} downvotes={item.downvotes} userId={item.userId}  editRender={setUpdateQuestions}/>)
+    setQuestions(renderQuestions);
+    setUpdateQuestions(false);
+
+  })
+  .catch(err => console.log(err));
+
+},[updateQuestions]);
+
+
     return (
         <div>
            <Helmet>
@@ -125,9 +148,7 @@ const QuestionsPage = () => {
           </div>
         </div>
         <div className='question-card-con'>
-                <QuestionCard />
-                <QuestionCard />
-                <QuestionCard />
+                {questions}
             </div>
       </div>
     </div>
