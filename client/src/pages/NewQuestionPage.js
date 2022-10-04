@@ -9,6 +9,7 @@ import Axios from 'axios';
 import Helmet from "react-helmet";
 import { useEffect, useState } from 'react';
 import upload from '../assets/newQuestionAssets/upload.png';
+import QuestionAdded from '../modals/QuestionAdded';
 
 const NewQuestionPage = () => {
     
@@ -99,6 +100,8 @@ const NewQuestionPage = () => {
         alert("Selected uploadedScreenshots are not of valid type!");
     }
 
+    const [postConfirmation, setPostConfirmation] = useState();
+
     useEffect(() => {
         const uploadedScreenshots = [], fileReaders = [];
         let isCancel = false;
@@ -176,10 +179,13 @@ const NewQuestionPage = () => {
             payloadData.append('screenshots', element);
         }
 
+
         // send payload to database
         Axios.post('http://localhost:5000/api/newquestion', payloadData)
         .then((res)=> {
           if(res){
+            //show post confirmation modal 
+            setPostConfirmation(<QuestionAdded close={setPostConfirmation}/>)
             console.log("New Question Added. Slayyy!");
           }
         })
@@ -189,7 +195,9 @@ const NewQuestionPage = () => {
     }
 
     return (  
-        <div className='new-question-con'>
+        <div>
+            {postConfirmation}
+            <div className='new-question-con'>
             <Helmet>
                 <title>Ask</title>
             </Helmet>
@@ -264,6 +272,7 @@ const NewQuestionPage = () => {
                 </div>
                 
             </div>
+        </div>
         </div>
     );
 }
