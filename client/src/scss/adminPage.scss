@@ -66,15 +66,16 @@
         text-decoration: none;
         height: 300px;
         overflow-y: scroll;
-
+        grid-template-columns: auto;
+        margin-right: 8px;
 
         // grid-template-columns: auto;
         &__card {
             display: grid;
-            text-decoration: none;
-            // height: 300px;
+            padding: 8px;
+            margin-left: 16px;
             overflow-y: scroll !important;
-
+            margin-right: 8px;
         }
 
         &__tablinks {
@@ -83,6 +84,10 @@
 
 
         }
+    }
+
+    .css-13xfq8m-MuiTabPanel-root {
+        padding: 0px !important;
     }
 
     .admin .css-1gsv261 {

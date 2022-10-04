@@ -1,10 +1,10 @@
 .auprofilecard {
     display: grid;
     margin-top: 7px;
-    grid-template-columns: repeat(200, calc(17% - 100px)) !important;
+    // grid-template-columns: repeat(200, calc(17% - 100px)) !important;
     height: 250px !important;
     border-radius: 20px;
-    padding: 8px;
+    // padding: 8px;
     grid-gap: 2px;
 
     // background-color: #3f3fde;
