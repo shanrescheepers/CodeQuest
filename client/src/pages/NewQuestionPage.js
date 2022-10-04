@@ -208,17 +208,6 @@ const NewQuestionPage = () => {
                     <TextField name='title' placeholder='Title' color='grey' fullWidth sx={{backgroundColor: 'white', borderRadius: '50px', marginTop: '16px'}} onChange={getFormValues}/>
                     <TextField name='description' placeholder='Description' multiline color='grey' fullWidth sx={{backgroundColor: 'white', borderRadius: '50px', marginTop: '16px'}} onChange={getFormValues}/>
 
-                    <div className='screenshot-preview'>
-
-                        <div className='upload-image-con' id='upload-image-con'>
-                            <img className='img-picture' src={upload} alt='image placeholder'/>
-
-                            <p>Click here to add new images.</p>
-                            <input name='screenshots' className='image-input' type="file" multiple onChange={getScreenshots}/>
-                        </div>
-
-                        <img className='screenshot' id="screenshot-preview"/>
-
                         <div className='screenshot-preview' id='screenshot-preview'>
                             <div className='upload-image-con' id='upload-image-con'>
                                 <div className='things'>
@@ -250,13 +239,6 @@ const NewQuestionPage = () => {
                             </div>
 
                         </div>
-
-                    </div>
-                    
-
-                    {/* <Button variant="contained" component="label"> Upload File 
-                        <input name='screenshots' type="file" hidden multiple onChange={getScreenshots}/>
-                    </Button> */}
 
                     <TextField name='code' placeholder='Code' color='grey' multiline fullWidth sx={{backgroundColor: 'white', borderRadius: '50px', marginTop: '16px'}} onChange={getFormValues}/>
                     <TextField name='tags' placeholder='Tags' color='grey' fullWidth sx={{backgroundColor: 'white', borderRadius: '50px', marginTop: '16px'}} onChange={getFormValues}/>
