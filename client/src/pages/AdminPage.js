@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
 import '../scss/adminPage.scss';
 import bosscatimage from '../assets/adminpage_cat.svg';
@@ -47,15 +47,27 @@ const AdminPage = () => {
     //     }
     // }
 
+    const [totalUsers, setTotalUsers] = useState();
+    // represents all users
+    const [allTotalUsers, setAllTotalUsers] = useState();
+    // renders of users
+    const [totalRenderedUsers, setTotalRenderedUsers] = useState(false);
+
+
     // // Admin Rights Permission
-    // useEffect(() => {
-    //     const userId = sessionStorage.getItem("id");
-    //     Axios.get('http://localhost:5000/api/userInfo/' + userId)
-    //         .then(res => {
-    //             console.log(res.data.rank)
-    //             { getAdminPermission(res.data.rank) }
-    //         })
-    // })
+    useEffect(() => {
+        Axios.get('http://localhost:5000/api/getUser')
+            .then(res => {
+                // getting all the isers in. then count them, with it, capture some data , the ids, the names, emails.
+                setTotalUsers(res.data.length)
+                // console.log(res.data.length)
+
+                const allUsers = res.data.map((item) => <UserprofileCard key={item.id} username={item.username} email={item.email} profileimage={item.profileimage} yearlevel={item.yearlevel} />)
+
+                setAllTotalUsers(allUsers);
+                setTotalRenderedUsers(false);
+            })
+    }, [totalRenderedUsers]);
 
 
 
@@ -82,10 +94,6 @@ const AdminPage = () => {
             </div>
 
 
-
-
-
-
             <div className='admin__con'  >
                 <TabContext value={value} className='admin__links'>
                     <div className='admin__links__tablinks'>
@@ -98,8 +106,13 @@ const AdminPage = () => {
                         </Box>
                     </div>
 
+                    {/* All Users */}
+                    <TabPanel value="1" className='admin__links__card'
+                        // grid-template-columns: repeat(200, calc(17% - 100px)) !important;
+                        style={{ gridTemplateColumns: `repeat(${totalUsers}, calc(20%))` }} >
+                        {allTotalUsers}
+                    </TabPanel>
 
-                    <TabPanel value="1" className='admin__links__card' style={{ gridTemplateColumns: 'repeat(20, calc(100%))' }}><UserprofileCard /></TabPanel>
                     <TabPanel value="2" className='admin__links__card'><ReportedUserCard /></TabPanel>
                     <TabPanel value="3" className='admin__links__card'><PromotionRequests /></TabPanel>
 

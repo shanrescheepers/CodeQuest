@@ -85,7 +85,8 @@ router.post('/api/loginUser', async (req, res) => {
 
 });
 
-
+// DELETE USERS
+// router.post('/api/loginUser', async (req, res) => { })
 //============================================================================================
 //encrypt password
 

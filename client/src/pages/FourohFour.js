@@ -17,7 +17,7 @@ const FourOhFour = () => {
                 <div className="fourohfour">
                     <div className='fourohfour__coolcat'>
                         <h1 className='fourohfour__coolcat__h1'>Hey Coolcat,</h1>
-                        <p className='fourohfour__coolcat__p'> it seems as though the page you are looking for does not exist.</p>
+                        <p className='fourohfour__coolcat__p'> 404, it seems as though the page you are looking for does not exist.</p>
 
 
 
