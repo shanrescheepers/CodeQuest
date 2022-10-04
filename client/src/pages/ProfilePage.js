@@ -129,9 +129,9 @@ const ProfilePage = () => {
                 <p className='pp_answers_btn'>Answers</p>
 
                 <div className='pp_userInput_card_con'>
+                        {/* <QuestionCard/>
                         <QuestionCard/>
-                        <QuestionCard/>
-                        <QuestionCard/>
+                        <QuestionCard/> */}
                     
 
                 </div>

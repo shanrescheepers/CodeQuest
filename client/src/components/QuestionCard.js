@@ -32,6 +32,23 @@ let formatDate = moment(date).format('DD MMMM YYYY');;
 
 let desc = (props.description).substring(0,80);
 
+
+//====================================================================
+//Format votes
+
+let upVotes = props.upvotes;
+if(upVotes>9){
+    upVotes = props.upvotes;
+}else{
+    upVotes = '0' + upVotes;
+}
+
+let downVotes = props.downvotes;
+if(upVotes>9){
+    downVotes = props.downvotes;
+}else{
+    downVotes = '0' + downVotes;
+}
 //=====================================================================
 //User Info
 
@@ -101,10 +118,10 @@ if (year === 1) {
                     <div className='bottom-block'>
                         <div className='arrow-con'>                         
                             <img className='upvote question-card-icon' onClick={addVote} src={upvote}/>
-                            <small className='upvote-count vote-count'>{props.upvotes}</small>
+                            <small className='upvote-count vote-count'>{upVotes}</small>
 
                             <img className='downvote question-card-icon' onClick={subtractVote} src={downvote}/>
-                            <small className='downvote-count vote-count'>{props.downvotes}</small>
+                            <small className='downvote-count vote-count'>{downVotes}</small>
                         </div>
 
                         <small><p>00 Answers</p></small>
