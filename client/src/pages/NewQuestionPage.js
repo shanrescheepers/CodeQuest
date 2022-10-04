@@ -193,6 +193,7 @@ const NewQuestionPage = () => {
             <Helmet>
                 <title>Ask</title>
             </Helmet>
+
             <div className='main-form-con'>
                 <div className='back-arrow' onClick={goBack}>
                     <ArrowBackRounded sx={{fontSize:'40px'}}/>
