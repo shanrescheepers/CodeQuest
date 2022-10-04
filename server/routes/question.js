@@ -46,4 +46,11 @@ router.post('/api/newquestion', uploadQuestionScreenshots.array('screenshots'), 
     });
 });
 
+// read all questions
+// the get method requires a asynchronous connection to the database
+router.get('/api/readquestions', async(req, res) => {
+    const findQuestions = await newQuestionModel.find();
+    res.json(findQuestions);
+});
+
 module.exports = router;
