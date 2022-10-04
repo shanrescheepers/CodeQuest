@@ -6,8 +6,8 @@ import { alpha, styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import Axios from 'axios';
-import { useState } from 'react';
-import upload from '../assets/newQuestionAssets/upload.png'
+import { useEffect, useState } from 'react';
+import upload from '../assets/newQuestionAssets/upload.png';
 
 const NewQuestionPage = () => {
     
@@ -67,28 +67,66 @@ const NewQuestionPage = () => {
 
     //screenshot names
     const [screenshots, setScreenshots] = useState([]);
+    const [screenshotFiles, setImageFiles] = useState([]);
+    const [uploadedScreenshots, setImages] = useState([]);
+    const [index, setIndex] = useState(0);
 
-    //get screenshots
+    const imageTypeRegex = /image\/(png|jpg|jpeg)/gm;
+
+    //get screenshots + display them in the image slider
     const getScreenshots = (e) => {
-        let imageFile = e.target.files;
-        setScreenshots(imageFile);
 
-        //hide screenshots upload thingie
-        document.getElementById('upload-image-con').style.opacity = '0';
+        // // hide screenshots upload thingie
+        document.getElementById('upload-image-con').style.display = 'none';
+        document.getElementById('screenshot-preview').style.backgroundColor = '#F1F1FC';
 
-        // for(let i = 0; i < imageFile.length; i++){
-        //     console.log(imageFile[i]);
-        // }
-      
-        let reader = new FileReader();
-        reader.onload = () => {
-          let output = document.getElementById('screenshot-preview');
-          output.src = reader.result;
-        }; 
-      
-        reader.readAsDataURL(e.target.files[0]); 
+        let screenshotFiles = e.target.files;
+        setScreenshots(screenshotFiles);
+
+        const { files } = e.target;
+        const validImageFiles = [];
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          if (file.type.match(imageTypeRegex)) {
+            validImageFiles.push(file);
+          }
+        }
+        if (validImageFiles.length) {
+          setImageFiles(validImageFiles);
+          return;
+        }
+        alert("Selected uploadedScreenshots are not of valid type!");
     }
 
+    useEffect(() => {
+        const uploadedScreenshots = [], fileReaders = [];
+        let isCancel = false;
+        if (screenshotFiles.length) {
+          screenshotFiles.forEach((file) => {
+            const fileReader = new FileReader();
+            fileReaders.push(fileReader);
+            fileReader.onload = (e) => {
+              const { result } = e.target;
+              if (result) {
+                uploadedScreenshots.push(result)
+              }
+              if (uploadedScreenshots.length === screenshotFiles.length && !isCancel) {
+                setImages(uploadedScreenshots);
+              }
+            }
+            fileReader.readAsDataURL(file);
+          })
+        };
+    return () => {
+        isCancel = true;
+        fileReaders.forEach(fileReader => {
+          if (fileReader.readyState === 1) {
+            fileReader.abort()
+          }
+        })
+      }
+    }, [screenshotFiles]);
+ 
     //add new question to database
     const addNewQuestion = (e) => {
         e.preventDefault();
@@ -128,9 +166,11 @@ const NewQuestionPage = () => {
             downvotes: +Downvotes,
         }
 
+        //appends text 
         payloadData.append('information', JSON.stringify(payload));
+
+        //appends uploadedScreenshots
         for(let i = 0; i < screenshots.length; i++){
-            // console.log(screenshots[i]);
             const element = screenshots[i];
             payloadData.append('screenshots', element);
         }
@@ -163,24 +203,37 @@ const NewQuestionPage = () => {
                     <TextField name='title' placeholder='Title' color='grey' fullWidth sx={{backgroundColor: 'white', borderRadius: '50px', marginTop: '16px'}} onChange={getFormValues}/>
                     <TextField name='description' placeholder='Description' multiline color='grey' fullWidth sx={{backgroundColor: 'white', borderRadius: '50px', marginTop: '16px'}} onChange={getFormValues}/>
 
-                    <div className='screenshot-preview'>
-
+                    <div className='screenshot-preview' id='screenshot-preview'>
                         <div className='upload-image-con' id='upload-image-con'>
                             <div className='things'>
                                 <img className='img-picture' src={upload} alt='image placeholder'/>
-                                <p>Click here to add new images.</p>
+                                <p>Click here to add your screenshots.</p>
                             </div>
-                            
-                            <input name='screenshots' className='image-input' type="file" multiple onChange={getScreenshots}/>
+
+                            <input name='screenshots' className='image-input' id='image-input' type="file"  accept='image/*' multiple onChange={getScreenshots}/>
                         </div>
 
-                        <img className='screenshot' id="screenshot-preview"/>
-                        {/* replace image with carousel */}
-                    </div>
+                        <div className="slideshow">
+                            <div className="slideshow-slider" style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
+                                {uploadedScreenshots.map((screenshot, index) => (
+                                    <div className="slide" key={index}>
+                                        <img src={screenshot} className="slide-img"/>
+                                    </div>
+                                ))}
+                            </div>
 
-                    {/* <Button variant="contained" component="label"> Upload File 
-                        <input name='screenshots' type="file" hidden multiple onChange={getScreenshots}/>
-                    </Button> */}
+                            <div className="slideshow-dots">
+                                {uploadedScreenshots.map((_, idx) => (
+                                    <div key={idx} className={`slideshow-dot${index === idx ? " active" : ""}`}
+                                        onClick={() => {
+                                            setIndex(idx);
+                                        }}>    
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                    </div>
 
                     <TextField name='code' placeholder='Code' color='grey' multiline fullWidth sx={{backgroundColor: 'white', borderRadius: '50px', marginTop: '16px'}} onChange={getFormValues}/>
                     <TextField name='tags' placeholder='Tags' color='grey' fullWidth sx={{backgroundColor: 'white', borderRadius: '50px', marginTop: '16px'}} onChange={getFormValues}/>
