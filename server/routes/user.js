@@ -11,6 +11,10 @@ const bcrypt = require('bcrypt');
 // const image = require('../../client/src/assets/Emailer.jpg');
 const router = express();
 
+//reference the plugin for handlebars
+var hbs = require('nodemailer-express-handlebars');
+const path = require('path');
+
 //set express view engine
 // const app = express();
 // app.set("view engine", "ejs");
@@ -49,22 +53,25 @@ router.post('/api/adduser', (req, res) =>{
 //===================================================================================
 //Mailer functionality
 
-const mailerOutput = `
-<html>
-    <head>
-        
-    </head>
-    <body style="color: #2b2b2b;font-family: 'Open Sans';background-color: #ffffff;padding: 50px;">
-        <div class="circle" style="width: 400px;height: 400px;background-color: #2b2b2b;border-radius: 50%;color: #ffffff;text-align: center;padding: 20px;">
-            <h4 style="margin-top: 90px;font-weight: 300;margin-bottom: 0px;">Hey ${req.body.username}!</h4>
-            <h2 style="margin-top: 5px;">Welcome to CodeQuest!</h2>
-            <p style="width: 300px;margin: 0 auto;margin-bottom: 50px;">Are you ready to embark on the quest for code? Join us and help yourself and others become better coders along this journey as developers!</p>
+// const mailerOutput = `
+//     <html > 
+//     <body style="color: #2b2b2b;font-family: 'Open Sans';background-color: #EBEBF5; padding: 50px;text-align: center;">
+//         <div class="circle" style="width: 100%;height: 250px;background-color: #2b2b2b;color: #f1f1f1;text-align: center;padding: 20px;">
+//             <h4 style="margin-top: 25px;font-weight: 300;margin-bottom: 0px;">Hey ${req.body.username}!</h4>
+//             <h2 style="margin-top: 5px;">Welcome to CodeQuest!</h2>
+//             <p style="width: 300px;margin: 0 auto;margin-bottom: 40px;">Are you ready to embark on the quest for code? Join us and help yourself and others become better coders along this journey as developers!</p>
 
-            <a class="button" style="padding: 13px;background-color: #FF7900;border-radius: 30px;color: #ffffff;padding-left: 25px;padding-right: 25px;">Verify Account</a>
-      </div>  
+//             <a class="button" style="padding: 13px;background-color: #FF7900;border-radius: 30px;color: #ffffff;padding-left: 25px;padding-right: 25px;">Verify Account</a>
+//       </div>  
+//       <img src="cid:unique@kreata.ee" style="width: 450px;position: absolute;margin-top: -285px;margin-left: -60px">
 
        
-    </body>`;
+   
+//     <footer style="height: 60px; background-color: #EBEBF5;width: 100%;text-align: center;background-color: #2b2b2b;color: #ffffff;padding-top: 5px;padding-bottom: 5px;bottom: 0;margin-top:20px;">
+//         <h3>Your Journey Awaits.</h3>
+//     </footer>
+//     </body>
+// </html>`;
 
 const transporter = nodemailer.createTransport({
     host: "thehandler.aserv.co.za",
@@ -76,24 +83,41 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+const handlebarOptions = {
+    viewEngine: {
+      extName: ".handlebars",
+      partialsDir: path.resolve('./mailers'),
+      defaultLayout: false,
+    },
+    viewPath: path.resolve('./mailers'),
+    extName: ".handlebars",
+  };
+
+  transporter.use('compile', hbs(handlebarOptions));
+
 const mailOptions = {
     from: '"Mike the Mage" <mikethemage@codequest.co.za>',
     to: req.body.email,
     subject: 'Welcome from CodeQuest!',
-    text: 'Generic',
-    html: mailerOutput,
+    template: 'verficationEmail',
+    context: {
+      username: req.body.username
+    }
+    // text: 'Generic',
+    // html: mailerOutput,
     // attachments: [{
     //     filename: 'Emailer.jpg',
     //     path: '../server/assets/Emailer.jpg',
     //     cid: 'unique@kreata.ee' //same cid value as in the html img src
-    // }]
+    // }
+// ]
 }
 
 transporter.sendMail(mailOptions, (error, info)=> {
     if(error){
         console.log(error);
     }
-    console.log("massage sent: ", info.messageId);
+    console.log("massage sent: ", info);
 })
 
 
@@ -117,9 +141,7 @@ router.get('/api/getUser', async(req, res) => {
     res.send(user);
 });
 
-router.get('/preview', function(req,res){
-    res.render(`<h1>Hi</h1>`);
-});
+
 
 //============================================================================================
 //login user
