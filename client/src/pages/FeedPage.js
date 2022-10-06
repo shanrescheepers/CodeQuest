@@ -79,7 +79,8 @@ useEffect(()=>{
     for (let i = Math.max(0,questionData.length-10); i < questionData.length; i++) { 
         newArray.push(questionData[i])
     }
-console.log(newArray);
+
+    console.log(newArray);
 
     let renderQuestions = newArray.map((item) => <QuestionCard key={item._id} questionId={item._id} date={item.datePosted} title={item.title} description={item.description} upvotes={item.upvotes} downvotes={item.downvotes} userId={item.userId}  editRender={setUpdateQuestions}/>)
     setQuestions(renderQuestions);
