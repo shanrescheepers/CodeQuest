@@ -13,8 +13,18 @@ import { Label } from '@mui/icons-material';
 import { NavLink } from 'react-router-dom';
 import { ArrowBackRounded } from '@mui/icons-material';
 import Helmet from "react-helmet";
+import { useNavigate } from 'react-router';
 
 const IndividualQuestion = () => {
+
+    const navigate = useNavigate();
+
+    //clears question id from session when user goes back
+    const goBack = () => {
+        sessionStorage.removeItem('questionId');
+        navigate(-1);
+    }
+
     function AnswerQuestion() {
         console.log("something");
         $(".answer_question").fadeIn();
@@ -24,6 +34,7 @@ const IndividualQuestion = () => {
         $(".answer_question").fadeOut();
       };
 
+
     return (
         <div>
             <Helmet>
@@ -31,7 +42,9 @@ const IndividualQuestion = () => {
             </Helmet>
 
             <div className="pp_main_card">
-            <NavLink activeclassname="active" to="/FeedPage"> <ArrowBackRounded sx={{fontSize:'40px', color:'#2b2b2b'}} className="backArrow"/></NavLink>
+
+        <ArrowBackRounded sx={{fontSize:'40px', color:'#2b2b2b'}} className="backArrow"  onClick={goBack}/>
+
 
         <div className="display_question">
           <div className="qq_and_title">
