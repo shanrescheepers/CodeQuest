@@ -55,7 +55,7 @@ const IndividualQuestion = () => {
   };
 
   //set initial form values
-  let initialFormValues = ["title", "description", "code", "tags"];
+  let initialFormValues = [ "description", "code" ];
 
   //set form values from input fields
   const [formValues, setFormValues] = useState(initialFormValues);
@@ -138,24 +138,7 @@ const IndividualQuestion = () => {
   const addNewQuestion = (e) => {
     e.preventDefault();
 
-    //turn every character to a lowercase charater
-    const lowercaseTags = formValues.tags.toLowerCase();
-    //split tags string by comma or space
-    let seperateLowercaseTags = lowercaseTags.split(/[ ,]+/);
-
-    //make a tags array
-    let tagsArray = [];
-
-    //capatalise the first letter of every word then put it into an array
-    for (let i = 0; i < seperateLowercaseTags.length; i++) {
-      const firstLetter = seperateLowercaseTags[i].charAt(0);
-      const firstLetterCap = firstLetter.toUpperCase();
-      const remainingLetters = seperateLowercaseTags[i].slice(1);
-      const capitalisedWord = firstLetterCap + remainingLetters;
-
-      const tags = capitalisedWord;
-      tagsArray.push(tags);
-    }
+    
 
     const payloadData = new FormData();
 
@@ -166,7 +149,7 @@ const IndividualQuestion = () => {
 
     let payload = {
       userId: UserID,
-      uestionId: questionId,
+      questionId: questionId,
       description: formValues["description"],
       code: formValues["code"],
 
@@ -278,18 +261,7 @@ const IndividualQuestion = () => {
               will be removed
             </p>
 
-            <TextField
-              name="title"
-              placeholder="Title"
-              color="grey"
-              fullWidth
-              sx={{
-                backgroundColor: "white",
-                borderRadius: "50px",
-                marginTop: "16px",
-              }}
-              onChange={getFormValues}
-            />
+        
             <TextField
               name="description"
               placeholder="Description"
@@ -367,18 +339,7 @@ const IndividualQuestion = () => {
               }}
               onChange={getFormValues}
             />
-            <TextField
-              name="tags"
-              placeholder="Tags"
-              color="grey"
-              fullWidth
-              sx={{
-                backgroundColor: "white",
-                borderRadius: "50px",
-                marginTop: "16px",
-              }}
-              onChange={getFormValues}
-            />
+           
 
             <Button
               type="submit"
