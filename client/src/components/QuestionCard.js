@@ -7,8 +7,19 @@ import deleteIcon from '../assets/questionCardAssets/delete.png';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import { useNavigate } from 'react-router';
 
 const QuestionCard = (props) => {
+
+    const navigate = useNavigate();
+
+    //navigate to individual question page
+    const goToIndividualQuestion = () => {
+        navigate('/IndividualQuestion');
+        
+        //send question id to session storage
+        sessionStorage.setItem('questionId', props.questionId);
+    }
 
     const deleteQuestion = () => {
         //delete question functionality
@@ -21,41 +32,42 @@ const QuestionCard = (props) => {
     const subtractVote = () => {
         //subtract vote functionality
     }
-//===================================================================
-//Format Date date
-let date = props.date;
-let formatDate = moment(date).format('DD MMMM YYYY');;
+
+    //===================================================================
+    //Format Date date
+    let date = props.date;
+    let formatDate = moment(date).format('DD MMMM YYYY');;
 
 
-//====================================================================
-//Cut descirption
+    //====================================================================
+    //Cut descirption
 
-let desc = (props.description).substring(0,80);
+    let desc = (props.description).substring(0,80);
 
 
-//====================================================================
-//Format votes
+    //====================================================================
+    //Format votes
 
-let upVotes = props.upvotes;
-if(upVotes>9){
-    upVotes = props.upvotes;
-}else{
-    upVotes = '0' + upVotes;
-}
+    let upVotes = props.upvotes;
+    if(upVotes>9){
+        upVotes = props.upvotes;
+    }else{
+        upVotes = '0' + upVotes;
+    }
 
-let downVotes = props.downvotes;
-if(upVotes>9){
-    downVotes = props.downvotes;
-}else{
-    downVotes = '0' + downVotes;
-}
-//=====================================================================
-//User Info
+    let downVotes = props.downvotes;
+    if(upVotes>9){
+        downVotes = props.downvotes;
+    }else{
+        downVotes = '0' + downVotes;
+    }
+    //=====================================================================
+    //User Info
 
-const [username, setUsername] = useState();
-const [rank, setRank] = useState();
-const [profileImg, setprofileImg] = useState();
-const [year, setYear] = useState();
+    const [username, setUsername] = useState();
+    const [rank, setRank] = useState();
+    const [profileImg, setprofileImg] = useState();
+    const [year, setYear] = useState();
 
 useEffect(() => {
 
@@ -77,7 +89,6 @@ useEffect(() => {
   // localStorage.clear();
 }, []);
 
-
 //get profile image path
 const imgURL = ('Avatars/' + profileImg + '.png');
 
@@ -93,8 +104,7 @@ if (year === 1) {
 };
 
     return (
-        <Link to='/IndividualQuestion'>
-            <div className='question-con'>
+            <div className='question-con' onClick={goToIndividualQuestion}>
                 <div className='question-con-content'>
                     <div className='top-block'>
                         <div className='user-info-block'>
@@ -128,7 +138,6 @@ if (year === 1) {
                     </div>
                 </div>
             </div>
-        </Link>
     );
 }
 
