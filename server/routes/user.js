@@ -101,16 +101,30 @@ const mailOptions = {
     subject: 'Welcome from CodeQuest!',
     template: 'verficationEmail',
     context: {
-      username: req.body.username
+      username: req.body.username,
+      email: req.body.email
+    },
+    attachments: [{
+        filename: 'Emailer.jpg',
+        path: '../server/assets/Emailer.jpg',
+        cid: 'catImg' //same cid value as in the html img src
+    },
+    {
+        filename: 'logo2.jpg',
+        path: '../server/assets/logo2.jpg',
+        cid: 'logo' //same cid value as in the html img src
+    },
+    {
+        filename: 'otherLogo.png',
+        path: '../server/assets/otherLogo.png',
+        cid: 'otherLogo' //same cid value as in the html img src
+    },
+    {
+        filename: 'socialMedia.png',
+        path: '../server/assets/socialMedia.png',
+        cid: 'socials' //same cid value as in the html img src
     }
-    // text: 'Generic',
-    // html: mailerOutput,
-    // attachments: [{
-    //     filename: 'Emailer.jpg',
-    //     path: '../server/assets/Emailer.jpg',
-    //     cid: 'unique@kreata.ee' //same cid value as in the html img src
-    // }
-// ]
+]
 }
 
 transporter.sendMail(mailOptions, (error, info)=> {
