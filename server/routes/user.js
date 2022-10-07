@@ -50,28 +50,28 @@ router.post('/api/adduser', (req, res) =>{
     }); 
     console.log("new user", newUser);
 
+
+
+
+//=====================================================s======================
+//save new user
+    newUser.save()
+    .then( async item => {
+
+        console.log("Item log:", item);
+        res.json(item);
+
+//verification
+
+const findUser = await UserSchema.findOne({
+    username: req.body.username
+});
+
+let userIdLink = "http://localhost:3000/auth?id=" + findUser._id;
+
 //===================================================================================
 //Mailer functionality
 
-// const mailerOutput = `
-//     <html > 
-//     <body style="color: #2b2b2b;font-family: 'Open Sans';background-color: #EBEBF5; padding: 50px;text-align: center;">
-//         <div class="circle" style="width: 100%;height: 250px;background-color: #2b2b2b;color: #f1f1f1;text-align: center;padding: 20px;">
-//             <h4 style="margin-top: 25px;font-weight: 300;margin-bottom: 0px;">Hey ${req.body.username}!</h4>
-//             <h2 style="margin-top: 5px;">Welcome to CodeQuest!</h2>
-//             <p style="width: 300px;margin: 0 auto;margin-bottom: 40px;">Are you ready to embark on the quest for code? Join us and help yourself and others become better coders along this journey as developers!</p>
-
-//             <a class="button" style="padding: 13px;background-color: #FF7900;border-radius: 30px;color: #ffffff;padding-left: 25px;padding-right: 25px;">Verify Account</a>
-//       </div>  
-//       <img src="cid:unique@kreata.ee" style="width: 450px;position: absolute;margin-top: -285px;margin-left: -60px">
-
-       
-   
-//     <footer style="height: 60px; background-color: #EBEBF5;width: 100%;text-align: center;background-color: #2b2b2b;color: #ffffff;padding-top: 5px;padding-bottom: 5px;bottom: 0;margin-top:20px;">
-//         <h3>Your Journey Awaits.</h3>
-//     </footer>
-//     </body>
-// </html>`;
 
 const transporter = nodemailer.createTransport({
     host: "thehandler.aserv.co.za",
@@ -102,7 +102,8 @@ const mailOptions = {
     template: 'verficationEmail',
     context: {
       username: req.body.username,
-      email: req.body.email
+      email: req.body.email,
+      link: userIdLink
     },
     attachments: [{
         filename: 'Emailer.jpg',
@@ -134,15 +135,7 @@ transporter.sendMail(mailOptions, (error, info)=> {
     console.log("massage sent: ", info);
 })
 
-
-
-
-//=====================================================s======================
-//save new user
-    newUser.save()
-    .then(item => {
-        console.log("Item log:", item);
-        res.json(item)
+  
     })
     .catch(err => {
        res.status(400).json({msg:"Can't add user, there is an error", err}); 
@@ -168,6 +161,21 @@ router.post('/api/loginUser', async (req,res) => {
     });
     console.log(findUser);
 
+    if(findUser){
+        if(findUser.accountStatus){
+            if(await bcrypt.compare(req.body.password, findUser.password)){
+                res.send("The user can login.")
+            }else{
+                res.send("Password does not match username");
+            }
+        }else{
+            res.send("Your Account has not been verified");
+        }
+    }else{
+        res.send("No user found");
+    };
+    
+
     let userId= findUser._id;
     if(findUser){
         if(await bcrypt.compare(req.body.password, findUser.password)){
@@ -187,6 +195,43 @@ router.post('/api/loginUser', async (req,res) => {
     }
 
 });
+
+
+//==========================================================================================
+//verification
+
+router.patch('/api/validate/:id', async (req,res) => {
+    let userId = req.params.id;
+
+    const findUser = await UserSchema.findOne({
+        _id: userId
+    });
+
+    if(findUser){
+        try{
+            const tokenDecrypt = jwt.verify(findUser.token, process.env.ACCESS_TOKEN_SECRET);
+            const authUser = await UserSchema.findOne({
+                _id: userId,
+                eamil: tokenDecrypt.email
+            });
+
+            if(authUser){
+                const updateAccountStatus = await UserSchema.updateOne(
+                   {_id: req.params.id},
+                   {$set: {accountStatus: true}}
+                );
+                res.json({success:true, msg: "This profile is valid", user: authUser.username})
+            }else{
+                res.json({success:false, msg: "This profile is not valid"})
+            }
+        }catch (error){
+            res.json({success:false, msg: "Invalid Token"});
+        }
+    }else{
+        res.json({success: false, msg: "Verification failed: Please contact support"})
+    }
+});
+
 
 
 //============================================================================================

@@ -33,15 +33,32 @@ const UserSchema = mongoose.Schema({
     profileimage: {
         type: String,
         // required: true
+    },
+    accountStatus: { 
+        type: Boolean,
+        default: false
+    },
+    token: { 
+        type: String
     }
 });
 
 UserSchema.pre('save', async function(next){
     try {
-        const salt = await bcrypt.genSalt(10);
+        const salt = await bcrypt.genSalt(12);
         const hashPass = await bcrypt.hash(this.password, salt);
         this.password = hashPass;
-        next();
+
+          //create JWT
+          let tokenPayload = {
+            username: this.username, 
+            email: this.email
+        }
+
+          const token = await jwt.sign(tokenPayload, process.env.ACCESS_TOKEN_SECRET);
+  
+          this.token = token;
+        // next();
         
     } catch (error) {
         next(error);
