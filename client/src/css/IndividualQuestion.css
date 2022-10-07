@@ -231,7 +231,11 @@
 .show_answered_blue_con {
   background-color: white;
   padding: 10px;
+  border-radius: 20px;
 }
 .show_answer_text {
   margin: 30px;
+}
+.icons_block img {
+  width: 10%;
 }

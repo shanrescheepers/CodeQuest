@@ -45,4 +45,9 @@ router.post('/api/addanswer', uploadAnswerScreenshots.array('screenshots'), (req
     });
 });
 
+router.get("/api/readanswer", async (req, res) => {
+    const findQuestions = await newAnswerModel.find();
+    res.json(findQuestions);
+  });
+  
 module.exports = router;

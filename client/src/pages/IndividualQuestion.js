@@ -20,9 +20,38 @@ import Axios from "axios";
 import { useEffect, useState } from "react";
 import upload from "../assets/newQuestionAssets/upload.png";
 import QuestionAdded from "../modals/QuestionAdded";
+import QuestionCard from "../components/QuestionCard";
+import { AnswerCard } from "../components/AnswerCard";
 
 const IndividualQuestion = () => {
-  
+  const [questions, setQuestions] = useState();
+  const [updateQuestions, setUpdateQuestions] = useState();
+
+  useEffect(() => {
+    Axios.get("http://localhost:5000/api/readanswer")
+      .then((res) => {
+        let questionData = res.data;
+        let renderQuestions = questionData.map((item) => (
+          <AnswerCard
+            key={item._id}
+            questionId={item._id}
+            date={item.datePosted}
+            code={item.code}
+            screenshots={item.screenshots}
+            description={item.description}
+            upvotes={item.upvotes}
+            downvotes={item.downvotes}
+            userId={item.userId}
+            editRender={setUpdateQuestions}
+          />
+        ));
+        setQuestions(renderQuestions);
+        setUpdateQuestions(false);
+      })
+      .catch((err) => console.log(err));
+  }, [updateQuestions]);
+
+  /*====================== */
   function AnswerQuestion() {
     console.log("something");
     $(".answer_question").fadeIn();
@@ -55,7 +84,7 @@ const IndividualQuestion = () => {
   };
 
   //set initial form values
-  let initialFormValues = [ "description", "code" ];
+  let initialFormValues = ["title", "description", "code", "tags"];
 
   //set form values from input fields
   const [formValues, setFormValues] = useState(initialFormValues);
@@ -138,12 +167,12 @@ const IndividualQuestion = () => {
   const addNewQuestion = (e) => {
     e.preventDefault();
 
-    
+
 
     const payloadData = new FormData();
 
     var UserID = sessionStorage.getItem("id");
-    var questionId = sessionStorage.getItem("id");
+    var questionId = sessionStorage.getItem("questionId");
     var Upvotes = 0;
     var Downvotes = 0;
 
@@ -252,16 +281,15 @@ const IndividualQuestion = () => {
             </button>
           </div>
         </div>
-        {/* */}{" "}
-        <div className="answer_question">
-          <form className="form-con">
-            <h1>Ask us Anything</h1>
-            <p>
-              Strictly related to dev though, questions deemed inappropriate
-              will be removed
-            </p>
+        {/* */}
 
         
+        <div className="answer_question">
+          <form className="form-con">
+            <h1>Your Answer</h1>
+            
+
+            
             <TextField
               name="description"
               placeholder="Description"
@@ -339,7 +367,6 @@ const IndividualQuestion = () => {
               }}
               onChange={getFormValues}
             />
-           
 
             <Button
               type="submit"
@@ -358,41 +385,7 @@ const IndividualQuestion = () => {
 
           {/*=================*/}
         </div>
-        <div className="show_answered_con">
-          <div className="show_answered_blue_con">
-            <div className="show_answer_text">
-              <p>Title</p>
-            </div>
-            <div className="show_answer_text">
-              <p>
-                Strictly related to dev though, questions deemed inappropriate
-                will be removed Strictly related to dev though, questions deemed
-                inappropriate will be removed Strictly related to dev though,
-                questions deemed inappropriate will be removed Strictly related
-                to dev though, questions deemed inappropriate will be removed
-              </p>
-            </div>
-            <div className="show_answer_text">
-              <img className="q_img" src={questionImage}></img>
-            </div>
-            <div className="code_text"></div>
-            <div className="answer_question_btn">
-              <div className="icons_block">
-                <img src={UpVote} className="UpVote"></img>
-                <p className="UpVote_text">00</p>
-                <img src={DownVote} className="DownVote"></img>
-                <p className="DownVote_text">00</p>
-                <img src={flagQuestion} className="flagQuestion"></img>
-              </div>
-              <button
-                onClick={() => AnswerQuestion()}
-                className="btn_answer_question"
-              >
-                Respond
-              </button>
-            </div>
-          </div>
-        </div>
+        <div className="">{questions}</div>
       </div>
     </div>
   );
