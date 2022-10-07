@@ -90,6 +90,15 @@ router.post('/api/loginUser', async (req, res) => {
 //============================================================================================
 //encrypt password
 
+
+// DELETE USER ACCOUNT
+router.delete('/api/deleteaccount/:id', async (req, res) => {
+    const deleteAccount = await UserSchema.remove({ _id: req.params.id });
+    res.json(deleteAccount);
+});
+//============================================================================================
+
+
 router.post('/api/verifytoken', async (req, res) => {
     const token = req.body.token;
     // console.log(token);

@@ -19,6 +19,7 @@ import Footer from '../components/Footer'
 import { useEffect, useNavigate } from 'react';
 import Axios from 'axios';
 import FourOhFour from '../pages/FourohFour';
+import DeleteAccount from '../pages/DeleteAccount';
 
 function AnimatedRoutes() {
 
@@ -74,6 +75,7 @@ function AnimatedRoutes() {
           <Route path="/IndividualQuestion" element={<IndividualQuestion />} />
           <Route path="/QuestionsPage" element={<QuestionsPage />} />
           <Route path="/newquestion" element={<NewQuestionPage />} />
+          <Route path="/deleteaccount" element={<DeleteAccount />} />
           <Route path="*" element={<FourOhFour />} />
 
         </Routes>

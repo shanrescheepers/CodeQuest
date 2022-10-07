@@ -15,7 +15,66 @@ import Helmet from "react-helmet";
 import { motion } from "framer-motion";
 import QuestionCard from '../components/QuestionCard';
 
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Axios from 'axios';
+
 const ProfilePage = () => {
+
+    const userId = sessionStorage.getItem("id");
+
+    const navigate = useNavigate();
+
+
+    // useEffect(() => {
+    //     Axios.get('http://localhost:5000/api/getUser')
+    //         .then(res => {
+    //             let userData = res.data;
+
+    //             if (userData.id === userId){
+    //                 console.log("Account Found");
+
+    //                 deleteItem(userId)
+
+    //             }
+
+
+
+    //         });
+    // }, []);
+
+
+    const deleteItem = () => {
+        // console.log(id);
+
+        Axios.get('http://localhost:5000/api/userInfo/' + userId)
+            .then(res => {
+                let userData = res.data;
+                console.log(userData._id);
+                console.log(userId);
+
+                if (window.confirm(userData.username + "are you sure you want to delete you account. THIS CAN NOT BE UNDONE") === true) {
+                    if (userId === userData._id) {
+                        Axios.delete('http://localhost:5000/api/deleteaccount/' + userId)
+                            .then((res) => {
+                                if (res) {
+                                    navigate('/');
+                                    sessionStorage.clear();
+                                    console.log(res);
+                                }
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+
+                        console.log("Account Deleted");
+                    }
+                }
+            });
+
+    }
+
+
     return (
 
 
@@ -31,7 +90,7 @@ const ProfilePage = () => {
                     <h1>Hi Friend,</h1>
                     <p>We love that you've joined us! Lets take a look at all things YOU! View your rank, badges, questions and more! </p>
                     <Button sx={{
-                        backgroundColor: '#FF7900', height: '42px',borderRadius: '20px', marginTop: "20px", width: 'auto', fontFamily: 'Open Sans', textTransform: 'capitalize',
+                        backgroundColor: '#FF7900', height: '42px', borderRadius: '20px', marginTop: "20px", width: 'auto', fontFamily: 'Open Sans', textTransform: 'capitalize',
                         '&:hover': {
                             backgroundColor: '#FF7900',
                         }
@@ -129,21 +188,21 @@ const ProfilePage = () => {
                 <p className='pp_answers_btn'>Answers</p>
 
                 <div className='pp_userInput_card_con'>
-                        {/* <QuestionCard/>
+                    {/* <QuestionCard/>
                         <QuestionCard/>
                         <QuestionCard/> */}
-                    
+
 
                 </div>
 
             </div>
 
             <Button sx={{
-                backgroundColor: '#2b2b2b', float: 'right', borderRadius: '20px', height:'45px', marginTop: "150px", textTransform: 'capitalize', marginRight: "50px", width: '200px', fontFamily: 'Open Sans',
+                backgroundColor: '#2b2b2b', float: 'right', borderRadius: '20px', height: '45px', marginTop: "150px", textTransform: 'capitalize', marginRight: "50px", width: '200px', fontFamily: 'Open Sans',
                 '&:hover': {
                     backgroundColor: '#2b2b2b',
                 }
-            }} variant="contained">Delete my Account</Button>
+            }} variant="contained" onClick={deleteItem}>Delete my Account</Button>
 
         </motion.div>
     );

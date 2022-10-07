@@ -1,0 +1,24 @@
+.delete-account-con{
+    width: 60%;
+    height: 40vh;
+    /* background-color: cadetblue; */
+    position: absolute;
+    left: 55%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    border-radius: 20px;
+
+    box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
+    -webkit-box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
+    -moz-box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
+
+}
+
+.delete-account-heading{
+    position: absolute;
+    left: 55%;
+    top: 20%;
+    transform: translate(-50%, -50%);
+    color: black;
+}
