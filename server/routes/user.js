@@ -48,99 +48,103 @@ router.post('/api/adduser', (req, res) =>{
 
 
     }); 
-    console.log("new user", newUser);
+    // console.log("new user", newUser);
 
 
 
 
 //=====================================================s======================
 //save new user
-    newUser.save()
-    .then( async item => {
+newUser.save()
+    .then(async item => {
 
-        console.log("Item log:", item);
-        res.json(item);
+                console.log("Item log:", item);
+                res.json(item);
 
-//verification
+        //verification
 
-const findUser = await UserSchema.findOne({
-    username: req.body.username
-});
+        // const findUser = await UserSchema.findOne({
+        //     username: req.body.username
+        // });
 
-let userIdLink = "http://localhost:3000/auth?id=" + findUser._id;
+        // let userIdLink = "http://localhost:3000/auth?id=" + findUser._id;
+        // console.log("link is ", findUser._id);
 
 //===================================================================================
 //Mailer functionality
 
 
-const transporter = nodemailer.createTransport({
-    host: "thehandler.aserv.co.za",
-    port: 465,
-    secure: true,
-    auth: {
-        user: "mikethemage@codequest.co.za",
-        pass: "@~buhejH0fB!"
-    }
-});
+        const transporter = nodemailer.createTransport({
+            host: "thehandler.aserv.co.za",
+            port: 465,
+            secure: true,
+            auth: {
+                user: "mikethemage@codequest.co.za",
+                pass: "@~buhejH0fB!"
+            }
+        });
 
-const handlebarOptions = {
-    viewEngine: {
-      extName: ".handlebars",
-      partialsDir: path.resolve('./mailers'),
-      defaultLayout: false,
-    },
-    viewPath: path.resolve('./mailers'),
-    extName: ".handlebars",
-  };
+        const handlebarOptions = {
+            viewEngine: {
+            extName: ".handlebars",
+            partialsDir: path.resolve('./mailers'),
+            defaultLayout: false,
+            },
+            viewPath: path.resolve('./mailers'),
+            extName: ".handlebars",
+        };
 
-  transporter.use('compile', hbs(handlebarOptions));
+        transporter.use('compile', hbs(handlebarOptions));
 
-const mailOptions = {
-    from: '"Mike the Mage" <mikethemage@codequest.co.za>',
-    to: req.body.email,
-    subject: 'Welcome from CodeQuest!',
-    template: 'verficationEmail',
-    context: {
-      username: req.body.username,
-      email: req.body.email,
-      link: userIdLink
-    },
-    attachments: [{
-        filename: 'Emailer.jpg',
-        path: '../server/assets/Emailer.jpg',
-        cid: 'catImg' //same cid value as in the html img src
-    },
-    {
-        filename: 'logo2.jpg',
-        path: '../server/assets/logo2.jpg',
-        cid: 'logo' //same cid value as in the html img src
-    },
-    {
-        filename: 'otherLogo.png',
-        path: '../server/assets/otherLogo.png',
-        cid: 'otherLogo' //same cid value as in the html img src
-    },
-    {
-        filename: 'socialMedia.png',
-        path: '../server/assets/socialMedia.png',
-        cid: 'socials' //same cid value as in the html img src
-    }
-]
-}
+        const mailOptions = {
+            from: '"Mike the Mage" <mikethemage@codequest.co.za>',
+            to: req.body.email,
+            subject: 'Welcome from CodeQuest!',
+            template: 'verficationEmail',
+            context: {
+            username: req.body.username,
+            email: req.body.email,
+            link: userIdLink
+            },
+            attachments: [{
+                filename: 'Emailer.jpg',
+                path: '../server/assets/Emailer.jpg',
+                cid: 'catImg' //same cid value as in the html img src
+            },
+            {
+                filename: 'logo2.jpg',
+                path: '../server/assets/logo2.jpg',
+                cid: 'logo' //same cid value as in the html img src
+            },
+            {
+                filename: 'otherLogo.png',
+                path: '../server/assets/otherLogo.png',
+                cid: 'otherLogo' //same cid value as in the html img src
+            },
+            {
+                filename: 'socialMedia.png',
+                path: '../server/assets/socialMedia.png',
+                cid: 'socials' //same cid value as in the html img src
+            }
+        ]};
 
-transporter.sendMail(mailOptions, (error, info)=> {
-    if(error){
-        console.log(error);
-    }
-    console.log("massage sent: ", info);
-})
+        transporter.sendMail(mailOptions, (error, info)=> {
+            if(error){
+                console.log(error);
+            }
+            console.log("massage sent: ", info);
+        });
 
   
     })
     .catch(err => {
-       res.status(400).json({msg:"Can't add user, there is an error", err}); 
-    });
-});
+        res.status(400).json({msg:"There is an error", err}); 
+     });
+ });
+ 
+
+//=================================================================
+//Get users
 
 router.get('/api/getUser', async(req, res) => {
     const user = await UserSchema.find();
