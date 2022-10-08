@@ -16,7 +16,8 @@ import QuestionCard from '../components/QuestionCard';
 import { motion } from "framer-motion";
 import { useNavigate } from 'react-router';
 import Helmet from "react-helmet";
-
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 const FeedPage = (props) => {
 
@@ -60,6 +61,37 @@ const FeedPage = (props) => {
 
 props.funcNav(true);
 
+//========================================================================================
+//Display Recent Questions
+
+//read products
+const [questions, setQuestions] = useState();
+const [updateQuestions, setUpdateQuestions] = useState();
+
+useEffect(()=>{
+
+  axios.get('http://localhost:5000/api/readquestions')
+  .then(res =>{
+
+    let questionData = res.data;
+    console.log(questionData);
+    let newArray =[];
+    for (let i = Math.max(0,questionData.length-10); i < questionData.length; i++) { 
+        newArray.push(questionData[i])
+    }
+
+    console.log(newArray);
+
+    let renderQuestions = newArray.map((item) => <QuestionCard key={item._id} questionId={item._id} date={item.datePosted} title={item.title} description={item.description} upvotes={item.upvotes} downvotes={item.downvotes} userId={item.userId}  editRender={setUpdateQuestions}/>)
+    setQuestions(renderQuestions);
+    setUpdateQuestions(false);
+
+  })
+  .catch(err => console.log(err));
+
+},[updateQuestions]);
+
+
     return (
         <>
         <motion.div className='home-con'
@@ -88,9 +120,7 @@ props.funcNav(true);
             </div>
 
             <div className='question-card-con'>
-                <QuestionCard />
-                <QuestionCard />
-                <QuestionCard />
+                {questions}
             </div>
 
         </motion.div>

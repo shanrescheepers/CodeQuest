@@ -5,7 +5,12 @@ const mongoose = require('mongoose')
 // const userRoute = require('./routes/user');
 const userRoute = require('./routes/user');
 const questionRoute = require('./routes/question');
+
 const reportedUserRoute = require('./routes/reportedUser');
+
+const answerRoute = require('./routes/answer')
+
+
 require('dotenv/config');
 
 const app = express();
@@ -14,13 +19,18 @@ app.use(cors({
     origin: 'http://localhost:3000'
 }));
 
+//question screenshot storage path
 app.use('/questionScreenshots', express.static('questionScreenshots'));
+
+//answer screenshot storage path
+app.use('/answerScreenshots', express.static('answerScreenshots'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(reportedUserRoute)
 app.use(questionRoute);
 app.use(userRoute);
+app.use(answerRoute);
 
 
 

@@ -182,25 +182,25 @@ const AdminPage = () => {
                     </div>
                     <div className='admin__flagged__and__bad__tabs__tabpanel'>
                         <TabPanel value="1" >
+                            {/* <QuestionCard />
                             <QuestionCard />
-                            <QuestionCard />
-                            <QuestionCard />
+                            <QuestionCard /> */}
                         </TabPanel>
                         <TabPanel value="2">
+                            {/* <QuestionCard />
                             <QuestionCard />
                             <QuestionCard />
-                            <QuestionCard />
-                            <QuestionCard />
+                            <QuestionCard /> */}
                         </TabPanel>
                         <TabPanel value="3">
+                            {/* <QuestionCard />
                             <QuestionCard />
-                            <QuestionCard />
-                            <QuestionCard />
+                            <QuestionCard /> */}
                         </TabPanel>
                         <TabPanel value="4">
+                            {/* <QuestionCard />
                             <QuestionCard />
-                            <QuestionCard />
-                            <QuestionCard />
+                            <QuestionCard /> */}
                         </TabPanel>
                     </div>
                 </TabContext>

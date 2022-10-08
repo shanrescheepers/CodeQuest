@@ -3,13 +3,13 @@ const router = express();
 const path = require('path');
 const multer = require('multer');
 
-//link question schema 
-const newQuestionModel = require('../models/newQuestion');
+//link answer schema 
+const newAnswerModel = require('../models/addAnswer');
 
 //multer middleware, make file for screenshot image storage
-const questionScreenshotStorage = multer.diskStorage({
+const answerScreenshotStorage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, './questionScreenshots');
+        cb(null, './answerScreenshots');
       },
       filename: (req, file, cb) => {
         console.log(file);
@@ -17,40 +17,37 @@ const questionScreenshotStorage = multer.diskStorage({
     }
 })
 
-const uploadQuestionScreenshots = multer({ storage: questionScreenshotStorage });
+const uploadAnswerScreenshots = multer({ storage: answerScreenshotStorage });
 
-router.post('/api/newquestion', uploadQuestionScreenshots.array('screenshots'), (req, res, next) => {
+router.post('/api/addanswer', uploadAnswerScreenshots.array('screenshots'), (req, res, next) => {
 
     const data = JSON.parse(req.body.information);
     console.log(data);
     console.log(req.files);
 
-    const newQuestion = new newQuestionModel({
+    const addAnswer = new newAnswerModel({
         userId: data.userId,
-        title: data.title,
+        questionId: data.questionId,
         description: data.description,
+        screenshots: req.files,
         code: data.code,
-        tags: data.tags,
         upvotes: data.upvotes,
         downvotes: data.downvotes,
         datePosted: data.datePosed,
-        screenshots: req.files,
     });
 
-    newQuestion.save()
+    addAnswer.save()
     .then(item => {
         res.json(item)
     })
     .catch(err => {
-       res.status(400).json({msg: 'There was an error posting your question', err}); 
+       res.status(400).json({msg: 'There was an error posting your answer.', err}); 
     });
 });
 
-// read all questions
-// the get method requires a asynchronous connection to the database
-router.get('/api/readquestions', async(req, res) => {
-    const findQuestions = await newQuestionModel.find();
+router.get("/api/readanswer", async (req, res) => {
+    const findQuestions = await newAnswerModel.find();
     res.json(findQuestions);
-});
-
+  });
+  
 module.exports = router;
