@@ -5,7 +5,11 @@ const mongoose = require('mongoose')
 // const userRoute = require('./routes/user');
 const userRoute = require('./routes/user');
 const questionRoute = require('./routes/question');
+
+const reportedUserRoute = require('./routes/reportedUser');
+
 const answerRoute = require('./routes/answer')
+
 
 require('dotenv/config');
 
@@ -23,10 +27,12 @@ app.use('/answerScreenshots', express.static('answerScreenshots'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
+app.use(reportedUserRoute)
 app.use(questionRoute);
 app.use(userRoute);
 app.use(answerRoute);
+
+
 
 mongoose.connect(process.env.DB_CONNECTION, {
     useNewUrlParser: true,

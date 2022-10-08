@@ -21,6 +21,10 @@ import { motion } from "framer-motion";
 import Axios from 'axios';
 import Helmet from "react-helmet";
 
+import NewReportedUserTable from '../components/AdminComponents/NewReportedUsersTable';
+
+
+
 const AdminPage = () => {
     // Links function
     const [value, setValue] = React.useState('1');
@@ -29,33 +33,21 @@ const AdminPage = () => {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
     const handleChangeTwo = (event, newValueTwo) => {
         setValueTwo(newValueTwo);
     };
-    // // const [loggedIn, setLoggedIn] = useState(true);
-    // let navigate = useNavigate();
-
-    // const getAdminPermission = (rankId) => {
-    //     if (rankId === 'Diamond') {
-    //         console.log("navigate true because rank is Diamond, Admint Rights Granted")
-    //         return true;
-    //     } else {
-    //         navigate("/FeedPage", { replace: true });
-    //         localStorage.clear();
-    //         console.log("navigate false because rank admin permission is not 1")
-    //         return false;
-    //     }
-    // }
-
     const [totalUsers, setTotalUsers] = useState();
     // represents all users
     const [allTotalUsers, setAllTotalUsers] = useState();
     // renders of users
     const [totalRenderedUsers, setTotalRenderedUsers] = useState(false);
 
+    // Reported Users
+    const [reportedUsers, setReportedUsers] = useState();
+    const [reportedUsersStateNumberofUsers, setReportedUsersStateNumberofUsers] = useState();
 
-    // // Admin Rights Permission
+    const [totalReportedUsers, setTotalReportedUsers] = useState();
+
     useEffect(() => {
         Axios.get('http://localhost:5000/api/getUser')
             .then(res => {
@@ -66,8 +58,46 @@ const AdminPage = () => {
                 const allUsers = res.data.map((item) => <UserprofileCard key={item.id} username={item.username} email={item.email} profileimage={item.profileimage} yearlevel={item.yearlevel} />)
 
                 setAllTotalUsers(allUsers);
-                setTotalRenderedUsers(false);
-            })
+            });
+
+        Axios.get('http://localhost:5000/api/allReportedUsers')
+            .then(res => {
+                // getting all the isers in. then count them, with it, capture some data , the ids, the names, emails.
+                setTotalReportedUsers(res.data.length)
+
+                let reportedUserIds = [];
+                // Check om te sien of daar nie dubbels is van dieselfde user nie. daar kan net een user wees.
+                for (let index = 0; index < res.data.length; index++) {
+                    // console.log(res.data[index])
+                    if (!reportedUserIds.includes(res.data[index].reportedUserId)) {
+                        reportedUserIds.push(res.data[index].reportedUserId);
+                    };
+                };
+
+                // al die users wat reported is
+                let allReportedUsers = new Array()
+                for (let i = 0; i < reportedUserIds.length; i++) {
+                    Axios.get('http://localhost:5000/api/userInfo/' + reportedUserIds[i]).then(res => {
+                        allReportedUsers.push(res.data);
+                        console.log(allReportedUsers.length);
+
+                        let reportedUsersofCQ = allReportedUsers.map((reporteds) => <ReportedUserCard key={reporteds._id} username={reporteds.username} email={reporteds.email} />)
+                        console.log(reportedUsersofCQ.length);
+                        // Check IF - dubbels in die nuwe array of nie? 
+                        setReportedUsers(reportedUsersofCQ);
+                        setReportedUsersStateNumberofUsers(reportedUsersofCQ.length);
+
+
+                    });
+                    // console.log(reportedUsersState.length);
+                    setTotalRenderedUsers(false)
+
+                }
+
+
+            });
+
+
     }, [totalRenderedUsers]);
 
 
@@ -113,12 +143,23 @@ const AdminPage = () => {
 
                     {/* All Users */}
                     <TabPanel value="1" className='admin__links__card'
-                        // grid-template-columns: repeat(200, calc(17% - 100px)) !important;
-                        style={{ gridTemplateColumns: `repeat(${totalUsers}, calc(20%))` }} >
+
+                        style={{ gridTemplateColumns: `repeat(${totalUsers}, calc(7%))` }} >
                         {allTotalUsers}
                     </TabPanel>
 
-                    <TabPanel value="2" className='admin__links__card'><ReportedUserCard /></TabPanel>
+                    {/* <TabPanel value="2" className='admin__links__card' style={{ gridTemplateColumns: `repeat(${reportedUsersStateNumberofUsers}, calc(20%))` }} >
+                        {reportedUsers}
+                    </TabPanel> */}
+
+                    {/* Reported user Table */}
+                    <TabPanel value="2" className='admin__links__card' >
+                        <NewReportedUserTable />
+                    </TabPanel>
+
+
+                    {/* Reported user Table */}
+
                     <TabPanel value="3" className='admin__links__card'><PromotionRequests /></TabPanel>
 
                 </TabContext>
