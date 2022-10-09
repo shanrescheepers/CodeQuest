@@ -3,7 +3,7 @@ import profilePic from '../assets/homeAssets/profile-pic.png'
 import { Link } from 'react-router-dom';
 import upvote from '../assets/questionCardAssets/upvote.png';
 import downvote from '../assets/questionCardAssets/downvote.png';
-import deleteIcon from '../assets/questionCardAssets/delete.png';
+import OutlinedFlagIcon from '@mui/icons-material/OutlinedFlag';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
@@ -115,7 +115,9 @@ if (year === 1) {
                             </div>
                         </div>
 
-                        <img className='delete-button question-card-icon' onClick={deleteQuestion} src={deleteIcon}/>
+                        <div className='delete-button question-card-icon' onClick={deleteQuestion}>
+                        <OutlinedFlagIcon fontSize="large"/>
+                        </div>
                     </div>
 
                     <div className='user-question'>
