@@ -23,10 +23,10 @@ const DeleteUserModal = (props) => {
 
 
     return (
-        <div className='pop-up'>
+        <div className='pop-up delete'>
             <div className='modal'>
                 <div className='close'><CloseIcon sx={{ fontSize: '40px' }} /></div>
-                <h1>Are you sure you want to delete this user?</h1>
+                <h1>Are you sure?</h1>
                 <h4>Remember once you delete this user, they will be gone for good!</h4>
                 <div className='modal-img delete'><img src={picture}></img></div>
 
@@ -35,7 +35,7 @@ const DeleteUserModal = (props) => {
                     '&:hover': {
                         backgroundColor: '#4A4A4A',
                     }
-                }} variant="contained" type="submit" backgroundColor="primary" onClick={() => { deleteUserFunction() }}>Delete</Button>
+                }} variant="contained" type="submit" backgroundColor="primary" onClick={() => { deleteUserFunction() }}>Delete User</Button>
 
                 <Button sx={{
                     backgroundColor: '#f1f1f1', textTransform: 'capitalize', color: "#2b2b2b", borderRadius: '20px', marginTop: "15px", width: '95%', height: '45px', fontFamily: 'Open Sans', marginLeft: '0px',
