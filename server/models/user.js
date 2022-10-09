@@ -35,6 +35,7 @@ const UserSchema = mongoose.Schema({
         type: String,
         // required: true
     }
+    // The moment you post a question/ or a answer, it must update here
 });
 
 UserSchema.pre('save', async function (next) {

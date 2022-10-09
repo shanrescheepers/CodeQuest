@@ -22,6 +22,7 @@ import Axios from 'axios';
 import Helmet from "react-helmet";
 
 import NewReportedUserTable from '../components/AdminComponents/NewReportedUsersTable';
+import NewAllUsersTable from '../components/AdminComponents/NewAllUsersTable';
 
 
 
@@ -79,10 +80,7 @@ const AdminPage = () => {
                 for (let i = 0; i < reportedUserIds.length; i++) {
                     Axios.get('http://localhost:5000/api/userInfo/' + reportedUserIds[i]).then(res => {
                         allReportedUsers.push(res.data);
-                        console.log(allReportedUsers.length);
-
                         let reportedUsersofCQ = allReportedUsers.map((reporteds) => <ReportedUserCard key={reporteds._id} username={reporteds.username} email={reporteds.email} />)
-                        console.log(reportedUsersofCQ.length);
                         // Check IF - dubbels in die nuwe array of nie? 
                         setReportedUsers(reportedUsersofCQ);
                         setReportedUsersStateNumberofUsers(reportedUsersofCQ.length);
@@ -142,10 +140,11 @@ const AdminPage = () => {
                     </div>
 
                     {/* All Users */}
-                    <TabPanel value="1" className='admin__links__card'
+                    <TabPanel value="1" className='admin__links__card'>
 
-                        style={{ gridTemplateColumns: `repeat(${totalUsers}, calc(7%))` }} >
-                        {allTotalUsers}
+                        {/* // style={{ gridTemplateColumns: `repeat(${totalUsers}, calc(7%))` }} >
+                        // {allTotalUsers} */}
+                        <NewAllUsersTable />
                     </TabPanel>
 
                     {/* <TabPanel value="2" className='admin__links__card' style={{ gridTemplateColumns: `repeat(${reportedUsersStateNumberofUsers}, calc(20%))` }} >

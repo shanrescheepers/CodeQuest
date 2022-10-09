@@ -86,6 +86,16 @@ router.post('/api/loginUser', async (req, res) => {
 });
 
 // DELETE USERS
+// DELETE ONE USER
+router.delete("/api/deleteUser/:id", async (req, res) => {
+
+    console.log("User Deleted");
+    console.log(req.params);
+
+    await UserSchema.findByIdAndDelete(req.params.id)
+        .then(response => res.json(response))
+        .catch(error => res.status(500).json(error))
+});
 // router.post('/api/loginUser', async (req, res) => { })
 //============================================================================================
 //encrypt password
