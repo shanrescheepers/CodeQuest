@@ -52,7 +52,7 @@ router.post('/api/adduser', (req, res) => {
 // get all users
 router.get('/api/getUser', async (req, res) => {
     const user = await UserSchema.find();
-    console.log("Get Users", user);
+    // console.log("Get Users", user);
     res.send(user);
 });
 

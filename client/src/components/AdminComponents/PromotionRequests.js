@@ -1,101 +1,99 @@
 import React from 'react';
-import '../../scss/promotionRequestCards.scss';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Avatar from '@mui/material/Avatar';
-import { blue } from '@mui/material/colors';
-import TourTwoToneIcon from '@mui/icons-material/TourTwoTone';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+import { useEffect, useState } from 'react';
+import Axios from 'axios';
+import '../../scss/allUsersTableview.scss';
 import { Icon, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-// import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import pp from "../../assets/placeholderPP.png";
+import Button from '@mui/material/Button';
 
-const PromotionRequests = () => {
+const columns = [
+    { id: 'avatar', label: 'Avatar', minWidth: 50 },
+    { id: 'username', label: 'Username', minWidth: 50 },
+    { id: 'email', label: 'User Email', minWidth: 90 },
+    { id: 'questionsAsked', label: 'Questions Asked', minWidth: 30 },
+    { id: 'questionsAnswered', label: 'Questions Answered', minWidth: 20 },
+    { id: 'yearlevel', label: 'Year Level', minWidth: 30 },
+    { id: 'rank', label: 'Rank', minWidth: 30 },
+    { id: 'deleteUser', label: 'Delete User', minWidth: 100 },
+];
+
+const PromotionRequestsTableView = () => {
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
+    const [rows, setRows] = useState([
+        {}
+    ]);
     return (
-        // this will be a prop injected onto the admin page whenever link is clicked on, similar workings to permissions ui etc...maybe, kinda
-        <div className='prprofilecard'>
+        // IGNORE MODAL HERE
+        // Waiting on Simon For Promotion Content
+        <>
+            <Paper style={{ width: "100%" }
+            }>
 
-            <Card className='prprofilecard__card'>
-                <Avatar sx={{ bgcolor: blue[500] }} aria-label="userprofilepicture" className='profilecard__card__useravatar' style={{ marginTop: "12px" }}>
-                    <img src={pp} className="prprofilecard__card__useravatar__logo" width="150px"></img>
-                </Avatar>
-                <CardContent>
-                    <Typography gutterBottom variant="body1" component="div" style={{ textAlign: "center" }}>
-                        Username
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" style={{ textAlign: "center" }}>
-                        User Email
-                    </Typography>
-                </CardContent>
-                <Button sx={{
-                    backgroundColor: '#FF7900', borderRadius: '20px', height: "33px", width: '140px', fontFamily: 'Open Sans', fontSize: "12px", marginLeft: "15px", padding: "8px",
-                    '&:hover': {
-                        backgroundColor: '#FF7900',
-                    }
-                }} variant="contained" >Promote User</Button>
-                <Button>
-                    <Typography variant="subtitle2" gutterBottom style={{ color: "#2b2b2b", fontSize: "10px", fontVariant: "small-caps", marginTop: "8px" }}>
-                        Delete Request
-                    </Typography>
-                </Button>
-            </Card>
-
-            <Card className='prprofilecard__card'>
-                <Avatar sx={{ bgcolor: blue[500] }} aria-label="userprofilepicture" className='profilecard__card__useravatar' style={{ marginTop: "12px" }}>
-                    <img src={pp} className="prprofilecard__card__useravatar__logo" width="150px"></img>
-                </Avatar>
-                <CardContent>
-                    <Typography gutterBottom variant="body1" component="div" style={{ textAlign: "center" }}>
-                        Username
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" style={{ textAlign: "center" }}>
-                        User Email
-                    </Typography>
-                </CardContent>
-                <Button sx={{
-                    backgroundColor: '#FF7900', borderRadius: '20px', height: "33px", width: '140px', fontFamily: 'Open Sans', fontSize: "12px", marginLeft: "15px", padding: "8px",
-                    '&:hover': {
-                        backgroundColor: '#FF7900',
-                    }
-                }} variant="contained" >Promote User</Button>
-                <Button>
-                    <Typography variant="subtitle2" gutterBottom style={{ color: "#2b2b2b", fontSize: "10px", fontVariant: "small-caps", marginTop: "8px" }}>
-                        Delete Request
-                    </Typography>
-                </Button>
-            </Card>
-
-            <Card className='prprofilecard__card'>
-                <Avatar sx={{ bgcolor: blue[500] }} aria-label="userprofilepicture" className='profilecard__card__useravatar' style={{ marginTop: "12px" }}>
-                    <img src={pp} className="prprofilecard__card__useravatar__logo" width="150px"></img>
-                </Avatar>
-                <CardContent>
-                    <Typography gutterBottom variant="body1" component="div" style={{ textAlign: "center" }}>
-                        Username
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" style={{ textAlign: "center" }}>
-                        User Email
-                    </Typography>
-                </CardContent>
-                <Button sx={{
-                    backgroundColor: '#FF7900', borderRadius: '20px', height: "33px", width: '140px', fontFamily: 'Open Sans', fontSize: "12px", marginLeft: "15px", padding: "8px",
-                    '&:hover': {
-                        backgroundColor: '#FF7900',
-                    }
-                }} variant="contained" >Promote User</Button>
-                <Button>
-                    <Typography variant="subtitle2" gutterBottom style={{ color: "#2b2b2b", fontSize: "10px", fontVariant: "small-caps", marginTop: "8px" }}>
-                        Delete Request
-                    </Typography>
-                </Button>
-            </Card>
-
-        </div >
+                <TableContainer sx={{ maxHeight: 450 }}>
+                    <Table stickyHeader aria-label="sticky table">
+                        <TableHead>
+                            <TableRow>
+                                {columns.map((column) => (
+                                    <TableCell
+                                        key={column.id}
+                                        align={column.align}
+                                        style={{ minWidth: column.minWidth }}
+                                    >
+                                        {column.label}
+                                    </TableCell>
+                                ))}
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {rows
+                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                .map((row) => {
+                                    return (
+                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                            {columns.map((column) => {
+                                                const value = row[column.id];
+                                                return (
+                                                    <TableCell key={column.id} align={column.align}>
+                                                        {column.format && typeof value === 'number'
+                                                            ? column.format(value)
+                                                            : value}
+                                                    </TableCell>
+                                                );
+                                            })}
+                                        </TableRow>
+                                    );
+                                })}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <TablePagination
+                    rowsPerPageOptions={[10, 25, 100]}
+                    component="div"
+                    count={rows.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+            </Paper >
+        </>
     );
 };
 
-export default PromotionRequests;
+export default PromotionRequestsTableView;

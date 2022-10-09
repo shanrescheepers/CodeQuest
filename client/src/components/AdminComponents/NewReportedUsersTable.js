@@ -13,6 +13,7 @@ import '../../scss/reportedUserCards.scss';
 import { Icon, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
+import DeleteUserModalAdmin from '../../modals/DeleteUserModalAdmin';
 
 
 const columns = [
@@ -42,14 +43,28 @@ export default function NewReportedUserTable() {
     const [rows, setRows] = useState([
         {}
     ]);
+    // Delete USer
+    // Delete user
+    const [deleteUserModal, setDeleteUserModal] = useState();
 
+    const deleteUser = (id) => {
+        console.log(id);
+        setDeleteUserModal(<DeleteUserModalAdmin
+            close={setDeleteUserModal} id={id}
+        />)
+    }
     // Reporteds
     // Reported Users
     const [reportedUsers, setReportedUsers] = useState(false);
     const [reportedUsersStateNumberofUsers, setReportedUsersStateNumberofUsers] = useState();
     const [totalReportedUsers, setTotalReportedUsers] = useState();
 
-
+    const removeUserFromFlagTable = (id) => {
+        Axios.delete('http://localhost:5000/api/deleteReportedUser/' + id)
+            .then(res => {
+                console.log("user has been removed from flagged list");
+            });
+    }
     useEffect(() => {
         Axios.get('http://localhost:5000/api/allReportedUsers')
             .then(res1 => {
@@ -97,10 +112,14 @@ export default function NewReportedUserTable() {
                                 '&:hover': {
                                     backgroundColor: '#FF7900',
                                 }
-                            }} variant="contained" >
+
+                            }} variant="contained" onClick={() =>
+                                deleteUser(reportedUser._id)}>
+
                                 <DeleteIcon style={{ height: "15px" }} />Delete User
-                            </Button>
+                            </Button >
                         )
+                        reportedUser["deleteUser"] = deleteButton;
 
                         const removeFromListButton = (
                             <Button sx={{
@@ -108,7 +127,7 @@ export default function NewReportedUserTable() {
                                 '&:hover': {
                                     backgroundColor: '#FF7900',
                                 }
-                            }} variant="contained" >
+                            }} variant="contained" onClick={() => removeUserFromFlagTable(reportedUser._id)}>
                                 IGNORE
                             </Button>
                         )
@@ -131,62 +150,63 @@ export default function NewReportedUserTable() {
                     });
 
                 }
-
-
-            });
+            })
 
 
     }, [reportedUsers]);
 
 
     return (
-        <Paper style={{ width: "100%" }}>
-            <TableContainer sx={{ maxHeight: 450 }}>
-                <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                        <TableRow>
-                            {columns.map((column) => (
-                                <TableCell
-                                    key={column.id}
-                                    align={column.align}
-                                    style={{ minWidth: column.minWidth }}
-                                >
-                                    {column.label}
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows
-                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            .map((row) => {
-                                return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                        {columns.map((column) => {
-                                            const value = row[column.id];
-                                            return (
-                                                <TableCell key={column.id} align={column.align}>
-                                                    {column.format && typeof value === 'number'
-                                                        ? column.format(value)
-                                                        : value}
-                                                </TableCell>
-                                            );
-                                        })}
-                                    </TableRow>
-                                );
-                            })}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
-                component="div"
-                count={rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-        </Paper >
+        < >{deleteUserModal}
+            <Paper style={{ width: "100%" }}>
+                <TableContainer sx={{ maxHeight: 450 }}>
+                    <Table stickyHeader aria-label="sticky table">
+                        <TableHead>
+                            <TableRow>
+                                {columns.map((column) => (
+                                    <TableCell
+                                        key={column.id}
+                                        align={column.align}
+                                        style={{ minWidth: column.minWidth }}
+                                    >
+                                        {column.label}
+                                    </TableCell>
+                                ))}
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {rows
+                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                .map((row) => {
+                                    return (
+                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                            {columns.map((column) => {
+                                                const value = row[column.id];
+                                                return (
+                                                    <TableCell key={column.id} align={column.align}>
+                                                        {column.format && typeof value === 'number'
+                                                            ? column.format(value)
+                                                            : value}
+                                                    </TableCell>
+                                                );
+                                            })}
+                                        </TableRow>
+                                    );
+                                })}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <TablePagination
+                    rowsPerPageOptions={[10, 25, 100]}
+                    component="div"
+                    count={rows.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+            </Paper >
+        </>
     );
 }
+

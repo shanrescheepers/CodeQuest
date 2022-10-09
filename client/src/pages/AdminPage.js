@@ -15,7 +15,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import UserprofileCard from '../components/AdminComponents/UserProfileCard';
 import { deepOrange } from '@mui/material/colors';
 import ReportedUserCard from '../components/AdminComponents/ReportedUsers';
-import PromotionRequests from '../components/AdminComponents/PromotionRequests';
+import PromotionRequestsTableView from '../components/AdminComponents/PromotionRequests';
 import QuestionCard from '../components/QuestionCard';
 import { motion } from "framer-motion";
 import Axios from 'axios';
@@ -159,7 +159,7 @@ const AdminPage = () => {
 
                     {/* Reported user Table */}
 
-                    <TabPanel value="3" className='admin__links__card'><PromotionRequests /></TabPanel>
+                    <TabPanel value="3" className='admin__links__card'><PromotionRequestsTableView /></TabPanel>
 
                 </TabContext>
 
