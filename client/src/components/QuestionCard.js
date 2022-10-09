@@ -104,6 +104,7 @@ if (year === 1) {
 };
 
     return (
+        <Link to="/IndividualQuestion">
             <div className='question-con' onClick={goToIndividualQuestion}>
                 <div className='question-con-content'>
                     <div className='top-block'>
@@ -140,6 +141,7 @@ if (year === 1) {
                     </div>
                 </div>
             </div>
+            </Link>
     );
 }
 
