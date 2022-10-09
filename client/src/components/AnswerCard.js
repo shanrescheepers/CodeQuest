@@ -110,7 +110,7 @@ export const AnswerCard = (props) => {
       ".../server/answerScreenshots/" +
       props.screenshots[0].filename
   );
-  const s = "...server/" + props.screenshots[0].filename;
+  const s = "http://localhost:5000/answerScreenshots/" + props.screenshots[0].filename;
   return (
     <div className="show_answered_con">
       <div className="show_answered_blue_con">
@@ -125,7 +125,7 @@ export const AnswerCard = (props) => {
         <div className="show_answer_text">
           <img
             className="q_img"
-            src={"...server/" + props.screenshots[0].filename}
+            src={s}
           ></img>
         </div>
         <div className="code_text">{props.code}</div>
