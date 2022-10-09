@@ -169,8 +169,6 @@ export const IndividualQuestionCard = (props) => {
                 Answer Question
             </button>
         </div>
-
-
       </div>
     </div>
   );

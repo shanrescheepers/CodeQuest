@@ -11,8 +11,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
 import { useNavigate } from "react-router";
-import flagQuestion from "../assets/individualPageAssets/questionFlag.png";
 import questionImage from "../assets/individualPageAssets/QuestionImg.png";
+import upvote from "../assets/profilePageAssets/upVote.png";
+import downvote from "../assets/profilePageAssets/downVote.png";
+import flag from "../assets/individualPageAssets/questionFlag.png";
 
 export const AnswerCard = (props) => {
   const navigate = useNavigate();
@@ -72,6 +74,7 @@ export const AnswerCard = (props) => {
   const [rank, setRank] = useState();
   const [profileImg, setprofileImg] = useState();
   const [year, setYear] = useState();
+  const [questionColor, setQuestionColor] = useState();
 
   useEffect(() => {
     if (props.userId == null) {
@@ -87,24 +90,30 @@ export const AnswerCard = (props) => {
           setprofileImg(data.profileimage);
           setYear(data.yearlevel);
           console.log(data.rank);
+
+          let year = data.yearlevel;
+          let bgColor = '';
+
+          if (year === 1) {
+            bgColor = "#6EEB83";
+          } else if (year === 2) {
+            bgColor = "#6CD4FF";
+          } else {
+            bgColor = "#FF7900";
+          }
+
+          setQuestionColor(bgColor)   	    
         });
     }
     // localStorage.clear();
   }, []);
 
+  console.log(questionColor);
+
   //get profile image path
   const imgURL = "Avatars/" + profileImg + ".png";
-
   console.log(year);
-  let bgColor = "";
-
-  if (year === 1) {
-    bgColor = "#6EEB83";
-  } else if (year === 2) {
-    bgColor = "#6CD4FF";
-  } else {
-    bgColor = "#FF7900";
-  }
+  
   console.log(
     "over here" +
       ".../server/answerScreenshots/" +
@@ -112,38 +121,47 @@ export const AnswerCard = (props) => {
   );
   const s = "http://localhost:5000/answerScreenshots/" + props.screenshots[0].filename;
   return (
-    <div className="show_answered_con">
+    <div className="show_answered_con" style={{background:{questionColor}}}>
       <div className="show_answered_blue_con">
+
         <div className="show_answer_text">
-          
-          <h4>Posted by {username}</h4>
-         <p>{formatDate}</p>
+            <h4>Posted by {username}</h4>
+            <p>{formatDate}</p>
         </div>
+
         <div className="show_answer_text">
           <p>{props.description}</p>
         </div>
-        <div className="show_answer_text">
+
+        {/* <div>
           <img
             className="q_img"
             src={s}
-          ></img>
+          />
+        </div> */}
+
+        <div className="image-preview"></div>
+
+        <div className="code_text"> 
+            <p>{props.code}</p>
         </div>
-        <div className="code_text">{props.code}</div>
-        <div className="answer_question_btn">
-          <div className="icons_block">
-            <img src={UpVote} className="UpVote"></img>
-            <p className="UpVote_text">00</p>
-            <img src={DownVote} className="DownVote"></img>
-            <p className="DownVote_text">00</p>
-            <img src={flagQuestion} className="flagQuestion"></img>
-          </div>
-          <button
-            onClick={() => AnswerQuestion()}
-            className="btn_answer_question"
-          >
-            Respond
-          </button>
+
+        <div className='divider'></div>
+
+        <div className='bottom-block'>
+            <div className='arrow-con'>                         
+                <img className='upvote question-card-icon' onClick={addVote} src={upvote}/>
+                <small className='upvote-count vote-count'>{upVotes}</small>
+
+                <img className='downvote question-card-icon' onClick={subtractVote} src={downvote}/>
+                <small className='downvote-count vote-count'>{downVotes}</small>
+
+                <img className='flag question-card-icon' onClick={addVote} src={flag}/>
+            </div>
+
+            <small><p>00 Answers</p></small>
         </div>
+
       </div>
     </div>
   );
