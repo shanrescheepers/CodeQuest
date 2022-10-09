@@ -4,14 +4,18 @@ import '../css/modals.css';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from 'react-router';
-
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 const AnsweredModal = (props) => {
 
     const navigate = useNavigate();
 
     //navigates back to home page
     const goHome = () => {
-        navigate('/FeedPage')
+        props.close();
     }
 
     //close modal 
