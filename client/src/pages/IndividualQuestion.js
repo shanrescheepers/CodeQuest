@@ -64,7 +64,9 @@ const IndividualQuestion = () => {
       })
       .catch((err) => console.log(err));
   }, [updateQuestions]);
+
   /*====================== */
+
   const [answer, setAnswer] = useState();
   const [updateAnswers, setUpdateAnswers] = useState();
 
@@ -212,8 +214,6 @@ const IndividualQuestion = () => {
   const addNewQuestion = (e) => {
     e.preventDefault();
 
-    
-
     const payloadData = new FormData();
 
     var UserID = sessionStorage.getItem("id");
@@ -270,14 +270,13 @@ const IndividualQuestion = () => {
         <div className="display_question">
           <div className="">{questions}</div>
         </div>
-
+        {/* */}
 
         
         <div className="answer_question">
           <form className="form-con">
-            <h1>Your Answer</h1>
+            <h2>Your Answer</h2>
          
-            
             <TextField
               name="description"
               placeholder="Description"
@@ -367,8 +366,8 @@ const IndividualQuestion = () => {
               Answer Question
             </Button>
 
-            <div className="answer-btn">
-              <p onClick={() => HideAnswer()}>Cancel</p>
+            <div onClick={() => HideAnswer()} className="answer-btn">
+              <p>Cancel</p>
             </div>
           </form>
 

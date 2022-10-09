@@ -165,9 +165,7 @@ export const IndividualQuestionCard = (props) => {
 
             <button
                 onClick={() => AnswerQuestion()}
-                className="btn_answer_question"
-                >
-                {/* {" "} */}
+                className="btn_answer_question">
                 Answer Question
             </button>
         </div>
