@@ -36,7 +36,7 @@ const QuestionCard = (props) => {
     //===================================================================
     //Format Date date
     let date = props.date;
-    let formatDate = moment(date).format('DD MMMM YYYY');;
+    let formatDate = moment(date).format('DD MMMM YYYY');
 
 
     //====================================================================

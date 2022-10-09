@@ -117,7 +117,7 @@ export const IndividualQuestionCard = (props) => {
     <div>
       <div className="qq_and_title">
         <div className="title_show">
-          <p className="questionTitle">{props.title}</p>
+          <h1 className="questionTitle">{props.title}</h1>
           <p className="questionInfo">
             Posted by: <label id="Username">{username}</label> <br></br>{" "}
             <label id="Date">{date}</label>
@@ -133,32 +133,47 @@ export const IndividualQuestionCard = (props) => {
             );
           })}
         </div>
+
       </div>
       <div className="question">
         <p>{props.description}</p>
       </div>
-      <div className="question_image">
+
+      {/* <div className="question_image">
         <img className="q_img" src={props.screenshots[0]}></img>
-      </div>
+      </div> */}
+
+      <div className="image-preview"></div>
+
       <div className="code_text">
         <p>{props.code}</p>
       </div>
+
+      <div className='divider'></div>
+
       <div className="answer_question_btn">
-        <div className="icons_block">
-          <img src={UpVote} className="UpVote"></img>
-          <p className="UpVote_text">{upVotes}</p>
-          <img src={DownVote} className="DownVote"></img>
-          <p className="DownVote_text">{downVotes}</p>
-          <img src={flagQuestion} className="flagQuestion"></img>
+        <div className='bottom-block'>
+            <div className='arrow-con'>                         
+                <img className='upvote question-card-icon' onClick={UpVote} src={UpVote}/>
+                <small className='upvote-count vote-count'>{upVotes}</small>
+
+                <img className='downvote question-card-icon' onClick={subtractVote} src={DownVote}/>
+                <small className='downvote-count vote-count'>{downVotes}</small>
+
+                <img className='flag question-card-icon' src={flagQuestion}/>
+            </div>
+
+            <button
+                onClick={() => AnswerQuestion()}
+                className="btn_answer_question"
+                >
+                {/* {" "} */}
+                Answer Question
+            </button>
         </div>
-        <button
-          onClick={() => AnswerQuestion()}
-          className="btn_answer_question"
-        >
-          {" "}
-          Answer Question
-        </button>
-      </div>{" "}
+
+
+      </div>
     </div>
   );
 };
