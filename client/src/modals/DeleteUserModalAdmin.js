@@ -25,7 +25,7 @@ const DeleteUserModal = (props) => {
     return (
         <div className='pop-up delete'>
             <div className='modal'>
-                <div className='close'><CloseIcon sx={{ fontSize: '40px' }} /></div>
+                <div className='close'><CloseIcon sx={{ fontSize: '40px' }} onClick={closeModal} /></div>
                 <h1>Are you sure?</h1>
                 <h4>Remember once you delete this user, they will be gone for good!</h4>
                 <div className='modal-img delete'><img src={picture}></img></div>
