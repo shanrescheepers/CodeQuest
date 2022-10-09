@@ -16,6 +16,7 @@ import NewQuestionPage from '../pages/NewQuestionPage';
 import { useState } from 'react';
 import { AnimatePresence } from "framer-motion";
 import Footer from '../components/Footer'
+import Auth from '../pages/Auth';
 
 function AnimatedRoutes() {
 
@@ -30,6 +31,7 @@ function AnimatedRoutes() {
             <Navigation />
           </nav>
    } 
+
     <AnimatePresence exitBeforeEnter>
       <Routes location={location} key={location.pathname} >
         <Route path="/" element={<LoginPage funcNav={setShowNav} />} />
@@ -40,6 +42,7 @@ function AnimatedRoutes() {
         <Route path="/IndividualQuestion" element={<IndividualQuestion />} />
         <Route path="/QuestionsPage" element={<QuestionsPage />} />
         <Route path="/newquestion" element={<NewQuestionPage />} />
+        <Route path="/Auth" element={<Auth funcNav={setShowNav}/>} />
       </Routes>
     </AnimatePresence>
     {   showNav &&

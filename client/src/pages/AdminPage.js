@@ -21,6 +21,8 @@ import QuestionCard from '../components/QuestionCard';
 import { motion } from "framer-motion";
 
 const AdminPage = () => {
+
+    
     // Links function
     const [value, setValue] = React.useState('1');
 
