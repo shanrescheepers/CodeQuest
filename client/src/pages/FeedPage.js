@@ -51,7 +51,7 @@ const FeedPage = (props) => {
     }
 
 //=====================================================================================
-//Show Navigation
+//Ask New Question
 
     const navigate = useNavigate();
 

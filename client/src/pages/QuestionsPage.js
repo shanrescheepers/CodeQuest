@@ -9,6 +9,7 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 
 
 const QuestionsPage = () => {
@@ -18,7 +19,13 @@ const QuestionsPage = () => {
       setAge(event.target.value);
     
     };
+//======================================================================================
+//Navigate to Ask Question
+    const navigate = useNavigate();
 
+    const askNewQuestion = () => {
+        navigate('/newquestion')
+    }
 
 //========================================================================================
 //Display All Questions
@@ -55,7 +62,7 @@ useEffect(()=>{
             <p>
             Sharing is caring - especially when it comes to knowledge. So please don’t hesitate to ask or answer!
             </p>
-            <Button
+            <Button onClick={askNewQuestion}
               sx={{
                 backgroundColor: "#FF7900",
                 borderRadius: "20px",
@@ -70,7 +77,7 @@ useEffect(()=>{
               }}
               variant="contained"
             >
-              Ask Question
+              Ask A Question
             </Button>
           </div>
           <div className='pp_welcome_banner-img'></div>
@@ -127,7 +134,7 @@ useEffect(()=>{
             </Box>{" "}
           </div>
           <div>
-            <Button
+            <Button onClick={askNewQuestion}
               sx={{
                 backgroundColor: "#2b2b2b",
                 borderRadius: "20px",
@@ -143,7 +150,7 @@ useEffect(()=>{
               }}
               variant="contained"
             >
-              Ask a question
+              Ask A Question
             </Button>
           </div>
         </div>
