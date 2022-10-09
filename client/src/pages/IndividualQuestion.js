@@ -23,6 +23,8 @@ import QuestionAdded from "../modals/QuestionAdded";
 import QuestionCard from "../components/QuestionCard";
 import { AnswerCard } from "../components/AnswerCard";
 import { IndividualQuestionCard } from "../components/IndividualQuestionCard";
+import moment from "moment";
+
 const IndividualQuestion = () => {
   const [questions, setQuestions] = useState();
   const [updateQuestions, setUpdateQuestions] = useState();
@@ -33,12 +35,16 @@ const IndividualQuestion = () => {
         let questionData = res.data;
         let renderQuestions = questionData.map((item) => {
           console.log(item);
+
           if (item._id == sessionStorage.getItem("questionId")) {
+
+            let date = questionData.date;
+            let formatted = moment(date).format('DD MMMM YYYY');
             return (
               <IndividualQuestionCard
                 key={item._id}
                 questionId={item._id}
-                date={item.datePosted}
+                date={formatted}
                 title={item.title}
                 description={item.description}
                 screenshots={item.screenshots}
