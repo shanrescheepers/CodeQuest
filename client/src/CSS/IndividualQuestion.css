@@ -239,3 +239,9 @@
 .icons_block img {
   width: 10%;
 }
+
+.show_answer_text p {
+  margin-top: -15px !important;
+  
+
+}

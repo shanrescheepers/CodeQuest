@@ -22,34 +22,73 @@ import upload from "../assets/newQuestionAssets/upload.png";
 import QuestionAdded from "../modals/QuestionAdded";
 import QuestionCard from "../components/QuestionCard";
 import { AnswerCard } from "../components/AnswerCard";
-
+import { IndividualQuestionCard } from "../components/IndividualQuestionCard";
 const IndividualQuestion = () => {
   const [questions, setQuestions] = useState();
   const [updateQuestions, setUpdateQuestions] = useState();
 
   useEffect(() => {
-    Axios.get("http://localhost:5000/api/readanswer")
+    Axios.get("http://localhost:5000/api/readquestions")
       .then((res) => {
         let questionData = res.data;
-        let renderQuestions = questionData.map((item) => (
-          <AnswerCard
-            key={item._id}
-            questionId={item._id}
-            date={item.datePosted}
-            code={item.code}
-            screenshots={item.screenshots}
-            description={item.description}
-            upvotes={item.upvotes}
-            downvotes={item.downvotes}
-            userId={item.userId}
-            editRender={setUpdateQuestions}
-          />
-        ));
+        let renderQuestions = questionData.map((item) => {
+          console.log(item);
+          if (item._id == sessionStorage.getItem("questionId")) {
+            return (
+              <IndividualQuestionCard
+                key={item._id}
+                questionId={item._id}
+                date={item.datePosted}
+                title={item.title}
+                description={item.description}
+                screenshots={item.screenshots}
+                code={item.code}
+                tags={item.tags}
+                upvotes={item.upvotes}
+                downvotes={item.downvotes}
+                userId={item.userId}
+                editRender={setUpdateQuestions}
+              />
+            );
+          }
+        });
+
         setQuestions(renderQuestions);
         setUpdateQuestions(false);
       })
       .catch((err) => console.log(err));
   }, [updateQuestions]);
+  /*====================== */
+  const [answer, setAnswer] = useState();
+  const [updateAnswers, setUpdateAnswers] = useState();
+
+  useEffect(() => {
+    Axios.get("http://localhost:5000/api/readanswer")
+      .then((res) => {
+        let questionData = res.data;
+        let renderAnswers = questionData.map((item) => {
+          if (item.questionId == sessionStorage.getItem("questionId")) {
+            return (
+              <AnswerCard
+                key={item._id}
+                questionId={item._id}
+                date={item.datePosted}
+                code={item.code}
+                screenshots={item.screenshots}
+                description={item.description}
+                upvotes={item.upvotes}
+                downvotes={item.downvotes}
+                userId={item.userId}
+                editRender={setUpdateAnswers}
+              />
+            );
+          }
+        });
+        setAnswer(renderAnswers);
+        setUpdateAnswers(false);
+      })
+      .catch((err) => console.log(err));
+  }, [updateAnswers]);
 
   /*====================== */
   function AnswerQuestion() {
@@ -167,7 +206,7 @@ const IndividualQuestion = () => {
   const addNewQuestion = (e) => {
     e.preventDefault();
 
-
+    
 
     const payloadData = new FormData();
 
@@ -223,63 +262,7 @@ const IndividualQuestion = () => {
           onClick={goBack}
         />
         <div className="display_question">
-          <div className="qq_and_title">
-            <div className="title_show">
-              <p className="questionTitle">Question Title</p>
-              <p className="questionInfo">
-                Posted by: <label id="Username">Username</label> <br></br>{" "}
-                <label id="Date">00 September 2022</label>
-              </p>
-            </div>
-            <div className="tags">
-              <div className="tags_block">
-                <p>Null</p>
-              </div>
-              <div className="tags_block">
-                <p>React</p>
-              </div>
-            </div>
-          </div>
-          <div className="question">
-            <p>
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.Ut enim ad minim veniam, quis nostrud exercitation
-              ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-              irure dolor in reprehenderit in voluptate velit esse cillum dolore
-              eu fugiat nulla pariatur. hello world
-            </p>
-          </div>
-
-          <div className="question_image">
-            <img className="q_img" src={questionImage}></img>
-          </div>
-
-          <div className="code_text">
-            <p>
-              {" "}
-              Grid item xs=12 md=12 lg=12 order= xs: 1, md: 1 Item
-              elevation=false{" "}
-            </p>
-          </div>
-
-          <div className="answer_question_btn">
-            <div className="icons_block">
-              <img src={UpVote} className="UpVote"></img>
-              <p className="UpVote_text">00</p>
-              <img src={DownVote} className="DownVote"></img>
-              <p className="DownVote_text">00</p>
-              <img src={flagQuestion} className="flagQuestion"></img>
-            </div>
-            <button
-              onClick={() => AnswerQuestion()}
-              className="btn_answer_question"
-            >
-              {" "}
-              Answer Question
-            </button>
-          </div>
+          <div className="">{questions}</div>
         </div>
         {/* */}
 
@@ -287,8 +270,7 @@ const IndividualQuestion = () => {
         <div className="answer_question">
           <form className="form-con">
             <h1>Your Answer</h1>
-            
-
+         
             
             <TextField
               name="description"
@@ -367,6 +349,7 @@ const IndividualQuestion = () => {
               }}
               onChange={getFormValues}
             />
+            
 
             <Button
               type="submit"
@@ -385,7 +368,7 @@ const IndividualQuestion = () => {
 
           {/*=================*/}
         </div>
-        <div className="">{questions}</div>
+        <div className="">{answer}</div>
       </div>
     </div>
   );
