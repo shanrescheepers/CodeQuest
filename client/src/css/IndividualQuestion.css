@@ -225,7 +225,7 @@
 .show_answered_con {
   padding-top: 9px;
   margin: 50px;
-  background-color: #00aaf0;
+  /* background-color: #00aaf0; */
   border-radius: 20px;
 }
 .show_answered_blue_con {

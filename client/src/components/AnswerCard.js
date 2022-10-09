@@ -112,7 +112,7 @@ export const AnswerCard = (props) => {
   );
   const s = "http://localhost:5000/answerScreenshots/" + props.screenshots[0].filename;
   return (
-    <div className="show_answered_con">
+    <div className="show_answered_con"  style={{ backgroundColor: bgColor }}>
       <div className="show_answered_blue_con">
         <div className="show_answer_text">
           
@@ -137,12 +137,12 @@ export const AnswerCard = (props) => {
             <p className="DownVote_text">00</p>
             <img src={flagQuestion} className="flagQuestion"></img>
           </div>
-          <button
+          {/* <button
             onClick={() => AnswerQuestion()}
             className="btn_answer_question"
           >
             Respond
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

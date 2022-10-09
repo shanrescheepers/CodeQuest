@@ -257,14 +257,14 @@ const IndividualQuestion = () => {
 
       <div className="pp_main_card">
         <ArrowBackRounded
-          sx={{ fontSize: "40px", color: "#2b2b2b" }}
+          sx={{ fontSize: "40px", color: "#2b2b2b", cursor: 'pointer' }}
           className="backArrow"
           onClick={goBack}
         />
         <div className="display_question">
           <div className="">{questions}</div>
         </div>
-        {/* */}
+
 
         
         <div className="answer_question">
