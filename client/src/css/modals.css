@@ -67,3 +67,13 @@
   .modal-img.logOut img{
     width: 260px;
   }
+
+  .modal.questionAdded.answer{
+    height: 465px;
+  }
+
+  .modal.questionAdded.answer img{
+    width: 250px;
+    margin-bottom: 0;
+    margin-top: 0px;
+  }

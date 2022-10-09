@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router';
 import Helmet from "react-helmet";
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import AnsweredModal from '../modals/AnsweredModal';
 
 const FeedPage = (props) => {
 
@@ -94,6 +95,7 @@ useEffect(()=>{
 
     return (
         <>
+         <AnsweredModal/>
         <motion.div className='home-con'
             intital={{ width: 0 }}
             animate={{ width: "76%" }}
@@ -102,6 +104,7 @@ useEffect(()=>{
             <Helmet>
                 <title>Home</title>
             </Helmet>
+           
         
             <div className='feed-header'>
                 <div className='header-con'>
