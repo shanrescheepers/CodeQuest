@@ -19,6 +19,10 @@ const DeleteUserModal = (props) => {
             .catch(function (error) {
                 console.log(error);
             });
+        Axios.delete('http://localhost:5000/api/deleteReportedUser/' + props.id)
+            .then(res => {
+                console.log("user has been removed from flagged list");
+            });
     }
 
 

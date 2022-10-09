@@ -17,10 +17,11 @@ router.get('/api/allReportedUsers', async (req, res) => {
 });
 
 // DELETE ONE : this needs some thinking because a user can get flagged by many other users
-router.delete("/deleteReportedUser/:id", async (req, res) => {
-    console.log("Delete");
+// Remove From List Function on Admin Page
+router.delete('/api/deleteReportedUser/:id', async (req, res) => {
+    console.log("Deleted the user on flagged");
     // console.log(req.params);
-    await ReportedUser.findByIdAndDelete(req.params.id)
+    await ReportedUser.deleteMany({ reportedUserId: req.params.id })
         .then(response => res.json(response))
         .catch(error => res.status(500).json(error))
 });
