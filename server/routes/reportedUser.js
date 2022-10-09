@@ -12,7 +12,7 @@ router.get('/api/reportedUser/:id', async (req, res) => {
 // GET ALL
 router.get('/api/allReportedUsers', async (req, res) => {
     const reportedUsers = await ReportedUser.find();
-    console.log("All Reported Users:", reportedUsers);
+    // console.log("All Reported Users:", reportedUsers);
     res.send(reportedUsers);
 });
 
