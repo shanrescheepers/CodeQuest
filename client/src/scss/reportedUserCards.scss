@@ -1,70 +1,58 @@
-.ruprofilecard {
+.profileBackground {
+    height: 50px;
+    width: 50px;
+    border-radius: 50px !important;
     display: grid;
-    margin-top: 7px;
-    // grid-template-columns: repeat(200, calc(17% - 100px)) !important;
-    height: 250px !important;
-    border-radius: 20px;
-    // padding: 8px;
-    grid-gap: 2px;
+    grid-template-columns: 1fr;
+    justify-content: center;
+}
 
-    &__card {
-        display: grid;
-        background-color: #f7f7f9 !important;
-        border-radius: 20px !important;
-        width: 170px;
-        height: 230px !important;
-        box-shadow: 0px 0px 15px -6px rgba(0, 0, 0, 0.59);
-        -webkit-box-shadow: 1px 1px 9px -7px rgba(0, 0, 0, 0.454);
-        -moz-box-shadow: 1px 0px 5px -6px rgba(0, 0, 0, 0.59);
-        grid-template-rows: 1fr 1fr 1fr 1fr;
+.profile-imgage {
+    height: 30px;
+    width: 30px;
+    display: grid;
+    align-self: center;
+    padding-left: 8px;
+}
 
-        &__flagbutton {
-            padding-top: 8px !important;
-            width: 5px;
-            border-radius: 20px;
-            background-color: #ff000011;
-        }
+.css-1ex1afd-MuiTableCell-root {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 1.43;
+    letter-spacing: 0.01071em;
+    display: table-cell;
+    vertical-align: inherit;
+    border-bottom: 1pxsolidrgba(224, 224, 224, 1);
+    text-align: left;
+    padding: 16px;
+    color: rgba(0, 0, 0, 0.87);
+}
 
-        &__useravatar {
-            display: grid;
-            align-self: center;
-            background-image: url(../assets/placeholderPP.png);
-        }
+.css-1ex1afd-MuiTableCell-root {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 1.43;
+    letter-spacing: 0 !important;
+    display: table-cell;
+    vertical-align: inherit;
+    border-bottom: 1px solid (rgba) 224, 224, 224, 1;
+    text-align: left !important;
+    padding-right: 8px !important;
+    padding-left: 16px !important;
+    width: 100vh !important;
+    color: rgba(0, 0, 0, 0.87);
+    font-size: 10px !important;
+}
 
-        .css-4vb5ob-MuiAvatar-root {
-            display: grid !important;
-            margin-left: 33%;
-            align-self: center !important;
-            grid-template-columns: 1fr !important;
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: -ms-flexbox;
-            -webkit-align-items: center;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            -webkit-justify-content: center;
-            justify-content: center;
-            -webkit-flex-shrink: 0;
-            -ms-flex-negative: 0;
-            flex-shrink: 0;
-            width: 60px;
-            margin-top: -16px;
-            height: 60px;
-            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-            font-size: 1.25rem;
-            line-height: 1;
-            border-radius: 50%;
-            overflow: hidden;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            color: #fff;
-            background-color: #bdbdbd;
-            background-color: #2196f3;
-        }
-    }
+.MuiTableBody-root css-apqrd9-MuiTableBody-root {
+    height: 70px !important;
+}
+
+// .MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-1ps6pg7-MuiPaper-root {
+//     margin-left: 0px !important;
+// }
+.MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 css-1ps6pg7-MuiPaper-root {
+    margin-left: 0px !important;
 }
