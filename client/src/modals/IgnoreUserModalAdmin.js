@@ -4,27 +4,17 @@ import '../css/modals.css';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
 import Axios from 'axios';
-const DeleteUserModal = (props) => {
 
+const IgnoreUserModal = (props) => {
     const closeModal = () => {
         props.close();
     }
-    const deleteUserFunction = () => {
-        Axios.delete('http://localhost:5000/api/deleteUser/' + props.id)
-            .then((res) => {
-                if (res) {
-                    console.log("User has been deleted");
-                    Axios.delete('http://localhost:5000/api/deleteReportedUser/' + props.id)
-                        .then(res => {
-                            console.log("user has been removed from flagged list");
-                        });
-                    closeModal();
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
+    const ignoreFlagUserFunction = () => {
+        Axios.delete('http://localhost:5000/api/deleteReportedUser/' + props.id)
+            .then(res => {
+                console.log("user has been removed from flagged list");
+                closeModal();
             });
-
     }
 
 
@@ -41,7 +31,7 @@ const DeleteUserModal = (props) => {
                     '&:hover': {
                         backgroundColor: '#4A4A4A',
                     }
-                }} variant="contained" type="submit" backgroundColor="primary" onClick={() => { deleteUserFunction() }}>Delete User</Button>
+                }} variant="contained" type="submit" backgroundColor="primary" onClick={() => { ignoreFlagUserFunction() }}>Ignore</Button>
 
                 <Button sx={{
                     backgroundColor: '#f1f1f1', textTransform: 'capitalize', color: "#2b2b2b", borderRadius: '20px', marginTop: "15px", width: '95%', height: '45px', fontFamily: 'Open Sans', marginLeft: '0px',
@@ -55,4 +45,4 @@ const DeleteUserModal = (props) => {
     );
 };
 
-export default DeleteUserModal;
+export default IgnoreUserModal;

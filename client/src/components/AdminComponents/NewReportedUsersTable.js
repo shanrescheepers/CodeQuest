@@ -14,7 +14,7 @@ import { Icon, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 import DeleteUserModalAdmin from '../../modals/DeleteUserModalAdmin';
-
+import IgnoreUserModal from '../../modals/IgnoreUserModalAdmin';
 
 const columns = [
     { id: 'avatar', label: 'Avatar', minWidth: 50 },
@@ -43,9 +43,15 @@ export default function NewReportedUserTable() {
     const [rows, setRows] = useState([
         {}
     ]);
-    // Delete USer
+
     // Delete user
     const [deleteUserModal, setDeleteUserModal] = useState();
+    const [ignoreUserModal, setIgnoreUserModal] = useState();
+
+    const removeUserFromFlagTable = (id) => {
+        setIgnoreUserModal(<IgnoreUserModal close={setIgnoreUserModal} id={id} />)
+        console.log(id);
+    }
 
     const deleteUser = (id) => {
         console.log(id);
@@ -59,12 +65,6 @@ export default function NewReportedUserTable() {
     const [reportedUsersStateNumberofUsers, setReportedUsersStateNumberofUsers] = useState();
     const [totalReportedUsers, setTotalReportedUsers] = useState();
 
-    const removeUserFromFlagTable = (id) => {
-        Axios.delete('http://localhost:5000/api/deleteReportedUser/' + id)
-            .then(res => {
-                console.log("user has been removed from flagged list");
-            });
-    }
     useEffect(() => {
         Axios.get('http://localhost:5000/api/allReportedUsers')
             .then(res1 => {
@@ -136,7 +136,6 @@ export default function NewReportedUserTable() {
                         reportedUser["avatar"] = imgURL;
                         reportedUser["dateFlagged"] = usersdateflagged;
                         reportedUser["flaggedReason"] = userflagReason;
-                        reportedUser["deleteUser"] = deleteButton;
                         reportedUser["removeFromFragList"] = removeFromListButton;
                         // Check IF - dubbels in die nuwe array of nie? 
                         allReportedUsers.push(reportedUser);
@@ -158,6 +157,7 @@ export default function NewReportedUserTable() {
 
     return (
         < >{deleteUserModal}
+            <>{ignoreUserModal}</>
             <Paper style={{ width: "100%" }}>
                 <TableContainer sx={{ maxHeight: 450 }}>
                     <Table stickyHeader aria-label="sticky table">
