@@ -1,6 +1,9 @@
 import React from 'react';
 import '../css/profilePage.css';
 import Button from '@mui/material/Button';
+import { useState, useEffect } from "react";
+import Axios from 'axios';
+import { useNavigate } from "react-router";
 
 import fishUnlockImage from '../assets/profilePageAssets/fishUnlock.png';
 import fishLockImage from '../assets/profilePageAssets/fishLock.png';
@@ -15,7 +18,83 @@ import Helmet from "react-helmet";
 import { motion } from "framer-motion";
 import QuestionCard from '../components/QuestionCard';
 
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
+import Tab from '@mui/material/Tab';
+import Box from '@mui/material/Box';
+
+
 const ProfilePage = () => {
+
+   const activeUser = sessionStorage.getItem("id");
+
+   const navigate = useNavigate();
+
+    const [value, setValue] = useState('1');
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
+    const [questions, setQuestions] = useState();
+    const [questionCount, setQuestionCount] = useState();
+
+
+
+    useEffect(() => {
+
+        Axios.get('http://localhost:5000/api/readquestions')
+        .then(res =>{
+      
+          let questionData = res.data;
+          let questions = questionData.filter(user => user.userId === activeUser).map((item) => <QuestionCard key={item._id} questionId={item._id} date={item.datePosted} title={item.title} description={item.description} upvotes={item.upvotes} downvotes={item.downvotes} userId={item.userId}/>)
+          setQuestions(questions);
+      
+        })
+        .catch(err => console.log(err));
+
+        // Question Counter for Badges
+        // setQuestionCount(questions.length);
+        console.log(questionCount);
+
+        
+      
+      },[value]);
+
+
+      const deleteItem = () => {
+        // console.log(id);
+
+        Axios.get('http://localhost:5000/api/userInfo/' + activeUser)
+            .then(res => {
+                let userData = res.data;
+                console.log(userData._id);
+                console.log(activeUser);
+
+                if (window.confirm(userData.username + "are you sure you want to delete you account. THIS CAN NOT BE UNDONE") === true) {
+                    if (activeUser === userData._id) {
+                        Axios.delete('http://localhost:5000/api/deleteaccount/' + activeUser)
+                            .then((res) => {
+                                if (res) {
+                                    navigate('/');
+                                    sessionStorage.clear();
+                                    console.log(res);
+                                }
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+
+                        console.log("Account Deleted");
+                    }
+                }
+            });
+
+    }
+
+
+
     return (
 
 
@@ -31,7 +110,7 @@ const ProfilePage = () => {
                     <h1>Hi Friend,</h1>
                     <p>We love that you've joined us! Lets take a look at all things YOU! View your rank, badges, questions and more! </p>
                     <Button sx={{
-                        backgroundColor: '#FF7900', height: '42px',borderRadius: '20px', marginTop: "20px", width: 'auto', fontFamily: 'Open Sans', textTransform: 'capitalize',
+                        backgroundColor: '#FF7900', height: '42px', borderRadius: '20px', marginTop: "20px", width: 'auto', fontFamily: 'Open Sans', textTransform: 'capitalize',
                         '&:hover': {
                             backgroundColor: '#FF7900',
                         }
@@ -125,25 +204,48 @@ const ProfilePage = () => {
 
 
             <div className='pp_activity_con'>
-                <p className='pp_questions_btn'>Questions</p>
-                <p className='pp_answers_btn'>Answers</p>
+
+                <TabContext value={value} className='admin__links'>
+                    <div className='admin__links__tablinks'>
+                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                            <TabList onChange={handleChange} aria-label="lab API tabs example" >
+                                <Tab label="Questions" value="1" indicatorColor="secondary" />
+                                <Tab label="Answers" value="2" />
+                            </TabList>
+                        </Box>
+                    </div>
+
+                    <TabPanel value="1">
+                        {questions}
+                    </TabPanel>
+
+                    {/* Reported user Table */}
+                    <TabPanel value="2">
+                        {/* <QuestionCard /> */}
+                    </TabPanel>
+
+
+                </TabContext>
+
+                {/* <p className='pp_questions_btn'>Questions</p>
+                <p className='pp_answers_btn'>Answers</p> */}
 
                 <div className='pp_userInput_card_con'>
-                        {/* <QuestionCard/>
+                    {/* <QuestionCard/>
                         <QuestionCard/>
                         <QuestionCard/> */}
-                    
+
 
                 </div>
 
             </div>
 
             <Button sx={{
-                backgroundColor: '#2b2b2b', float: 'right', borderRadius: '20px', height:'45px', marginTop: "150px", textTransform: 'capitalize', marginRight: "50px", width: '200px', fontFamily: 'Open Sans',
+                backgroundColor: '#2b2b2b', float: 'right', borderRadius: '20px', height: '45px', marginTop: "150px", textTransform: 'capitalize', marginRight: "50px", width: '200px', fontFamily: 'Open Sans',
                 '&:hover': {
                     backgroundColor: '#2b2b2b',
                 }
-            }} variant="contained">Delete my Account</Button>
+            }} variant="contained" onClick={deleteItem}>Delete my Account</Button>
 
         </motion.div>
     );
