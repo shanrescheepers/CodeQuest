@@ -121,7 +121,7 @@ export const AnswerCard = (props) => {
   );
   const s = "http://localhost:5000/answerScreenshots/" + props.screenshots[0].filename;
   return (
-    <div className="show_answered_con" style={{background:{questionColor}}}>
+    <div className="show_answered_con" style={{backgroundColor:questionColor}}>
       <div className="show_answered_blue_con">
 
         <div className="show_answer_text">
