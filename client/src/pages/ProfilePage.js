@@ -23,7 +23,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-
+import DeleteAccountModal from '../modals/DeleteAccountModal';
 
 const ProfilePage = () => {
 
@@ -39,6 +39,8 @@ const ProfilePage = () => {
 
     const [questions, setQuestions] = useState();
     const [questionCount, setQuestionCount] = useState();
+
+    const [deleteModal, setDeleteModal] = useState();
 
 
 
@@ -66,38 +68,20 @@ const ProfilePage = () => {
       const deleteItem = () => {
         // console.log(id);
 
-        Axios.get('http://localhost:5000/api/userInfo/' + activeUser)
-            .then(res => {
-                let userData = res.data;
-                console.log(userData._id);
-                console.log(activeUser);
-
-                if (window.confirm(userData.username + "are you sure you want to delete you account. THIS CAN NOT BE UNDONE") === true) {
-                    if (activeUser === userData._id) {
-                        Axios.delete('http://localhost:5000/api/deleteaccount/' + activeUser)
-                            .then((res) => {
-                                if (res) {
-                                    navigate('/');
-                                    sessionStorage.clear();
-                                    console.log(res);
-                                }
-                            })
-                            .catch(function (error) {
-                                console.log(error);
-                            });
-
-                        console.log("Account Deleted");
-                    }
-                }
-            });
-
+        setDeleteModal(<DeleteAccountModal
+            close={setDeleteModal}
+          />)
     }
+
+   
 
 
 
     return (
 
 
+        <div>
+            {deleteModal}
         <motion.div className='pp_main_card'
             intital={{ width: 0 }}
             animate={{ width: "76%" }}
@@ -246,8 +230,8 @@ const ProfilePage = () => {
                     backgroundColor: '#2b2b2b',
                 }
             }} variant="contained" onClick={deleteItem}>Delete my Account</Button>
-
         </motion.div>
+</div>
     );
 };
 
