@@ -261,7 +261,7 @@ const IndividualQuestion = () => {
         <title>Question Expand</title>
       </Helmet>
 
-      <div className="pp_main_card">
+      <div className="pp_main_card question">
         <ArrowBackRounded
           sx={{ fontSize: "40px", color: "#2b2b2b", cursor: 'pointer' }}
           className="backArrow"
