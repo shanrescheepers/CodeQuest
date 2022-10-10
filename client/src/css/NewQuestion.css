@@ -1,6 +1,6 @@
 .new-question-con {
     width: 75%;
-    height: 70vh;
+    height: 58vh;
     background-color: #F1F1FC;
     border-radius: 20px;
     position: absolute;
@@ -23,7 +23,7 @@
     padding: 4rem;
     box-sizing: border-box;
     width: 100%;
-    height: auto;
+    height: 1380px;
     background-color: #F1F1FC;
 }
 
@@ -69,7 +69,7 @@
     height: auto;
     background-color: #FFF;
     border-radius: 20px;
-    margin: 2rem 0;
+    margin: 3rem 0;
     overflow: hidden;
 }
 
@@ -175,6 +175,7 @@
     background-color: #2B2B2B;
     padding: 2rem 4rem;
     box-sizing: border-box;
+    margin-bottom: 0;
 }
 
 .question-rules-title h2 {
