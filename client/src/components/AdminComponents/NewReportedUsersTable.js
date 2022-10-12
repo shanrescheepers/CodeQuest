@@ -40,9 +40,7 @@ export default function NewReportedUserTable() {
         setPage(0);
     };
 
-    const [rows, setRows] = useState([
-        {}
-    ]);
+    const [rows, setRows] = useState([]);
 
     // Delete user
     const [deleteUserModal, setDeleteUserModal] = useState();
@@ -61,15 +59,17 @@ export default function NewReportedUserTable() {
     }
     // Reporteds
     // Reported Users
-    const [reportedUsers, setReportedUsers] = useState(false);
-    const [reportedUsersStateNumberofUsers, setReportedUsersStateNumberofUsers] = useState();
-    const [totalReportedUsers, setTotalReportedUsers] = useState();
+    // const [reportedUsers, setReportedUsers] = useState(false);
+    // const [reportedUsersStateNumberofUsers, setReportedUsersStateNumberofUsers] = useState();
+    // const [totalReportedUsers, setTotalReportedUsers] = useState();
+
+    const [reportedUsers, setReportedUsers] = useState();
 
     useEffect(() => {
         Axios.get('http://localhost:5000/api/allReportedUsers')
             .then(res1 => {
                 // getting all the isers in. then count them, with it, capture some data , the ids, the names, emails.
-                setTotalReportedUsers(res1.data.length)
+                // setTotalReportedUsers(res1.data.length)
 
                 let reportedUserIds = [];
                 // Check om te sien of daar nie dubbels is van dieselfde user nie. daar kan net een user wees.
@@ -79,8 +79,12 @@ export default function NewReportedUserTable() {
                         reportedUserIds.push(res1.data[index].reportedUserId);
                     };
                 };
-                // al die users wat reported is
-                let allReportedUsers = []
+
+                if (reportedUsers !== reportedUserIds.length) {
+                    setRows([]);
+                }
+
+
                 for (let i = 0; i < reportedUserIds.length; i++) {
                     Axios.get('http://localhost:5000/api/userInfo/' + reportedUserIds[i]).then(res => {
                         let reportedUser = res.data;
@@ -138,21 +142,18 @@ export default function NewReportedUserTable() {
                         reportedUser["flaggedReason"] = userflagReason;
                         reportedUser["removeFromFragList"] = removeFromListButton;
                         // Check IF - dubbels in die nuwe array of nie? 
-                        allReportedUsers.push(reportedUser);
-                        console.log(allReportedUsers);
-
-                        setRows(allReportedUsers);
-
-
-                        console.log(rows)
-                        console.log(allReportedUsers);
+                        if (reportedUsers !== reportedUserIds.length) {
+                            setRows(rows => [...rows, reportedUser]);
+                        }
                     });
 
                 }
+                setReportedUsers(reportedUserIds.length)
+
             })
 
 
-    }, [reportedUsers]);
+    }, [deleteUserModal, ignoreUserModal]);
 
 
     return (
