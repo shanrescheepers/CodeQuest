@@ -17,7 +17,9 @@ import downvote from "../assets/profilePageAssets/downVote.png";
 import flag from "../assets/individualPageAssets/questionFlag.png";
 
 export const AnswerCard = (props) => {
+    const [index, setIndex] = useState(0);
   const navigate = useNavigate();
+
   function AnswerQuestion() {
     console.log("something");
     $(".answer_question").fadeIn();
@@ -76,11 +78,22 @@ export const AnswerCard = (props) => {
   const [year, setYear] = useState();
   const [questionColor, setQuestionColor] = useState();
 
+    //display screenshots in image slider 
+    let aScreenshots = props.screenshots;
+
+    let screenshots = [];  
+
+    for (let i = 0; i < aScreenshots.length; i++){
+        let URLs = 'http://localhost:5000/answerScreenshots/' + aScreenshots[i].filename;
+        screenshots.push(URLs);
+    }   
+
+
   useEffect(() => {
     if (props.userId == null) {
-      console.log("User not logged in");
+    //   console.log("User not logged in");
     } else {
-      console.log("user logged in");
+    //   console.log("user logged in");
       axios
         .get("http://localhost:5000/api/userInfo/" + props.userId)
         .then((res) => {
@@ -105,7 +118,6 @@ export const AnswerCard = (props) => {
           setQuestionColor(bgColor)   	    
         });
     }
-    // localStorage.clear();
   }, []);
 
   console.log(questionColor);
@@ -120,6 +132,7 @@ export const AnswerCard = (props) => {
       props.screenshots[0].filename
   );
   const s = "http://localhost:5000/answerScreenshots/" + props.screenshots[0].filename;
+
   return (
     <div className="show_answered_con" style={{backgroundColor:questionColor}}>
       <div className="show_answered_blue_con">
@@ -133,14 +146,25 @@ export const AnswerCard = (props) => {
           <p>{props.description}</p>
         </div>
 
-        {/* <div>
-          <img
-            className="q_img"
-            src={s}
-          />
-        </div> */}
+        <div className="slideshow">
+            <div className="slideshow-slider" style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
+                {screenshots.map((screenshot, index) => (
+                    <div className="slide" key={index}>
+                        <img src={screenshot} className="slide-img"/>
+                    </div>
+                ))}
+            </div>
 
-        <div className="image-preview"></div>
+            <div className="slideshow-dots">
+                {screenshots.map((_, idx) => (
+                    <div key={idx} className={`slideshow-dot${index === idx ? " active" : ""}`}
+                        onClick={() => {
+                            setIndex(idx);
+                        }}>    
+                    </div>
+                ))}
+            </div>
+        </div>
 
         <div className="code_text"> 
             <p>{props.code}</p>
