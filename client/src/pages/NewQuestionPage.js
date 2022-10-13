@@ -179,14 +179,13 @@ const NewQuestionPage = () => {
             payloadData.append('screenshots', element);
         }
 
-
         // send payload to database
         Axios.post('http://localhost:5000/api/newquestion', payloadData)
         .then((res)=> {
           if(res){
             //show post confirmation modal 
             setPostConfirmation(<QuestionAdded close={setPostConfirmation}/>)
-            console.log("New Question Added. Slayyy!");
+            // console.log("New Question Added. Slayyy!");
           }
         })
         .catch(function (error) {

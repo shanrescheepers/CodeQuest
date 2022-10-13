@@ -247,7 +247,7 @@ const IndividualQuestion = () => {
         if (res) {
           //show post confirmation modal
           setPostConfirmation(<QuestionAdded close={setPostConfirmation} />);
-          console.log("New Question Added. Slayyy!");
+          console.log("New answer Added. Slayyy!");
         }
       })
       .catch(function (error) {
@@ -257,6 +257,7 @@ const IndividualQuestion = () => {
 
   return (
     <div>
+        {postConfirmation}
       <Helmet>
         <title>Question Expand</title>
       </Helmet>

@@ -77,6 +77,7 @@ export const AnswerCard = (props) => {
   const [profileImg, setprofileImg] = useState();
   const [year, setYear] = useState();
   const [questionColor, setQuestionColor] = useState();
+  const [answerConfirmation, setAnsweronfirmation] = useState();
 
     //display screenshots in image slider 
     let aScreenshots = props.screenshots;
