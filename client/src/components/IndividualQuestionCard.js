@@ -12,22 +12,17 @@ import axios from "axios";
 import moment from "moment";
 
 export const IndividualQuestionCard = (props) => {
-    const [imgUrls, setImgUrls] = useState();
     const [index, setIndex] = useState(0);
     const qScreenshots = props.screenshots;
+
     console.log(qScreenshots);
 
     let screenshots = [];    
 
     for (let i = 0; i < qScreenshots.length; i++){
-
         let URLs = 'http://localhost:5000/questionScreenshots/' + qScreenshots[i].filename;
-        // console.log(URLs);
-        // setImgUrls(URLs);
         screenshots.push(URLs);
-    }
-
-    console.log(screenshots);
+    }        
 
   function AnswerQuestion() {
     // console.log("something");
@@ -151,10 +146,6 @@ export const IndividualQuestionCard = (props) => {
       <div className="question">
         <p>{props.description}</p>
       </div>
-
-      {/* <div className="question_image">
-        <img className="q_img" src={props.screenshots[0]}></img>
-      </div> */}
 
         <div className="slideshow">
             <div className="slideshow-slider" style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
