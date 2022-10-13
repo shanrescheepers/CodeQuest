@@ -25,12 +25,77 @@ const QuestionCard = (props) => {
         //delete question functionality
     }
 
+//=====================================================================
+//Upvote and downvote
+
+    // const addVote = () => {
+    //     console.log("It works, Whoopieee");
+
+    //     let newUpvote = props.upvotes+1;
+
+    //     let payload = {
+    //         totalUpvotes: newUpvote   
+    //   }
+    
+    //     let questionId = props.questionId;
+
+    //     axios.patch('http://localhost:5000/api/updateUpvotes/' + questionId, payload)
+    //     .then((res)=> {
+    //         if(res){
+    //         console.log("Question Votes Updated"); 
+    //         }
+    //     })
+    //     .catch(function (error) {
+    //         console.log(error);
+    //     });
+    
+    // };
+
     const addVote = () => {
-        //add vote functionality
-    }
+        console.log("It works, Whoopieee");
+
+        let payloadData={
+            vote: 'upvote',
+            userId: sessionStorage.getItem('id'),
+            questionId: props.questionId
+        }
+        // console.log(payloadData);
+
+        axios.post('http://localhost:5000/api/addvote', payloadData)
+        .then((res)=> {
+            if(res){
+            console.log("Vote Added"); 
+            console.log(payloadData);
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+    };
+
+    //======================================================================
+    //downvote
 
     const subtractVote = () => {
-        //subtract vote functionality
+        console.log("It works, Whoopieee");
+
+        let payloadData={
+            vote: 'downvote',
+            userId: sessionStorage.getItem('id'),
+            questionId: props.questionId
+        }
+        console.log(payloadData);
+
+        axios.post('http://localhost:5000/api/addvote', payloadData)
+        .then((res)=> {
+            if(res){
+            console.log("Vote Added"); 
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     }
 
     //===================================================================
@@ -61,8 +126,8 @@ const QuestionCard = (props) => {
     }else{
         downVotes = '0' + downVotes;
     }
-    //=====================================================================
-    //User Info
+//=====================================================================
+//User Info
 
     const [username, setUsername] = useState();
     const [rank, setRank] = useState();
@@ -103,9 +168,11 @@ if (year === 1) {
   bgColor = '#FF7900'
 };
 
+
     return (
-        <Link to="/IndividualQuestion">
-            <div className='question-con' onClick={goToIndividualQuestion}>
+        <>
+        {/* <Link to="/IndividualQuestion"> */}
+            <div className='question-con' >
                 <div className='question-con-content'>
                     <div className='top-block'>
                         <div className='user-info-block'>
@@ -121,7 +188,7 @@ if (year === 1) {
                         </div>
                     </div>
 
-                    <div className='user-question'>
+                    <div className='user-question' onClick={goToIndividualQuestion}>
                         <h3>Q: {props.title}</h3>
                         <p>{desc} ...</p>
                     </div>
@@ -141,7 +208,8 @@ if (year === 1) {
                     </div>
                 </div>
             </div>
-            </Link>
+            {/* </Link> */}
+            </>
     );
 }
 
