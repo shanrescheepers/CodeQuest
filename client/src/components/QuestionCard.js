@@ -72,10 +72,10 @@ const QuestionCard = (props) => {
 useEffect(() => {
 
   if (props.userId == null) {
-    console.log("User not logged in")
+    // console.log("User not logged in")
 
   } else {
-    console.log("user logged in")
+    // console.log("user logged in")
     axios.get('http://localhost:5000/api/userInfo/' + props.userId)
       .then(res => {
         let data = res.data;
@@ -83,7 +83,7 @@ useEffect(() => {
         setRank(data.rank);
         setprofileImg(data.profileimage);
         setYear(data.yearlevel);
-        console.log(data.rank)
+        // console.log(data.rank)
       })
   }
   // localStorage.clear();
@@ -92,7 +92,7 @@ useEffect(() => {
 //get profile image path
 const imgURL = ('Avatars/' + profileImg + '.png');
 
-console.log(year);
+// console.log(year);
 let bgColor = '';
 
 if (year === 1) {
@@ -104,44 +104,42 @@ if (year === 1) {
 };
 
     return (
-        <Link to="/IndividualQuestion">
-            <div className='question-con' onClick={goToIndividualQuestion}>
-                <div className='question-con-content'>
-                    <div className='top-block'>
-                        <div className='user-info-block'>
-                        <div className='profile-circle question' style={{ backgroundColor: bgColor }}><img src={imgURL} className="profile-Img question"></img></div>
-                            <div className='user-info'>
-                                <h4>{username}</h4>
-                                <p>{formatDate}</p>
-                            </div>
-                        </div>
-
-                        <div className='delete-button question-card-icon' onClick={deleteQuestion}>
-                        <OutlinedFlagIcon fontSize="large"/>
+        <div className='question-con' onClick={goToIndividualQuestion}>
+            <div className='question-con-content'>
+                <div className='top-block'>
+                    <div className='user-info-block'>
+                    <div className='profile-circle question' style={{ backgroundColor: bgColor }}><img src={imgURL} className="profile-Img question"></img></div>
+                        <div className='user-info'>
+                            <h4>{username}</h4>
+                            <p>{formatDate}</p>
                         </div>
                     </div>
 
-                    <div className='user-question'>
-                        <h3>Q: {props.title}</h3>
-                        <p>{desc} ...</p>
-                    </div>
-
-                    <div className='divider'></div>
-
-                    <div className='bottom-block'>
-                        <div className='arrow-con'>                         
-                            <img className='upvote question-card-icon' onClick={addVote} src={upvote}/>
-                            <small className='upvote-count vote-count'>{upVotes}</small>
-
-                            <img className='downvote question-card-icon' onClick={subtractVote} src={downvote}/>
-                            <small className='downvote-count vote-count'>{downVotes}</small>
-                        </div>
-
-                        <small><p>00 Answers</p></small>
+                    <div className='delete-button question-card-icon' onClick={deleteQuestion}>
+                    <OutlinedFlagIcon fontSize="large"/>
                     </div>
                 </div>
+
+                <div className='user-question'>
+                    <h3>Q: {props.title}</h3>
+                    <p>{desc} ...</p>
+                </div>
+
+                <div className='divider'></div>
+
+                <div className='bottom-block'>
+                    <div className='arrow-con'>                         
+                        <img className='upvote question-card-icon' onClick={addVote} src={upvote}/>
+                        <small className='upvote-count vote-count'>{upVotes}</small>
+
+                        <img className='downvote question-card-icon' onClick={subtractVote} src={downvote}/>
+                        <small className='downvote-count vote-count'>{downVotes}</small>
+                    </div>
+
+                    <small><p>00 Answers</p></small>
+                </div>
             </div>
-            </Link>
+        </div>
     );
 }
 
