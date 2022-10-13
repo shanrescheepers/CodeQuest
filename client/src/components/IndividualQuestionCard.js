@@ -1,30 +1,42 @@
 import React from "react";
-
 import "../css/IndividualQuestion.css";
 import "../css/profilePage.css";
 import $ from "jquery";
 import questionImage from "../assets/individualPageAssets/QuestionImg.png";
 import UpVote from "../assets/profilePageAssets/upVote.png";
 import DownVote from "../assets/profilePageAssets/downVote.png";
-
 import flagQuestion from "../assets/individualPageAssets/questionFlag.png";
-
 import { useNavigate } from "react-router";
-
 import { useEffect, useState } from "react";
-
 import axios from "axios";
 import moment from "moment";
 
 export const IndividualQuestionCard = (props) => {
+    const [imgUrls, setImgUrls] = useState();
+    const [index, setIndex] = useState(0);
+    const qScreenshots = props.screenshots;
+    console.log(qScreenshots);
+
+    let screenshots = [];    
+
+    for (let i = 0; i < qScreenshots.length; i++){
+
+        let URLs = 'http://localhost:5000/questionScreenshots/' + qScreenshots[i].filename;
+        // console.log(URLs);
+        // setImgUrls(URLs);
+        screenshots.push(URLs);
+    }
+
+    console.log(screenshots);
+
   function AnswerQuestion() {
-    console.log("something");
+    // console.log("something");
     $(".answer_question").fadeIn();
   }
 
   const navigate = useNavigate();
   function AnswerQuestion() {
-    console.log("something");
+    // console.log("something");
     $(".answer_question").fadeIn();
   }
   //navigate to individual question page
@@ -82,9 +94,9 @@ export const IndividualQuestionCard = (props) => {
 
   useEffect(() => {
     if (props.userId == null) {
-      console.log("User not logged in");
+    //   console.log("User not logged in");
     } else {
-      console.log("user logged in");
+    //   console.log("user logged in");
       axios
         .get("http://localhost:5000/api/userInfo/" + props.userId)
         .then((res) => {
@@ -93,7 +105,7 @@ export const IndividualQuestionCard = (props) => {
           setRank(data.rank);
           setprofileImg(data.profileimage);
           setYear(data.yearlevel);
-          console.log(data.rank);
+        //   console.log(data.rank);
         });
     }
     // localStorage.clear();
@@ -102,7 +114,7 @@ export const IndividualQuestionCard = (props) => {
   //get profile image path
   const imgURL = "Avatars/" + profileImg + ".png";
 
-  console.log(year);
+//   console.log(year);
   let bgColor = "";
 
   if (year === 1) {
@@ -135,6 +147,7 @@ export const IndividualQuestionCard = (props) => {
         </div>
 
       </div>
+
       <div className="question">
         <p>{props.description}</p>
       </div>
@@ -143,7 +156,25 @@ export const IndividualQuestionCard = (props) => {
         <img className="q_img" src={props.screenshots[0]}></img>
       </div> */}
 
-      <div className="image-preview"></div>
+        <div className="slideshow">
+            <div className="slideshow-slider" style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
+                {screenshots.map((screenshot, index) => (
+                    <div className="slide" key={index}>
+                        <img src={screenshot} className="slide-img"/>
+                    </div>
+                ))}
+            </div>
+
+            <div className="slideshow-dots">
+                {screenshots.map((_, idx) => (
+                    <div key={idx} className={`slideshow-dot${index === idx ? " active" : ""}`}
+                        onClick={() => {
+                            setIndex(idx);
+                        }}>    
+                    </div>
+                ))}
+            </div>
+        </div>
 
       <div className="code_text">
         <p>{props.code}</p>
