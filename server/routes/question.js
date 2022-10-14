@@ -85,9 +85,12 @@ router.post('/api/addvote',async (req, res) =>{
      const users = questions.filter(item => item.userId == req.body.userId); //gets users qs
      console.log("Questions: ",questions);
      console.log("Users: ",users);
-     console.log(users);
-     if(users.length === 0){
 
+    //  const findQuestion = await newQuestionModel.findById(users[0].questionId);
+
+     if( users === 'undefined' || users.length === 0){
+
+        console.log("Users length:",users.length);
             const findQuestion = await newQuestionModel.findById(req.body.questionId);
 
             let upvote = findQuestion.upvotes;
@@ -129,13 +132,29 @@ router.post('/api/addvote',async (req, res) =>{
      }else{
         console.log("User Already voted");
         //if() they are the same otherwise update
-        console.log(users[0]._id);
-
         console.log(req.body.vote);
         if(users[0].vote === req.body.vote){
-            console.log("delete:", req.body.vote);
-            console.log({_id:users[0]._id});
-            const findRepVote = await VoteSchema.remove({_id:users[0]._id});
+
+            const findQuestion = await newQuestionModel.findById(users[0].questionId);
+
+            let upvote = findQuestion.upvotes;
+            let downvote = findQuestion.downvotes;
+
+            if(req.body.vote === 'upvote'){
+                upvote = upvote - 1;
+            }else{
+                downvote = downvote - 1;
+            }
+
+            const updateQuestion = await newQuestionModel.updateOne(
+                {_id:users[0].questionId},
+                {$set: { 
+                   upvotes: upvote,
+                   downvotes: downvote
+                    }
+                }
+            );
+            const findRepVote = await VoteSchema.deleteOne({_id:users[0]._id});
             res.json(findRepVote);
 
         }else{
