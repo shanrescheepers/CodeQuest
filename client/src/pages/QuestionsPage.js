@@ -25,13 +25,14 @@ const QuestionsPage = () => {
 
     const askNewQuestion = () => {
         navigate('/newquestion')
+        
     }
 
 //========================================================================================
 //Display All Questions
 //read products
 const [questions, setQuestions] = useState();
-const [updateQuestions, setUpdateQuestions] = useState();
+const [updateQuestions, setUpdateQuestions] = useState(false);
 
 useEffect(()=>{
 

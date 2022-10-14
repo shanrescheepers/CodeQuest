@@ -65,6 +65,7 @@ const QuestionCard = (props) => {
         .then((res)=> {
             if(res){
             console.log("Vote Added"); 
+            upVotes = upVotes + 1;
             console.log(payloadData);
             }
         })

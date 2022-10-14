@@ -82,21 +82,45 @@ router.post('/api/addvote',async (req, res) =>{
     //  console.log(findVoteUser);
 
      const questions = findVoteUser.filter(item => item.questionId == req.body.questionId); //gets questions id
-     const users = questions.filter(item => item.userId == req.body.userId); //gets questions id
+     const users = questions.filter(item => item.userId == req.body.userId); //gets users qs
      console.log("Questions: ",questions);
      console.log("Users: ",users);
+     console.log(users);
      if(users.length === 0){
+
+            const findQuestion = await newQuestionModel.findById(req.body.questionId);
+
+            let upvote = findQuestion.upvotes;
+            let downvote = findQuestion.downvotes;
+
+            if(req.body.vote === 'upvote'){
+                upvote = upvote + 1;
+                voteState = "downvote"
+            }else{
+                downvote = downvote + 1;
+                voteState = "upvote"
+            };
+            
+            const updateQuestion = await newQuestionModel.updateOne(
+                {_id:req.body.questionId},
+                {$set: { 
+                   upvotes: upvote,
+                   downvotes: downvote
+                    }
+                }
+            );
                     // console.log(req.body);
             const newVote = new VoteSchema({
                 vote: req.body.vote, 
                 userId: req.body.userId,
                 questionId: req.body.questionId
             }); 
-            // console.log(newVote);
+            console.log("New vote code");
 
             newVote.save()
             .then(item => {
-                res.json(item)
+                console.log(updateQuestion);
+                res.json([item, updateQuestion])
             })
             .catch(err => {
             res.status(400).json({msg:"There is an error", err}); 
@@ -107,23 +131,31 @@ router.post('/api/addvote',async (req, res) =>{
         //if() they are the same otherwise update
         console.log(users[0]._id);
 
+        console.log(req.body.vote);
         if(users[0].vote === req.body.vote){
-            console.log("delete");
+            console.log("delete:", req.body.vote);
+            console.log({_id:users[0]._id});
+            const findRepVote = await VoteSchema.remove({_id:users[0]._id});
+            res.json(findRepVote);
+
         }else{
-
-            let upvote = 0;
-            let downvote = 0;
-
             const findQuestion = await newQuestionModel.findById(users[0].questionId);
 
-            if(users[0].vote === 'upvote'){
-                upvote = findQuestion.upvote +1;
-                downvote = findQuestion.downvote -1;
+            let upvote = findQuestion.upvotes;
+            let downvote = findQuestion.downvotes;
+            let voteState = users[0].vote;
 
-            }else{
-                upvote = findQuestion.upvote -1;
-                downvote = findQuestion.downvote +1;
+            if(users[0].vote === 'upvote'){
+                upvote = upvote - 1;
+                downvote = downvote +1;
+                voteState ='downvote';
+            }else if(users[0].vote === 'downvote'){
+                downvote = downvote - 1;
+                upvote = upvote + 1;
+                voteState = 'upvote';
             }
+            console.log(upvote);
+            console.log(downvote);
             
             const updateQuestion = await newQuestionModel.updateOne(
                 {_id:users[0].questionId},
@@ -133,14 +165,19 @@ router.post('/api/addvote',async (req, res) =>{
                     }
                 }
             );
-            res.json(updateQuestion);
+
+            const updateVotes = await VoteSchema.updateOne(
+                {_id:users[0]._id},
+                {$set: { 
+                    vote: voteState,
+                    }
+                }
+            );
+            console.log("UpdateVote", updateVotes);
+
+            res.json([updateVotes, updateQuestion]);
         }
-        res.json("Vote Update");
      }
-
-
-
-
 
 });
 
