@@ -9,11 +9,14 @@
     display: block;
     padding: 1rem 2rem; 
     box-sizing: border-box;
+    
+
 }
 
 .question-con-content {
     width: 100%;
     height: auto;
+
 }
 
 .top-block {
@@ -59,7 +62,7 @@
 
 .question-con h4 {
     margin: 0 4px 0 0;
-    color: #000000;
+    color: #2b2b2b;
 }
 
 .question-con p {
@@ -119,7 +122,7 @@
     margin: 5px;
 }
 
-.question-card-icon:hover {
+.delete-button.question-card-icon:hover {
     border-radius: 50px;
     background-color: #EEEEEE;
 }
@@ -132,12 +135,14 @@
 }
 
 .bottom-block small {
-    color: #000000;
+    color: #2b2b2b;
+    margin-top: 40px;
 }
 
 .user-question {
     width: 100%;
     height: auto;
+    cursor: pointer;
 }
 
 .upvote-con {
@@ -148,4 +153,16 @@
 
 a {
     text-decoration: none;
+}
+
+.MuiButtonBase-root.MuiToggleButton-root.Mui-selected.MuiToggleButton-sizeMedium.MuiToggleButton-primary.MuiToggleButtonGroup-grouped.MuiToggleButtonGroup-groupedHorizontal.css-d9c359-MuiButtonBase-root-MuiToggleButton-root{
+    background: none;
+    outline: none !important;
+}
+
+.MuiButtonBase-root.MuiToggleButton-root.MuiToggleButton-sizeMedium.MuiToggleButton-primary.MuiToggleButtonGroup-grouped.MuiToggleButtonGroup-groupedHorizontal.css-d9c359-MuiButtonBase-root-MuiToggleButton-root{
+    outline: none !important;
+    border: none !important;
+    border-radius: 60px;
+    color: #2b2b2b;
 }

@@ -85,8 +85,7 @@ export const IndividualQuestionCard = (props) => {
       console.log("User not logged in");
     } else {
       console.log("user logged in");
-      axios
-        .get("http://localhost:5000/api/userInfo/" + props.userId)
+      axios.get("http://localhost:5000/api/userInfo/" + props.userId)
         .then((res) => {
           let data = res.data;
           setUsername(data.username);

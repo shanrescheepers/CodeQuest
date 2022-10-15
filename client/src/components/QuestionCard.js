@@ -8,6 +8,9 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import { useNavigate } from 'react-router';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import {TbArrowBigTop} from 'react-icons'
 
 const QuestionCard = (props) => {
 
@@ -27,30 +30,56 @@ const QuestionCard = (props) => {
 
 //=====================================================================
 //Upvote and downvote
+    //====================================================================
+    //Format votes
 
-    // const addVote = () => {
-    //     console.log("It works, Whoopieee");
+    let upVotes = props.upvotes;
+    let downVotes = props.downvotes;
 
-    //     let newUpvote = props.upvotes+1;
+const [voteCast, setVoteCast] = useState('');
+const [upVoteCast, setUpvoteCast] = useState(props.upvotes);
+const [downVoteCast, setDownvoteCast] = useState(props.downvotes);
 
-    //     let payload = {
-    //         totalUpvotes: newUpvote   
-    //   }
-    
-    //     let questionId = props.questionId;
+const [arrowImgUp, setArrowImgUp] = useState('Up');
+const [arrowImgDown, setArrowImgDown] = useState('Down');
+  const handleVote = (event, vote) => {
+    setVoteCast(vote);
+    console.log(vote);
 
-    //     axios.patch('http://localhost:5000/api/updateUpvotes/' + questionId, payload)
-    //     .then((res)=> {
-    //         if(res){
-    //         console.log("Question Votes Updated"); 
-    //         }
-    //     })
-    //     .catch(function (error) {
-    //         console.log(error);
-    //     });
-    
-    // };
+    if(vote ==='up'){
+        setUpvoteCast(props.upvotes +1);
+        setDownvoteCast(props.downvotes);
+        setArrowImgUp('UpActive');
+        setArrowImgDown('Down');
+    }else if(vote ==='down'){
+        setDownvoteCast(props.downvotes +1); 
+        setUpvoteCast(props.upvotes);
+        setArrowImgUp('Up');
+        setArrowImgDown('DownActive'); 
+    }else{
+        setDownvoteCast(props.downvotes); 
+        setUpvoteCast(props.upvotes);
+        setArrowImgUp('Up');
+        setArrowImgDown('Down'); 
+    }
+  };
 
+  let displayUpVote = upVoteCast;
+  if(displayUpVote>9){
+    displayUpVote = displayUpVote
+  }else{
+    displayUpVote = '0' + displayUpVote
+  }
+
+  let displayDownVote = downVoteCast;
+  if(displayDownVote>9){
+    displayDownVote = displayDownVote
+  }else{
+    displayDownVote = '0' + displayDownVote
+  }
+ 
+
+//UpVote
     const addVote = () => {
         console.log("It works, Whoopieee");
 
@@ -59,13 +88,11 @@ const QuestionCard = (props) => {
             userId: sessionStorage.getItem('id'),
             questionId: props.questionId
         }
-        // console.log(payloadData);
 
         axios.post('http://localhost:5000/api/addvote', payloadData)
         .then((res)=> {
             if(res){
             console.log("Vote Added"); 
-            upVotes = upVotes + 1;
             console.log(payloadData);
             }
         })
@@ -77,6 +104,8 @@ const QuestionCard = (props) => {
 
     //======================================================================
     //downvote
+
+    const [downClickVote, setDownClickVote] = useState(props.downvotes);
 
     const subtractVote = () => {
         console.log("It works, Whoopieee");
@@ -111,22 +140,7 @@ const QuestionCard = (props) => {
     let desc = (props.description).substring(0,80);
 
 
-    //====================================================================
-    //Format votes
 
-    let upVotes = props.upvotes;
-    if(upVotes>9){
-        upVotes = props.upvotes;
-    }else{
-        upVotes = '0' + upVotes;
-    }
-
-    let downVotes = props.downvotes;
-    if(upVotes>9){
-        downVotes = props.downvotes;
-    }else{
-        downVotes = '0' + downVotes;
-    }
 //=====================================================================
 //User Info
 
@@ -170,6 +184,10 @@ if (year === 1) {
 };
 
 
+const upImgURL = ('Votes/' + arrowImgUp + '.png');
+const downImgURL = ('Votes/' + arrowImgDown + '.png');
+
+
     return (
         <>
         {/* <Link to="/IndividualQuestion"> */}
@@ -197,12 +215,22 @@ if (year === 1) {
                     <div className='divider'></div>
 
                     <div className='bottom-block'>
-                        <div className='arrow-con'>                         
-                            <img className='upvote question-card-icon' onClick={addVote} src={upvote}/>
-                            <small className='upvote-count vote-count'>{upVotes}</small>
+                        <div className='arrow-con'>  
+                        <ToggleButtonGroup
+                        value={voteCast}
+                        onChange={handleVote}
+                          color="primary"
+                          exclusive>                     
+                        <ToggleButton onClick={addVote} value="up">
 
-                            <img className='downvote question-card-icon' onClick={subtractVote} src={downvote}/>
-                            <small className='downvote-count vote-count'>{downVotes}</small>
+                            <img className='upvote question-card-icon' src={upImgURL}/>
+                        </ToggleButton>
+                            <small className='upvote-count vote-count'>{displayUpVote}</small>
+
+                            <ToggleButton onClick={subtractVote} value="down">
+                            <img className='downvote question-card-icon' src={downImgURL}/></ToggleButton>
+                           <small className='downvote-count vote-count'>{displayDownVote}</small>
+                           </ToggleButtonGroup>  
                         </div>
 
                         <small><p>00 Answers</p></small>
