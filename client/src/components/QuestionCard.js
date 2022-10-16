@@ -24,45 +24,237 @@ const QuestionCard = (props) => {
         sessionStorage.setItem('questionId', props.questionId);
     }
 
-    const deleteQuestion = () => {
-        //delete question functionality
-    }
+//=====================================================================
+//Get Current Vote state
+
+const [arrowImgUp, setArrowImgUp] = useState('Up');
+const [arrowImgDown, setArrowImgDown] = useState('Down');
+const [category, setCategory] = useState('');
+
+useEffect(() => {
+      axios.get('http://localhost:5000/api/readvote')
+        .then(res => {
+          let data = res.data;
+         console.log(data);
+        let user = sessionStorage.getItem('id');
+
+        for(let i=0; i<data.length;i++){
+            if(props.questionId === data[i].questionId){
+
+                console.log(user, data[i].userId);
+                if(user === data[i].userId){
+                   if(data[i].vote === 'upvote'){
+                       setArrowImgUp('UpActive');
+                       setArrowImgDown('Down')
+                       setCategory('startUp')
+                   }else if(data[i].vote === 'downvote'){
+                       setArrowImgDown('DownActive')
+                       setArrowImgUp('Up');
+                       setCategory('startDown')
+                };
+                console.log("not happening");
+                
+               }else{
+                   console.log('N/A');
+               }
+
+
+            }else{
+                // console.log('not relevent');
+            }
+
+        }
+
+        })
+         .catch(function (error) {
+            console.log(error);
+        });
+
+    }, []);
+  
+
+
 
 //=====================================================================
 //Upvote and downvote
-    //====================================================================
-    //Format votes
 
-    let upVotes = props.upvotes;
-    let downVotes = props.downvotes;
+let upVotes = props.upvotes;
+let downVotes = props.downvotes;
 
 const [voteCast, setVoteCast] = useState('');
 const [upVoteCast, setUpvoteCast] = useState(props.upvotes);
 const [downVoteCast, setDownvoteCast] = useState(props.downvotes);
 
-const [arrowImgUp, setArrowImgUp] = useState('Up');
-const [arrowImgDown, setArrowImgDown] = useState('Down');
+
   const handleVote = (event, vote) => {
     setVoteCast(vote);
     console.log(vote);
 
-    if(vote ==='up'){
-        setUpvoteCast(props.upvotes +1);
-        setDownvoteCast(props.downvotes);
-        setArrowImgUp('UpActive');
-        setArrowImgDown('Down');
-    }else if(vote ==='down'){
-        setDownvoteCast(props.downvotes +1); 
-        setUpvoteCast(props.upvotes);
-        setArrowImgUp('Up');
-        setArrowImgDown('DownActive'); 
-    }else{
-        setDownvoteCast(props.downvotes); 
-        setUpvoteCast(props.upvotes);
-        setArrowImgUp('Up');
-        setArrowImgDown('Down'); 
-    }
-  };
+    if(category === 'startUp' && arrowImgUp === 'UpActive' && arrowImgDown === 'Down'){
+            if(vote ==='up'){
+                setUpvoteCast(props.upvotes -1);
+                setDownvoteCast(props.downvotes);
+                setArrowImgUp('Up');
+                setArrowImgDown('Down');
+            }else if(vote ==='down'){
+                setDownvoteCast(props.downvotes +1); 
+                setUpvoteCast(props.upvotes-1);
+                setArrowImgUp('Up');
+                setArrowImgDown('DownActive'); 
+            }
+        };
+        if(category === 'startUp' && arrowImgUp === 'Up' && arrowImgDown === 'Down'){
+            if(vote ==='up'){
+                setUpvoteCast(props.upvotes);
+                setDownvoteCast(props.downvotes);
+                setArrowImgUp('UpActive');
+                setArrowImgDown('Down');
+            }else if(vote ==='down'){
+                setDownvoteCast(props.downvotes +1); 
+                setUpvoteCast(props.upvotes-1);
+                setArrowImgUp('Up');
+                setArrowImgDown('DownActive'); 
+            }
+        };
+         if(category === 'startUp' && arrowImgUp === 'Up' && arrowImgDown === 'DownActive'){
+                if(vote ==='up'){
+                    setUpvoteCast(props.upvotes);
+                    setDownvoteCast(props.downvotes);
+                    setArrowImgUp('UpActive');
+                    setArrowImgDown('Down');
+                }else if(vote ==='down'){
+                    setDownvoteCast(props.downvotes); 
+                    setUpvoteCast(props.upvotes-1);
+                    setArrowImgUp('Up');
+                    setArrowImgDown('Down'); 
+                }
+            };
+
+            //start down
+
+            if(category === 'startDown' && arrowImgUp === 'Up' && arrowImgDown === 'Down'){
+                if(vote ==='up'){
+                    setUpvoteCast(props.upvotes+1);
+                    setDownvoteCast(props.downvotes-1);
+                    setArrowImgUp('UpActive');
+                    setArrowImgDown('Down');
+                }else if(vote ==='down'){
+                    setDownvoteCast(props.downvotes); 
+                    setUpvoteCast(props.upvotes);
+                    setArrowImgUp('Up');
+                    setArrowImgDown('DownActive'); 
+                }
+            };
+
+            if(category === 'startDown' && arrowImgUp === 'UpActive' && arrowImgDown === 'Down'){
+                if(vote ==='up'){
+                    setUpvoteCast(props.upvotes-1);
+                    setDownvoteCast(props.downvotes-1);
+                    setArrowImgUp('Up');
+                    setArrowImgDown('Down');
+                    console.log('active to nuet');
+                }else if(vote ==='down'){
+                    setDownvoteCast(props.downvotes); 
+                    setUpvoteCast(props.upvotes);
+                    setArrowImgUp('Up');
+                    setArrowImgDown('DownActive'); 
+                }
+            };
+
+            //start down
+
+             if(category === 'startDown' && arrowImgUp === 'Up' && arrowImgDown === 'DownActive'){
+                    if(vote ==='up'){
+                        setUpvoteCast(props.upvotes+1);
+                        setDownvoteCast(props.downvotes-1);
+                        setArrowImgUp('UpActive');
+                        setArrowImgDown('Down');
+                    }else if(vote ==='down'){
+                        setDownvoteCast(props.downvotes-1); 
+                        setUpvoteCast(props.upvotes);
+                        setArrowImgUp('Up');
+                        setArrowImgDown('Down'); 
+                    }
+                };
+
+            if(category === 'startDown' && arrowImgUp === 'Up' && arrowImgDown === 'Down'){
+                if(vote ==='up'){
+                    setUpvoteCast(props.upvotes+1);
+                    setDownvoteCast(props.downvotes-1);
+                    setArrowImgUp('UpActive');
+                    setArrowImgDown('Down');
+                }else if(vote ==='down'){
+                    setDownvoteCast(props.downvotes); 
+                    setUpvoteCast(props.upvotes);
+                    setArrowImgUp('Up');
+                    setArrowImgDown('DownActive'); 
+                }
+            };
+
+            if(category === 'startDown' && arrowImgUp === 'UpActive' && arrowImgDown === 'Down'){
+                if(vote ==='up'){
+                    setUpvoteCast(props.upvotes-1);
+                    setDownvoteCast(props.downvotes-1);
+                    setArrowImgUp('Up');
+                    setArrowImgDown('Down');
+                    console.log('active to nuet');
+                }else if(vote ==='down'){
+                    setDownvoteCast(props.downvotes); 
+                    setUpvoteCast(props.upvotes);
+                    setArrowImgUp('Up');
+                    setArrowImgDown('DownActive'); 
+                }
+            };
+
+            //start neutral
+
+        if(category === '' && arrowImgUp === 'Up' && arrowImgDown === 'Down'){
+            if(vote ==='up'){
+                setUpvoteCast(props.upvotes+1);
+                setDownvoteCast(props.downvotes);
+                setArrowImgUp('UpActive');
+                setArrowImgDown('Down');
+            }else if(vote ==='down'){
+                setDownvoteCast(props.downvotes+1); 
+                setUpvoteCast(props.upvotes);
+                setArrowImgUp('Up');
+                setArrowImgDown('DownActive'); 
+            }
+        };
+
+        if(category === '' && arrowImgUp === 'UpActive' && arrowImgDown === 'Down'){
+            if(vote ==='up'){
+                setUpvoteCast(props.upvotes);
+                setDownvoteCast(props.downvotes);
+                setArrowImgUp('Up');
+                setArrowImgDown('Down');
+                console.log('active to nuet');
+            }else if(vote ==='down'){
+                setDownvoteCast(props.downvotes+1); 
+                setUpvoteCast(props.upvotes);
+                setArrowImgUp('Up');
+                setArrowImgDown('DownActive'); 
+            }
+        };
+
+             if(category === '' && arrowImgUp === 'Up' && arrowImgDown === 'DownActive'){
+                    if(vote ==='up'){
+                        setUpvoteCast(props.upvotes+1);
+                        setDownvoteCast(props.downvotes);
+                        setArrowImgUp('UpActive');
+                        setArrowImgDown('Down');
+                    }else if(vote ==='down'){
+                        setDownvoteCast(props.downvotes); 
+                        setUpvoteCast(props.upvotes);
+                        setArrowImgUp('Up');
+                        setArrowImgDown('Down'); 
+                    }
+                };
+        
+   
+  
+};
+  //format votes
 
   let displayUpVote = upVoteCast;
   if(displayUpVote>9){
@@ -102,8 +294,8 @@ const [arrowImgDown, setArrowImgDown] = useState('Down');
 
     };
 
-    //======================================================================
-    //downvote
+//======================================================================
+//downvote
 
     const [downClickVote, setDownClickVote] = useState(props.downvotes);
 
@@ -128,14 +320,14 @@ const [arrowImgDown, setArrowImgDown] = useState('Down');
         });
     }
 
-    //===================================================================
-    //Format Date date
+//===================================================================
+//Format Date date
     let date = props.date;
     let formatDate = moment(date).format('DD MMMM YYYY');
 
 
-    //====================================================================
-    //Cut descirption
+ //====================================================================
+//Cut descirption
 
     let desc = (props.description).substring(0,80);
 
@@ -202,7 +394,7 @@ const downImgURL = ('Votes/' + arrowImgDown + '.png');
                             </div>
                         </div>
 
-                        <div className='delete-button question-card-icon' onClick={deleteQuestion}>
+                        <div className='delete-button question-card-icon'>
                         <OutlinedFlagIcon fontSize="large"/>
                         </div>
                     </div>

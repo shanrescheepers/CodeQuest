@@ -200,6 +200,13 @@ router.post('/api/addvote',async (req, res) =>{
 
 });
 
+//===============================================================================
+//Read Votes
+
+router.get('/api/readvote', async (req, res) =>{
+    const findVote = await VoteSchema.find();
+    res.json(findVote);
+});
 
 
 module.exports = router;
