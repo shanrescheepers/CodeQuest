@@ -58,16 +58,16 @@
     border-radius: 20px;
     height: auto;
     background-color: #dff1fe;
-    display: flex;
+
     padding: 1rem 2rem;
     box-sizing: border-box;
     margin-top: 2rem;
 }
-
-.code_text p {
-    width: 100%;
-    height: auto;
-    word-wrap: break-word;
+/* text to code css */
+.code-converted-text{
+  font-size: 10px;
+  word-wrap: break-word;
+ height: auto;
 }
 
 .btn_answer_question {

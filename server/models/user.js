@@ -34,6 +34,9 @@ const UserSchema = mongoose.Schema({
     profileimage: {
         type: String,
         // required: true
+    },
+    bannedUser: {
+        type: String,
     }
     // The moment you post a question/ or a answer, it must update here
 });
