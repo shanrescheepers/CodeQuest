@@ -83,8 +83,8 @@ router.post('/api/addvote',async (req, res) =>{
 
      const questions = findVoteUser.filter(item => item.questionId == req.body.questionId); //gets questions id
      const users = questions.filter(item => item.userId == req.body.userId); //gets users qs
-     console.log("Questions: ",questions);
-     console.log("Users: ",users);
+    //  console.log("Questions: ",questions);
+    //  console.log("Users: ",users);
 
     //  const findQuestion = await newQuestionModel.findById(users[0].questionId);
 
@@ -118,7 +118,7 @@ router.post('/api/addvote',async (req, res) =>{
                 userId: req.body.userId,
                 questionId: req.body.questionId
             }); 
-            console.log("New vote code");
+            // console.log("New vote code");
 
             newVote.save()
             .then(item => {
@@ -173,8 +173,8 @@ router.post('/api/addvote',async (req, res) =>{
                 upvote = upvote + 1;
                 voteState = 'upvote';
             }
-            console.log(upvote);
-            console.log(downvote);
+            // console.log(upvote);
+            // console.log(downvote);
             
             const updateQuestion = await newQuestionModel.updateOne(
                 {_id:users[0].questionId},
@@ -192,7 +192,7 @@ router.post('/api/addvote',async (req, res) =>{
                     }
                 }
             );
-            console.log("UpdateVote", updateVotes);
+            // console.log("UpdateVote", updateVotes);
 
             res.json([updateVotes, updateQuestion]);
         }

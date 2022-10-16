@@ -273,7 +273,7 @@ const [downVoteCast, setDownvoteCast] = useState(props.downvotes);
 
 //UpVote
     const addVote = () => {
-        console.log("It works, Whoopieee");
+        // console.log("It works, Whoopieee");
 
         let payloadData={
             vote: 'upvote',
@@ -284,7 +284,7 @@ const [downVoteCast, setDownvoteCast] = useState(props.downvotes);
         axios.post('http://localhost:5000/api/addvote', payloadData)
         .then((res)=> {
             if(res){
-            console.log("Vote Added"); 
+            // console.log("Vote Added"); 
             console.log(payloadData);
             }
         })
@@ -300,14 +300,14 @@ const [downVoteCast, setDownvoteCast] = useState(props.downvotes);
     const [downClickVote, setDownClickVote] = useState(props.downvotes);
 
     const subtractVote = () => {
-        console.log("It works, Whoopieee");
+        // console.log("It works, Whoopieee");
 
         let payloadData={
             vote: 'downvote',
             userId: sessionStorage.getItem('id'),
             questionId: props.questionId
         }
-        console.log(payloadData);
+        // console.log(payloadData);
 
         axios.post('http://localhost:5000/api/addvote', payloadData)
         .then((res)=> {
