@@ -374,6 +374,9 @@ const IndividualQuestion = () => {
 
           {/*=================*/}
         </div>
+
+        <h1>Answers</h1>
+
         <div className="">{answer}</div>
       </div>
     </div>
