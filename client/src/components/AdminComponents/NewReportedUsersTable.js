@@ -48,11 +48,11 @@ export default function NewReportedUserTable() {
 
     const removeUserFromFlagTable = (id) => {
         setIgnoreUserModal(<IgnoreUserModal close={setIgnoreUserModal} id={id} />)
-        console.log(id);
+        // console.log(id);
     }
 
     const deleteUser = (id) => {
-        console.log(id);
+        // console.log(id);
         setDeleteUserModal(<DeleteUserModalAdmin
             close={setDeleteUserModal} id={id}
         />)

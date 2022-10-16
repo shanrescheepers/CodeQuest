@@ -14,9 +14,9 @@ const FlagModal = (props) => {
     const userId = sessionStorage.getItem("id");
 
     const flag = () => {
-        console.log(props.questionId);
-        console.log(props.userId);
-        console.log(reasonValue);
+        // console.log(props.questionId);
+        // console.log(props.userId);
+        // console.log(reasonValue);
 
         let payloadData = new FormData();
 

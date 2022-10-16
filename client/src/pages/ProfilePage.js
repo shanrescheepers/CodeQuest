@@ -58,7 +58,7 @@ const ProfilePage = () => {
 
         // Question Counter for Badges
         // setQuestionCount(questions.length);
-        console.log(questionCount);
+        // console.log(questionCount);
 
         
       

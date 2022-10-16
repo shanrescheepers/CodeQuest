@@ -53,9 +53,9 @@ const RegisterPage = (props) => {
       const [activeButton, setActiveButton] = useState();
 
       function profilePicValue(value){
-        console.log(value);
+        // console.log(value);
         setActiveButton(value) //update your current active button state 
-        console.log(activeButton);
+        // console.log(activeButton);
     }
 
 //=====================================================================================
@@ -93,12 +93,12 @@ const addNewUser = (e) => {
         profileimage: activeButton,
     }
 
-    console.log(payload);
+    // console.log(payload);
 
     Axios.post('http://localhost:5000/api/adduser', payload)
     .then((res)=> {
         if(res){
-        console.log("User Successfully Added");
+        // console.log("User Successfully Added");
         console.log(res);
         sessionStorage.setItem('id', res.data._id);
         sessionStorage.setItem('token', res.data.username);
@@ -107,7 +107,7 @@ const addNewUser = (e) => {
         }
     })
     .catch(function (error) {
-        console.log("Could not add user: Error is:" + error);
+        // console.log("Could not add user: Error is:" + error);
     });
 } 
 

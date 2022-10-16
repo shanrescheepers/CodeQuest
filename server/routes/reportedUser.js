@@ -19,7 +19,7 @@ router.get('/api/allReportedUsers', async (req, res) => {
 // DELETE ONE : this needs some thinking because a user can get flagged by many other users
 // Remove From List Function on Admin Page
 router.delete('/api/deleteReportedUser/:id', async (req, res) => {
-    console.log("Deleted the user on flagged");
+    // console.log("Deleted the user on flagged");
     // console.log(req.params);
     await ReportedUser.deleteMany({ reportedUserId: req.params.id })
         .then(response => res.json(response))
@@ -28,7 +28,7 @@ router.delete('/api/deleteReportedUser/:id', async (req, res) => {
 
 // To Report A User, One must First , ADD a User (to report, obviouslay ay ay).
 router.post('/api/addReportedUser', (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const newReportedUser = new ReportedUser({
         reportingUserId: req.body.reportingUserId,
         reportedUserId: req.body.reportedUserId,
@@ -36,7 +36,7 @@ router.post('/api/addReportedUser', (req, res) => {
         questionId: req.body.questionId,
         // dateflagged doesn't get passed through
     });
-    console.log("New Reported User (in violation of CodeQuest ethichs and principles)", newReportedUser);
+    // console.log("New Reported User (in violation of CodeQuest ethichs and principles)", newReportedUser);
 
     newReportedUser.save()
         .then(item => {

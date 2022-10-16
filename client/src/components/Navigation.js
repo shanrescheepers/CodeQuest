@@ -126,10 +126,10 @@ const Navigation = () => {
     const userId = sessionStorage.getItem("id");
 
     if (userId == null) {
-      console.log("User not logged in")
+    //   console.log("User not logged in")
 
     } else {
-      console.log("user logged in")
+    //   console.log("user logged in")
       Axios.get('http://localhost:5000/api/userInfo/' + userId)
         .then(res => {
           let data = res.data;
@@ -137,7 +137,7 @@ const Navigation = () => {
           setRank(data.rank);
           setprofileImg(data.profileimage);
           setYear(data.yearlevel);
-          console.log(data.rank)
+        //   console.log(data.rank)
         })
     }
     // localStorage.clear();
@@ -147,7 +147,7 @@ const Navigation = () => {
   //get profile image path
   const imgURL = ('Avatars/' + profileImg + '.png');
 
-  console.log(year);
+//   console.log(year);
   let bgColor = '';
 
   if (year === 1) {

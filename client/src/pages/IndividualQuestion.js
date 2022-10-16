@@ -34,7 +34,7 @@ const IndividualQuestion = () => {
       .then((res) => {
         let questionData = res.data;
         let renderQuestions = questionData.map((item) => {
-          console.log(item);
+        //   console.log(item);
 
           if (item._id == sessionStorage.getItem("questionId")) {
 
@@ -100,11 +100,11 @@ const IndividualQuestion = () => {
 
   /*====================== */
   function AnswerQuestion() {
-    console.log("something");
+    // console.log("something");
     $(".answer_question").fadeIn();
   }
   const HideAnswer = () => {
-    console.log("something");
+    // console.log("something");
     $(".answer_question").fadeOut();
   };
 
@@ -247,11 +247,11 @@ const IndividualQuestion = () => {
         if (res) {
           //show post confirmation modal
           setPostConfirmation(<QuestionAdded close={setPostConfirmation} />);
-          console.log("New answer Added. Slayyy!");
+        //   console.log("New answer Added. Slayyy!");
         }
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   };
 

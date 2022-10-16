@@ -25,7 +25,7 @@ router.get('/api/userInfo/:id', async (req, res) => {
 
 router.post('/api/adduser', (req, res) => {
 
-    console.log(req.body);
+    // console.log(req.body);
     const newUser = new UserSchema({
         username: req.body.username,
         email: req.body.email,
@@ -38,11 +38,11 @@ router.post('/api/adduser', (req, res) => {
 
 
     });
-    console.log("new user", newUser);
+    // console.log("new user", newUser);
 
     newUser.save()
         .then(item => {
-            console.log("Item log:", item);
+            // console.log("Item log:", item);
             res.json(item)
         })
         .catch(err => {
@@ -62,7 +62,7 @@ router.post('/api/loginUser', async (req, res) => {
     const findUser = await UserSchema.findOne({
         email: req.body.email,
     });
-    console.log(findUser);
+    // console.log(findUser);
 
     let userId = findUser._id;
     if (findUser) {
@@ -89,8 +89,8 @@ router.post('/api/loginUser', async (req, res) => {
 // DELETE ONE USER
 router.delete("/api/deleteUser/:id", async (req, res) => {
 
-    console.log("User Deleted");
-    console.log(req.params);
+    // console.log("User Deleted");
+    // console.log(req.params);
 
     await UserSchema.findByIdAndDelete(req.params.id)
         .then(response => res.json(response))

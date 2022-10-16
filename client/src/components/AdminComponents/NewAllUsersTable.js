@@ -46,7 +46,7 @@ export default function NewAllUsersTable() {
     const [deleteUserModal, setDeleteUserModal] = useState();
     // Delete user
     const deleteUser = (id) => {
-        console.log(id);
+        // console.log(id);
         setDeleteUserModal(<DeleteUserModalAdmin
             close={setDeleteUserModal} id={id}
         />)

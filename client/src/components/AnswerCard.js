@@ -21,7 +21,7 @@ export const AnswerCard = (props) => {
   const navigate = useNavigate();
 
   function AnswerQuestion() {
-    console.log("something");
+    // console.log("something");
     $(".answer_question").fadeIn();
   }
   //navigate to individual question page
@@ -103,7 +103,7 @@ export const AnswerCard = (props) => {
           setRank(data.rank);
           setprofileImg(data.profileimage);
           setYear(data.yearlevel);
-          console.log(data.rank);
+        //   console.log(data.rank);
 
           let year = data.yearlevel;
           let bgColor = '';
@@ -121,17 +121,17 @@ export const AnswerCard = (props) => {
     }
   }, []);
 
-  console.log(questionColor);
+//   console.log(questionColor);
 
   //get profile image path
   const imgURL = "Avatars/" + profileImg + ".png";
-  console.log(year);
+//   console.log(year);
   
-  console.log(
-    "over here" +
-      ".../server/answerScreenshots/" +
-      props.screenshots[0].filename
-  );
+//   console.log(
+//     "over here" +
+//       ".../server/answerScreenshots/" +
+//       props.screenshots[0].filename
+//   );
   const s = "http://localhost:5000/answerScreenshots/" + props.screenshots[0].filename;
 
   return (

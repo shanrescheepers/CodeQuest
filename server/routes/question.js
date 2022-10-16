@@ -12,7 +12,7 @@ const questionScreenshotStorage = multer.diskStorage({
         cb(null, './questionScreenshots');
       },
       filename: (req, file, cb) => {
-        console.log(file);
+        // console.log(file);
         cb(null, Date.now() + path.extname(file.originalname));
     }
 })
@@ -22,8 +22,8 @@ const uploadQuestionScreenshots = multer({ storage: questionScreenshotStorage })
 router.post('/api/newquestion', uploadQuestionScreenshots.array('screenshots'), (req, res, next) => {
 
     const data = JSON.parse(req.body.information);
-    console.log(data);
-    console.log(req.files);
+    // console.log(data);
+    // console.log(req.files);
 
     const newQuestion = new newQuestionModel({
         userId: data.userId,

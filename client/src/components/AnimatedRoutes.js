@@ -38,10 +38,10 @@ function AnimatedRoutes() {
   useEffect(() => {
     const userId = sessionStorage.getItem("id");
     if (userId == null) {
-      console.log("User not logged in")
+    //   console.log("User not logged in")
 
     } else {
-      console.log("user logged in")
+    //   console.log("user logged in")
       Axios.get('http://localhost:5000/api/userInfo/' + userId)
         .then(res => {
           let data = res.data;

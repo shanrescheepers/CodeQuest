@@ -19,7 +19,7 @@ const CatLottie = () => {
 
         animation.onComplete = function () {
 
-            console.log("complete")
+            // console.log("complete")
             navigate('/FeedPage');
         }
     }, []);

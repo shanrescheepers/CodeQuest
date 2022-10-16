@@ -25,8 +25,8 @@ const DeleteAccountModal = (props) => {
         Axios.get('http://localhost:5000/api/userInfo/' + activeUser)
             .then(res => {
                 let userData = res.data;
-                console.log(userData._id);
-                console.log(activeUser);
+                // console.log(userData._id);
+                // console.log(activeUser);
 
             
                     if (activeUser === userData._id) {
@@ -35,14 +35,14 @@ const DeleteAccountModal = (props) => {
                                 if (res) {
                                     navigate('/');
                                     sessionStorage.clear();
-                                    console.log(res);
+                                    // console.log(res);
                                 }
                             })
                             .catch(function (error) {
-                                console.log(error);
+                                // console.log(error);
                             });
 
-                        console.log("Account Deleted");
+                        // console.log("Account Deleted");
                     }
             });
 

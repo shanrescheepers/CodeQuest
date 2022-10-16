@@ -63,16 +63,16 @@ const LoginPage = (props) => {
       email: formValues['email'],
       password: formValues['password']
     }
-    console.log(payload);
+    // console.log(payload);
 
     Axios.post('http://localhost:5000/api/loginUser', payload)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (!res.data) {
           alert('Bad request');
         } else {
           if (res.data.user) {
-            console.log(res);
+            // console.log(res);
             sessionStorage.setItem('id', res.data.id);
             sessionStorage.setItem('token', res.data.user);
             sessionStorage.setItem('email', formValues['email']);
@@ -82,12 +82,12 @@ const LoginPage = (props) => {
             setEditModal(
               <CantLoginModal close={setEditModal} />
             )
-            console.log("can't log in");
+            // console.log("can't log in");
           }
         }
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       })
   }
   return (
