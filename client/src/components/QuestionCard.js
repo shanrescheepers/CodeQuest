@@ -9,6 +9,9 @@ import axios from 'axios';
 import moment from 'moment';
 import { useNavigate } from 'react-router';
 import FlagModal from '../modals/FlagModal';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import {TbArrowBigTop} from 'react-icons'
 
 const QuestionCard = (props) => {
 
@@ -411,14 +414,23 @@ const downImgURL = ('Votes/' + arrowImgDown + '.png');
                     </div>
 
                     <div className='divider' onClick={() => goToIndividualQuestion()}></div>
-
                     <div className='bottom-block'>
-                        <div className='arrow-con'>
-                            <img className='upvote question-card-icon' onClick={addVote} src={upvote} />
-                            <small className='upvote-count vote-count'>{upVotes}</small>
+                        <div className='arrow-con'>  
+                        <ToggleButtonGroup
+                        value={voteCast}
+                        onChange={handleVote}
+                          color="primary"
+                          exclusive>                     
+                        <ToggleButton onClick={addVote} value="up">
 
-                            <img className='downvote question-card-icon' onClick={subtractVote} src={downvote} />
-                            <small className='downvote-count vote-count'>{downVotes}</small>
+                            <img className='upvote question-card-icon' src={upImgURL}/>
+                        </ToggleButton>
+                            <small className='upvote-count vote-count'>{displayUpVote}</small>
+
+                            <ToggleButton onClick={subtractVote} value="down">
+                            <img className='downvote question-card-icon' src={downImgURL}/></ToggleButton>
+                           <small className='downvote-count vote-count'>{displayDownVote}</small>
+                           </ToggleButtonGroup>  
                         </div>
 
                         <small><p>00 Answers</p></small>
