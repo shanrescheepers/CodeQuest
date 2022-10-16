@@ -1,8 +1,5 @@
 import '../css/QuestionCard.css';
-import profilePic from '../assets/homeAssets/profile-pic.png'
 import { Link } from 'react-router-dom';
-import upvote from '../assets/questionCardAssets/upvote.png';
-import downvote from '../assets/questionCardAssets/downvote.png';
 import OutlinedFlagIcon from '@mui/icons-material/OutlinedFlag';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -11,7 +8,6 @@ import { useNavigate } from 'react-router';
 import FlagModal from '../modals/FlagModal';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import {TbArrowBigTop} from 'react-icons'
 
 const QuestionCard = (props) => {
 
@@ -49,10 +45,13 @@ useEffect(() => {
         for(let i=0; i<data.length;i++){
             if(props.questionId === data[i].questionId){
 
-                console.log(user, data[i].userId);
+                // console.log(user, data[i].userId);
                 if(user === data[i].userId){
+                    console.log("should work");
                    if(data[i].vote === 'upvote'){
                        setArrowImgUp('UpActive');
+                       
+                
                        setArrowImgDown('Down')
                        setCategory('startUp')
                    }else if(data[i].vote === 'downvote'){
@@ -305,7 +304,7 @@ const [downVoteCast, setDownvoteCast] = useState(props.downvotes);
 //======================================================================
 //downvote
 
-    const [downClickVote, setDownClickVote] = useState(props.downvotes);
+
 
     const subtractVote = () => {
         // console.log("It works, Whoopieee");
@@ -363,7 +362,7 @@ useEffect(() => {
         setRank(data.rank);
         setprofileImg(data.profileimage);
         setYear(data.yearlevel);
-        console.log(data.rank)
+        // console.log(data.rank)
       })
   }
   // localStorage.clear();
@@ -372,7 +371,7 @@ useEffect(() => {
 //get profile image path
 const imgURL = ('Avatars/' + profileImg + '.png');
 
-console.log(year);
+// console.log(year);
 let bgColor = '';
 
 if (year === 1) {
