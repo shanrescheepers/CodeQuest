@@ -173,8 +173,6 @@ export const AnswerCard = (props) => {
 
                 <img className='flag question-card-icon' onClick={addVote} src={flag}/>
             </div>
-
-            <small><p>00 Answers</p></small>
         </div>
 
       </div>
