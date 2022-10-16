@@ -10,19 +10,21 @@ import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import moment from "moment";
+import Highlight from 'react-highlight';
+import "../../node_modules/highlight.js/styles/solarized-dark.css";
 
 export const IndividualQuestionCard = (props) => {
-    const [index, setIndex] = useState(0);
-    const qScreenshots = props.screenshots;
+  const [index, setIndex] = useState(0);
+  const qScreenshots = props.screenshots;
 
-    console.log(qScreenshots);
+  console.log(qScreenshots);
 
-    let screenshots = [];    
+  let screenshots = [];
 
-    for (let i = 0; i < qScreenshots.length; i++){
-        let URLs = 'http://localhost:5000/questionScreenshots/' + qScreenshots[i].filename;
-        screenshots.push(URLs);
-    }        
+  for (let i = 0; i < qScreenshots.length; i++) {
+    let URLs = 'http://localhost:5000/questionScreenshots/' + qScreenshots[i].filename;
+    screenshots.push(URLs);
+  }
 
   function AnswerQuestion() {
     // console.log("something");
@@ -89,9 +91,9 @@ export const IndividualQuestionCard = (props) => {
 
   useEffect(() => {
     if (props.userId == null) {
-    //   console.log("User not logged in");
+      //   console.log("User not logged in");
     } else {
-    //   console.log("user logged in");
+      //   console.log("user logged in");
       axios
         .get("http://localhost:5000/api/userInfo/" + props.userId)
         .then((res) => {
@@ -100,7 +102,7 @@ export const IndividualQuestionCard = (props) => {
           setRank(data.rank);
           setprofileImg(data.profileimage);
           setYear(data.yearlevel);
-        //   console.log(data.rank);
+          //   console.log(data.rank);
         });
     }
     // localStorage.clear();
@@ -109,7 +111,7 @@ export const IndividualQuestionCard = (props) => {
   //get profile image path
   const imgURL = "Avatars/" + profileImg + ".png";
 
-//   console.log(year);
+  //   console.log(year);
   let bgColor = "";
 
   if (year === 1) {
@@ -147,49 +149,52 @@ export const IndividualQuestionCard = (props) => {
         <p>{props.description}</p>
       </div>
 
-        <div className="slideshow">
-            <div className="slideshow-slider" style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
-                {screenshots.map((screenshot, index) => (
-                    <div className="slide" key={index}>
-                        <img src={screenshot} className="slide-img"/>
-                    </div>
-                ))}
+      <div className="slideshow">
+        <div className="slideshow-slider" style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
+          {screenshots.map((screenshot, index) => (
+            <div className="slide" key={index}>
+              <img src={screenshot} className="slide-img" />
             </div>
-
-            <div className="slideshow-dots">
-                {screenshots.map((_, idx) => (
-                    <div key={idx} className={`slideshow-dot${index === idx ? " active" : ""}`}
-                        onClick={() => {
-                            setIndex(idx);
-                        }}>    
-                    </div>
-                ))}
-            </div>
+          ))}
         </div>
 
+        <div className="slideshow-dots">
+          {screenshots.map((_, idx) => (
+            <div key={idx} className={`slideshow-dot${index === idx ? " active" : ""}`}
+              onClick={() => {
+                setIndex(idx);
+              }}>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div className="code_text">
-        <p>{props.code}</p>
+        {/* Code Converted Text Here */}
+        <Highlight autodetect className="code-converted-text">
+          {props.code}
+        </Highlight>
       </div>
 
       <div className='divider'></div>
 
       <div className="answer_question_btn">
         <div className='bottom-block'>
-            <div className='arrow-con'>                         
-                <img className='upvote question-card-icon' onClick={UpVote} src={UpVote}/>
-                <small className='upvote-count vote-count'>{upVotes}</small>
+          <div className='arrow-con'>
+            <img className='upvote question-card-icon' onClick={UpVote} src={UpVote} />
+            <small className='upvote-count vote-count'>{upVotes}</small>
 
-                <img className='downvote question-card-icon' onClick={subtractVote} src={DownVote}/>
-                <small className='downvote-count vote-count'>{downVotes}</small>
+            <img className='downvote question-card-icon' onClick={subtractVote} src={DownVote} />
+            <small className='downvote-count vote-count'>{downVotes}</small>
 
-                <img className='flag question-card-icon' src={flagQuestion}/>
-            </div>
+            <img className='flag question-card-icon' src={flagQuestion} />
+          </div>
 
-            <button
-                onClick={() => AnswerQuestion()}
-                className="btn_answer_question">
-                Answer Question
-            </button>
+          <button
+            onClick={() => AnswerQuestion()}
+            className="btn_answer_question">
+            Answer Question
+          </button>
         </div>
       </div>
     </div>
