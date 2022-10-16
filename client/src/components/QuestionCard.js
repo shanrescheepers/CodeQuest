@@ -25,7 +25,7 @@ const QuestionCard = (props) => {
 
 
     const flagQuestion = () => {
-        setFlagModal(<FlagModal close={setFlagModal} id={props.id} />)
+        setFlagModal(<FlagModal close={setFlagModal} id={props.id} questionId={props.questionId} userId={props.userId} />)
     }
 
     const addVote = () => {
