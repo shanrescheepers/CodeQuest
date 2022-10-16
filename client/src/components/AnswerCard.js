@@ -121,18 +121,8 @@ export const AnswerCard = (props) => {
     }
   }, []);
 
-//   console.log(questionColor);
-
   //get profile image path
   const imgURL = "Avatars/" + profileImg + ".png";
-//   console.log(year);
-  
-//   console.log(
-//     "over here" +
-//       ".../server/answerScreenshots/" +
-//       props.screenshots[0].filename
-//   );
-  const s = "http://localhost:5000/answerScreenshots/" + props.screenshots[0].filename;
 
   return (
     <div className="show_answered_con" style={{backgroundColor:questionColor}}>
