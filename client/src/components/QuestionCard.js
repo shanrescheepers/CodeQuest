@@ -413,23 +413,27 @@ const downImgURL = ('Votes/' + arrowImgDown + '.png');
                     </div>
 
                     <div className='divider' onClick={() => goToIndividualQuestion()}></div>
+                    
                     <div className='bottom-block'>
                         <div className='arrow-con'>  
                         <ToggleButtonGroup
                         value={voteCast}
                         onChange={handleVote}
                           color="primary"
-                          exclusive>                     
+                          exclusive
+                          sx={{display: 'flex', alignItems: 'center'}}>                     
                         <ToggleButton onClick={addVote} value="up">
-
                             <img className='upvote question-card-icon' src={upImgURL}/>
                         </ToggleButton>
+
                             <small className='upvote-count vote-count'>{displayUpVote}</small>
 
-                            <ToggleButton onClick={subtractVote} value="down">
-                            <img className='downvote question-card-icon' src={downImgURL}/></ToggleButton>
-                           <small className='downvote-count vote-count'>{displayDownVote}</small>
-                           </ToggleButtonGroup>  
+                        <ToggleButton onClick={subtractVote} value="down">
+                            <img className='downvote question-card-icon' src={downImgURL}/>
+                        </ToggleButton>
+
+                            <small className='downvote-count vote-count'>{displayDownVote}</small>
+                        </ToggleButtonGroup>  
                         </div>
 
                         <small><p>00 Answers</p></small>
