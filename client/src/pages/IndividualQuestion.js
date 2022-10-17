@@ -75,7 +75,9 @@ const IndividualQuestion = () => {
       .then((res) => {
         let questionData = res.data;
         let renderAnswers = questionData.map((item) => {
+         
           if (item.questionId == sessionStorage.getItem("questionId")) {
+            console.log(item._id);
             return (
               <AnswerCard
                 key={item._id}
