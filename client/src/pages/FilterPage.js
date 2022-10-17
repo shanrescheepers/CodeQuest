@@ -1,22 +1,30 @@
 import React from "react";
-import Button from "@mui/material/Button";
+
+import "../css/NewQuestion.css";
+import "../css/ResultPage.css";
+import { Button } from "@mui/material";
+import headerImg from "../assets/homeAssets/header-img.png";
 import QuestionCard from "../components/QuestionCard";
-import AnswerCard from "../components/AnswerCard";
+import { motion } from "framer-motion";
+
 import Helmet from "react-helmet";
+import axios from "axios";
+import Navigation from "../components/Navigation";
+import { useState, useEffect } from "react";
+import { ArrowBackRounded } from "@mui/icons-material";
+import { color } from "@mui/system";
+
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { NavLink } from "react-router-dom";
-import axios from "axios";
-import { useState, useEffect } from "react";
+
 import { useNavigate } from "react-router-dom";
 
-const QuestionsPage = () => {
+const ResultPage = (props) => {
   const [age, setAge] = React.useState("");
-
-  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -24,34 +32,97 @@ const QuestionsPage = () => {
     sessionStorage.setItem("filter", event.target.value);
     navigate("/FilterPage");
     window.location.reload(false);
-
     console.log(event.target.value);
   };
+  let searchText = sessionStorage.getItem("SearchText");
+  const buttonStyle = {
+    backgroundColor: "#FF7900",
+    borderRadius: "50px",
+    height: "42px",
+    marginTop: "16px",
+    width: "auto",
+    padding: "16px 24px",
+    fontFamily: "Open Sans",
+    textTransform: "capitalize",
+    "&:hover": {
+      background: "FF7900",
+      color: "#2B2B2B",
+    },
+  };
 
-  //========================================================================================
-  //Display All Questions
-  //read products
+  const secondaryButtonStyle = {
+    backgroundColor: "#2B2B2B",
+    borderRadius: "50px",
+    height: "45px",
+    width: "auto",
+    padding: "16px 24px",
+    fontFamily: "Open Sans",
+    textTransform: "capitalize",
+    "&:hover": {
+      background: "FF7900",
+      color: "#2B2B2B",
+    },
+  };
+  const navigate = useNavigate();
+
+  const askNewQuestion = () => {
+    navigate("/newquestion");
+  };
+
+  const goBack = () => {
+    sessionStorage.removeItem("questionId");
+    navigate(-1);
+  };
   const [questions, setQuestions] = useState();
   const [updateQuestions, setUpdateQuestions] = useState();
+
+  let getFilterText = sessionStorage.getItem("filter");
 
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/readquestions")
       .then((res) => {
         let questionData = res.data;
-        let renderQuestions = questionData.map((item) => (
-          <QuestionCard
-            key={item._id}
-            questionId={item._id}
-            date={item.datePosted}
-            title={item.title}
-            description={item.description}
-            upvotes={item.upvotes}
-            downvotes={item.downvotes}
-            userId={item.userId}
-            editRender={setUpdateQuestions}
-          />
-        ));
+        let idArray = [];
+        let tagsArray = questionData.map((item) => {
+          item.tags.map((tag) => {
+            if (tag.toLowerCase() == getFilterText.toLowerCase()) {
+              idArray.push(item._id);
+            }
+
+            return tag;
+          });
+        });
+
+        console.log(idArray);
+
+        for (let x = 0; x < questionData.length; x++) {
+          console.log();
+
+          for (let y = 0; y < idArray.length; y++) {
+            if (questionData[x]._id == idArray[y]) {
+            }
+          }
+        }
+        let renderQuestions = questionData.map((item) => {
+          for (let y = 0; y < idArray.length; y++) {
+            if (item._id == idArray[y]) {
+              return (
+                <QuestionCard
+                  key={item._id}
+                  questionId={item._id}
+                  date={item.datePosted}
+                  title={item.title}
+                  description={item.description}
+                  upvotes={item.upvotes}
+                  downvotes={item.downvotes}
+                  userId={item.userId}
+                  editRender={setUpdateQuestions}
+                />
+              );
+            }
+          }
+        });
         setQuestions(renderQuestions);
         setUpdateQuestions(false);
       })
@@ -167,5 +238,4 @@ const QuestionsPage = () => {
     </div>
   );
 };
-
-export default QuestionsPage;
+export default ResultPage;

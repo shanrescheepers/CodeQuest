@@ -19,6 +19,8 @@ import Footer from '../components/Footer'
 import { useEffect, useNavigate } from 'react';
 import Axios from 'axios';
 import FourOhFour from '../pages/FourohFour';
+import ResultPage from "../pages/ResultPage";
+import FilterPage from "../pages/FilterPage";
 
 function AnimatedRoutes() {
 
@@ -65,6 +67,9 @@ function AnimatedRoutes() {
         <Routes location={location} key={location.pathname} >
           <Route path="/" element={<LoginPage funcNav={setShowNav} />} />
           <Route path="/RegisterPage" element={<RegisterPage funcNav={setShowNav} />} />
+
+          <Route path="SearchPage" element={<ResultPage />} />
+          <Route path="FilterPage" element={<FilterPage />} />
 
           {getAdminPermission(rank) &&
             <Route path="/AdminPage" element={<AdminPage />} />}
