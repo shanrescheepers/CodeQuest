@@ -83,10 +83,6 @@ router.post('/api/addvote',async (req, res) =>{
 
      const questions = findVoteUser.filter(item => item.questionId == req.body.questionId); //gets questions id
      const users = questions.filter(item => item.userId == req.body.userId); //gets users qs
-    //  console.log("Questions: ",questions);
-    //  console.log("Users: ",users);
-
-    //  const findQuestion = await newQuestionModel.findById(users[0].questionId);
 
      if( users === 'undefined' || users.length === 0){
 

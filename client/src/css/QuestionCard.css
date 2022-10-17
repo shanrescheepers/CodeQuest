@@ -170,3 +170,9 @@ a {
     border-radius: 60px;
     color: #2b2b2b;
 }
+
+.MuiButtonBase-root.MuiToggleButton-root.MuiToggleButton-sizeMedium.MuiToggleButton-standard.MuiToggleButtonGroup-grouped.MuiToggleButtonGroup-groupedHorizontal.css-ueukts-MuiButtonBase-root-MuiToggleButton-root:hover{
+    border-radius: 50px;
+    background-color: #EEEEEE;
+    
+}
