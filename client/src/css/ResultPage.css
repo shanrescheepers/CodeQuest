@@ -1,0 +1,19 @@
+.title-con-search {
+    padding: 0 4rem;
+    box-sizing: border-box;
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 32px;
+  }
+  .title-con-search h2 {
+    color: black;
+  }
+  .backArrow-search {
+    margin-top: 40px;
+    margin-left: 80px;
+    position: absolute;
+  }
+  

@@ -1,80 +1,80 @@
-import React from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import Axios from 'axios';
-import { NavLink } from 'react-router-dom';
-import logo from '../assets/logo.png';
-import '../css/Navigation.css';
-import { styled, alpha } from '@mui/material/styles';
-import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
-import Button from '@mui/material/Button';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
-import { useNavigate } from 'react-router-dom';
-import LogOutModal from '../modals/LogOutModal';
+import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import Axios from "axios";
+import { NavLink } from "react-router-dom";
+import logo from "../assets/logo.png";
+import "../css/Navigation.css";
+import { styled, alpha } from "@mui/material/styles";
+import InputBase from "@mui/material/InputBase";
+import SearchIcon from "@mui/icons-material/Search";
+import Button from "@mui/material/Button";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import QuestionAnswerOutlinedIcon from "@mui/icons-material/QuestionAnswerOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
+import { useNavigate } from "react-router-dom";
+import LogOutModal from "../modals/LogOutModal";
+import FeedPage from "../pages/FeedPage";
+import QuestionCard from "../components/QuestionCard";
 
 // import Stack from '@mui/material/Stack';
 
-
-const Navigation = () => {
+const Navigation = ({ questions, setUpdateQuestions }) => {
   // const [loggedIn, setLoggedIn] = useState(false);
   const [loggedIn, setLoggedIn] = useState(true);
 
   const getAdminPermission = (rankId) => {
-    if (rankId === 'Diamond') {
+    if (rankId === "Diamond") {
       return true;
     } else {
       return false;
     }
-  }
+  };
 
   const goToDiscord = () => {
-    window.open('https://discord.gg/GpqtG8dHpn', '_blank');
-  }
+    window.open("https://discord.gg/GpqtG8dHpn", "_blank");
+  };
 
-
-  const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
-    float: 'left',
-    borderRadius: '30px',
-    marginTop: '20px',
-    boxShadow: 'rgba(0, 0, 0, 0.1) -4px 9px 25px -6px',
-    backgroundColor: '#FFFFFF',
-    '&:hover': {
-      backgroundColor: '#FFFFFF',
+  const Search = styled("div")(({ theme }) => ({
+    position: "relative",
+    float: "left",
+    borderRadius: "30px",
+    marginTop: "20px",
+    boxShadow: "rgba(0, 0, 0, 0.1) -4px 9px 25px -6px",
+    backgroundColor: "#FFFFFF",
+    "&:hover": {
+      backgroundColor: "#FFFFFF",
     },
     marginRight: theme.spacing(2),
-    marginLeft: '30',
-    [theme.breakpoints.up('sm')]: {
+    marginLeft: "30",
+    [theme.breakpoints.up("sm")]: {
       marginLeft: theme.spacing(1),
-      width: '25%',
+      width: "25%",
     },
   }));
 
-  const SearchIconWrapper = styled('div')(({ theme }) => ({
+  const SearchIconWrapper = styled("div")(({ theme }) => ({
     padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   }));
 
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
+    color: "inherit",
     fontFamily: "Open Sans",
-    '& .MuiInputBase-input': {
+    "& .MuiInputBase-input": {
       padding: theme.spacing(1, 1, 1, 0),
       // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create('width'),
-      width: '100%',
-      [theme.breakpoints.up('md')]: {
-        width: '60ch',
+      transition: theme.transitions.create("width"),
+      width: "100%",
+      [theme.breakpoints.up("md")]: {
+        width: "60ch",
       },
     },
   }));
@@ -84,10 +84,21 @@ const Navigation = () => {
   const navigate = useNavigate();
 
   const logOut = () => {
-    setEditModal(<LogOutModal
-      close={setEditModal}
-    />)
-  }
+    setEditModal(<LogOutModal close={setEditModal} />);
+  };
+
+  //========================================
+
+  // Search log
+
+  const SearchBtn = () => {
+    let searchText = document.getElementById("search").value;
+
+    navigate("/SearchPage");
+    window.location.reload(false);
+    //send question id to session storage
+    sessionStorage.setItem("SearchText", searchText);
+  };
 
   //======================================================
   //verify User
@@ -121,123 +132,223 @@ const Navigation = () => {
   const [year, setYear] = useState();
 
   useEffect(() => {
-
-
     const userId = sessionStorage.getItem("id");
 
     if (userId == null) {
-    //   console.log("User not logged in")
-
+      console.log("User not logged in");
     } else {
-    //   console.log("user logged in")
-      Axios.get('http://localhost:5000/api/userInfo/' + userId)
-        .then(res => {
-          let data = res.data;
-          setUsername(data.username);
-          setRank(data.rank);
-          setprofileImg(data.profileimage);
-          setYear(data.yearlevel);
-        //   console.log(data.rank)
-        })
+      console.log("user logged in");
+      Axios.get("http://localhost:5000/api/userInfo/" + userId).then((res) => {
+        let data = res.data;
+        setUsername(data.username);
+        setRank(data.rank);
+        setprofileImg(data.profileimage);
+        setYear(data.yearlevel);
+        console.log(data.rank);
+      });
     }
     // localStorage.clear();
   }, []);
 
-
   //get profile image path
-  const imgURL = ('Avatars/' + profileImg + '.png');
+  const imgURL = "Avatars/" + profileImg + ".png";
 
-//   console.log(year);
-  let bgColor = '';
+  console.log(year);
+  let bgColor = "";
 
   if (year === 1) {
-    bgColor = '#6EEB83'
+    bgColor = "#6EEB83";
   } else if (year === 2) {
-    bgColor = '#6CD4FF'
+    bgColor = "#6CD4FF";
   } else {
-    bgColor = '#FF7900'
-  };
+    bgColor = "#FF7900";
+  }
 
   //=====================================================================================
   //Log out modal
   // Handle Modal
   const [editModal, setEditModal] = useState();
+  const [postConfirmation, setSearchResult] = useState();
+  const doSomeStuff = () => {
+    Axios.get("http://localhost:5000/api/readquestions").then((res) => {
+      let questionData = res.data;
+
+      let a = questionData.filter((items) => items.title == "Test");
+
+      console.log(a);
+
+      a.map((item) => {
+        console.log("do something");
+
+        setSearchResult(
+          <QuestionCard
+            key={item._id}
+            questionId={item._id}
+            date={item.datePosted}
+            title={item.title}
+            description={item.description}
+            upvotes={item.upvotes}
+            downvotes={item.downvotes}
+            userId={item.userId}
+            editRender={setUpdateQuestions}
+          />
+        );
+      });
+    });
+  };
   return (
     <div>
       {editModal}
       <div className="navContainer">
-
-        <div className='topNavBar'>
+        <div className="topNavBar">
           <img src={logo} className="Logo" width="150px"></img>
 
-
-          <Search style={{ marginLeft: "100px", width: "390px", height: "42px", marginTop: "25px", marginLeft: "15px" }}>
+          <Search
+            style={{
+              marginLeft: "100px",
+              width: "390px",
+              height: "42px",
+              marginTop: "25px",
+              marginLeft: "15px",
+            }}
+          >
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
+
             <StyledInputBase
               placeholder="What would you like to know?"
-              inputProps={{ 'aria-label': 'search' }}
+              inputProps={{ "aria-label": "search" }}
+              id="search"
             />
           </Search>
+          <div className="nav_btn">
+            <Button
+              sx={{
+                backgroundColor: "#2b2b2b",
+                borderRadius: "20px",
+                height: "42px",
+                marginTop: "25px",
+                width: "140px",
+                fontFamily: "Open Sans",
 
-          <Button sx={{
-            backgroundColor: '#2b2b2b', borderRadius: '20px', height: '42px', marginTop: "25px", width: '140px', fontFamily: 'Open Sans', marginLeft: '510px',
-            '&:hover': {
-              backgroundColor: '#4A4A4A',
-            }
-          }} variant="contained" backgroundColor="primary" onClick={logOut}>Log Out</Button>
+                "&:hover": {
+                  backgroundColor: "#4A4A4A",
+                },
+              }}
+              variant="contained"
+              backgroundColor="primary"
+              onClick={SearchBtn}
+            >
+              Search
+            </Button>
+
+            <Button
+              sx={{
+                backgroundColor: "#2b2b2b",
+                borderRadius: "20px",
+                height: "42px",
+                marginTop: "25px",
+                width: "140px",
+                fontFamily: "Open Sans",
+                marginRight: "75px",
+                "&:hover": {
+                  backgroundColor: "#4A4A4A",
+                },
+              }}
+              variant="contained"
+              backgroundColor="primary"
+              onClick={logOut}
+            >
+              Log Out
+            </Button>
+          </div>
         </div>
 
-        <div className='sideNav'>
-
-
-          <div className='profile-section'>
-            <div className='profileCircle' style={{ backgroundColor: bgColor }}><img src={imgURL} className="profile-Img"></img></div>
+        <div className="sideNav">
+          <div className="profile-section">
+            <div className="profileCircle" style={{ backgroundColor: bgColor }}>
+              <img src={imgURL} className="profile-Img"></img>
+            </div>
             <h3>{username}</h3>
             <h5>{rank} | Reliability Score: </h5>
           </div>
 
-
-          <div className='Navigation'>
-            {loggedIn ?
+          <div className="Navigation">
+            {loggedIn ? (
               <div className="list">
-
-                <li><NavLink exact activeclassname="active" to="/FeedPage"><button><HomeOutlinedIcon className='icon' /><div className="text">Feed</div></button></NavLink></li>
-                <li><NavLink activeclassname="active" to="/QuestionsPage"><button><QuestionAnswerOutlinedIcon className='icon' /><div className="text">Questions</div></button></NavLink></li>
-                <li><NavLink activeclassname="active" to="/ProfilePage"><button><PersonOutlineOutlinedIcon className='icon' /><div className="text">Profile</div></button></NavLink></li>
+                <li>
+                  <NavLink exact activeclassname="active" to="/FeedPage">
+                    <button>
+                      <HomeOutlinedIcon className="icon" />
+                      <div className="text">Feed</div>
+                    </button>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink activeclassname="active" to="/QuestionsPage">
+                    <button>
+                      <QuestionAnswerOutlinedIcon className="icon" />
+                      <div className="text">Questions</div>
+                    </button>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink activeclassname="active" to="/ProfilePage">
+                    <button>
+                      <PersonOutlineOutlinedIcon className="icon" />
+                      <div className="text">Profile</div>
+                    </button>
+                  </NavLink>
+                </li>
 
                 {/* BELOW: This will allow for ONLY the ADMIN (based on rank from DB) to view the admin nav icon, and navigate onto the AdminPage */}
                 {/* ipv 1 this will be a useState. useState update from axios call that's being plled from the user's ID */}
-                {getAdminPermission(rank) ?
-                  <li><NavLink activeclassname="active" to="/AdminPage">
-                    <button><AdminPanelSettingsOutlinedIcon className='icon' />
-                      <div className="text">Admin</div>
-                    </button>
-                  </NavLink>
+                {getAdminPermission(rank) ? (
+                  <li>
+                    <NavLink activeclassname="active" to="/AdminPage">
+                      <button>
+                        <AdminPanelSettingsOutlinedIcon className="icon" />
+                        <div className="text">Admin</div>
+                      </button>
+                    </NavLink>
                   </li>
-                  : <span></span>}
+                ) : (
+                  <span></span>
+                )}
               </div>
-              : <span></span>
-            }
+            ) : (
+              <span></span>
+            )}
           </div>
-
-
-
         </div>
 
-        <div className='discordBlock'>
+        <div className="discordBlock">
           <h6>Join Our</h6>
           <h4>Discord Server</h4>
 
-          <Button sx={{
-            backgroundColor: '#FFFFFF', height: '42px', color: '#2b2b2b', fontWeight: 'bold', borderRadius: '20px', marginTop: "20px", width: '140px', fontFamily: 'Open Sans', marginLeft: '600px',
-            '&:hover': {
-              backgroundColor: '#F6F6FA',
-            }
-          }} variant="contained" backgroundColor="primary" onClick={goToDiscord}>Join</Button>
+          <Button
+            sx={{
+              backgroundColor: "#FFFFFF",
+              height: "42px",
+              color: "#2b2b2b",
+              fontWeight: "bold",
+              borderRadius: "20px",
+              marginTop: "20px",
+              width: "140px",
+              fontFamily: "Open Sans",
+              marginLeft: "600px",
+              "&:hover": {
+                backgroundColor: "#F6F6FA",
+              },
+            }}
+            variant="contained"
+            backgroundColor="primary"
+            onClick={goToDiscord}
+          >
+            Join
+          </Button>
         </div>
-
 
         {/* <ul>
                         <li><div className="logo">SKY SKATES.</div></li>
@@ -251,12 +362,7 @@ const Navigation = () => {
         
                         </div>
                         </ul> */}
-
-
-
-
       </div>
-
     </div>
   );
 };
