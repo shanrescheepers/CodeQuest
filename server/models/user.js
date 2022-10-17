@@ -19,20 +19,16 @@ const UserSchema = mongoose.Schema({
         required: true
     },
     rank: {
-        type: String,
-        // required: true,
+        type: String
     },
     questionsAnswered: {
-        type: Number,
-        // required: true,
+        type: Number
     },
     questionsAsked: {
-        type: Number,
-        // required: true,
+        type: Number
     },
     profileimage: {
-        type: String,
-        // required: true
+        type: String
     },
     accountStatus: { 
         type: Boolean,
@@ -58,7 +54,7 @@ UserSchema.pre('save', async function(next){
           const token = await jwt.sign(tokenPayload, process.env.ACCESS_TOKEN_SECRET);
   
           this.token = token;
-        // next();
+        next();
         
     } catch (error) {
         next(error);
@@ -66,6 +62,4 @@ UserSchema.pre('save', async function(next){
 });
 
 
-// const User = mongoose.model("User", UserSchema);
-// module.exports = { User };
 module.exports = mongoose.model("User", UserSchema);

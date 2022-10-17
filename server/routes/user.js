@@ -50,10 +50,6 @@ router.post('/api/adduser', (req, res) =>{
     }); 
     // console.log("new user", newUser);
 
-
-
-
-//=====================================================s======================
 //save new user
 newUser.save()
     .then(async item => {
@@ -63,14 +59,14 @@ newUser.save()
 
         //verification
 
-        // const findUser = await UserSchema.findOne({
-        //     username: req.body.username
-        // });
+        const findUser = await UserSchema.findOne({
+            username: req.body.username
+        });
 
-        // let userIdLink = "http://localhost:3000/auth?id=" + findUser._id;
-        // console.log("link is ", findUser._id);
+        let userIdLink = "http://localhost:3000/auth?id=" + findUser._id;
+        console.log("link is ", findUser._id);
 
-//===================================================================================
+
 //Mailer functionality
 
 
@@ -132,7 +128,7 @@ newUser.save()
             if(error){
                 console.log(error);
             }
-            console.log("massage sent: ", info);
+            console.log("massage sent: ", info.messageId);
         });
 
   
