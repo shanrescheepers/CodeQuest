@@ -16,10 +16,6 @@ const router = express();
 var hbs = require('nodemailer-express-handlebars');
 const path = require('path');
 
-//set express view engine
-// const app = express();
-// app.set("view engine", "ejs");
-
 
 //============================================================================================
 //Get Current user info
@@ -161,10 +157,17 @@ router.post('/api/loginUser', async (req,res) => {
     });
     console.log(findUser);
 
+
     if(findUser){
-        if(findUser.accountStatus){
+        if(findUser){
             if(await bcrypt.compare(req.body.password, findUser.password)){
-                res.send("The user can login.")
+
+                const userToken = jwt.sign({
+                    email: req.body.email
+                }, '883Xc7F@1dkK') //this is our secret key
+    
+                return res.json({ status: "Ok", user: userToken, id: findUser._id });
+    
             }else{
                 res.send("Password does not match username");
             }
@@ -175,24 +178,6 @@ router.post('/api/loginUser', async (req,res) => {
         res.send("No user found");
     };
     
-
-    let userId= findUser._id;
-    if(findUser){
-        if(await bcrypt.compare(req.body.password, findUser.password)){
-            const userToken = jwt.sign({
-                email: req.body.email
-            }, '883Xc7F@1dkK') //this is our secret key
-
-            return res.json({status: "Ok", user: userToken, id: userId});
-
-
-        }else{
-            res.json({user: false})
-        }
-
-    }else{
-        res.json({msg: "User not found"})
-    }
 
 });
 

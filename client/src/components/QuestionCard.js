@@ -62,7 +62,7 @@ useEffect(() => {
                 console.log("not happening");
                 
                }else{
-                   console.log('N/A');
+                //    console.log('N/A');
                }
 
 

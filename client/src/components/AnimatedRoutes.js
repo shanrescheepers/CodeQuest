@@ -21,6 +21,7 @@ import Axios from 'axios';
 import FourOhFour from '../pages/FourohFour';
 import ResultPage from "../pages/ResultPage";
 import FilterPage from "../pages/FilterPage";
+import Auth from '../pages/Auth';
 
 function AnimatedRoutes() {
 
@@ -79,6 +80,7 @@ function AnimatedRoutes() {
           <Route path="/IndividualQuestion" element={<IndividualQuestion />} />
           <Route path="/QuestionsPage" element={<QuestionsPage />} />
           <Route path="/newquestion" element={<NewQuestionPage />} />
+          <Route path="/Auth" element={<Auth funcNav={setShowNav} />} />
           <Route path="*" element={<FourOhFour />} />
 
         </Routes>
