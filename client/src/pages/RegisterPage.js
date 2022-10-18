@@ -215,7 +215,7 @@ const toLogin =()=>{
                     Sign In
             </Button>
           
-          <p className='signIn-Op' onClick={toLogin}>Already have an account?Log in</p>
+          <p className='signIn-Op' onClick={toLogin}>Already have an account? <b>Log in</b></p>
 
 
           </form>

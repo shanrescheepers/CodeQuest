@@ -36,7 +36,7 @@ router.get('/api/userInfo/:id', async (req, res) =>{
 
 router.post('/api/adduser', (req, res) =>{
 
-    console.log(req.body);
+   
     const newUser = new UserSchema({
         username: req.body.username, 
         email: req.body.email, 
@@ -49,7 +49,7 @@ router.post('/api/adduser', (req, res) =>{
 
 
     }); 
-    // console.log("new user", newUser);
+    console.log("new user", newUser);
 
 //save new user
 newUser.save()
@@ -69,7 +69,6 @@ newUser.save()
 
 
 //Mailer functionality
-
 
         const transporter = nodemailer.createTransport({
             host: "thehandler.aserv.co.za",
@@ -213,7 +212,7 @@ router.patch('/api/validate/:id', async (req,res) => {
             const tokenDecrypt = jwt.verify(findUser.token, process.env.ACCESS_TOKEN_SECRET);
             const authUser = await UserSchema.findOne({
                 _id: userId,
-                eamil: tokenDecrypt.email
+                email: tokenDecrypt.email
             });
 
             if(authUser){
