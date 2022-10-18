@@ -1,5 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
 import { Router } from 'react-router-dom';
+import Auth from './pages/Auth';
 
 //Import Pages
 import Navigation from './components/Navigation';
@@ -15,6 +16,7 @@ function App() {
 
         <BrowserRouter>
             <AnimatedRoutes/>
+            <Auth/>
         </BrowserRouter>
 
     </div>
