@@ -35,7 +35,7 @@ router.get('/api/userInfo/:id', async (req, res) =>{
 
 router.post('/api/adduser', (req, res) =>{
 
-    console.log(req.body);
+    // console.log(req.body);
     const newUser = new UserSchema({
         username: req.body.username, 
         email: req.body.email, 
@@ -48,7 +48,7 @@ router.post('/api/adduser', (req, res) =>{
 
 
     }); 
-    // console.log("new user", newUser);
+    console.log("new user", newUser);
 
 //save new user
 newUser.save()
@@ -64,7 +64,7 @@ newUser.save()
         });
 
         let userIdLink = "http://localhost:3000/auth?id=" + findUser._id;
-        console.log("link is ", findUser._id);
+        // console.log("link is ", findUser._id);
 
 
 //Mailer functionality
@@ -131,7 +131,7 @@ newUser.save()
             console.log("massage sent: ", info.messageId);
         });
 
-  
+  console.log("Hello world");
     })
     .catch(err => {
         res.status(400).json({msg:"There is an error", err}); 
@@ -202,17 +202,20 @@ router.post('/api/loginUser', async (req,res) => {
 
 router.patch('/api/validate/:id', async (req,res) => {
     let userId = req.params.id;
+    console.log(userId);
 
     const findUser = await UserSchema.findOne({
         _id: userId
     });
+    console.log(findUser);
+    console.log(userId);
 
     if(findUser){
         try{
             const tokenDecrypt = jwt.verify(findUser.token, process.env.ACCESS_TOKEN_SECRET);
             const authUser = await UserSchema.findOne({
                 _id: userId,
-                eamil: tokenDecrypt.email
+                email: tokenDecrypt.email
             });
 
             if(authUser){

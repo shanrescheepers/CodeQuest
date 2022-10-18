@@ -120,21 +120,21 @@ const Navigation = () => {
   const [profileImg, setprofileImg] = useState();
   const [year, setYear] = useState();
 
-  useEffect(()=>{
+  // useEffect(()=>{
 
 
-    const userId = sessionStorage.getItem("id");
-    // localStorage.clear();
-      Axios.get('http://localhost:5000/api/userInfo/' + userId)
-      .then(res => {
-          let data = res.data;
-          setUsername(data.username);
-          setRank(data.rank);
-          setprofileImg(data.profileimage);
-          setYear(data.yearlevel);
-      })
+  //   const userId = sessionStorage.getItem("id");
+  //   // localStorage.clear();
+  //     Axios.get('http://localhost:5000/api/userInfo/' + userId)
+  //     .then(res => {
+  //         let data = res.data;
+  //         setUsername(data.username);
+  //         setRank(data.rank);
+  //         setprofileImg(data.profileimage);
+  //         setYear(data.yearlevel);
+  //     })
 
-  }, []);
+  // }, []);
 
 
 //get profile image path

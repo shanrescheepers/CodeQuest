@@ -44,6 +44,7 @@ const toLogin =()=>{
   const [welcome, setWelcome] = useState();
   const [message, setMessage] = useState();
  
+  console.log(searchParams.get('id'));
   useEffect(()=>{
 
     axios.patch('http://localhost:5000/api/validate/' + searchParams.get('id'))
