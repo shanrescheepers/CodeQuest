@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-
+const jwt = require('jsonwebtoken');
 const UserSchema = mongoose.Schema({
     username: {
         type: String,
@@ -20,41 +20,47 @@ const UserSchema = mongoose.Schema({
         required: true
     },
     rank: {
-        type: String,
-        // required: true,
+        type: String
     },
     questionsAnswered: {
-        type: Number,
-        // required: true,
+        type: Number
     },
     questionsAsked: {
-        type: Number,
-        // required: true,
+        type: Number
     },
     profileimage: {
-        type: String,
-        // required: true
+        type: String
     },
-    bannedUser: {
-        type: String,
+    accountStatus: { 
+        type: Boolean,
+        default: false
+    },
+    token: { 
+        type: String
     }
-    // The moment you post a question/ or a answer, it must update here
 });
 
-UserSchema.pre('save', async function (next) {
+UserSchema.pre('save', async function(next){
     try {
-        const salt = await bcrypt.genSalt(10);
+        const salt = await bcrypt.genSalt(12);
         const hashPass = await bcrypt.hash(this.password, salt);
         this.password = hashPass;
-        next();
 
+          //create JWT
+          let tokenPayload = {
+            username: this.username, 
+            email: this.email
+        }
+
+          const token = await jwt.sign(tokenPayload, process.env.ACCESS_TOKEN_SECRET);
+  
+          this.token = token;
+        next();
+        
     } catch (error) {
         next(error);
     }
 });
 
-
-// const User = mongoose.model("User", UserSchema);
-// module.exports = { User };
 
 module.exports = mongoose.model("User", UserSchema);

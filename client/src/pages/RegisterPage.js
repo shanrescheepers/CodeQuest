@@ -98,19 +98,18 @@ const addNewUser = (e) => {
     Axios.post('http://localhost:5000/api/adduser', payload)
     .then((res)=> {
         if(res){
-        // console.log("User Successfully Added");
+        console.log("User Successfully Added");
         console.log(res);
         sessionStorage.setItem('id', res.data._id);
         sessionStorage.setItem('token', res.data.username);
         sessionStorage.setItem('email', formValues['email']);
-        navigate("/FeedPage"); 
+        window.location.href = 'https://mail.google.com/mail/u/0/#inbox'; 
         }
     })
     .catch(function (error) {
-        // console.log("Could not add user: Error is:" + error);
+        console.log("Could not add user: Error is:" + error);
     });
 } 
-
 //====================================================================================
 //To register
 
@@ -215,7 +214,7 @@ const toLogin =()=>{
                     Sign In
             </Button>
           
-          <p className='signIn-Op' onClick={toLogin}>Already have an account?Log in</p>
+          <p className='signIn-Op' onClick={toLogin}>Already have an account? <b>Log in</b></p>
 
 
           </form>

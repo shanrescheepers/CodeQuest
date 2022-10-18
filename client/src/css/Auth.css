@@ -1,0 +1,43 @@
+.auth-container{
+    background-color: #2b2b2b;
+    position: absolute;
+    height:530px;
+    width: 90%;
+    border-radius: 50px;
+    top:0;
+    margin-top: 100px;
+    margin-left: 80px;
+    color: #ffffff;
+}
+
+.auth-text{
+    padding: 80px;
+    padding-top: 100px;
+    float: left;
+}
+.auth-text h1, .auth-text p {
+    color: #ffffff;
+    margin-top: 5px;
+}
+
+.auth-text h5{
+    font-weight: 300;
+    font-size: 18px;
+    margin-bottom: 0;
+}
+
+.auth-text p{
+    width: 440px;
+}
+.auth-img img{
+    width: 400px;
+    float: left;
+    margin-top: 60px;
+    margin-left: 150px;
+}
+
+.auth-logo img{
+    width: 125px;
+    margin-top: 30px;
+    margin-left: 90px;
+}
