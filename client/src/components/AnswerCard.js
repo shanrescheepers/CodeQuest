@@ -97,12 +97,17 @@ const [upVoteCast, setUpvoteCast] = useState(props.upvotes);
 const [downVoteCast, setDownvoteCast] = useState(props.downvotes);
 
 
-  const handleVote = (event, vote) => {
+const handleVote = (event, vote) => {
     setVoteCast(vote);
-    console.log(vote);
+    // console.log(vote);
+    // console.log("category", category);
+    // console.log("arrowImgUp",arrowImgUp);
+    // console.log("arrowImgDown",arrowImgDown);
 
     if(category === 'startUp' && arrowImgUp === 'UpActive' && arrowImgDown === 'Down'){
-            if(vote ==='up'){
+            console.log("Up vote again");
+            if(vote === null){
+                console.log("Did do null");
                 setUpvoteCast(props.upvotes -1);
                 setDownvoteCast(props.downvotes);
                 setArrowImgUp('Up');
@@ -112,6 +117,12 @@ const [downVoteCast, setDownvoteCast] = useState(props.downvotes);
                 setUpvoteCast(props.upvotes-1);
                 setArrowImgUp('Up');
                 setArrowImgDown('DownActive'); 
+            }else if(vote ==='up'){
+                console.log("Did do null");
+                setUpvoteCast(props.upvotes -1);
+                setDownvoteCast(props.downvotes);
+                setArrowImgUp('Up');
+                setArrowImgDown('Down');
             }
         };
         if(category === 'startUp' && arrowImgUp === 'Up' && arrowImgDown === 'Down'){
@@ -129,11 +140,13 @@ const [downVoteCast, setDownvoteCast] = useState(props.downvotes);
         };
          if(category === 'startUp' && arrowImgUp === 'Up' && arrowImgDown === 'DownActive'){
                 if(vote ==='up'){
+                    console.log("Unvote");
                     setUpvoteCast(props.upvotes);
                     setDownvoteCast(props.downvotes);
                     setArrowImgUp('UpActive');
                     setArrowImgDown('Down');
-                }else if(vote ==='down'){
+                }else if(vote ===null){
+                    console.log("Unvote");
                     setDownvoteCast(props.downvotes); 
                     setUpvoteCast(props.upvotes-1);
                     setArrowImgUp('Up');
@@ -158,7 +171,7 @@ const [downVoteCast, setDownvoteCast] = useState(props.downvotes);
             };
 
             if(category === 'startDown' && arrowImgUp === 'UpActive' && arrowImgDown === 'Down'){
-                if(vote ==='up'){
+                if(vote === null){
                     setUpvoteCast(props.upvotes-1);
                     setDownvoteCast(props.downvotes-1);
                     setArrowImgUp('Up');
@@ -180,7 +193,12 @@ const [downVoteCast, setDownvoteCast] = useState(props.downvotes);
                         setDownvoteCast(props.downvotes-1);
                         setArrowImgUp('UpActive');
                         setArrowImgDown('Down');
-                    }else if(vote ==='down'){
+                    }else if(vote === null){
+                        setDownvoteCast(props.downvotes-1); 
+                        setUpvoteCast(props.upvotes);
+                        setArrowImgUp('Up');
+                        setArrowImgDown('Down'); 
+                    }else if(vote === 'down'){
                         setDownvoteCast(props.downvotes-1); 
                         setUpvoteCast(props.upvotes);
                         setArrowImgUp('Up');
@@ -203,7 +221,7 @@ const [downVoteCast, setDownvoteCast] = useState(props.downvotes);
             };
 
             if(category === 'startDown' && arrowImgUp === 'UpActive' && arrowImgDown === 'Down'){
-                if(vote ==='up'){
+                if(vote ===null){
                     setUpvoteCast(props.upvotes-1);
                     setDownvoteCast(props.downvotes-1);
                     setArrowImgUp('Up');
@@ -234,7 +252,10 @@ const [downVoteCast, setDownvoteCast] = useState(props.downvotes);
         };
 
         if(category === '' && arrowImgUp === 'UpActive' && arrowImgDown === 'Down'){
-            if(vote ==='up'){
+            console.log("Upvote should be 0");
+            console.log("vote", vote);
+            if(vote ===null){
+                console.log("up again");
                 setUpvoteCast(props.upvotes);
                 setDownvoteCast(props.downvotes);
                 setArrowImgUp('Up');
@@ -254,7 +275,7 @@ const [downVoteCast, setDownvoteCast] = useState(props.downvotes);
                         setDownvoteCast(props.downvotes);
                         setArrowImgUp('UpActive');
                         setArrowImgDown('Down');
-                    }else if(vote ==='down'){
+                    }else if(vote ===null){
                         setDownvoteCast(props.downvotes); 
                         setUpvoteCast(props.upvotes);
                         setArrowImgUp('Up');

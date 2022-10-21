@@ -93,10 +93,10 @@ const [downVoteCast, setDownvoteCast] = useState(props.downvotes);
 
   const handleVote = (event, vote) => {
     setVoteCast(vote);
-    console.log(vote);
-    console.log("category", category);
-    console.log("arrowImgUp",arrowImgUp);
-    console.log("arrowImgDown",arrowImgDown);
+    // console.log(vote);
+    // console.log("category", category);
+    // console.log("arrowImgUp",arrowImgUp);
+    // console.log("arrowImgDown",arrowImgDown);
 
     if(category === 'startUp' && arrowImgUp === 'UpActive' && arrowImgDown === 'Down'){
             console.log("Up vote again");
