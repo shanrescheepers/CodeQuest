@@ -200,7 +200,7 @@ h2 {
 
 
 .pp_badge_card_slide {
-    height: 68%;
+    height: auto;
     width: auto;
     /* background-color: black; */
     position: relative;

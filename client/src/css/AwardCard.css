@@ -1,0 +1,27 @@
+.award-card-con {
+    width: 250px;
+    height: 320px;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+    padding: 2rem;
+    box-sizing: border-box;
+    margin-right: 1rem;
+    align-items: center;
+    display: flex;
+}
+
+.award-content {
+    text-align: center;
+    margin: auto;
+    width: 250px;
+    height: auto;
+}
+
+.badge-img {
+    margin: auto;
+    width: 64px;
+}
+
+.award-card-con h4 {
+    margin: 0.5rem;
+}
