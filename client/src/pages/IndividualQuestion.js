@@ -74,14 +74,16 @@ const IndividualQuestion = () => {
     Axios.get("http://localhost:5000/api/readQuestionAnswer/" + sessionStorage.getItem("questionId"))
       .then((res) => {
         let questionData = res.data;
+        console.log(questionData);
         let renderAnswers = questionData.map((item) => {
 
           // if (item.questionId == sessionStorage.getItem("questionId")) {
-          console.log(item._id);
+          console.log("Id", item._id);
           return (
             <AnswerCard
               key={item._id}
-              questionId={item._id}
+              questionId={item.questionId}
+              answerId={item._id}
               date={item.datePosted}
               code={item.code}
               screenshots={item.screenshots}

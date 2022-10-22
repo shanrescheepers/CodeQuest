@@ -3,6 +3,8 @@ const express = require('express');
 const router = express();
 const ReportedUser = require('../models/reportedUser');
 const UserSchema = require('../models/user');
+const newAnswerModel = require('../models/addAnswer');
+const newQuestionModel = require('../models/newQuestion');
 
 
 // CRUD GET
@@ -11,26 +13,92 @@ router.get('/api/reportedUser/:id', async (req, res) => {
     res.json(findUser);
 });
 
+// CRUD GET
+router.get('/api/reportedQuestionAnswer/:id', async (req, res) => {
+    // const findUser = await ReportedUser.findById(req.params.id);
+    const finduser = await ReportedUser.find({
+        questionId: req.params.id,
+    });
+
+    let reportedState = false
+    let totalAnswers = []
+
+    for (let i = 0; i < finduser.length; i++) {
+
+        const findQuestions = await newAnswerModel.find({
+            questionId: finduser[i].questionId
+        });
+        let pair = { answerLength: findQuestions.length }
+        totalAnswers.push(pair);
+
+    }
+    // console.log(finduser);
+    res.json({ finduser, totalAnswers });
+});
+
+// CRUD GET Flagged / Reported Question
+router.get('/api/reportedQuestions/', async (req, res) => {
+    let reportedUsers = await ReportedUser.find();
+    let questions = []
+    for (let i = 0; i < reportedUsers.length; i++) {
+        // console.log(reportedUsers[i].questionId);
+        const findQuestion = await newQuestionModel.findById(reportedUsers[i].questionId);
+        // console.log(findQuestion);
+        if (findQuestion !== null) {
+            questions.push(findQuestion)
+        }
+    }
+    res.json(questions);
+});
+
+// CRUD GET Flagged / Reported Answers
+router.get('/api/reportedAnswer/', async (req, res) => {
+    let reportedUsers = await ReportedUser.find();
+    let answers = []
+    for (let i = 0; i < reportedUsers.length; i++) {
+        console.log(reportedUsers[i].questionId);
+        const findAnswer = await newAnswerModel.findById(reportedUsers[i].questionId);
+        console.log(findAnswer);
+        if (findAnswer !== null) {
+            answers.push(findAnswer)
+        }
+    }
+
+    res.json(answers);
+});
+
 // CRUD GET reported Post
 router.get('/api/reportedPost/:id', async (req, res) => {
     const reportedPost = await ReportedUser.find();
     // pull to do the flag icon state on question card
     let reportedState = false
+
+
     for (let i = 0; i < reportedPost.length; i++) {
+
         if (reportedPost[i].questionId === req.params.id) {
             reportedState = true
+
+
         }
     }
+    console.log(req.params.id);
     res.json(reportedState);
 });
 
-// GET ALL
+// GET ALL 
 router.get('/api/allReportedUsers', async (req, res) => {
     let reportedUsers = await ReportedUser.find();
     let newReported = []
+
+
     for (let i = 0; i < reportedUsers.length; i++) {
         const findUser = await UserSchema.findById(reportedUsers[i].reportingUserId);
-        let pair = { reportingUsername: findUser.username }
+        const findQuestions = await newAnswerModel.find({
+            questionId: reportedUsers[i].questionId
+        });
+
+        let pair = { reportingUsername: findUser.email, answerLenght: findQuestions.length }
         newReported.push(pair);
     }
 

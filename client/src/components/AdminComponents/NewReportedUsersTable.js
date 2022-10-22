@@ -18,7 +18,7 @@ import IgnoreUserModal from '../../modals/IgnoreUserModalAdmin';
 
 const columns = [
     { id: 'avatar', label: 'Avatar', minWidth: 50 },
-    { id: 'username', label: 'Reported User', minWidth: 50 },
+    { id: 'email', label: 'Reported User', minWidth: 50 },
     { id: 'reportingUser', label: 'Reporting User', minWidth: 100 },
     { id: 'dateFlagged', label: 'Date Flagged', minWidth: 90 },
     { id: 'flaggedReason', label: 'Flagged Reason', minWidth: 90 },

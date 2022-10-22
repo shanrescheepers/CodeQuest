@@ -20,6 +20,7 @@ import { Flag } from "@mui/icons-material";
 import FlagModal from '../modals/FlagModal';
 
 export const AnswerCard = (props) => {
+    console.log("Answer Prop", props);
     const [index, setIndex] = useState(0);
     const navigate = useNavigate();
 
@@ -46,7 +47,7 @@ export const AnswerCard = (props) => {
         axios.get('http://localhost:5000/api/readanswervote')
             .then(res => {
                 let data = res.data;
-                console.log(data);
+                // console.log(data);
                 let user = sessionStorage.getItem('id');
 
                 for (let i = 0; i < data.length; i++) {
@@ -388,6 +389,8 @@ export const AnswerCard = (props) => {
 
 
     useEffect(() => {
+        console.log(props);
+
         if (props.userId == null) {
             //   console.log("User not logged in");
         } else {
@@ -427,10 +430,11 @@ export const AnswerCard = (props) => {
     const [flagModal, setFlagModal] = useState()
     const [flagState, setFlagState] = useState(false)
     const flagAnswer = () => {
-        setFlagModal(<FlagModal close={setFlagModal} id={props.id} questionId={props.questionId} userId={props.userId} />)
+
+        setFlagModal(<FlagModal close={setFlagModal} id={props.id} questionId={props.answerId} userId={props.userId} />)
     }
     useEffect(() => {
-        axios.get('http://localhost:5000/api/reportedPost/' + props?.questionId)
+        axios.get('http://localhost:5000/api/reportedPost/' + props.answerId)
             .then(res => {
                 let data = res.data;
                 console.log(data);

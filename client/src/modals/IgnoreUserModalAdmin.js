@@ -23,7 +23,7 @@ const IgnoreUserModal = (props) => {
             <div className='modal'>
                 <div className='close'><CloseIcon sx={{ fontSize: '40px' }} onClick={closeModal} /></div>
                 <h1>Are you sure?</h1>
-                <h4>Remember once you ignore this reported user, the report will be gone for good!</h4>
+                <h4>Remember once you ignore, the report will be gone for good!</h4>
                 <div className='modal-img delete'><img src={picture}></img></div>
 
                 <Button sx={{

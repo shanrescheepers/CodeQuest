@@ -23,6 +23,7 @@ import Helmet from "react-helmet";
 
 import NewReportedUserTable from '../components/AdminComponents/NewReportedUsersTable';
 import NewAllUsersTable from '../components/AdminComponents/NewAllUsersTable';
+import FlaggedAnswers from '../components/AdminComponents/FlaggedAnswers';
 
 
 
@@ -207,17 +208,11 @@ const AdminPage = () => {
                     </div>
                     <div className='admin__flagged__and__bad__tabs__tabpanel'>
                         <TabPanel value="1" >
-                            {/* <QuestionCard />
-                            <QuestionCard />
-                            <QuestionCard /> */}
+                            <FlaggedPosts />
                         </TabPanel>
                         <TabPanel value="2">
-                            {/* <QuestionCard />
-                            <QuestionCard />
-                            <QuestionCard />
-                            <QuestionCard /> */}
+                            <FlaggedAnswers />
                         </TabPanel>
-
                     </div>
                 </TabContext>
             </div>
