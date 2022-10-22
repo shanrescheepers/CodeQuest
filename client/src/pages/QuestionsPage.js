@@ -12,6 +12,7 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const QuestionsPage = () => {
   const [age, setAge] = React.useState("");
@@ -64,7 +65,11 @@ const QuestionsPage = () => {
         <title>Questions</title>
       </Helmet>
       {/* <Navigation/> */}
-      <div className="pp_main_card">
+      <motion.div className="pp_main_card"
+        initial={{ width: 0 }}
+        animate={{ width: "76%" }}
+        exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
+      >
         <div className="pp_welcome_con">
           <div className="pp_welcome_banner1">
             <h1>Questions</h1>
@@ -163,7 +168,7 @@ const QuestionsPage = () => {
           </div>
         </div>
         <div className="question-card-con">{questions}</div>
-      </div>
+      </motion.div>
     </div>
   );
 };

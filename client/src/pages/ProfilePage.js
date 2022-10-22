@@ -558,9 +558,10 @@ const ProfilePage = () => {
         <div>
             {deleteModal}
             <motion.div className='pp_main_card'
-                intital={{ width: 0 }}
-                animate={{ width: "76%" }}
-                exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}>
+                 initial={{ width: 0 }}
+                 animate={{ width: "76%" }}
+                 exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
+                >
                 <Helmet>
                     <title>Profile</title>
                 </Helmet>
