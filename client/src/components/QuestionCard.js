@@ -27,20 +27,36 @@ const QuestionCard = (props) => {
         setFlagModal(<FlagModal close={setFlagModal} id={props.id} questionId={props.questionId} userId={props.userId} />)
     }
 
+    const [flagState, setFlagState] = useState(false)
+
     useEffect(() => {
         axios.get('http://localhost:5000/api/reportedPost/' + props?.questionId)
             .then(res => {
                 let data = res.data;
                 console.log(data);
-
+                setFlagState(data)
 
             })
             .catch(function (error) {
                 console.log(error);
             });
 
-    }, []);
+    }, [flagModal]);
 
+    const [answersLength, setAnswersLength] = useState(0)
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/readQuestionAnswerAmount/' + props?.questionId)
+            .then(res => {
+                let data = res.data;
+                console.log(data);
+                setAnswersLength(data)
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+    }, [flagModal]);
 
     //=====================================================================
     //Get Current Vote state
@@ -435,10 +451,20 @@ const QuestionCard = (props) => {
                             </div>
                         </div>
 
-                        <div className='flag-button question-card-icon' onClick={() => flagQuestion()}>
-                            <OutlinedFlagIcon fontSize="large" />
-                            {/* <Flag fontSize="large" /> */}
-                        </div>
+
+                        {flagState ? (
+                            <div className='flag-button question-card-icon' onClick={() => console.log("Already flagged")}>
+                                <Flag fontSize="large" />
+                            </div>
+                        ) : (
+                            <div className='flag-button question-card-icon' onClick={() => flagQuestion()}>
+                                <OutlinedFlagIcon fontSize="large" />
+                            </div>
+                        )}
+
+
+
+
                     </div>
 
                     <div className='user-question' onClick={() => goToIndividualQuestion()}>
@@ -470,7 +496,7 @@ const QuestionCard = (props) => {
                             </ToggleButtonGroup>
                         </div>
 
-                        <small><p>00 Answers</p></small>
+                        <small><p>{answersLength} Answers</p></small>
                     </div>
                 </div>
             </div>

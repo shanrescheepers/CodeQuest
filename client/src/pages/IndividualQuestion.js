@@ -34,7 +34,7 @@ const IndividualQuestion = () => {
       .then((res) => {
         let questionData = res.data;
         let renderQuestions = questionData.map((item) => {
-        //   console.log(item);
+          //   console.log(item);
 
           if (item._id == sessionStorage.getItem("questionId")) {
 
@@ -71,28 +71,28 @@ const IndividualQuestion = () => {
   const [updateAnswers, setUpdateAnswers] = useState();
 
   useEffect(() => {
-    Axios.get("http://localhost:5000/api/readanswer")
+    Axios.get("http://localhost:5000/api/readQuestionAnswer/" + sessionStorage.getItem("questionId"))
       .then((res) => {
         let questionData = res.data;
         let renderAnswers = questionData.map((item) => {
-         
-          if (item.questionId == sessionStorage.getItem("questionId")) {
-            console.log(item._id);
-            return (
-              <AnswerCard
-                key={item._id}
-                questionId={item._id}
-                date={item.datePosted}
-                code={item.code}
-                screenshots={item.screenshots}
-                description={item.description}
-                upvotes={item.upvotes}
-                downvotes={item.downvotes}
-                userId={item.userId}
-                editRender={setUpdateAnswers}
-              />
-            );
-          }
+
+          // if (item.questionId == sessionStorage.getItem("questionId")) {
+          console.log(item._id);
+          return (
+            <AnswerCard
+              key={item._id}
+              questionId={item._id}
+              date={item.datePosted}
+              code={item.code}
+              screenshots={item.screenshots}
+              description={item.description}
+              upvotes={item.upvotes}
+              downvotes={item.downvotes}
+              userId={item.userId}
+              editRender={setUpdateAnswers}
+            />
+          );
+          // }
         });
         setAnswer(renderAnswers);
         setUpdateAnswers(false);
@@ -249,7 +249,7 @@ const IndividualQuestion = () => {
         if (res) {
           //show post confirmation modal
           setPostConfirmation(<QuestionAdded close={setPostConfirmation} />);
-        //   console.log("New answer Added. Slayyy!");
+          //   console.log("New answer Added. Slayyy!");
         }
       })
       .catch(function (error) {
@@ -259,7 +259,7 @@ const IndividualQuestion = () => {
 
   return (
     <div>
-        {postConfirmation}
+      {postConfirmation}
       <Helmet>
         <title>Question Expand</title>
       </Helmet>
@@ -275,11 +275,11 @@ const IndividualQuestion = () => {
         </div>
         {/* */}
 
-        
+
         <div className="answer_question">
           <form className="form-con">
             <h2>Your Answer</h2>
-         
+
             <TextField
               name="description"
               placeholder="Description"
@@ -332,9 +332,8 @@ const IndividualQuestion = () => {
                   {uploadedScreenshots.map((_, idx) => (
                     <div
                       key={idx}
-                      className={`slideshow-dot${
-                        index === idx ? " active" : ""
-                      }`}
+                      className={`slideshow-dot${index === idx ? " active" : ""
+                        }`}
                       onClick={() => {
                         setIndex(idx);
                       }}
@@ -357,7 +356,7 @@ const IndividualQuestion = () => {
               }}
               onChange={getFormValues}
             />
-            
+
 
             <Button
               type="submit"

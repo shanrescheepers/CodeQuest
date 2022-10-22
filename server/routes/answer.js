@@ -11,8 +11,8 @@ const AnswerVoteSchema = require('../models/answerVote');
 const answerScreenshotStorage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, './answerScreenshots');
-      },
-      filename: (req, file, cb) => {
+    },
+    filename: (req, file, cb) => {
         // console.log(file);
         cb(null, Date.now() + path.extname(file.originalname));
     }
@@ -38,18 +38,39 @@ router.post('/api/addanswer', uploadAnswerScreenshots.array('screenshots'), (req
     });
 
     addAnswer.save()
-    .then(item => {
-        res.json(item)
-    })
-    .catch(err => {
-       res.status(400).json({msg: 'There was an error posting your answer.', err}); 
-    });
+        .then(item => {
+            res.json(item)
+        })
+        .catch(err => {
+            res.status(400).json({ msg: 'There was an error posting your answer.', err });
+        });
 });
 
-router.get("/api/readanswer", async (req, res) => {
+router.get("/api/readAllAnswers", async (req, res) => {
     const findQuestions = await newAnswerModel.find();
     res.json(findQuestions);
-  });
+});
+
+router.get("/api/readanswer/:id", async (req, res) => {
+    const findQuestions = await newAnswerModel.findById(req.params.id);
+    res.json(findQuestions);
+});
+
+router.get("/api/readQuestionAnswer/:id", async (req, res) => {
+    // console.log(req.params.id);
+    const findQuestions = await newAnswerModel.find({
+        questionId: req.params.id
+    });
+    res.json(findQuestions);
+});
+
+router.get("/api/readQuestionAnswerAmount/:id", async (req, res) => {
+    // console.log(req.params.id);
+    const findQuestions = await newAnswerModel.find({
+        questionId: req.params.id
+    });
+    res.json(findQuestions.length);
+});
 
 //===================================================================================
 //new code
@@ -57,15 +78,16 @@ router.get("/api/readanswer", async (req, res) => {
 
 //========================================================================================
 //Increase Upvote
-router.patch('/api/updateanswerUpvotes/:id', async(req, res) => {
+router.patch('/api/updateanswerUpvotes/:id', async (req, res) => {
 
     // console.log(req.body);
     // console.log("works");
 
- const findAnswer = await newAnswerModel.updateOne(
-        {_id:req.params.id},
-        {$set: { 
-           upvotes: req.body.totalUpvotes,
+    const findAnswer = await newAnswerModel.updateOne(
+        { _id: req.params.id },
+        {
+            $set: {
+                upvotes: req.body.totalUpvotes,
             }
         }
     );
@@ -75,91 +97,93 @@ router.patch('/api/updateanswerUpvotes/:id', async(req, res) => {
 
 //===============================================================================
 //Add Vote
-router.post('/api/addanswervote',async (req, res) =>{
+router.post('/api/addanswervote', async (req, res) => {
 
-    console.log('body: ',req.body);
-     const findVoter = await AnswerVoteSchema.find();
-     console.log('find', findVoter);
+    console.log('body: ', req.body);
+    const findVoter = await AnswerVoteSchema.find();
+    console.log('find', findVoter);
 
-     const answers = findVoter.filter(item => item.answerId == req.body.answerId); //gets questions id
-     const users = answers.filter(item => item.userId == req.body.userId); //gets users qs
-     console.log("answers: ",answers);  
-     console.log("Users: ",users);
+    const answers = findVoter.filter(item => item.answerId == req.body.answerId); //gets questions id
+    const users = answers.filter(item => item.userId == req.body.userId); //gets users qs
+    console.log("answers: ", answers);
+    console.log("Users: ", users);
 
     //  const findQuestion = await newQuestionModel.findById(users[0].questionId);
 
-     if( users === 'undefined' || users.length === 0){
+    if (users === 'undefined' || users.length === 0) {
 
-        console.log("Users length:",users.length);
-            const findAnswer = await newAnswerModel.findById(req.body.answerId);
+        console.log("Users length:", users.length);
+        const findAnswer = await newAnswerModel.findById(req.body.answerId);
 
-            console.log('FindAnswer',findAnswer);
-            let upvote = findAnswer.upvotes;
-            let downvote = findAnswer.downvotes;
+        console.log('FindAnswer', findAnswer);
+        let upvote = findAnswer.upvotes;
+        let downvote = findAnswer.downvotes;
 
 
-            if(req.body.vote === 'upvote'){
-                upvote = upvote + 1;
-                voteState = "downvote"
-            }else{
-                downvote = downvote + 1;
-                voteState = "upvote"
-            };
-            
-            const updateAnswer = await newAnswerModel.updateOne(
-                {_id:req.body.answerId},
-                {$set: { 
-                   upvotes: upvote,
-                   downvotes: downvote
-                    }
+        if (req.body.vote === 'upvote') {
+            upvote = upvote + 1;
+            voteState = "downvote"
+        } else {
+            downvote = downvote + 1;
+            voteState = "upvote"
+        };
+
+        const updateAnswer = await newAnswerModel.updateOne(
+            { _id: req.body.answerId },
+            {
+                $set: {
+                    upvotes: upvote,
+                    downvotes: downvote
                 }
-            );
-                    // console.log(req.body);
-            const newVote = new AnswerVoteSchema({
-                vote: req.body.vote, 
-                userId: req.body.userId,
-                answerId: req.body.answerId
-            }); 
-            console.log("New vote code", newVote);
+            }
+        );
+        // console.log(req.body);
+        const newVote = new AnswerVoteSchema({
+            vote: req.body.vote,
+            userId: req.body.userId,
+            answerId: req.body.answerId
+        });
+        console.log("New vote code", newVote);
 
-            newVote.save()
+        newVote.save()
             .then(item => {
                 console.log(updateQuestion);
                 res.json([item, updateQuestion])
             })
             .catch(err => {
-            res.status(400).json({msg:"There is an error", err}); 
+                res.status(400).json({ msg: "There is an error", err });
             });
 
-     }else{
+    } else {
         console.log("User Already voted");
         //if() they are the same otherwise update
         console.log(req.body.vote);
-        if(users[0].vote === req.body.vote){
+        if (users[0].vote === req.body.vote) {
 
             const findAnswer = await newAnswerModel.findById(users[0].answerId);
             console.log("rep", findAnswer);
             let upvote = findAnswer.upvotes;
             let downvote = findAnswer.downvotes;
 
-            if(req.body.vote === 'upvote'){
+            if (req.body.vote === 'upvote') {
                 upvote = upvote - 1;
-            }else{
+            } else {
                 downvote = downvote - 1;
             }
 
             const updateAnswer = await newAnswerModel.updateOne(
-                {_id:users[0].answerId},
-                {$set: { 
-                   upvotes: upvote,
-                   downvotes: downvote
+                { _id: users[0].answerId },
+                {
+                    $set: {
+                        upvotes: upvote,
+                        downvotes: downvote
                     }
                 }
             );
-            const findRepVote = await AnswerVoteSchema.deleteOne({_id:users[0]._id});
+            const findRepVote = await AnswerVoteSchema.deleteOne({ _id: users[0]._id });
             res.json(findRepVote);
 
-        }else{
+        } else {
             const findAnswer = await newAnswerModel.findById(users[0].answerId);
 
             // console.log(findQuestion);
@@ -167,31 +191,33 @@ router.post('/api/addanswervote',async (req, res) =>{
             let downvote = findAnswer.downvotes;
             let voteState = users[0].vote;
 
-            if(users[0].vote === 'upvote'){
+            if (users[0].vote === 'upvote') {
                 upvote = upvote - 1;
-                downvote = downvote +1;
-                voteState ='downvote';
-            }else if(users[0].vote === 'downvote'){
+                downvote = downvote + 1;
+                voteState = 'downvote';
+            } else if (users[0].vote === 'downvote') {
                 downvote = downvote - 1;
                 upvote = upvote + 1;
                 voteState = 'upvote';
             }
             // console.log(upvote);
             // console.log(downvote);
-            
+
             const updateQuestion = await newAnswerModel.updateOne(
-                {_id:users[0].answerId},
-                {$set: { 
-                   upvotes: upvote,
-                   downvotes: downvote
+                { _id: users[0].answerId },
+                {
+                    $set: {
+                        upvotes: upvote,
+                        downvotes: downvote
                     }
                 }
             );
 
             const updateVotes = await AnswerVoteSchema.updateOne(
-                {_id:users[0]._id},
-                {$set: { 
-                    vote: voteState,
+                { _id: users[0]._id },
+                {
+                    $set: {
+                        vote: voteState,
                     }
                 }
             );
@@ -199,17 +225,17 @@ router.post('/api/addanswervote',async (req, res) =>{
 
             res.json([updateVotes, updateQuestion]);
         }
-     }
+    }
 
 });
 
 //===============================================================================
 //Read Votes
 
-router.get('/api/readanswervote', async (req, res) =>{
+router.get('/api/readanswervote', async (req, res) => {
     const findVote = await AnswerVoteSchema.find();
     res.json(findVote);
 });
 
-  
+
 module.exports = router;
