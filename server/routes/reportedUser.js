@@ -2,6 +2,8 @@
 const express = require('express');
 const router = express();
 const ReportedUser = require('../models/reportedUser');
+const UserSchema = require('../models/user');
+
 
 // CRUD GET
 router.get('/api/reportedUser/:id', async (req, res) => {
@@ -9,11 +11,32 @@ router.get('/api/reportedUser/:id', async (req, res) => {
     res.json(findUser);
 });
 
+// CRUD GET reported Post
+router.get('/api/reportedPost/:id', async (req, res) => {
+    const reportedPost = await ReportedUser.find();
+    // pull to do the flag icon state on question card
+    let reportedState = false
+    for (let i = 0; i < reportedPost.length; i++) {
+        if (reportedPost[i].questionId === req.params.id) {
+            reportedState = true
+        }
+    }
+    res.json(reportedState);
+});
+
 // GET ALL
 router.get('/api/allReportedUsers', async (req, res) => {
-    const reportedUsers = await ReportedUser.find();
-    // console.log("All Reported Users:", reportedUsers);
-    res.send(reportedUsers);
+    let reportedUsers = await ReportedUser.find();
+    let newReported = []
+    for (let i = 0; i < reportedUsers.length; i++) {
+        const findUser = await UserSchema.findById(reportedUsers[i].reportingUserId);
+        let pair = { reportingUsername: findUser.username }
+        newReported.push(pair);
+    }
+
+
+    // concat die dinge hier
+    res.json({ reportedUsers, newReported });
 });
 
 // DELETE ONE : this needs some thinking because a user can get flagged by many other users
