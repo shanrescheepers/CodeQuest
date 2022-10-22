@@ -119,7 +119,7 @@ const ProfilePage = () => {
     const badgeSixteen = <EighthAnswerAward/>
 
     let badgeSilverCheck = false;
-    const badgeSilver = <SliverAward/>
+    const badgeSilver = <SilverAward/>
 
     let badgeGoldCheck = false;
     const badgeGold = <GoldAward/>
