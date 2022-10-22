@@ -46,7 +46,7 @@ import SeventhAnswerAward from '../components/AnswerAwardBadges/SeventhAnswerAwa
 import EighthAnswerAward from '../components/AnswerAwardBadges/EighthAnswerAward';
 
 
-import SliverAward from '../components/RankAwardBadges/SliverAward';
+import SilverAward from '../components/RankAwardBadges/SilverAward';
 import GoldAward from '../components/RankAwardBadges/GoldAward';
 import DiamondAward from '../components/RankAwardBadges/DiamondAward';
 // import SliverAward from '../components/RankAwardBadges/SliverAward';
