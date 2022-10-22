@@ -201,9 +201,8 @@ const AdminPage = () => {
                             <TabList onChange={handleChangeTwo} aria-label="lab API tabs example" >
                                 <Tab label="Flagged Posts" value="1" indicatorColor="secondary" />
                                 <Tab label="Flagged Answers" value="2" />
-                                <Tab label="Badly Rated Posts" value="3" />
-                                <Tab label="Badly Rated Answers" value="4" />
                             </TabList>
+
                         </Box>
                     </div>
                     <div className='admin__flagged__and__bad__tabs__tabpanel'>
@@ -218,16 +217,7 @@ const AdminPage = () => {
                             <QuestionCard />
                             <QuestionCard /> */}
                         </TabPanel>
-                        <TabPanel value="3">
-                            {/* <QuestionCard />
-                            <QuestionCard />
-                            <QuestionCard /> */}
-                        </TabPanel>
-                        <TabPanel value="4">
-                            {/* <QuestionCard />
-                            <QuestionCard />
-                            <QuestionCard /> */}
-                        </TabPanel>
+
                     </div>
                 </TabContext>
             </div>
