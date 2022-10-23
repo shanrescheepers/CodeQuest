@@ -51,7 +51,7 @@ router.post('/api/adduser', (req, res) => {
     newUser.save()
         .then(async item => {
 
-            console.log("Item log:", item);
+            // console.log("Item log:", item);
             res.json(item);
 
             //verification
@@ -61,7 +61,7 @@ router.post('/api/adduser', (req, res) => {
             });
 
             let userIdLink = "http://localhost:3000/auth?id=" + findUser._id;
-            console.log("link is ", findUser._id);
+            // console.log("link is ", findUser._id);
 
 
             //Mailer functionality
@@ -125,7 +125,7 @@ router.post('/api/adduser', (req, res) => {
                 if (error) {
                     console.log(error);
                 }
-                console.log("massage sent: ", info.messageId);
+                // console.log("massage sent: ", info.messageId);
             });
 
 
@@ -245,8 +245,8 @@ router.post('/api/verifytoken', async (req, res) => {
 // DELETE ONE USER
 router.delete("/api/deleteUser/:id", async (req, res) => {
 
-    console.log("User Deleted");
-    console.log(req.params);
+    // console.log("User Deleted");
+    // console.log(req.params);
 
     await UserSchema.findByIdAndDelete(req.params.id)
         .then(response => res.json(response))

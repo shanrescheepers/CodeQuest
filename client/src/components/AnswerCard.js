@@ -18,6 +18,10 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import OutlinedFlagIcon from "@mui/icons-material/OutlinedFlag";
 import { Flag } from "@mui/icons-material";
 import FlagModal from '../modals/FlagModal';
+import Highlight from 'react-highlight';
+import "../css/code.css";
+
+
 
 export const AnswerCard = (props) => {
     console.log("Answer Prop", props);
@@ -482,7 +486,9 @@ export const AnswerCard = (props) => {
                     </div>
 
                     <div className="code_text">
-                        <p>{props.code}</p>
+                        <Highlight autodetect className="code-converted-text">
+                            {props.code}
+                        </Highlight>
                     </div>
 
                     <div className='divider'></div>

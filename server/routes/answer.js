@@ -99,23 +99,23 @@ router.patch('/api/updateanswerUpvotes/:id', async (req, res) => {
 //Add Vote
 router.post('/api/addanswervote', async (req, res) => {
 
-    console.log('body: ', req.body);
+    // console.log('body: ', req.body);
     const findVoter = await AnswerVoteSchema.find();
-    console.log('find', findVoter);
+    // console.log('find', findVoter);
 
     const answers = findVoter.filter(item => item.answerId == req.body.answerId); //gets questions id
     const users = answers.filter(item => item.userId == req.body.userId); //gets users qs
-    console.log("answers: ", answers);
-    console.log("Users: ", users);
+    // console.log("answers: ", answers);
+    // console.log("Users: ", users);
 
     //  const findQuestion = await newQuestionModel.findById(users[0].questionId);
 
     if (users === 'undefined' || users.length === 0) {
 
-        console.log("Users length:", users.length);
+        // console.log("Users length:", users.length);
         const findAnswer = await newAnswerModel.findById(req.body.answerId);
 
-        console.log('FindAnswer', findAnswer);
+        // console.log('FindAnswer', findAnswer);
         let upvote = findAnswer.upvotes;
         let downvote = findAnswer.downvotes;
 
@@ -143,11 +143,11 @@ router.post('/api/addanswervote', async (req, res) => {
             userId: req.body.userId,
             answerId: req.body.answerId
         });
-        console.log("New vote code", newVote);
+        // console.log("New vote code", newVote);
 
         newVote.save()
             .then(item => {
-                console.log(updateQuestion);
+                // console.log(updateQuestion);
                 res.json([item, updateQuestion])
             })
             .catch(err => {
@@ -155,13 +155,13 @@ router.post('/api/addanswervote', async (req, res) => {
             });
 
     } else {
-        console.log("User Already voted");
+        // console.log("User Already voted");
         //if() they are the same otherwise update
-        console.log(req.body.vote);
+        // console.log(req.body.vote);
         if (users[0].vote === req.body.vote) {
 
             const findAnswer = await newAnswerModel.findById(users[0].answerId);
-            console.log("rep", findAnswer);
+            // console.log("rep", findAnswer);
             let upvote = findAnswer.upvotes;
             let downvote = findAnswer.downvotes;
 

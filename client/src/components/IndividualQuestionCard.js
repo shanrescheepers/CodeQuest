@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import moment from "moment";
 import Highlight from 'react-highlight';
-import "../../node_modules/highlight.js/styles/solarized-dark.css";
+import "../css/code.css";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
