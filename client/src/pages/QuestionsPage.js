@@ -15,7 +15,11 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const QuestionsPage = () => {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+
+    const askNewQuestion = () => {
+        navigate('/newquestion')
+    }
 
   const [age, setAge] = React.useState("");
   const [tag, setTag] = React.useState("");
@@ -171,6 +175,7 @@ const QuestionsPage = () => {
                 },
               }}
               variant="contained"
+              onClick={askNewQuestion}
             >
               Ask a question
             </Button>
