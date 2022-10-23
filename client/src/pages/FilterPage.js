@@ -25,6 +25,16 @@ import { useNavigate } from "react-router-dom";
 
 const ResultPage = (props) => {
   const [age, setAge] = React.useState("");
+  const [tag, setTag] = React.useState("");
+
+  const tagHandleChange = (event) => {
+    setTag(event.target.value);
+
+    sessionStorage.setItem("filter", event.target.value);
+    navigate("/FilterPage");
+    window.location.reload(false);
+    console.log(event.target.value);
+  };
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -78,12 +88,26 @@ const ResultPage = (props) => {
 
   let getFilterText = sessionStorage.getItem("filter");
 
+  // functions to sort by date
+  function sortNewest(a, b) {
+    var dateA = new Date(a.datePosted).getTime();
+    var dateB = new Date(b.datePosted).getTime();
+    return dateA < dateB ? 1 : -1;
+  }
+  function sortOldest(a, b) {
+    var dateA = new Date(a.datePosted).getTime();
+    var dateB = new Date(b.datePosted).getTime();
+    return dateA > dateB ? 1 : -1;
+  }
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/readquestions")
       .then((res) => {
         let questionData = res.data;
         let idArray = [];
+        let newestDates = [];
+        let Oldest = [];
+        let questionDataFiller = [];
         let tagsArray = questionData.map((item) => {
           item.tags.map((tag) => {
             if (tag.toLowerCase() == getFilterText.toLowerCase()) {
@@ -93,7 +117,6 @@ const ResultPage = (props) => {
             return tag;
           });
         });
-
         console.log(idArray);
 
         for (let x = 0; x < questionData.length; x++) {
@@ -104,25 +127,35 @@ const ResultPage = (props) => {
             }
           }
         }
-        let renderQuestions = questionData.map((item) => {
-          for (let y = 0; y < idArray.length; y++) {
-            if (item._id == idArray[y]) {
-              return (
-                <QuestionCard
-                  key={item._id}
-                  questionId={item._id}
-                  date={item.datePosted}
-                  title={item.title}
-                  description={item.description}
-                  upvotes={item.upvotes}
-                  downvotes={item.downvotes}
-                  userId={item.userId}
-                  editRender={setUpdateQuestions}
-                />
-              );
-            }
-          }
+
+        //get the newest date
+        if (getFilterText == "Oldest") {
+          questionDataFiller = questionData.sort(sortOldest);
+        } else {
+          questionDataFiller = questionData.sort(sortNewest);
+        }
+        
+
+        let renderQuestions = questionDataFiller.map((item) => {
+          
+          
+          return (
+            <QuestionCard
+              key={item._id}
+              questionId={item._id}
+              date={item.datePosted}
+              title={item.title}
+              description={item.description}
+              upvotes={item.upvotes}
+              downvotes={item.downvotes}
+              userId={item.userId}
+              editRender={setUpdateQuestions}
+            />
+          )
+          
         });
+        
+        
         setQuestions(renderQuestions);
         setUpdateQuestions(false);
       })
@@ -169,7 +202,7 @@ const ResultPage = (props) => {
           <div className="dropdowns">
             <Box sx={{ minWidth: 200, width: "140px", margin: "20px" }}>
               <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Year</InputLabel>
+                <InputLabel id="demo-simple-select-label">Order By</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
@@ -182,10 +215,8 @@ const ResultPage = (props) => {
                     "border-radius": "40px",
                   }}
                 >
-                  <MenuItem value={"Java"}>1st Year</MenuItem>
-                  <MenuItem value={"Node"}>2nd Year</MenuItem>
-                  <MenuItem value={"Express"}>3rd Year</MenuItem>
-                  <MenuItem value={"React"}>4rd Year</MenuItem>
+                  <MenuItem value={"Oldest"}>Oldest</MenuItem>
+                  <MenuItem value={"Newest"}>Newest</MenuItem>
                 </Select>
               </FormControl>
             </Box>
@@ -195,9 +226,9 @@ const ResultPage = (props) => {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={age}
-                  label="Age"
-                  onChange={handleChange}
+                  value={tag}
+                  label="Tag"
+                  onChange={tagHandleChange}
                   sx={{
                     background: "white",
                     "border-color": "white",

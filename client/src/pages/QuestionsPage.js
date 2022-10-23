@@ -15,9 +15,20 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const QuestionsPage = () => {
-  const [age, setAge] = React.useState("");
-
   const navigate = useNavigate();
+
+  const [age, setAge] = React.useState("");
+  const [tag, setTag] = React.useState("");
+
+  const tagHandleChange = (event) => {
+    setTag(event.target.value);
+
+    sessionStorage.setItem("filter", event.target.value);
+    navigate("/FilterPage");
+    window.location.reload(false);
+
+    console.log(event.target.value);
+  };
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -116,10 +127,8 @@ const QuestionsPage = () => {
                     "border-radius": "40px",
                   }}
                 >
-                  <MenuItem value={"Java"}>1st Year</MenuItem>
-                  <MenuItem value={"Node"}>2nd Year</MenuItem>
-                  <MenuItem value={"Express"}>3rd Year</MenuItem>
-                  <MenuItem value={"React"}>4rd Year</MenuItem>
+                  <MenuItem value={"Oldest"}>Oldest</MenuItem>
+                  <MenuItem value={"Newest"}>Newest</MenuItem>
                 </Select>
               </FormControl>
             </Box>
@@ -129,9 +138,9 @@ const QuestionsPage = () => {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={age}
-                  label="Age"
-                  onChange={handleChange}
+                  value={tag}
+                  label="Tag"
+                  onChange={tagHandleChange}
                   sx={{
                     background: "white",
                     "border-color": "white",
