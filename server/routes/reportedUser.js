@@ -55,16 +55,25 @@ router.get('/api/reportedQuestions/', async (req, res) => {
 router.get('/api/reportedAnswer/', async (req, res) => {
     let reportedUsers = await ReportedUser.find();
     let answers = []
+    let questions = []
+
     for (let i = 0; i < reportedUsers.length; i++) {
         console.log(reportedUsers[i].questionId);
         const findAnswer = await newAnswerModel.findById(reportedUsers[i].questionId);
         console.log(findAnswer);
         if (findAnswer !== null) {
             answers.push(findAnswer)
+            const findQuestion = await newQuestionModel.findById(findAnswer.questionId);
+            // console.log(findQuestion);
+            if (findQuestion !== null) {
+                questions.push(findQuestion)
+            }
         }
+
+
     }
 
-    res.json(answers);
+    res.json({ answers, questions });
 });
 
 // CRUD GET reported Post

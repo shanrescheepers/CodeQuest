@@ -454,11 +454,11 @@ const QuestionCard = (props) => {
                         {/* FLAG COLOR HERE in div class: flag-button-red */}
                         {flagState ? (
                             <div className='flag-button-red question-card-icon' onClick={() => console.log("Already flagged")}>
-                                <Flag fontSize="large" />
+                                <OutlinedFlagIcon fontSize="medium" />
                             </div>
                         ) : (
                             <div className='flag-button question-card-icon' onClick={() => flagQuestion()}>
-                                <OutlinedFlagIcon fontSize="large" />
+                                <OutlinedFlagIcon fontSize="medium" />
                             </div>
                         )}
 

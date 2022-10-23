@@ -70,27 +70,27 @@ const FlaggedPosts = () => {
         Axios.get('http://localhost:5000/api/reportedQuestions/')
             .then(res => {
                 let data = res.data
-                console.log(data);
+                // console.log(data);
                 let reportedQuestion = []
 
                 setRows([])
 
                 for (let i = 0; i < data.length; i++) {
                     let reportedQuestion = data[i];
-                    console.log(reportedQuestion._id);
+                    // console.log(reportedQuestion._id);
                     Axios.get('http://localhost:5000/api/reportedQuestionAnswer/' + reportedQuestion._id).then(res1 => {
                         let loopData = data[i]
 
                         let data1 = res1.data.finduser[0]
-                        console.log(res1.data);
+                        // console.log(res1.data);
 
                         reportedQuestion["datePosted"] = loopData.datePosted;
                         reportedQuestion["dateFlagged"] = data1.dateFlagged;
                         reportedQuestion["flagReason"] = data1.flagReason;
-                        reportedQuestion["totalAnswers"] = res1.data.totalAnswers[i].answerLength;
+                        reportedQuestion["totalAnswers"] = res1.data.totalAnswers[0].answerLength;
 
 
-                        console.log(loopData.datePosted);
+                        // console.log(loopData.datePosted);
 
 
 
