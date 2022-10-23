@@ -24,3 +24,13 @@
     border: none !important;
   }
   
+  .answer-flag-button-red{
+    color:rgb(203, 40, 40) !important;
+    background-color: rgb(252, 218, 218);
+    border-radius: 50px;
+    height: 39px;
+    width: 42px;
+    padding: 8px;
+justify-content: center;
+    text-align: center;
+}

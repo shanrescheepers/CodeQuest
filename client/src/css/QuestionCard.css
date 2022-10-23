@@ -13,12 +13,13 @@
 }
 
 .flag-button-red{
-    color:rgb(249, 147, 147) !important;
+    color:rgb(203, 40, 40) !important;
     background-color: rgb(252, 218, 218);
     border-radius: 50px;
     height: auto;
-    width: 40px;
-    padding: 2px;
+    width: 30px;
+    padding: 5px;
+    justify-content: center;
     text-align: center;
 }
 .question-con-content {

@@ -14,9 +14,8 @@ import Axios from 'axios';
 import { Icon, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
-import DeleteUserModalAdmin from '../../modals/DeleteUserModalAdmin';
-import IgnoreUserModal from '../../modals/IgnoreUserModalAdmin';
-import DeleteModal from '../../modals/DeleteModal';
+import DeletePostModal from '../../modals/DeleteFlaggedPostModal';
+import IgnorePostModal from '../../modals/IgnoreFlaggedPostModal';
 
 const FlaggedPosts = () => {
 
@@ -55,14 +54,14 @@ const FlaggedPosts = () => {
     const [reportedQuestion, setReportedQuestion] = useState([]);
 
     const removePostFromFlagTable = (id) => {
-        setIgnoreUserModal(<IgnoreUserModal close={setIgnoreUserModal} id={id} />)
+        setIgnoreUserModal(<IgnorePostModal close={setIgnoreUserModal} id={id} post={true} />)
         // console.log(id);
     }
 
     const deleteUser = (id) => {
         // console.log(id);
-        setDeletePostModal(<DeleteModal
-            close={setDeletePostModal} id={id}
+        setDeletePostModal(<DeletePostModal
+            close={setDeletePostModal} id={id} post={true}
         />)
     }
 
@@ -70,27 +69,27 @@ const FlaggedPosts = () => {
         Axios.get('http://localhost:5000/api/reportedQuestions/')
             .then(res => {
                 let data = res.data
-                console.log(data);
+                // console.log(data);
                 let reportedQuestion = []
 
                 setRows([])
 
                 for (let i = 0; i < data.length; i++) {
                     let reportedQuestion = data[i];
-                    console.log(reportedQuestion._id);
+                    // console.log(reportedQuestion._id);
                     Axios.get('http://localhost:5000/api/reportedQuestionAnswer/' + reportedQuestion._id).then(res1 => {
                         let loopData = data[i]
 
                         let data1 = res1.data.finduser[0]
-                        console.log(res1.data);
+                        // console.log(res1.data);
 
                         reportedQuestion["datePosted"] = loopData.datePosted;
                         reportedQuestion["dateFlagged"] = data1.dateFlagged;
                         reportedQuestion["flagReason"] = data1.flagReason;
-                        reportedQuestion["totalAnswers"] = res1.data.totalAnswers[i].answerLength;
+                        reportedQuestion["totalAnswers"] = res1.data.totalAnswers[0].answerLength;
 
 
-                        console.log(loopData.datePosted);
+                        // console.log(loopData.datePosted);
 
 
 
@@ -130,7 +129,7 @@ const FlaggedPosts = () => {
             })
 
 
-    }, []);
+    }, [deletePostModal, ignoreUserModal]);
     // WORKING[deleteUserModal, ignoreUserModal]
 
     return (

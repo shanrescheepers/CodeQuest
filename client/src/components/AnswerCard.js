@@ -515,8 +515,8 @@ export const AnswerCard = (props) => {
                             </div> */}
 
                             {flagState ? (
-                                <div className='flag-button question-card-icon' onClick={() => console.log("Already flagged")}>
-                                    <Flag fontSize="large" />
+                                <div className='answer-flag-button-red question-card-icon' onClick={() => console.log("Already flagged")}>
+                                    <OutlinedFlagIcon fontSize="large" />
                                 </div>
                             ) : (
                                 <div className='flag-button question-card-icon' onClick={() => flagAnswer()}>

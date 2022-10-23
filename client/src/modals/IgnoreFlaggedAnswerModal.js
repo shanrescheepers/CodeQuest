@@ -5,14 +5,14 @@ import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
 import Axios from 'axios';
 
-const IgnoreUserModal = (props) => {
+const IgnoreAnswerModal = (props) => {
     const closeModal = () => {
         props.close();
     }
     const ignoreFlagUserFunction = () => {
 
-        console.log("Ignore User");
-        Axios.delete('http://localhost:5000/api/deleteReportedUser/' + props.id)
+        console.log("This is a answer");
+        Axios.delete('http://localhost:5000/api/ignoreReportedAnswer/' + props.id)
             .then(res => {
                 // console.log("user has been removed from flagged list");
                 closeModal();
@@ -51,4 +51,4 @@ const IgnoreUserModal = (props) => {
     );
 };
 
-export default IgnoreUserModal;
+export default IgnoreAnswerModal;

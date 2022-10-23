@@ -28,9 +28,9 @@ const QuestionCard = (props) => {
     }
 
     const [flagState, setFlagState] = useState(false)
-
+    const userId = sessionStorage.getItem("id");
     useEffect(() => {
-        axios.get('http://localhost:5000/api/reportedPost/' + props?.questionId)
+        axios.get('http://localhost:5000/api/reportedPost/' + props?.questionId + "/" + userId)
             .then(res => {
                 let data = res.data;
                 console.log(data);
@@ -454,11 +454,11 @@ const QuestionCard = (props) => {
                         {/* FLAG COLOR HERE in div class: flag-button-red */}
                         {flagState ? (
                             <div className='flag-button-red question-card-icon' onClick={() => console.log("Already flagged")}>
-                                <Flag fontSize="large" />
+                                <OutlinedFlagIcon fontSize="medium" />
                             </div>
                         ) : (
                             <div className='flag-button question-card-icon' onClick={() => flagQuestion()}>
-                                <OutlinedFlagIcon fontSize="large" />
+                                <OutlinedFlagIcon fontSize="medium" />
                             </div>
                         )}
 

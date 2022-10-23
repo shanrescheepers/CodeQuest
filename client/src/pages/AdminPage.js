@@ -108,22 +108,17 @@ const AdminPage = () => {
         let payload = {
             rank: "Diamond"
         }
-
-
         // Need TO ADD THIS TO A CARD COMPONENT ---- GET THE USER ID TO UPDATE THE ADMIN PERMISSIONS 
         // Change Rank to Diamond 
-
         Axios.patch('/api/adminreqauth/:id' + activeUser, payload)
             .then((res) => {
                 if (res) {
                     console.log("User Updated");
-
                 }
             })
             .catch(function (error) {
                 console.log(error);
             });
-
     }
 
 
