@@ -5,7 +5,7 @@ const addAnswer = mongoose.Schema({
     questionId: {type: String, required: true},
     description: {type: String, required: true},
     screenshots: {type: Array, required: false},
-    code: {type: String, required: true},
+    code: {type: String, required: false},
     upvotes: {type: Number, required: true},
     downvotes: {type: Number, required: true},
     datePosted: {type: Date, default: Date.now},

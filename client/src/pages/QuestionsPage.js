@@ -118,7 +118,7 @@ const QuestionsPage = () => {
           <div className="dropdowns">
             <Box sx={{ minWidth: 200, width: "140px", margin: "20px" }}>
               <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Year</InputLabel>
+                <InputLabel id="demo-simple-select-label">Posts</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
