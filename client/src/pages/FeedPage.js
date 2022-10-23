@@ -1,13 +1,3 @@
-// Service Example
-
-// const axios = require('axios');
-
-// export class UserService {
-//     checkUser = (email, password) => {
-//     }
-// } 
-// import Navigation from '../components/Navigation';
-
 import '../css/HomeFeed.css';
 import React from 'react';
 import { Button } from '@mui/material';
@@ -123,6 +113,7 @@ useEffect(()=>{
             </div>
 
             <div className='question-card-con'>
+    
                 {questions}
             </div>
 

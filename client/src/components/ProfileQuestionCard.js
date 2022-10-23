@@ -1,15 +1,12 @@
 import '../css/QuestionCard.css';
-import { Link } from 'react-router-dom';
-import OutlinedFlagIcon from '@mui/icons-material/OutlinedFlag';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import { useNavigate } from 'react-router';
-import FlagModal from '../modals/FlagModal';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import { Flag } from '@mui/icons-material';
-const QuestionCard = (props) => {
+const ProfileQuestionCard = (props) => {
 
     const navigate = useNavigate();
 
@@ -20,28 +17,6 @@ const QuestionCard = (props) => {
         //send question id to session storage
         sessionStorage.setItem('questionId', props.questionId);
     }
-    const [flagModal, setFlagModal] = useState()
-
-
-    const flagQuestion = () => {
-        setFlagModal(<FlagModal close={setFlagModal} id={props.id} questionId={props.questionId} userId={props.userId} />)
-    }
-
-    const [flagState, setFlagState] = useState(false)
-    const userId = sessionStorage.getItem("id");
-    useEffect(() => {
-        axios.get('http://localhost:5000/api/reportedPost/' + props?.questionId + "/" + userId)
-            .then(res => {
-                let data = res.data;
-                console.log(data);
-                setFlagState(data)
-
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
-    }, [flagModal]);
 
     const [answersLength, setAnswersLength] = useState(0)
 
@@ -56,7 +31,7 @@ const QuestionCard = (props) => {
                 console.log(error);
             });
 
-    }, [flagModal]);
+    }, []);
 
     //=====================================================================
     //Get Current Vote state
@@ -438,7 +413,7 @@ const QuestionCard = (props) => {
 
 
     return (
-        <>{flagModal}
+        <>
             <div className='question-con' >
 
                 <div className='question-con-content'>
@@ -452,15 +427,11 @@ const QuestionCard = (props) => {
                         </div>
 
                         {/* FLAG COLOR HERE in div class: flag-button-red */}
-                        {flagState ? (
-                            <div className='flag-button-red question-card-icon' onClick={() => console.log("Already flagged")}>
-                                <OutlinedFlagIcon fontSize="large" />
+   
+                            <div className='flag-button question-card-icon'>
+                                <DeleteOutlineOutlinedIcon fontSize="large" />
                             </div>
-                        ) : (
-                            <div className='flag-button question-card-icon' onClick={() => flagQuestion()}>
-                                <OutlinedFlagIcon fontSize="large" />
-                            </div>
-                        )}
+                     
 
 
 
@@ -504,4 +475,4 @@ const QuestionCard = (props) => {
     );
 }
 
-export default QuestionCard;
+export default ProfileQuestionCard;

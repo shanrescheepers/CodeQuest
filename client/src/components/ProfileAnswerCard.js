@@ -1,62 +1,36 @@
-import '../css/QuestionCard.css';
-import { Link } from 'react-router-dom';
-import OutlinedFlagIcon from '@mui/icons-material/OutlinedFlag';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import moment from 'moment';
-import { useNavigate } from 'react-router';
-import FlagModal from '../modals/FlagModal';
+import "../css/QuestionCard.css";
+import "../css/profilePage.css";
+import "../css/IndividualQuestion.css";
+import "../css/AnswerCard.css";
+import $ from "jquery";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import moment from "moment";
+import { useNavigate } from "react-router";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import { Flag } from '@mui/icons-material';
-const QuestionCard = (props) => {
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import Highlight from 'react-highlight';
+import "../css/code.css";
 
+
+
+export const AnswerCard = (props) => {
+    console.log("Answer Prop", props);
+    const [index, setIndex] = useState(0);
     const navigate = useNavigate();
 
+    function AnswerQuestion() {
+        // console.log("something");
+        $(".answer_question").fadeIn();
+    }
     //navigate to individual question page
     const goToIndividualQuestion = () => {
-        navigate('/IndividualQuestion');
+        navigate("/IndividualQuestion");
 
         //send question id to session storage
-        sessionStorage.setItem('questionId', props.questionId);
-    }
-    const [flagModal, setFlagModal] = useState()
-
-
-    const flagQuestion = () => {
-        setFlagModal(<FlagModal close={setFlagModal} id={props.id} questionId={props.questionId} userId={props.userId} />)
-    }
-
-    const [flagState, setFlagState] = useState(false)
-    const userId = sessionStorage.getItem("id");
-    useEffect(() => {
-        axios.get('http://localhost:5000/api/reportedPost/' + props?.questionId + "/" + userId)
-            .then(res => {
-                let data = res.data;
-                console.log(data);
-                setFlagState(data)
-
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
-    }, [flagModal]);
-
-    const [answersLength, setAnswersLength] = useState(0)
-
-    useEffect(() => {
-        axios.get('http://localhost:5000/api/readQuestionAnswerAmount/' + props?.questionId)
-            .then(res => {
-                let data = res.data;
-                console.log(data);
-                setAnswersLength(data)
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
-    }, [flagModal]);
+        sessionStorage.setItem("questionId", props.questionId);
+    };
 
     //=====================================================================
     //Get Current Vote state
@@ -66,20 +40,22 @@ const QuestionCard = (props) => {
     const [category, setCategory] = useState('');
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/readvote')
+        axios.get('http://localhost:5000/api/readanswervote')
             .then(res => {
                 let data = res.data;
-                //  console.log(data);
+                // console.log(data);
                 let user = sessionStorage.getItem('id');
 
                 for (let i = 0; i < data.length; i++) {
-                    if (props.questionId === data[i].questionId) {
+                    if (props.questionId === data[i].answerId) {
 
                         // console.log(user, data[i].userId);
                         if (user === data[i].userId) {
                             console.log("should work");
                             if (data[i].vote === 'upvote') {
                                 setArrowImgUp('UpActive');
+
+
                                 setArrowImgDown('Down')
                                 setCategory('startUp')
                             } else if (data[i].vote === 'downvote') {
@@ -90,7 +66,7 @@ const QuestionCard = (props) => {
                             console.log("not happening");
 
                         } else {
-                            //    console.log('N/A');
+                            console.log('N/A');
                         }
 
 
@@ -331,13 +307,14 @@ const QuestionCard = (props) => {
     const addVote = () => {
         // console.log("It works, Whoopieee");
 
+        console.log(props.questionId);
         let payloadData = {
             vote: 'upvote',
             userId: sessionStorage.getItem('id'),
-            questionId: props.questionId
+            answerId: props.questionId
         }
 
-        axios.post('http://localhost:5000/api/addvote', payloadData)
+        axios.post('http://localhost:5000/api/addanswervote', payloadData)
             .then((res) => {
                 if (res) {
                     // console.log("Vote Added"); 
@@ -358,14 +335,15 @@ const QuestionCard = (props) => {
     const subtractVote = () => {
         // console.log("It works, Whoopieee");
 
+        console.log(props.questionId);
         let payloadData = {
             vote: 'downvote',
             userId: sessionStorage.getItem('id'),
-            questionId: props.questionId
+            answerId: props.questionId
         }
-        // console.log(payloadData);
+        console.log(payloadData);
 
-        axios.post('http://localhost:5000/api/addvote', payloadData)
+        axios.post('http://localhost:5000/api/addanswervote', payloadData)
             .then((res) => {
                 if (res) {
                     console.log("Vote Added");
@@ -384,11 +362,7 @@ const QuestionCard = (props) => {
 
     //====================================================================
     //Cut descirption
-
     let desc = (props.description).substring(0, 80);
-
-
-
     //=====================================================================
     //User Info
 
@@ -396,83 +370,100 @@ const QuestionCard = (props) => {
     const [rank, setRank] = useState();
     const [profileImg, setprofileImg] = useState();
     const [year, setYear] = useState();
+    const [questionColor, setQuestionColor] = useState();
+    const [answerConfirmation, setAnsweronfirmation] = useState();
+
+    //display screenshots in image slider 
+    let aScreenshots = props.screenshots;
+
+    let screenshots = [];
+
+    for (let i = 0; i < aScreenshots.length; i++) {
+        let URLs = 'http://localhost:5000/answerScreenshots/' + aScreenshots[i].filename;
+        screenshots.push(URLs);
+    }
+
 
     useEffect(() => {
+        console.log(props);
 
         if (props.userId == null) {
-            console.log("User not logged in")
-
+            //   console.log("User not logged in");
         } else {
-            console.log("user logged in")
-            axios.get('http://localhost:5000/api/userInfo/' + props.userId)
-                .then(res => {
+            //   console.log("user logged in");
+            axios
+                .get("http://localhost:5000/api/userInfo/" + props.userId)
+                .then((res) => {
                     let data = res.data;
                     setUsername(data.username);
                     setRank(data.rank);
                     setprofileImg(data.profileimage);
                     setYear(data.yearlevel);
-                    // console.log(data.rank)
-                })
+                    //   console.log(data.rank);
+
+                    let year = data.yearlevel;
+                    let bgColor = '';
+
+                    if (year === 1) {
+                        bgColor = "#6EEB83";
+                    } else if (year === 2) {
+                        bgColor = "#6CD4FF";
+                    } else {
+                        bgColor = "#FF7900";
+                    }
+
+                    setQuestionColor(bgColor)
+                });
         }
-        // localStorage.clear();
     }, []);
 
     //get profile image path
-    const imgURL = ('Avatars/' + profileImg + '.png');
-
-    // console.log(year);
-    let bgColor = '';
-
-    if (year === 1) {
-        bgColor = '#6EEB83'
-    } else if (year === 2) {
-        bgColor = '#6CD4FF'
-    } else {
-        bgColor = '#FF7900'
-    };
-
-
+    const imgURL = "Avatars/" + profileImg + ".png";
     const upImgURL = ('Votes/' + arrowImgUp + '.png');
     const downImgURL = ('Votes/' + arrowImgDown + '.png');
 
 
-
     return (
-        <>{flagModal}
-            <div className='question-con' >
+        <>
+            <div className="show_answered_con" style={{ backgroundColor: questionColor }}>
+                <div className="show_answered_blue_con">
 
-                <div className='question-con-content'>
-                    <div className='top-block'>
-                        <div className='user-info-block' onClick={() => goToIndividualQuestion()}>
-                            <div className='profile-circle question' style={{ backgroundColor: bgColor }}><img src={imgURL} className="profile-Img question"></img></div>
-                            <div className='user-info'>
-                                <h4>{username}</h4>
-                                <p>{formatDate}</p>
-                            </div>
+                    <div className="show_answer_text">
+                        <h4>Answered by {username}</h4>
+                        <p>{formatDate}</p>
+                    </div>
+
+                    <div className="show_answer_text">
+                        <p>{props.description}</p>
+                    </div>
+
+                    <div className="slideshow">
+                        <div className="slideshow-slider" style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
+                            {screenshots.map((screenshot, index) => (
+                                <div className="slide" key={index}>
+                                    <img src={screenshot} className="slide-img" />
+                                </div>
+                            ))}
                         </div>
 
-                        {/* FLAG COLOR HERE in div class: flag-button-red */}
-                        {flagState ? (
-                            <div className='flag-button-red question-card-icon' onClick={() => console.log("Already flagged")}>
-                                <OutlinedFlagIcon fontSize="large" />
-                            </div>
-                        ) : (
-                            <div className='flag-button question-card-icon' onClick={() => flagQuestion()}>
-                                <OutlinedFlagIcon fontSize="large" />
-                            </div>
-                        )}
-
-
-
-
+                        <div className="slideshow-dots">
+                            {screenshots.map((_, idx) => (
+                                <div key={idx} className={`slideshow-dot${index === idx ? " active" : ""}`}
+                                    onClick={() => {
+                                        setIndex(idx);
+                                    }}>
+                                </div>
+                            ))}
+                        </div>
                     </div>
 
-                    <div className='user-question' onClick={() => goToIndividualQuestion()}>
-                        <h3>Q: {props.title}</h3>
-                        <p>{desc} ...</p>
+                    <div className="code_text">
+                        <Highlight autodetect className="code-converted-text">
+                            {props.code}
+                        </Highlight>
                     </div>
 
-                    <div className='divider' onClick={() => goToIndividualQuestion()}></div>
+                    <div className='divider'></div>
 
                     <div className='bottom-block'>
                         <div className='arrow-con'>
@@ -494,14 +485,19 @@ const QuestionCard = (props) => {
 
                                 <small className='downvote-count vote-count'>{displayDownVote}</small>
                             </ToggleButtonGroup>
-                        </div>
 
-                        <small><p>{answersLength} Answers</p></small>
+  
+
+                     
+                                <div className='flag-button question-card-icon' >
+                                    <DeleteOutlineOutlinedIcon fontSize="large" />
+                                </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </>
     );
-}
+};
 
-export default QuestionCard;
