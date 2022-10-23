@@ -109,7 +109,7 @@ const FlaggedPosts = () => {
                         // Deletebutton
                         const deleteButton = (
                             <Button sx={{
-                                backgroundColor: '#2b2b2b', borderRadius: '20px', height: "33px", width: '130px', fontFamily: 'Open Sans', fontSize: "10px",
+                                backgroundColor: '#2b2b2b', borderRadius: '20px', height: "33px", width: '110px', fontFamily: 'Open Sans', fontSize: "10px",
                                 '&:hover': {
                                     backgroundColor: '#FF7900',
                                 }
@@ -117,7 +117,7 @@ const FlaggedPosts = () => {
                             }} variant="contained" onClick={() =>
                                 deleteUser(reportedQuestion._id)}>
 
-                                <DeleteIcon style={{ height: "15px" }} />Delete Post
+                                <DeleteIcon style={{ height: "15px" }} />DELETE
                             </Button >
                         )
                         reportedQuestion["deletePost"] = deleteButton;

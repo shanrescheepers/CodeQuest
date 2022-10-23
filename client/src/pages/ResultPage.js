@@ -11,7 +11,12 @@ import Navigation from "../components/Navigation";
 import { useState, useEffect } from "react";
 import { ArrowBackRounded } from "@mui/icons-material";
 const ResultPage = (props) => {
+  //Should rather be using Props
+
   let searchText = sessionStorage.getItem("SearchText");
+
+  // Why session storage???
+
   const buttonStyle = {
     backgroundColor: "#FF7900",
     borderRadius: "50px",
@@ -56,11 +61,16 @@ const ResultPage = (props) => {
   let getSearchText = sessionStorage.getItem("SearchText");
 
   useEffect(() => {
+    //This get function should take the prop value
+    //This should give back an array of questions
+    //If it was backend driven then it would be easy to implement extra search parameters like tags. Title. Description...
     axios
       .get("http://localhost:5000/api/readquestions")
       .then((res) => {
         let questionData = res.data;
-
+        //Why is this process being done on the frontend
+        //This should be back-end driven
+        //Should be driven from an endpoint
         let filteredSearch = questionData.filter(
           (items) => items.title.toLowerCase() == getSearchText.toLowerCase()
         );
