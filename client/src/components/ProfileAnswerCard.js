@@ -13,8 +13,6 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import Highlight from 'react-highlight';
 import "../css/code.css";
 
-
-
 export const AnswerCard = (props) => {
     console.log("Answer Prop", props);
     const [index, setIndex] = useState(0);
