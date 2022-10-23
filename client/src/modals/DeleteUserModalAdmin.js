@@ -5,10 +5,11 @@ import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
 import Axios from 'axios';
 const DeleteUserModal = (props) => {
-
+    console.log("Delete Modal");
     const closeModal = () => {
         props.close();
     }
+
     const deleteUserFunction = () => {
         Axios.delete('http://localhost:5000/api/deleteUser/' + props.id)
             .then((res) => {
@@ -24,6 +25,8 @@ const DeleteUserModal = (props) => {
             .catch(function (error) {
                 // console.log(error);
             });
+
+
 
     }
 

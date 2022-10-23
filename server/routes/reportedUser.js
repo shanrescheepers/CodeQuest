@@ -77,19 +77,19 @@ router.get('/api/reportedAnswer/', async (req, res) => {
 });
 
 // CRUD GET reported Post
-router.get('/api/reportedPost/:id', async (req, res) => {
+router.get('/api/reportedPost/:id/:userId', async (req, res) => {
     const reportedPost = await ReportedUser.find();
     // pull to do the flag icon state on question card
     let reportedState = false
 
 
     for (let i = 0; i < reportedPost.length; i++) {
-
-        if (reportedPost[i].questionId === req.params.id) {
-            reportedState = true
-
-
+        if (reportedPost[i].reportingUserId === req.params.userId) {
+            if (reportedPost[i].questionId === req.params.id) {
+                reportedState = true
+            }
         }
+
     }
     console.log(req.params.id);
     res.json(reportedState);
@@ -126,6 +126,22 @@ router.delete('/api/deleteReportedUser/:id', async (req, res) => {
         .catch(error => res.status(500).json(error))
 });
 
+router.delete('/api/ignoreReportedAnswer/:id', async (req, res) => {
+    // console.log("Deleted the user on flagged");
+    // console.log(req.params);
+    await ReportedUser.deleteOne({ questionId: req.params.id })
+        .then(response => res.json(response))
+        .catch(error => res.status(500).json(error))
+});
+
+router.delete('/api/ignoreReportedPost/:id', async (req, res) => {
+    // console.log("Deleted the user on flagged");
+    // console.log(req.params);
+    await ReportedUser.deleteOne({ questionId: req.params.id })
+        .then(response => res.json(response))
+        .catch(error => res.status(500).json(error))
+});
+
 // To Report A User, One must First , ADD a User (to report, obviouslay ay ay).
 router.post('/api/addReportedUser', (req, res) => {
     // console.log(req.body);
@@ -146,6 +162,21 @@ router.post('/api/addReportedUser', (req, res) => {
         .catch(err => {
             res.status(400).json({ msg: "Cannot add the new Reported User because: ", err });
         });
+});
+
+router.delete('/api/deleteAnswer/:id', async (req, res) => {
+    console.log(req.params.id);
+    await newAnswerModel.deleteOne({ _id: req.params.id })
+        .then(response => res.json(response))
+        .catch(error => res.status(500).json(error))
+});
+
+//This would delete the post and answers
+router.delete('/api/deletePost/:id', async (req, res) => {
+    console.log(req.params.id);
+    await newQuestionModel.deleteOne({ _id: req.params.id })
+        .then(response => res.json(response))
+        .catch(error => res.status(500).json(error))
 });
 
 module.exports = router;

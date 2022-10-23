@@ -71,64 +71,64 @@ const ProfilePage = () => {
     };
 
     let badgeOneCheck = false;
-    const badgeOne = <FirstQuestionAward/>
+    const badgeOne = <FirstQuestionAward />
 
     let badgeTwoCheck = false;
-    const badgeTwo = <SecondQuestionAward/>
+    const badgeTwo = <SecondQuestionAward />
 
     let badgeThreeCheck = false;
-    const badgeThree = <ThirdQuestionAward/>
+    const badgeThree = <ThirdQuestionAward />
 
     let badgeFourCheck = false;
-    const badgeFour = <FourthQuestionAward/>
+    const badgeFour = <FourthQuestionAward />
 
     let badgeFiveCheck = false;
-    const badgeFive = <FifthQuestionAward/>
+    const badgeFive = <FifthQuestionAward />
 
     let badgeSixCheck = false;
-    const badgeSix = <SixthQuestionAward/>
+    const badgeSix = <SixthQuestionAward />
 
     let badgeSevenCheck = false;
-    const badgeSeven = <SeventhQuestionAward/>
+    const badgeSeven = <SeventhQuestionAward />
 
     let badgeEightCheck = false;
-    const badgeEight = <EighthQuestionAward/>
+    const badgeEight = <EighthQuestionAward />
 
     let badgeNineCheck = false;
-    const badgeNine = <FirstAnswerAward/>
+    const badgeNine = <FirstAnswerAward />
 
     let badgeTenCheck = false;
-    const badgeTen = <SecondAnswerAward/>
+    const badgeTen = <SecondAnswerAward />
 
     let badgeElevenCheck = false;
-    const badgeEleven = <ThirdAnswerAward/>
+    const badgeEleven = <ThirdAnswerAward />
 
     let badgeTwelveCheck = false;
-    const badgeTwelve = <FourthAnswerAward/>
+    const badgeTwelve = <FourthAnswerAward />
 
     let badgeThirteenCheck = false;
-    const badgeThirteen = <FifthAnswerAward/>
+    const badgeThirteen = <FifthAnswerAward />
 
     let badgeFourteenCheck = false;
-    const badgeFourteen = <SixthAnswerAward/>
+    const badgeFourteen = <SixthAnswerAward />
 
     let badgeFifteenCheck = false;
-    const badgeFifteen = <SeventhAnswerAward/>
+    const badgeFifteen = <SeventhAnswerAward />
 
     let badgeSixteenCheck = false;
-    const badgeSixteen = <EighthAnswerAward/>
+    const badgeSixteen = <EighthAnswerAward />
 
     let badgeSilverCheck = false;
-    const badgeSilver = <SilverAward/>
+    const badgeSilver = <SilverAward />
 
     let badgeGoldCheck = false;
-    const badgeGold = <GoldAward/>
+    const badgeGold = <GoldAward />
 
     let badgePlatinumnCheck = false;
     const badgePlatinum = ""
 
     let badgeDiamondCheck = false;
-    const badgeDiamond = <DiamondAward/>
+    const badgeDiamond = <DiamondAward />
 
 
 
@@ -202,7 +202,7 @@ const ProfilePage = () => {
         // setQuestionCount(questions.length);
         // console.log(questionCount);
 
-        Axios.get('http://localhost:5000/api/readanswer')
+        Axios.get('http://localhost:5000/api/readAllAnswers')
             .then(res => {
 
                 let answerData = res.data;
@@ -314,7 +314,7 @@ const ProfilePage = () => {
             setGold(false);
             setPlatinum(true);
             setDiamond(false);
-            
+
             badgeSilverCheck = true;
             badgeGoldCheck = true;
 
@@ -355,54 +355,54 @@ const ProfilePage = () => {
             setUsersRank(data.rank);
             setUserEmail(data.email);
         });
-        
-            
-            
-        }, [questions]);
-        
-        // Awarding Badges 
 
-        // Rank Badges 
 
-        // Questions 
-    if(questionAmmount > 0){
+
+    }, [questions]);
+
+    // Awarding Badges 
+
+    // Rank Badges 
+
+    // Questions 
+    if (questionAmmount > 0) {
         badgeOneCheck = true;
         // console.log(questionAmmount);
     }
 
-    if(questionAmmount >= 5){
+    if (questionAmmount >= 5) {
         badgeTwoCheck = true;
         // console.log(questionAmmount);
     }
 
 
-    if(questionAmmount >= 10){
+    if (questionAmmount >= 10) {
         badgeThreeCheck = true;
         // console.log(questionAmmount);
     }
 
 
-    if(questionAmmount >= 20){
+    if (questionAmmount >= 20) {
         badgeFourCheck = true;
         // console.log(questionAmmount);
     }
 
-    if(questionAmmount >= 25){
+    if (questionAmmount >= 25) {
         badgeFiveCheck = true;
         // console.log(questionAmmount);
     }
 
-    if(questionAmmount >= 50){
+    if (questionAmmount >= 50) {
         badgeSixCheck = true;
         // console.log(questionAmmount);
     }
 
-    if(questionAmmount >= 75){
+    if (questionAmmount >= 75) {
         badgeSevenCheck = true;
         // console.log(questionAmmount);
     }
 
-    if(questionAmmount >= 100){
+    if (questionAmmount >= 100) {
         badgeEightCheck = true;
         // console.log(questionAmmount);
     }
@@ -410,44 +410,44 @@ const ProfilePage = () => {
 
     // Answer Badges 
 
-    if(answerCount > 0){
+    if (answerCount > 0) {
         badgeNineCheck = true;
         // console.log(questionAmmount);
     }
 
-    if(answerCount >= 5){
+    if (answerCount >= 5) {
         badgeTenCheck = true;
         // console.log(questionAmmount);
     }
 
 
-    if(answerCount >= 10){
+    if (answerCount >= 10) {
         badgeElevenCheck = true;
         // console.log(questionAmmount);
     }
 
 
-    if(answerCount >= 20){
+    if (answerCount >= 20) {
         badgeTwelveCheck = true;
         // console.log(questionAmmount);
     }
 
-    if(answerCount >= 25){
+    if (answerCount >= 25) {
         badgeThirteenCheck = true;
         // console.log(questionAmmount);
     }
 
-    if(answerCount >= 50){
+    if (answerCount >= 50) {
         badgeFourteenCheck = true;
         // console.log(questionAmmount);
     }
 
-    if(answerCount >= 75){
+    if (answerCount >= 75) {
         badgeFifteenCheck = true;
         // console.log(questionAmmount);
     }
 
-    if(answerCount >= 100){
+    if (answerCount >= 100) {
         badgeSixteenCheck = true;
         // console.log(questionAmmount);
     }
@@ -501,7 +501,7 @@ const ProfilePage = () => {
 
 
 
-  
+
 
 
 
@@ -558,10 +558,10 @@ const ProfilePage = () => {
         <div>
             {deleteModal}
             <motion.div className='pp_main_card'
-                 initial={{ width: 0 }}
-                 animate={{ width: "76%" }}
-                 exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
-                >
+                initial={{ width: 0 }}
+                animate={{ width: "76%" }}
+                exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
+            >
                 <Helmet>
                     <title>Profile</title>
                 </Helmet>

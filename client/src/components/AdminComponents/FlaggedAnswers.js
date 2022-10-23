@@ -14,9 +14,9 @@ import Axios from 'axios';
 import { Icon, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
-import DeleteUserModalAdmin from '../../modals/DeleteUserModalAdmin';
-import IgnoreUserModal from '../../modals/IgnoreUserModalAdmin';
 import DeleteAnswerModal from '../../modals/DeleteFlaggedAnswerModal';
+import IgnoreAnswerModal from '../../modals/IgnoreFlaggedAnswerModal';
+
 
 const FlaggedAnswers = () => {
 
@@ -54,22 +54,21 @@ const FlaggedAnswers = () => {
     const [reportedQuestion, setReportedQuestion] = useState([]);
 
     const removePostFromFlagTable = (id) => {
-        setIgnoreUserModal(<IgnoreUserModal close={setIgnoreUserModal} id={id} />)
+        setIgnoreUserModal(<IgnoreAnswerModal close={setIgnoreUserModal} id={id} answer={true} />)
         // console.log(id);
     }
 
     const deleteUser = (id) => {
         // console.log(id);
         setDeletePostModal(<DeleteAnswerModal
-            close={setDeletePostModal} id={id}
-        />)
+            close={setDeletePostModal} id={id} answer={true} />)
     }
 
     useEffect(() => {
         Axios.get('http://localhost:5000/api/reportedAnswer/')
             .then(res => {
                 let data = res.data.answers
-                console.log(res.data);
+                // console.log(res.data);
                 let reportedQuestion = []
 
                 setRows([])
@@ -81,7 +80,7 @@ const FlaggedAnswers = () => {
                         let loopData = data[i]
 
                         let data1 = res1.data.finduser[0]
-                        console.log(res1.data);
+                        // console.log(res1.data);
 
                         // console.log();
                         reportedQuestion["datePosted"] = loopData.datePosted;
@@ -131,8 +130,7 @@ const FlaggedAnswers = () => {
             })
 
 
-    }, []);
-    // WORKING[deleteUserModal, ignoreUserModal]
+    }, [deletePostModal, ignoreUserModal]);
 
     return (
         < >{deletePostModal}

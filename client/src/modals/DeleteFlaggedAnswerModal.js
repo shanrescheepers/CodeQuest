@@ -3,11 +3,30 @@ import picture from '../assets/modalAssets/delete.png'
 import '../css/modals.css';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
+import Axios from 'axios';
+
 
 const DeleteAnswerModal = (props) => {
+
     const closeModal = () => {
         props.close();
     }
+
+    const deleteUserFunction = () => {
+
+        console.log("This is a answer");
+        Axios.delete('http://localhost:5000/api/deleteAnswer/' + props.id)
+            .then((res) => {
+                console.log("Answer Deleted");
+                closeModal();
+            })
+            .catch(function (error) {
+                // console.log(error);
+            });
+    }
+
+
+
     return (
         <div className='pop-up'>
             <div className='modal'>
@@ -21,7 +40,7 @@ const DeleteAnswerModal = (props) => {
                     '&:hover': {
                         backgroundColor: '#4A4A4A',
                     }
-                }} variant="contained" type="submit" backgroundColor="primary">Delete</Button>
+                }} variant="contained" type="submit" backgroundColor="primary" onClick={deleteUserFunction}>Delete</Button>
 
                 <Button sx={{
                     backgroundColor: '#f1f1f1', textTransform: 'capitalize', color: "#2b2b2b", borderRadius: '20px', marginTop: "15px", width: '95%', height: '45px', fontFamily: 'Open Sans', marginLeft: '0px',

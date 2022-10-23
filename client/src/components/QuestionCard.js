@@ -28,9 +28,9 @@ const QuestionCard = (props) => {
     }
 
     const [flagState, setFlagState] = useState(false)
-
+    const userId = sessionStorage.getItem("id");
     useEffect(() => {
-        axios.get('http://localhost:5000/api/reportedPost/' + props?.questionId)
+        axios.get('http://localhost:5000/api/reportedPost/' + props?.questionId + "/" + userId)
             .then(res => {
                 let data = res.data;
                 console.log(data);

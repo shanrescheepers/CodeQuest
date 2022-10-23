@@ -14,9 +14,8 @@ import Axios from 'axios';
 import { Icon, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
-import DeleteUserModalAdmin from '../../modals/DeleteUserModalAdmin';
-import IgnoreUserModal from '../../modals/IgnoreUserModalAdmin';
-import DeleteModal from '../../modals/DeleteModal';
+import DeletePostModal from '../../modals/DeleteFlaggedPostModal';
+import IgnorePostModal from '../../modals/IgnoreFlaggedPostModal';
 
 const FlaggedPosts = () => {
 
@@ -55,14 +54,14 @@ const FlaggedPosts = () => {
     const [reportedQuestion, setReportedQuestion] = useState([]);
 
     const removePostFromFlagTable = (id) => {
-        setIgnoreUserModal(<IgnoreUserModal close={setIgnoreUserModal} id={id} />)
+        setIgnoreUserModal(<IgnorePostModal close={setIgnoreUserModal} id={id} post={true} />)
         // console.log(id);
     }
 
     const deleteUser = (id) => {
         // console.log(id);
-        setDeletePostModal(<DeleteModal
-            close={setDeletePostModal} id={id}
+        setDeletePostModal(<DeletePostModal
+            close={setDeletePostModal} id={id} post={true}
         />)
     }
 
@@ -130,7 +129,7 @@ const FlaggedPosts = () => {
             })
 
 
-    }, []);
+    }, [deletePostModal, ignoreUserModal]);
     // WORKING[deleteUserModal, ignoreUserModal]
 
     return (
