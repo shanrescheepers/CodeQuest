@@ -41,10 +41,10 @@ function AnimatedRoutes() {
   useEffect(() => {
     const userId = sessionStorage.getItem("id");
     if (userId == null) {
-    //   console.log("User not logged in")
+      //   console.log("User not logged in")
 
     } else {
-    //   console.log("user logged in")
+      //   console.log("user logged in")
       Axios.get('http://localhost:5000/api/userInfo/' + userId)
         .then(res => {
           let data = res.data;
@@ -69,8 +69,8 @@ function AnimatedRoutes() {
           <Route path="/" element={<LoginPage funcNav={setShowNav} />} />
           <Route path="/RegisterPage" element={<RegisterPage funcNav={setShowNav} />} />
 
-          <Route path="SearchPage" element={<ResultPage />} />
-          <Route path="FilterPage" element={<FilterPage />} />
+          <Route path="/SearchPage" element={<ResultPage />} />
+          <Route path="/FilterPage" element={<FilterPage />} />
 
           {getAdminPermission(rank) &&
             <Route path="/AdminPage" element={<AdminPage />} />}

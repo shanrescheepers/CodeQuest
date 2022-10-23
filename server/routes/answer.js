@@ -115,7 +115,11 @@ router.post('/api/addanswervote', async (req, res) => {
         // console.log("Users length:", users.length);
         const findAnswer = await newAnswerModel.findById(req.body.answerId);
 
-        // console.log('FindAnswer', findAnswer);
+        //****** ATTENTION ******
+        //PLEASE DO NOT REMOVE! OR ELSE IT WILL BREAK! - Shanre
+        console.log('FindAnswer', findAnswer);
+        //****** ATTENTION ******
+
         let upvote = findAnswer.upvotes;
         let downvote = findAnswer.downvotes;
 
