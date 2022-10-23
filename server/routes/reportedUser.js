@@ -58,9 +58,9 @@ router.get('/api/reportedAnswer/', async (req, res) => {
     let questions = []
 
     for (let i = 0; i < reportedUsers.length; i++) {
-        console.log(reportedUsers[i].questionId);
+        // console.log(reportedUsers[i].questionId);
         const findAnswer = await newAnswerModel.findById(reportedUsers[i].questionId);
-        console.log(findAnswer);
+        // console.log(findAnswer);
         if (findAnswer !== null) {
             answers.push(findAnswer)
             const findQuestion = await newQuestionModel.findById(findAnswer.questionId);
@@ -91,7 +91,7 @@ router.get('/api/reportedPost/:id/:userId', async (req, res) => {
         }
 
     }
-    console.log(req.params.id);
+    // console.log(req.params.id);
     res.json(reportedState);
 });
 
@@ -156,7 +156,7 @@ router.post('/api/addReportedUser', (req, res) => {
 
     newReportedUser.save()
         .then(item => {
-            console.log("Succesfully Added a New Reported User from CodeQuest. Username: ", item);
+            // console.log("Succesfully Added a New Reported User from CodeQuest. Username: ", item);
             res.json(item)
         })
         .catch(err => {
@@ -165,7 +165,7 @@ router.post('/api/addReportedUser', (req, res) => {
 });
 
 router.delete('/api/deleteAnswer/:id', async (req, res) => {
-    console.log(req.params.id);
+    // console.log(req.params.id);
     await newAnswerModel.deleteOne({ _id: req.params.id })
         .then(response => res.json(response))
         .catch(error => res.status(500).json(error))
@@ -173,7 +173,7 @@ router.delete('/api/deleteAnswer/:id', async (req, res) => {
 
 //This would delete the post and answers
 router.delete('/api/deletePost/:id', async (req, res) => {
-    console.log(req.params.id);
+    // console.log(req.params.id);
     await newQuestionModel.deleteOne({ _id: req.params.id })
         .then(response => res.json(response))
         .catch(error => res.status(500).json(error))

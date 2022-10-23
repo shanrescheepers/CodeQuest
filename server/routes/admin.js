@@ -6,18 +6,18 @@ const AdminSchema = require('../models/adminRequest');
 
 router.post('/api/adminreq', (req, res) => {
 
-    console.log(req.body);
+    // console.log(req.body);
     const adminReq = new AdminSchema({
         userId: req.body.userId,
         userEmail: req.body.userEmail,
         reliability: +req.body.reliability,
         requestStatus: req.body.requestStatus,
-});
+    });
     // console.log("new user", newUser);
 
     adminReq.save()
         .then(item => {
-            console.log("Item log:", item);
+            // console.log("Item log:", item);
             res.json(item)
         })
         .catch(err => {
@@ -37,7 +37,7 @@ router.get('/api/getadminreq', async (req, res) => {
 
 
 
-   router.get('/api/adminrequser/:id', async (req, res) => {
+router.get('/api/adminrequser/:id', async (req, res) => {
     const findUser = await AdminSchema.findById(req.params.id);
     res.json(findUser);
 });
@@ -45,12 +45,13 @@ router.get('/api/getadminreq', async (req, res) => {
 
 
 
-router.patch('/api/adminreqauth/:id', async(req, res) => {
+router.patch('/api/adminreqauth/:id', async (req, res) => {
 
- const adminReq = await AdminSchema.updateOne(
-        {_id:req.params.id},
-        {$set: { 
-            requestStatus: req.body.requestStatus,
+    const adminReq = await AdminSchema.updateOne(
+        { _id: req.params.id },
+        {
+            $set: {
+                requestStatus: req.body.requestStatus,
             }
         }
     );

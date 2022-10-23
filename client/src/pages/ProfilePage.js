@@ -487,7 +487,7 @@ const ProfilePage = () => {
             .then(res => {
                 let data = res.data;
 
-                console.log(data);
+                // console.log(data);
 
                 data.filter(user => user.userId === activeUser).forEach((val) => {
                     setAdminStatus(val.requestStatus);
