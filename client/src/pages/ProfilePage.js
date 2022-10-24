@@ -581,7 +581,7 @@ const ProfilePage = () => {
                             '&:hover': {
                                 backgroundColor: '#FF7900',
                             }
-                        }} variant="contained">View Questions</Button>
+                        }} variant="contained" href="#questions">View Questions</Button>
                     </div>
 
                     <div className='pp_welcome_banner_img'></div>
@@ -670,7 +670,7 @@ const ProfilePage = () => {
                 </div>
 
 
-                <div className='pp_activity_con'>
+                <div className='pp_activity_con' id="questions">
 
                     <TabContext value={value} className='admin__links'>
                         <div className='admin__links__tablinks'>
@@ -713,10 +713,11 @@ const ProfilePage = () => {
                     float: 'right',
                     borderRadius: '20px',
                     height: '45px',
-                    marginTop: "150px",
+                    marginTop: "0px",
                     textTransform: 'capitalize',
                     marginRight: "50px",
                     width: '200px',
+                    marginBottom: '-70px',
                     fontFamily: 'Open Sans',
                     '&:hover': {
                         backgroundColor: '#2b2b2b',
