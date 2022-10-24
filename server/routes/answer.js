@@ -99,20 +99,21 @@ router.patch('/api/updateanswerUpvotes/:id', async (req, res) => {
 //Add Vote
 router.post('/api/addanswervote', async (req, res) => {
 
-    // console.log('body: ', req.body);
+    console.log('body: ', req.body);
     const findVoter = await AnswerVoteSchema.find();
-    // console.log('find', findVoter);
+    console.log('find', findVoter);
 
     const answers = findVoter.filter(item => item.answerId == req.body.answerId); //gets questions id
     const users = answers.filter(item => item.userId == req.body.userId); //gets users qs
-    // console.log("answers: ", answers);
-    // console.log("Users: ", users);
+    console.log("answers: ", answers);
+    console.log("Users: ", users);
 
     //  const findQuestion = await newQuestionModel.findById(users[0].questionId);
 
     if (users === 'undefined' || users.length === 0) {
 
         // console.log("Users length:", users.length);
+        console.log(req.body.answerId);
         const findAnswer = await newAnswerModel.findById(req.body.answerId);
 
         //****** ATTENTION ******

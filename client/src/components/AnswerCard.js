@@ -55,7 +55,7 @@ export const AnswerCard = (props) => {
                 let user = sessionStorage.getItem('id');
 
                 for (let i = 0; i < data.length; i++) {
-                    if (props.questionId === data[i].answerId) {
+                    if (props.answerId === data[i].answerId) {
 
                         // console.log(user, data[i].userId);
                         if (user === data[i].userId) {
@@ -107,10 +107,6 @@ export const AnswerCard = (props) => {
 
     const handleVote = (event, vote) => {
         setVoteCast(vote);
-        // console.log(vote);
-        // console.log("category", category);
-        // console.log("arrowImgUp",arrowImgUp);
-        // console.log("arrowImgDown",arrowImgDown);
 
         if (category === 'startUp' && arrowImgUp === 'UpActive' && arrowImgDown === 'Down') {
             console.log("Up vote again");
@@ -315,11 +311,11 @@ export const AnswerCard = (props) => {
     const addVote = () => {
         // console.log("It works, Whoopieee");
 
-        console.log(props.questionId);
+        console.log(props.answerId);
         let payloadData = {
             vote: 'upvote',
             userId: sessionStorage.getItem('id'),
-            answerId: props.questionId
+            answerId: props.answerId
         }
 
         axios.post('http://localhost:5000/api/addanswervote', payloadData)
@@ -343,11 +339,12 @@ export const AnswerCard = (props) => {
     const subtractVote = () => {
         // console.log("It works, Whoopieee");
 
-        console.log(props.questionId);
+        // console.log(props.answerId);
+        // console.log(props.questionId);
         let payloadData = {
             vote: 'downvote',
             userId: sessionStorage.getItem('id'),
-            answerId: props.questionId
+            answerId: props.answerId
         }
         console.log(payloadData);
 
