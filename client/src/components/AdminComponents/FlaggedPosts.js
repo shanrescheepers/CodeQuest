@@ -16,17 +16,20 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 import DeletePostModal from '../../modals/DeleteFlaggedPostModal';
 import IgnorePostModal from '../../modals/IgnoreFlaggedPostModal';
+import moment from 'moment';
 
 const FlaggedPosts = () => {
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
 
+
+    // console.log(datePosted);
     const columns = [
-        { id: 'title', label: 'Title', minWidth: 50 },
-        { id: 'description', label: 'Description', minWidth: 50 },
-        { id: 'downvotes', label: 'Total Downvotes', minWidth: 50 },
-        { id: 'totalAnswers', label: 'Total Answers', minWidth: 100 },
+        { id: 'title', label: 'Title', minWidth: 100 },
+        // { id: 'description', label: 'Description', minWidth: 50 },
+        { id: 'downvotes', label: 'Total Downvotes', minWidth: 80 },
+        { id: 'totalAnswers', label: 'Total Answers', minWidth: 80 },
         { id: 'datePosted', label: 'Date Posted', minWidth: 90 },
         { id: 'dateFlagged', label: 'Flag Date', minWidth: 90 },
         { id: 'flagReason', label: 'Flag Reason', minWidth: 90 },
@@ -82,9 +85,19 @@ const FlaggedPosts = () => {
 
                         let data1 = res1.data.finduser[0]
                         // console.log(res1.data);
+                        console.log(data1.dateFlagged);
+                       
 
-                        reportedQuestion["datePosted"] = loopData.datePosted;
-                        reportedQuestion["dateFlagged"] = data1.dateFlagged;
+                            //Format Date date
+                            let dateFlagged =data1.dateFlagged;
+                            let formatDateFlagged = moment(dateFlagged).format('DD MMMM YYYY');
+
+                            let datePosted =loopData.datePosted;
+                            let formatDatePosted = moment(datePosted).format('DD MMMM YYYY');
+
+
+                        reportedQuestion["datePosted"] = formatDatePosted;
+                        reportedQuestion["dateFlagged"] = formatDateFlagged;
                         reportedQuestion["flagReason"] = data1.flagReason;
                         reportedQuestion["totalAnswers"] = res1.data.totalAnswers[0].answerLength;
 

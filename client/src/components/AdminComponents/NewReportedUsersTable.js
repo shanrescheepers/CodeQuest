@@ -15,6 +15,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 import DeleteUserModalAdmin from '../../modals/DeleteUserModalAdmin';
 import IgnoreUserModal from '../../modals/IgnoreUserModalAdmin';
+import moment from 'moment';
 
 const columns = [
     { id: 'avatar', label: 'Avatar', minWidth: 50 },
@@ -112,7 +113,9 @@ export default function NewReportedUserTable() {
 
                         res1.data.reportedUsers.forEach(e => {
                             if (e.reportedUserId === reportedUserIds[i]) {
-                                usersdateflagged.push(e.dateFlagged)
+                  
+                                let formatDateFlagged = moment(e.dateFlagged).format('DD MMMM YYYY');
+                                usersdateflagged.push(formatDateFlagged)
                                 userflagReason.push(e.flagReason)
                             }
                         });

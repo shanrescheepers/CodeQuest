@@ -525,7 +525,7 @@ h2 {
     background-color: #FF7900;
 }
 
-.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected, .MuiButtonBase-root.MuiTab-root.MuiTab-textColorPrimary.Mui-selected.css-1h9z7r5-MuiButtonBase-root-MuiTab-root {
     color: #2b2b2b;
 }
 

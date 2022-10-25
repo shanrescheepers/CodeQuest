@@ -16,6 +16,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 import DeleteAnswerModal from '../../modals/DeleteFlaggedAnswerModal';
 import IgnoreAnswerModal from '../../modals/IgnoreFlaggedAnswerModal';
+import moment from 'moment';
 
 
 const FlaggedAnswers = () => {
@@ -25,7 +26,7 @@ const FlaggedAnswers = () => {
 
     const columns = [
         { id: 'question', label: 'On Question', minWidth: 100 },
-        { id: 'description', label: 'Answer', minWidth: 50 },
+        // { id: 'description', label: 'Answer', minWidth: 50 },
         { id: 'downvotes', label: 'Total Downvotes', minWidth: 50 },
         { id: 'datePosted', label: 'Date Posted', minWidth: 90 },
         { id: 'dateFlagged', label: 'Flag Date', minWidth: 90 },
@@ -82,10 +83,17 @@ const FlaggedAnswers = () => {
                         let data1 = res1.data.finduser[0]
                         // console.log(res1.data);
 
+                            //Format Date date
+                            let dateFlagged =data1.dateFlagged;
+                            let formatDateFlagged = moment(dateFlagged).format('DD MMMM YYYY');
+
+                            let datePosted =loopData.datePosted;
+                            let formatDatePosted = moment(datePosted).format('DD MMMM YYYY');
+
                         // console.log();
-                        reportedQuestion["datePosted"] = loopData.datePosted;
+                        reportedQuestion["datePosted"] = formatDatePosted;
                         reportedQuestion["question"] = res.data.questions[i].title;
-                        reportedQuestion["dateFlagged"] = data1.dateFlagged;
+                        reportedQuestion["dateFlagged"] = formatDateFlagged;
                         reportedQuestion["flagReason"] = data1.flagReason;
                         reportedQuestion["totalAnswers"] = res1.data.totalAnswers[0].answerLength;
 
