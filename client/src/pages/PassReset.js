@@ -6,12 +6,13 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import Axios from 'axios';
+import axios from 'axios';
 import CantLoginModal from '../modals/CantLoginModal';
 import CatLottie from '../components/lotties/HeyCatLottie';
 import Helmet from "react-helmet";
+import { useSearchParams } from 'react-router-dom';
 
-const LoginPage = (props) => {
+const PassReset = (props) => {
 
   //=====================================================================================
   //Hide Navigation
@@ -35,81 +36,54 @@ const LoginPage = (props) => {
 
   const navigate = useNavigate();
 
-  const toRegister = () => {
-    navigate('/RegisterPage');
-  }
-
-
-
   //=====================================================================================
-  //Login functionality
+  // functionality
+  const [searchParams] = useSearchParams();
+  const [message, setMessage] = useState();
 
-  //get form values
-  let formVals = ["email", "password"];
-  const [formValues, setFormValues] = useState(formVals);
+  let defaultFormVals = ["password", "confirmPass"];
 
-  const getValues = (e) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-  }
-  // Handle Modal
-  const [editModal, setEditModal] = useState();
+  const [formValues, setFormValues] = useState(defaultFormVals);
 
-  // LOTTIE Routing
-  const [isClicked, setIsClicked] = useState(false);
+  const getValues = (e) =>{
+  const { name, value } = e.target;
+  setFormValues({ ...formValues, [name]: value });
+}
 
-
-//Login user function
-const loginUser = (e) => {
-  e.preventDefault(); 
+const sendPassReset = (e) => {
+  e.preventDefault();
 
   let payload = {
-      email: formValues['email'],
-      password: formValues['password']
+      password: formValues['password'],
+      confirmPass: formValues['confirmPass']
   }
 
-  console.log(payload);
-
-  Axios.post('http://localhost:5000/api/loginUser', payload)
-  .then((res) => {
+  axios.patch('http://localhost:5000/api/updatepass/' + searchParams.get('id'), payload)
+  .then((res)=>{
     console.log(res.data);
-    if (!res.data) {
-      alert('Bad request');
-    } else {
-      if (res.data.user) {
-        // console.log(res);
-        sessionStorage.setItem('id', res.data.id);
-        sessionStorage.setItem('token', res.data.user);
-        sessionStorage.setItem('email', formValues['email']);
-        // navigate("/FeedPage");
-        setIsClicked(!isClicked)
-      } else {
-        setEditModal(
-          <CantLoginModal close={setEditModal} />
-        )
-      // console.log("can't log in");
-      }
-    }
-  })
-  .catch(function(error){
-    console.log(error);
-  })
 
+    if(res.data.success){
+      setMessage("Your Password has been reset!");
+    } else {
+      setMessage("There was a problem resetting your password ");
+    }
+
+  })
+  .catch(function(error){console.log(error)});
 }
   return (
     <>
       <Helmet>
-        <title>Login</title>
+        <title>Reset Password</title>
     </Helmet>
-      {editModal}
+   
       <div className="Login">
-        {!isClicked && <ThemeProvider theme={theme} >
+        <ThemeProvider theme={theme} >
           <div className='login-container'>
-            <h1>Hey...</h1>
-            <h1>We missed you.</h1>
-            <h4>Let's make some magic.</h4>
+            <h1>Reset Password</h1>
+            <h4>You'll be able to login in no time.</h4>
 
-            <form onSubmit={loginUser} >
+            <form onSubmit={sendPassReset}>
 
               <TextField sx={{
                 backgroundColor: '#ffffff',
@@ -121,7 +95,7 @@ const loginUser = (e) => {
                 marginTop: '30px'
 
               }}
-                id="outlined-basic" onChange={getValues} name="email" color='primary' label="Email Address" variant="outlined" />
+                id="outlined-basic" onChange={getValues} name="password" color='primary' type="password" label="Password" variant="outlined" />
 
               <TextField sx={{
                 backgroundColor: '#ffffff',
@@ -134,28 +108,25 @@ const loginUser = (e) => {
                 borderBlock: 'none',
                 borderBlockColor: '#f1f1f1'
               }}
-                id="outlined-basic" onChange={getValues} name="password" color='primary' type="password" label="Password" variant="outlined" />
+                id="outlined-basic" onChange={getValues} name="confirmPass" color='primary' type="password" label="Confirm Password" variant="outlined" />
 
-              <a href='../UpdatePass' className='link'><p>Forgot your password?</p></a>
+             
 
               <Button sx={{
                 backgroundColor: '#2b2b2b', borderRadius: '20px', marginTop: "20px", width: '100%', fontFamily: 'Open Sans', marginLeft: '0px',
                 '&:hover': {
                   backgroundColor: '#FF983A',
                 }
-              }} variant="contained" type="submit" backgroundColor="primary">Log In</Button>
+              }} variant="contained" type="submit" backgroundColor="primary">Reset Password</Button>
 
-              <p className='signIn-Op' onClick={toRegister}>Don't have an account? <span style={{ fontWeight: 'bold' }}> Register now </span></p>
 
             </form>
 
           </div>
 
-          <img src={loginImg} className="loginImg"></img>
+          {/* <img src={loginImg} className="loginImg"></img> */}
 
-        </ThemeProvider>}
-
-        {isClicked && <CatLottie />}
+        </ThemeProvider>
 
 
       </div >
@@ -163,4 +134,4 @@ const loginUser = (e) => {
   );
 };
 
-export default LoginPage;
+export default PassReset;
