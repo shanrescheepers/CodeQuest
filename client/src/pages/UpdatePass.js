@@ -3,12 +3,16 @@ import '../css/Login.css';
 import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Helmet from "react-helmet";
+import CantLoginResetModal from '../modals/CantLoginResetModal';
 
 const UpdatePass = (props) => {
+
+       // Handle Modal
+       const [editModal, setEditModal] = useState();
 
   //=====================================================================================
   //Hide Navigation
@@ -34,7 +38,7 @@ const UpdatePass = (props) => {
 
 //get form vals
 let defaultFormVals = ["email"];
-
+let navigate = useNavigate();
 const [formValues, setFormValues] = useState(defaultFormVals);
 
 const getValues = (e) =>{
@@ -53,12 +57,23 @@ const sendPassReset = (e) => {
     axios.post('http://localhost:5000/api/resetpass', payload)
     .then((res)=> {
       if(res){
-        console.log(res); 
+        console.log(res.data); 
+        if(res.data.success == true){
+            window.location.href = 'https://mail.google.com/mail/u/0/#inbox'; 
+            navigate('https://mail.google.com/mail/u/0/#inbox')
+        }else if(res.data.success == false){
+            setEditModal(
+                <CantLoginResetModal close={setEditModal} />
+              )
+        }
+
       }
-      window.location.href = 'https://mail.google.com/mail/u/0/#inbox'; 
     })
     .catch(function (error) {
       console.log(error);
+      setEditModal(
+        <CantLoginResetModal close={setEditModal} />
+      )
     });
 
 }
@@ -68,10 +83,10 @@ const sendPassReset = (e) => {
       <Helmet>
         <title>Reset Password</title>
     </Helmet>
-
+{editModal}
       <div className="Login">
      <ThemeProvider theme={theme} >
-          <div className='login-container'>
+          <div className='email-container'>
             <h1>Reset Password</h1>
             <h4>It's okay, we've got this .</h4>
 

@@ -42,6 +42,7 @@ const toLogin =()=>{
 //====================================================================================
   const [searchParams] = useSearchParams();
   const [welcome, setWelcome] = useState();
+  const [username, setUsername] = useState();
   const [message, setMessage] = useState();
  
   useEffect(()=>{
@@ -52,6 +53,7 @@ const toLogin =()=>{
 
       if(res.data.success){
         setWelcome("Welcome " + res.data.user);
+        setUsername(res.data.user);
         setMessage("Your account has been verified successfully, you may now login!")
       }else{
         setWelcome("Account not verfied!");
@@ -77,7 +79,7 @@ const toLogin =()=>{
         <div className='auth-text'>
             <h5>{welcome}</h5>
             <h1>To CodeQuest!</h1>
-            <p>We're so happy to have you user! You can now login and officially begin your quest for code! </p>
+            <p>We're so happy to have you {username}! You can now login and officially begin your quest for code! </p>
             <p>You'll can now get the answers you need through asking questions and show off your skills by answering them! And all your hard work could lead up to a special reward... </p>
             <Button variant='contained' style={buttonStyle} onClick={toLogin} >Login Now!</Button>
         </div>

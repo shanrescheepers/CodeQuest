@@ -1,16 +1,15 @@
 import React from 'react';
 import '../css/Login.css';
-import loginImg from '../assets/loginImg.png';
 import TextField from '@mui/material/TextField';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import CantLoginModal from '../modals/CantLoginModal';
-import CatLottie from '../components/lotties/HeyCatLottie';
 import Helmet from "react-helmet";
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';   
+import ResetLoginModal from '../modals/ResetLoginModal';
+import CantLoginResetModal from '../modals/CantLoginResetModal';
 
 const PassReset = (props) => {
 
@@ -40,6 +39,8 @@ const PassReset = (props) => {
   // functionality
   const [searchParams] = useSearchParams();
   const [message, setMessage] = useState();
+    // Handle Modal
+    const [editModal, setEditModal] = useState();
 
   let defaultFormVals = ["password", "confirmPass"];
 
@@ -64,8 +65,14 @@ const sendPassReset = (e) => {
 
     if(res.data.success){
       setMessage("Your Password has been reset!");
+      setEditModal(
+        <ResetLoginModal/>
+      )
     } else {
       setMessage("There was a problem resetting your password ");
+      setEditModal(
+        <CantLoginResetModal close={setEditModal} />
+      )
     }
 
   })
@@ -76,10 +83,10 @@ const sendPassReset = (e) => {
       <Helmet>
         <title>Reset Password</title>
     </Helmet>
-   
+   {editModal}
       <div className="Login">
         <ThemeProvider theme={theme} >
-          <div className='login-container'>
+          <div className='reset-container'>
             <h1>Reset Password</h1>
             <h4>You'll be able to login in no time.</h4>
 

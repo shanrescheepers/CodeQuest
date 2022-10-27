@@ -307,7 +307,7 @@ router.post('/api/resetpass', async (req, res) => {
             subject: 'Password Reset',
             template: 'passwordReset',
             context: {
-                username: req.body.username,
+                username: findUser.username,
                 email: req.body.email,
                 link: userIdLink
             },
@@ -338,7 +338,8 @@ router.post('/api/resetpass', async (req, res) => {
             if (error) {
                 console.log(error);
             }
-            console.log("massage sent: ", info.messageId);
+            console.log("message sent: ", info.messageId);
+            res.json({success: true, msg: "Message Sent"})
         });
 
     }else{
