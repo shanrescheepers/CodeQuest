@@ -1,5 +1,5 @@
 import React from 'react';
-import picture from '../assets/modalAssets/delete.png'
+import picture from '../assets/modalAssets/ignore.png'
 import '../css/modals.css';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
@@ -33,7 +33,7 @@ const IgnorePostModal = (props) => {
                 <div className='modal-img delete'><img src={picture}></img></div>
 
                 <Button sx={{
-                    backgroundColor: '#2b2b2b', textTransform: 'capitalize', borderRadius: '20px', marginTop: "25px", width: '95%', height: '45px', fontFamily: 'Open Sans', marginLeft: '0px',
+                    backgroundColor: '#2b2b2b', textTransform: 'capitalize', borderRadius: '20px', marginTop: "0px", width: '95%', height: '45px', fontFamily: 'Open Sans', marginLeft: '0px',
                     '&:hover': {
                         backgroundColor: '#4A4A4A',
                     }
