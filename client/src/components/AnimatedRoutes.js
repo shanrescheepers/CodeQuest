@@ -22,6 +22,8 @@ import FourOhFour from '../pages/FourohFour';
 import ResultPage from "../pages/ResultPage";
 import FilterPage from "../pages/FilterPage";
 import Auth from '../pages/Auth';
+import PassReset from '../pages/PassReset';
+import UpdatePass from '../pages/UpdatePass';
 
 function AnimatedRoutes() {
 
@@ -81,6 +83,8 @@ function AnimatedRoutes() {
           <Route path="/QuestionsPage" element={<QuestionsPage />} />
           <Route path="/newquestion" element={<NewQuestionPage />} />
           <Route path="/Auth" element={<Auth funcNav={setShowNav} />} />
+          <Route path="/PassReset" element={<PassReset funcNav={setShowNav} />} />
+          <Route path="/UpdatePass" element={<UpdatePass funcNav={setShowNav} />} />
           <Route path="*" element={<FourOhFour />} />
 
         </Routes>

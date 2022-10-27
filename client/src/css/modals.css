@@ -82,4 +82,11 @@
   .pop-up.delete{
     position:fixed;
   }
-  
+
+  .modal.resetLogin{
+    height:450px;
+  }
+  .modal.resetLogin img{
+    height:220px;
+    width: auto;
+  }

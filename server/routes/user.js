@@ -252,17 +252,151 @@ router.delete("/api/deleteUser/:id", async (req, res) => {
         .then(response => res.json(response))
         .catch(error => res.status(500).json(error))
 });
-// router.post('/api/loginUser', async (req, res) => { })
+
+
 //============================================================================================
-//encrypt password
-
-
 // DELETE USER ACCOUNT
 router.delete('/api/deleteaccount/:id', async (req, res) => {
     const deleteAccount = await UserSchema.remove({ _id: req.params.id });
     res.json(deleteAccount);
 });
+
+
+
 //============================================================================================
+//password reset
+router.post('/api/resetpass', async (req, res) => {
+
+    console.log(req.body);
+    const findUser = await UserSchema.findOne({
+        email: req.body.email
+    });
+
+    if(findUser){
+
+        let userIdLink = 'http://localhost:3000/PassReset?id=' + findUser._id;
+        
+
+         //Mailer functionality
+
+         const transporter = nodemailer.createTransport({
+            host: "thehandler.aserv.co.za",
+            port: 465,
+            secure: true,
+            auth: {
+                user: "mikethemage@codequest.co.za",
+                pass: "@~buhejH0fB!"
+            }
+        });
+
+        const handlebarOptions = {
+            viewEngine: {
+                extName: ".handlebars",
+                partialsDir: path.resolve('./mailers'),
+                defaultLayout: false,
+            },
+            viewPath: path.resolve('./mailers'),
+            extName: ".handlebars",
+        };
+
+        transporter.use('compile', hbs(handlebarOptions));
+
+        const mailOptions = {
+            from: '"Mike the Mage" <mikethemage@codequest.co.za>',
+            to: req.body.email,
+            subject: 'Password Reset',
+            template: 'passwordReset',
+            context: {
+                username: findUser.username,
+                email: req.body.email,
+                link: userIdLink
+            },
+            attachments: [{
+                filename: 'reset.png',
+                path: '../server/assets/reset.png',
+                cid: 'reset' //same cid value as in the html img src
+            },
+            {
+                filename: 'logo2.jpg',
+                path: '../server/assets/logo2.jpg',
+                cid: 'logo' //same cid value as in the html img src
+            },
+            {
+                filename: 'otherLogo.png',
+                path: '../server/assets/otherLogo.png',
+                cid: 'otherLogo' //same cid value as in the html img src
+            },
+            {
+                filename: 'socialMedia.png',
+                path: '../server/assets/socialMedia.png',
+                cid: 'socials' //same cid value as in the html img src
+            }
+            ]
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.log(error);
+            }
+            console.log("message sent: ", info.messageId);
+            res.json({success: true, msg: "Message Sent"})
+        });
+
+    }else{
+        res.json({success: false, msg: "Could not locate user on Database"})
+    }
+
+});
+
+//update password
+
+router.patch('/api/updatepass/:id', async (req, res) => {
+    let userId = req.params.id;
+
+    
+    console.log(req.params.id);
+    console.log(userId);
+
+    const findUser = await UserSchema.findOne({
+        _id: userId
+    });
+
+    if(findUser){
+
+        try {
+            const tokenDecrypt = jwt.verify(findUser.token, process.env.ACCESS_TOKEN_SECRET);
+
+            const authUser = await UserSchema.findOne({
+                _id: userId,
+                username: tokenDecrypt.username,
+                email: tokenDecrypt.email
+            });
+
+            const salt = await bcrypt.genSalt(12);
+            const hashPass = await bcrypt.hash(req.body.password, salt);
+
+            if(authUser){
+
+                const updatePassword = await UserSchema.updateOne(
+                    {_id: req.params.id},
+                    {$set: {password: hashPass}}
+                );
+
+                res.json({user: authUser.username, success: true, msg: "Password Updated"})  
+
+            }else{
+                res.json({success: false, msg: "Invalid user on database"})   
+            }
+
+            
+        } catch (error) {
+            res.json({success: false, msg: "Invalid token"})           
+        }
+
+    }else{
+        res.json({success: false, msg: "Verification failed, please contact system admin"})
+    }
+})
 
 
 module.exports = router;

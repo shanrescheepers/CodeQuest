@@ -38,6 +38,9 @@ const LoginPage = (props) => {
   const toRegister = () => {
     navigate('/RegisterPage');
   }
+
+
+
   //=====================================================================================
   //Login functionality
 
@@ -133,7 +136,7 @@ const loginUser = (e) => {
               }}
                 id="outlined-basic" onChange={getValues} name="password" color='primary' type="password" label="Password" variant="outlined" />
 
-              <a href='' className='link'><p>Forgot your password?</p></a>
+              <a href='../UpdatePass' className='link'><p>Forgot your password?</p></a>
 
               <Button sx={{
                 backgroundColor: '#2b2b2b', borderRadius: '20px', marginTop: "20px", width: '100%', fontFamily: 'Open Sans', marginLeft: '0px',
