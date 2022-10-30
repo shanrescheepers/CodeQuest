@@ -1,6 +1,6 @@
 .home-con {
     width: 70%;
-    height: 58vh;
+    height: 60vh;
     background-color: #F1F1FC;
     border-radius: 20px;
     position: absolute;
@@ -28,7 +28,6 @@
 
 .feed-header h1 {
     color: #FFFFFF;
-    /* margin: 8px 0; */
 }
 
 .feed-header p {
