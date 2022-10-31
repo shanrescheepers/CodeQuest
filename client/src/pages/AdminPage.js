@@ -142,7 +142,7 @@ const AdminPage = () => {
                         '&:hover': {
                             backgroundColor: '#FF7900',
                         }
-                    }} variant="contained">View Flagged</Button>
+                    }} variant="contained" href='#flaggedBTN'>View Flagged</Button>
                 </div>
                 <div className='admin__top__header__cat'>
                     <img src={bosscatimage} alt="bosscatimage" className='admin__top__header__heyboss__maincatimage' style={{ height: "250px", paddingTop: "40px" }} />
@@ -189,7 +189,7 @@ const AdminPage = () => {
 
             </div>
 
-            <div className='admin__flagged__and__bad'>
+            <div className='admin__flagged__and__bad' id="flaggedBTN">
                 <TabContext value={valueTwo} className='admin__flagged__and__bad__tabs'>
                     <div className='admin__flagged__and__bad__tabs__tablinks'>
                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
