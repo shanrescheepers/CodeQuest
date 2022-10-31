@@ -13,6 +13,8 @@ import '../../scss/allUsersTableview.scss';
 import { Icon, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
+import PromotionAccepted from '../../modals/PromotionAcceptedModal';
+import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 
 const columns = [
     { id: 'avatar', label: 'Avatar', minWidth: 50 },
@@ -22,10 +24,20 @@ const columns = [
     { id: 'questionsAnswered', label: 'Questions Answered', minWidth: 20 },
     { id: 'yearlevel', label: 'Year Level', minWidth: 30 },
     { id: 'rank', label: 'Rank', minWidth: 30 },
-    { id: 'deleteUser', label: 'Delete User', minWidth: 100 },
+    { id: 'acceptRequest', label: 'Accept Request', minWidth: 100 },
 ];
 
-const PromotionRequestsTableView = () => {
+export default function PromotionRequestsTableView() {
+
+    const [promotionAcceptedModal, setPromotionAcceptedModal] = useState();
+    // Delete user
+    const promotionAccept = (id) => {
+        // console.log(id);
+        setPromotionAcceptedModal(<PromotionAccepted
+            close={setPromotionAcceptedModal} id={id}
+        />)
+    }
+
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const handleChangePage = (event, newPage) => {
@@ -35,13 +47,67 @@ const PromotionRequestsTableView = () => {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-    const [rows, setRows] = useState([
-        {}
-    ]);
+    const [rows, setRows] = useState([]);
+    const [promotionUsers, setPromotionUsers] = useState();
+
+    useEffect(() => {
+        setRows([])
+        Axios.get('http://localhost:5000/api/getadminreq')
+            .then(res => {
+
+
+                console.log(res.data)
+                let data = res.data;
+
+                for (let i = 0; i < data.length; i++) {
+                    Axios.get('http://localhost:5000/api/userInfo/' + data[i].userId)
+                        .then(res1 => {
+
+                            console.log(res1.data)
+                            let data2 = res1.data
+                            let year = data2.yearlevel;
+                            let bgColor = '';
+                            if (year === 1) {
+                                bgColor = '#6EEB83'
+                            } else if (year === 2) {
+                                bgColor = '#6CD4FF'
+                            } else {
+                                bgColor = '#FF7900'
+                            };
+                            const imgURL = (<div className='profileBackground' style={{ backgroundColor: bgColor }}>
+                                <img src={'Avatars/' + data2.profileimage + '.png'} className="profile-imgage"></img>
+                            </div>);
+                            data2["avatar"] = imgURL;
+                            const acceptButton = (
+                                <Button sx={{
+                                    backgroundColor: '#2b2b2b', borderRadius: '20px', height: "33px", width: '130px', fontFamily: 'Open Sans', fontSize: "10px",
+                                    '&:hover': {
+                                        backgroundColor: '#FF7900',
+                                    }
+                                    // onClick= {() => {decreaseProduct(row.id)}}
+                                }} variant="contained" onClick={() =>
+                                    promotionAccept(data[i]._id)
+                                }>
+                                    <CheckCircleOutlineOutlinedIcon style={{ height: "15px", paddingRight: "8px" }} />ACCEPT
+                                </Button >
+                            )
+                            data2["acceptRequest"] = acceptButton;
+
+                            setRows(rows => [...rows, data2], [...rows, data]);
+                        });
+
+
+                }
+
+
+            });
+    }, [promotionAcceptedModal]);
+
+
     return (
         // IGNORE MODAL HERE
         // Waiting on Simon For Promotion Content
-        <>
+        <>{promotionAcceptedModal}
             <Paper style={{ width: "100%" }
             }>
 
@@ -96,4 +162,3 @@ const PromotionRequestsTableView = () => {
     );
 };
 
-export default PromotionRequestsTableView;
