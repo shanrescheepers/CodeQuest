@@ -227,11 +227,9 @@ router.post('/api/addanswervote', async (req, res) => {
                 }
             );
             // console.log("UpdateVote", updateVotes);
-
             res.json([updateVotes, updateQuestion]);
         }
     }
-
 });
 
 //===============================================================================
