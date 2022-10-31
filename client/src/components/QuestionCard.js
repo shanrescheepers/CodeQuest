@@ -221,8 +221,8 @@ const QuestionCard = (props) => {
                                 <OutlinedFlagIcon fontSize="large" />
                             </div>
                         ) : (
-                            <div className='flag-button question-card-icon' onClick={() => flagQuestion()}>
-                                <OutlinedFlagIcon fontSize="large" />
+                            <div className='flag-button question-card-icon' onClick={() => console.log("Flag..")}>
+                                {/* <OutlinedFlagIcon fontSize="large" /> */}
                             </div>
                         )}
 
@@ -245,13 +245,13 @@ const QuestionCard = (props) => {
                                 color="primary"
                                 exclusive
                                 sx={{ display: 'flex', alignItems: 'center' }}>
-                                <ToggleButton  value="up"  style={{ backgroundColor: 'transparent' }}>
+                                <ToggleButton value="up" style={{ backgroundColor: 'transparent' }}>
                                     <img className='upvote question-card-icon' src={upImgURL} />
                                 </ToggleButton>
 
                                 <small className='upvote-count vote-count'>{displayUpVote}</small>
 
-                                <ToggleButton value="down"  style={{ backgroundColor: 'transparent' }}>
+                                <ToggleButton value="down" style={{ backgroundColor: 'transparent' }}>
                                     <img className='downvote question-card-icon' src={downImgURL} />
                                 </ToggleButton>
 
