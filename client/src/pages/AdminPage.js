@@ -126,7 +126,7 @@ const AdminPage = () => {
     return (
         <motion.div className='admin'
             initial={{ width: 0 }}
-            animate={{ width: "76%" }}
+            animate={{ width: "76.8%" }}
             exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
         >
             <Helmet>

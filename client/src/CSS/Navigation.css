@@ -3,6 +3,7 @@
 .Logo {
     width: 120px;
     float: left;
+    margin-left: 60px;
 }
 
 .top-nav {
@@ -18,13 +19,13 @@
 .search-block {
     width: auto;
     display: flex;
-    left: 20%;
+    left: 20.2%;
     position: absolute;
 }
 
 .logButton button{
     background-color: #2b2b2b;
-    text-transform: lowercase;
+    text-transform: capitalize;
     font-weight: 900;
 }
 
@@ -129,6 +130,7 @@ a {
     margin: 0 1rem;
     padding: 16px;
     box-sizing: border-box;
+    width: 250px;
     border-radius: 20px;
     height: auto;
     text-align: center;
@@ -136,6 +138,7 @@ a {
     bottom: 0;
     left: 0;
     right: 0;
+    margin-bottom: 5px;
  }
 
  .discordBlock h6{
@@ -169,5 +172,6 @@ a {
 .nav_btn {
    display: flex;
    justify-content: space-between;
+   
  }
  

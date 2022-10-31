@@ -223,6 +223,7 @@ const Navigation = ({ questions, setUpdateQuestions }) => {
                                 "&:hover": {
                                 backgroundColor: "#4A4A4A",
                                 },
+                                textTransform: 'capitalize'
                             }}
                             disableElevation
                             variant="contained"
@@ -240,9 +241,10 @@ const Navigation = ({ questions, setUpdateQuestions }) => {
                             borderRadius: "50px",
                             height: "auto",
                             // marginTop: "25px",
-                            width: "180px",
+                            width: "130px",
                             fontFamily: "Open Sans",
-                            // marginRight: "75px",
+                            textTransform: 'capitalize',
+                            marginRight: "13px",
                             "&:hover": {
                             backgroundColor: "#4A4A4A",
                             },
