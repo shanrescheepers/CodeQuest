@@ -120,8 +120,8 @@ router.post('/api/addanswervote', async (req, res) => {
         console.log('FindAnswer', findAnswer);
         //****** ATTENTION ******
 
-        let upvote = findAnswer.upvotes;
-        let downvote = findAnswer.downvotes;
+        let upvote = findAnswer?.upvotes;
+        let downvote = findAnswer?.downvotes;
 
 
         if (req.body.vote === 'upvote') {

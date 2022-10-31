@@ -416,7 +416,6 @@ const QuestionCard = (props) => {
         }
         // localStorage.clear();
     }, []);
-
     //get profile image path
     const imgURL = ('Avatars/' + profileImg + '.png');
 
@@ -457,8 +456,8 @@ const QuestionCard = (props) => {
                                 <OutlinedFlagIcon fontSize="large" />
                             </div>
                         ) : (
-                            <div className='flag-button question-card-icon' onClick={() => flagQuestion()}>
-                                <OutlinedFlagIcon fontSize="large" />
+                            <div className='flag-button question-card-icon' onClick={() => console.log("Flag..")}>
+                                {/* <OutlinedFlagIcon fontSize="large" /> */}
                             </div>
                         )}
 
