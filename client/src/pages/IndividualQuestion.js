@@ -73,9 +73,20 @@ const IndividualQuestion = () => {
   useEffect(() => {
     Axios.get("http://localhost:5000/api/readanswer")
       .then((res) => {
+        let filterAnswer = [];
         let questionData = res.data;
-        let renderAnswers = questionData.map((item) => {
+        questionData.map((item) => {
           if (item.questionId == sessionStorage.getItem("questionId")) {
+            filterAnswer.push(item);
+          }
+        });
+         filterAnswer.sort((a, b) => {
+          return b.upvotes - a.upvotes;
+
+        }); 
+        
+        console.log(filterAnswer);
+        let renderAnswers = filterAnswer.map((item) => {
             return (
               <AnswerCard
                 key={item._id}
@@ -90,7 +101,7 @@ const IndividualQuestion = () => {
                 editRender={setUpdateAnswers}
               />
             );
-          }
+          
         });
         setAnswer(renderAnswers);
         setUpdateAnswers(false);
