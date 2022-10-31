@@ -11,6 +11,7 @@ import { useState, useEffect } from 'react';
 
 const FeedPage = (props) => {
 
+
     const buttonStyle = {
         backgroundColor: '#FF7900',
         borderRadius: '50px',
@@ -40,6 +41,8 @@ const FeedPage = (props) => {
         }
     }
 
+
+  
 //=====================================================================================
 //Ask New Question
 
@@ -59,6 +62,23 @@ const [questions, setQuestions] = useState();
 const [updateQuestions, setUpdateQuestions] = useState();
 
 useEffect(()=>{
+
+    //verifyUser
+    let verifyUser = {token: sessionStorage.getItem('token')};
+    if(!verifyUser.token){
+      navigate('/');
+      sessionStorage.clear();
+    }else{
+      axios.post('http://localhost:5000/api/verifytoken', verifyUser)
+      .then(res =>{
+        console.log(res.data);
+        if(res.data.verified === false){
+          navigate('/');
+          sessionStorage.clear();
+  
+        }
+      })
+    }
 
   axios.get('http://localhost:5000/api/readquestions')
   .then(res =>{

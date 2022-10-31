@@ -19,3 +19,7 @@ code {
     monospace;
 }
 
+
+::selection{
+  background-color: #6cd3ff7c;
+}
