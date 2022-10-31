@@ -14,6 +14,7 @@ import Highlight from 'react-highlight';
 import "../css/code.css";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import { Button } from '@mui/material';
 
 export const IndividualQuestionCard = (props) => {
   const [index, setIndex] = useState(0);
@@ -425,6 +426,23 @@ export const IndividualQuestionCard = (props) => {
   const downImgURL = ('Votes/' + arrowImgDown + '.png');
 
 
+//Style Button
+const buttonStyle = {
+  backgroundColor: '#FF7900',
+  borderRadius: '50px',
+  height: '48px',
+  marginTop: '16px',
+  width: 'auto',
+  padding: '16px 24px',
+  fontFamily: 'Open Sans',
+  textTransform: 'capitalize',
+  '&:hover': {
+      background: 'FF7900',
+      color: '#2B2B2B'
+  }
+}
+
+
 
   return (
     <div>
@@ -505,11 +523,12 @@ export const IndividualQuestionCard = (props) => {
             </ToggleButtonGroup>
           </div>
 
-          <button
-            onClick={() => AnswerQuestion()}
+          {/* <Button
+          
             className="btn_answer_question">
             Answer Question
-          </button>
+          </Button> */}
+          <Button   onClick={() => AnswerQuestion()} variant='contained' disableElevation style={buttonStyle}>Answer Question</Button>
         </div>
       </div>
     </div>
