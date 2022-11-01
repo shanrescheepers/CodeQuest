@@ -12,9 +12,14 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const QuestionsPage = () => {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+
+    const askNewQuestion = () => {
+        navigate('/newquestion')
+    }
 
   const [age, setAge] = React.useState("");
   const [tag, setTag] = React.useState("");
@@ -75,7 +80,11 @@ const QuestionsPage = () => {
         <title>Questions</title>
       </Helmet>
       {/* <Navigation/> */}
-      <div className="pp_main_card">
+      <motion.div className="pp_main_card"
+        initial={{ width: 0 }}
+        animate={{ width: "76.8%" }}
+        exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
+      >
         <div className="pp_welcome_con">
           <div className="pp_welcome_banner1">
             <h1>Questions</h1>
@@ -109,7 +118,7 @@ const QuestionsPage = () => {
           <div className="dropdowns">
             <Box sx={{ minWidth: 200, width: "140px", margin: "20px" }}>
               <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Year</InputLabel>
+                <InputLabel id="demo-simple-select-label">Posts</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
@@ -166,13 +175,14 @@ const QuestionsPage = () => {
                 },
               }}
               variant="contained"
+              onClick={askNewQuestion}
             >
               Ask a question
             </Button>
           </div>
         </div>
         <div className="question-card-con">{questions}</div>
-      </div>
+      </motion.div>
     </div>
   );
 };

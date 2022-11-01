@@ -1,5 +1,5 @@
 import React from 'react';
-import picture from '../assets/modalAssets/delete.png'
+import picture from '../assets/modalAssets/ignore.png'
 import '../css/modals.css';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
@@ -10,11 +10,17 @@ const IgnoreUserModal = (props) => {
         props.close();
     }
     const ignoreFlagUserFunction = () => {
+
+        console.log("Ignore User");
         Axios.delete('http://localhost:5000/api/deleteReportedUser/' + props.id)
             .then(res => {
                 // console.log("user has been removed from flagged list");
                 closeModal();
-            });
+            }).catch(function (error) {
+                console.log(error);
+            })
+
+
     }
 
 
@@ -23,11 +29,11 @@ const IgnoreUserModal = (props) => {
             <div className='modal'>
                 <div className='close'><CloseIcon sx={{ fontSize: '40px' }} onClick={closeModal} /></div>
                 <h1>Are you sure?</h1>
-                <h4>Remember once you ignore this reported user, the report will be gone for good!</h4>
+                <h4>Remember once you ignore, the report will be gone for good!</h4>
                 <div className='modal-img delete'><img src={picture}></img></div>
 
                 <Button sx={{
-                    backgroundColor: '#2b2b2b', textTransform: 'capitalize', borderRadius: '20px', marginTop: "25px", width: '95%', height: '45px', fontFamily: 'Open Sans', marginLeft: '0px',
+                    backgroundColor: '#2b2b2b', textTransform: 'capitalize', borderRadius: '20px', marginTop: "0px", width: '95%', height: '45px', fontFamily: 'Open Sans', marginLeft: '0px',
                     '&:hover': {
                         backgroundColor: '#4A4A4A',
                     }

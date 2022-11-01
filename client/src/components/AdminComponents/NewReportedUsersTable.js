@@ -15,11 +15,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 import DeleteUserModalAdmin from '../../modals/DeleteUserModalAdmin';
 import IgnoreUserModal from '../../modals/IgnoreUserModalAdmin';
+import moment from 'moment';
 
 const columns = [
     { id: 'avatar', label: 'Avatar', minWidth: 50 },
-    { id: 'username', label: 'Username', minWidth: 50 },
-    { id: 'email', label: 'User Email', minWidth: 100 },
+    { id: 'email', label: 'Reported User', minWidth: 50 },
+    { id: 'reportingUser', label: 'Reporting User', minWidth: 100 },
     { id: 'dateFlagged', label: 'Date Flagged', minWidth: 90 },
     { id: 'flaggedReason', label: 'Flagged Reason', minWidth: 90 },
     { id: 'deleteUser', label: '', minWidth: 100 },
@@ -69,14 +70,22 @@ export default function NewReportedUserTable() {
         Axios.get('http://localhost:5000/api/allReportedUsers')
             .then(res1 => {
                 // getting all the isers in. then count them, with it, capture some data , the ids, the names, emails.
-                // setTotalReportedUsers(res1.data.length)
+                // setTotalReportedUsers(res1.data.reportedUsers.length)
+                // console.log(res1)
 
                 let reportedUserIds = [];
+                let reportingUserId = [];
+
                 // Check om te sien of daar nie dubbels is van dieselfde user nie. daar kan net een user wees.
-                for (let index = 0; index < res1.data.length; index++) {
+                for (let index = 0; index < res1.data.reportedUsers.length; index++) {
                     // console.log(res.data[index])
-                    if (!reportedUserIds.includes(res1.data[index].reportedUserId)) {
-                        reportedUserIds.push(res1.data[index].reportedUserId);
+                    if (!reportedUserIds.includes(res1.data.reportedUsers[index].reportedUserId)) {
+                        reportedUserIds.push(res1.data.reportedUsers[index].reportedUserId);
+
+                        // Axios.get('http://localhost:5000/api/userInfo/' + res1.data.reportedUsers[index].reportingUserId).then(res3 => {
+                        //     // console.log(res3.data.username);
+                        //     reportingUserId.push(res3.data.username);
+                        // })
                     };
                 };
 
@@ -87,6 +96,8 @@ export default function NewReportedUserTable() {
 
                 for (let i = 0; i < reportedUserIds.length; i++) {
                     Axios.get('http://localhost:5000/api/userInfo/' + reportedUserIds[i]).then(res => {
+
+                        // console.log(res.data);
                         let reportedUser = res.data;
                         let year = reportedUser.yearlevel;
                         let bgColor = '';
@@ -100,9 +111,11 @@ export default function NewReportedUserTable() {
                         let usersdateflagged = [];
                         let userflagReason = [];
 
-                        res1.data.forEach(e => {
+                        res1.data.reportedUsers.forEach(e => {
                             if (e.reportedUserId === reportedUserIds[i]) {
-                                usersdateflagged.push(e.dateFlagged)
+                  
+                                let formatDateFlagged = moment(e.dateFlagged).format('DD MMMM YYYY');
+                                usersdateflagged.push(formatDateFlagged)
                                 userflagReason.push(e.flagReason)
                             }
                         });
@@ -136,6 +149,9 @@ export default function NewReportedUserTable() {
                             </Button>
                         )
 
+                        // console.log(reportingUserId[i]);
+                        // console.log(res1.data.newReported[i].reportingUsername);
+                        reportedUser["reportingUser"] = res1.data.newReported[i].reportingUsername;
 
                         reportedUser["avatar"] = imgURL;
                         reportedUser["dateFlagged"] = usersdateflagged;
@@ -143,13 +159,11 @@ export default function NewReportedUserTable() {
                         reportedUser["removeFromFragList"] = removeFromListButton;
                         // Check IF - dubbels in die nuwe array of nie? 
                         if (reportedUsers !== reportedUserIds.length) {
-                            setRows(rows => [...rows, reportedUser]);
+                            setRows(rows => [...rows, reportedUser], [...rows, reportingUserId]);
                         }
                     });
-
                 }
                 setReportedUsers(reportedUserIds.length)
-
             })
 
 

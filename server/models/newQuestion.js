@@ -4,7 +4,7 @@ const NewQuestion = mongoose.Schema({
     userId: {type: String, required: true},
     title: {type: String, required: true},
     description: {type: String, required: true},
-    screenshots: {type: Array, required: true},
+    screenshots: {type: Array, required: false},
     code: {type: String, required: true},
     tags: {type: Array, required: true},
     upvotes: {type: Number, required: true},

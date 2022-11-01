@@ -38,6 +38,9 @@ const LoginPage = (props) => {
   const toRegister = () => {
     navigate('/RegisterPage');
   }
+
+
+
   //=====================================================================================
   //Login functionality
 
@@ -56,40 +59,43 @@ const LoginPage = (props) => {
   const [isClicked, setIsClicked] = useState(false);
 
 
-  //Login user function
-  const loginUser = (e) => {
-    e.preventDefault();
-    let payload = {
+//Login user function
+const loginUser = (e) => {
+  e.preventDefault(); 
+
+  let payload = {
       email: formValues['email'],
       password: formValues['password']
-    }
-    // console.log(payload);
-
-    Axios.post('http://localhost:5000/api/loginUser', payload)
-      .then((res) => {
-        // console.log(res.data);
-        if (!res.data) {
-          alert('Bad request');
-        } else {
-          if (res.data.user) {
-            // console.log(res);
-            sessionStorage.setItem('id', res.data.id);
-            sessionStorage.setItem('token', res.data.user);
-            sessionStorage.setItem('email', formValues['email']);
-            // navigate("/FeedPage");
-            setIsClicked(!isClicked)
-          } else {
-            setEditModal(
-              <CantLoginModal close={setEditModal} />
-            )
-            // console.log("can't log in");
-          }
-        }
-      })
-      .catch(function (error) {
-        // console.log(error);
-      })
   }
+
+  console.log(payload);
+
+  Axios.post('http://localhost:5000/api/loginUser', payload)
+  .then((res) => {
+    console.log(res.data);
+    if (!res.data) {
+      alert('Bad request');
+    } else {
+      if (res.data.user) {
+        // console.log(res);
+        sessionStorage.setItem('id', res.data.id);
+        sessionStorage.setItem('token', res.data.user);
+        sessionStorage.setItem('email', formValues['email']);
+        // navigate("/FeedPage");
+        setIsClicked(!isClicked)
+      } else {
+        setEditModal(
+          <CantLoginModal close={setEditModal} />
+        )
+      // console.log("can't log in");
+      }
+    }
+  })
+  .catch(function(error){
+    console.log(error);
+  })
+
+}
   return (
     <>
       <Helmet>
@@ -112,7 +118,7 @@ const LoginPage = (props) => {
                 borderRadius: '30px',
                 width: '100%',
                 height: '50px',
-                marginTop: '30px'
+                marginTop: '16px'
 
               }}
                 id="outlined-basic" onChange={getValues} name="email" color='primary' label="Email Address" variant="outlined" />
@@ -124,16 +130,16 @@ const LoginPage = (props) => {
                 borderRadius: '30px',
                 width: '100%',
                 height: '50px',
-                marginTop: '30px',
+                marginTop: '16px',
                 borderBlock: 'none',
                 borderBlockColor: '#f1f1f1'
               }}
                 id="outlined-basic" onChange={getValues} name="password" color='primary' type="password" label="Password" variant="outlined" />
 
-              <a href='' className='link'><p>Forgot your password?</p></a>
+              <a href='../UpdatePass' className='link'><p>Forgot your password?</p></a>
 
               <Button sx={{
-                backgroundColor: '#2b2b2b', borderRadius: '20px', marginTop: "20px", width: '100%', fontFamily: 'Open Sans', marginLeft: '0px',
+                backgroundColor: '#2b2b2b', borderRadius: '20px', marginTop: "24px", width: '100%', fontFamily: 'Open Sans', marginLeft: '0px',
                 '&:hover': {
                   backgroundColor: '#FF983A',
                 }

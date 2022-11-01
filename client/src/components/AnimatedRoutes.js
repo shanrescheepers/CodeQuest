@@ -21,6 +21,9 @@ import Axios from 'axios';
 import FourOhFour from '../pages/FourohFour';
 import ResultPage from "../pages/ResultPage";
 import FilterPage from "../pages/FilterPage";
+import Auth from '../pages/Auth';
+import PassReset from '../pages/PassReset';
+import UpdatePass from '../pages/UpdatePass';
 
 function AnimatedRoutes() {
 
@@ -40,10 +43,10 @@ function AnimatedRoutes() {
   useEffect(() => {
     const userId = sessionStorage.getItem("id");
     if (userId == null) {
-    //   console.log("User not logged in")
+      //   console.log("User not logged in")
 
     } else {
-    //   console.log("user logged in")
+      //   console.log("user logged in")
       Axios.get('http://localhost:5000/api/userInfo/' + userId)
         .then(res => {
           let data = res.data;
@@ -68,8 +71,8 @@ function AnimatedRoutes() {
           <Route path="/" element={<LoginPage funcNav={setShowNav} />} />
           <Route path="/RegisterPage" element={<RegisterPage funcNav={setShowNav} />} />
 
-          <Route path="SearchPage" element={<ResultPage />} />
-          <Route path="FilterPage" element={<FilterPage />} />
+          <Route path="/SearchPage" element={<ResultPage />} />
+          <Route path="/FilterPage" element={<FilterPage />} />
 
           {getAdminPermission(rank) &&
             <Route path="/AdminPage" element={<AdminPage />} />}
@@ -79,6 +82,9 @@ function AnimatedRoutes() {
           <Route path="/IndividualQuestion" element={<IndividualQuestion />} />
           <Route path="/QuestionsPage" element={<QuestionsPage />} />
           <Route path="/newquestion" element={<NewQuestionPage />} />
+          <Route path="/Auth" element={<Auth funcNav={setShowNav} />} />
+          <Route path="/PassReset" element={<PassReset funcNav={setShowNav} />} />
+          <Route path="/UpdatePass" element={<UpdatePass funcNav={setShowNav} />} />
           <Route path="*" element={<FourOhFour />} />
 
         </Routes>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body{
+                color: #2b2b2b;
+                font-family: 'Open Sans';
+                background-color: #EBEBF5;
+                padding: 50px;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                position: absolute;
+        
+            
+            }
+            .circle{
+                width: 100%;
+                height: 270px;
+                background-color: #2b2b2b;
+                color: #f1f1f1;
+                text-align: center;
+                padding: 20px;
+                margin: 0 auto;
+                
+            }
+            .button{
+                padding: 13px;
+                background-color: #FF7900;
+                border-radius: 30px;
+                color: #ffffff;
+                padding-left: 25px;
+                padding-right: 25px;
+            }
+
+            p{
+               
+                width: 300px;
+                margin: 0 auto;
+                margin-bottom: 50px;
+            }
+
+            h4{
+                margin-top: 25px;
+                font-weight: 300;
+                margin-bottom: 0px;
+            }
+
+            h2{
+                margin-top: 5px;
+            }
+            footer{
+                /* height: 60px; */
+                width: 100%;
+                text-align: center;
+                background-color: #2b2b2b;
+                color: #ffffff;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                position: absolute;
+                bottom: 0;
+                margin-top: auto;
+            }
+
+            .cat img{
+                width: 480px;
+                position: absolute;
+                margin-top: -5px;
+                margin-left: -120px;
+                padding-bottom: 50px;
+            }
+
+            .logo{
+                width: 100%;
+                padding: 20px;
+                     margin: 0 auto;
+                text-align: center;
+                background-color: #EBEBF5;
+            }
+            .logo img{
+                width: 150px;
+                margin: auto 0;
+                margin-top: 0px;
+                margin-bottom: 0px;
+            }
+            footer img{
+                width: 50px;
+            }
+            .cat{
+                height: 420px;
+                margin: 0 auto;
+                text-align: center;
+                background-color: #EBEBF5;
+            }
+
+            .social img{
+                width: 130px;
+                padding: 10px;
+            }
+            .text{
+                width: 550px;
+                margin: 0 auto;
+                padding-bottom: 20px;
+            }
+            .otherLogo img{
+                width: 100px;
+                padding-top: 15px;
+                margin-bottom: 0;
+            }
+
+            footer h3{
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+            small{
+                color: #EBEBF5;
+            }
+            a{
+                text-decoration: none;
+                color: #ffffff !important;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="logo"><img src="cid:logo"/></div>
+        <div class="circle">
+            <h4>Hey {{username}}!</h4>
+            <h2>Welcome to CodeQuest!</h2>
+            <p>Are you ready to embark on the quest for code? Verify your account now!</p>
+
+            <a href={{link}} class="button">Verify Account</a>
+      </div>  
+      <div class="cat">
+        <img src="cid:catImg">
+      </div>
+  
+
+       
+    </body>
+    <footer>
+        <div class="otherLogo">
+            <img src="cid:otherLogo" class="other"/>
+        </div>
+
+        <h3>Your Journey Awaits.</h3>
+        <small>@2022 CodeQuest.co.za All rights reserved.</small>
+        <div class="social">
+            <img src='cid:socials' class="'socials"/>
+        </div>
+       <div class="text">
+        <small>this email has been sent to {{email}} because you have requested to create a CodeQuest account using this email.
+            If you have not attempted to make an account, feel free to contact support.</small>
+       </div>
+
+    </footer>
+</html>

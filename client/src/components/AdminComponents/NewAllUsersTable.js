@@ -86,7 +86,7 @@ export default function NewAllUsersTable() {
                 }
                 setRows(allUsers);
             });
-    });
+    }, [deleteUserModal]);
     return (
         < >{deleteUserModal}
             <Paper style={{ width: "100%" }

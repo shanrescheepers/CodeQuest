@@ -1,13 +1,3 @@
-// Service Example
-
-// const axios = require('axios');
-
-// export class UserService {
-//     checkUser = (email, password) => {
-//     }
-// } 
-// import Navigation from '../components/Navigation';
-
 import '../css/HomeFeed.css';
 import React from 'react';
 import { Button } from '@mui/material';
@@ -75,14 +65,16 @@ useEffect(()=>{
 
     let questionData = res.data;
     // console.log(questionData);
-    let newArray =[];
-    for (let i = Math.max(0,questionData.length-10); i < questionData.length; i++) { 
-        newArray.push(questionData[i])
-    }
+    let reverse = [...questionData].reverse();
+    let slicedArray =[];
+    slicedArray = reverse.slice(0, 20);
+    console.log(slicedArray);
+  
+
 
     // console.log(newArray);
 
-    let renderQuestions = newArray.map((item) => <QuestionCard key={item._id} questionId={item._id} date={item.datePosted} title={item.title} description={item.description} upvotes={item.upvotes} downvotes={item.downvotes} userId={item.userId}  editRender={setUpdateQuestions}/>)
+    let renderQuestions = slicedArray.map((item) => <QuestionCard key={item._id} questionId={item._id} date={item.datePosted} title={item.title} description={item.description} upvotes={item.upvotes} downvotes={item.downvotes} userId={item.userId}  editRender={setUpdateQuestions}/>)
     setQuestions(renderQuestions);
     setUpdateQuestions(false);
 
@@ -97,9 +89,9 @@ useEffect(()=>{
     return (
         <>
         <motion.div className='home-con'
-            intital={{ width: 0 }}
-            animate={{ width: "76%" }}
-            exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
+             initial={{ width: 0 }}
+             animate={{ width: "76.8%" }}
+             exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
         >
             <Helmet>
                 <title>Home</title>
@@ -123,6 +115,7 @@ useEffect(()=>{
             </div>
 
             <div className='question-card-con'>
+    
                 {questions}
             </div>
 
