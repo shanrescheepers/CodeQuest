@@ -56,11 +56,15 @@ router.patch('/api/adminreqauth/:id', async (req, res) => {
                 reliability: req.body.reliability,
                 userEmail: req.body.userEmail,
             }
-        })
-        res.json(adminReq);
+
+        }
+    )
+
+
     
 
-   
+
+    res.json(adminReq);
 });
 
 
