@@ -14,8 +14,12 @@ const PromotionAccepted = (props) => {
         console.log("Promotion Accepted User");
         var state = true
         let payload = {
-            requestStatus: state
+            userId: props.userId,
+            requestStatus: state,
+            userEmail: props.userEmail,
+            reliability: props.reliability,
         }
+
 
         console.log(payload);
         Axios.patch('http://localhost:5000/api/adminreqauth/' + props.id, payload)
