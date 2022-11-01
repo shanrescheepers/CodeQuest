@@ -54,10 +54,9 @@ router.patch('/api/adminreqauth/:id', async (req, res) => {
                 requestStatus: req.body.requestStatus,
             }
         }
-        res.json(adminReq);
     )
 
-   
+    res.json(adminReq);
 });
 
 
