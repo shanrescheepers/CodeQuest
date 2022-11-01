@@ -274,10 +274,6 @@ const ProfilePage = () => {
             })
             .catch(err => console.log(err));
 
-        // Question Counter for Badges
-        // setQuestionCount(questions.length);
-        // console.log(questionCount);
-
         Axios.get('http://localhost:5000/api/readAllAnswers')
             .then(res => {
 
@@ -314,16 +310,7 @@ const ProfilePage = () => {
         totalUpVotes = upVotesQuestions + upVotesAnswers;
         totalDownVotes = downVotesQuestions + downVotesAnswers;
 
-        // Question Counter for Badges
-        //   setAnswerCount(answers.length);
-        //   console.log(questionCount);
-
-
         setReliability(totalUpVotes - totalDownVotes);
-        // console.log("Down Votes: " + totalDownVotes);
-        // console.log("Up Votes: " + totalUpVotes);
-        // console.log("Reliability Score: " + reliability);
-
 
         if (reliability > 20 && reliability < 40) {
             setBronze(false);
@@ -419,11 +406,11 @@ const ProfilePage = () => {
             setGold(false);
             setPlatinum(false);
             setDiamond(true);
+            
+            badgeSilverCheck = true;
+            badgeGoldCheck = true;
+            // badgeDiamondCheck = true;
         }
-
-        badgeSilverCheck = true;
-        badgeGoldCheck = true;
-        badgeDiamondCheck = true;
 
 
         Axios.get("http://localhost:5000/api/userInfo/" + activeUser).then((res) => {
@@ -439,41 +426,41 @@ const ProfilePage = () => {
 
     // Get Modal Values 
 
-    Axios.get('http://localhost:5000/api/getmodalStatus')
-        .then(res => {
+    // Axios.get('http://localhost:5000/api/getmodalStatus')
+    //     .then(res => {
 
-            let modalData = res.data;
+    //         let modalData = res.data;
 
 
 
-            modalData.filter(user => user.userId === activeUser).forEach((val) => {
-                setModalQuestionOneCheck(val.FirstQuestionModal);
-                setModalQuestionTwoCheck(val.SecondQuestionModal);
-                setModalQuestionThreeCheck(val.ThirdQuestionModal);
-                setModalQuestionFourCheck(val.FourthQuestionModal);
-                setModalQuestionFiveCheck(val.FifthAnswerModal);
-                setModalQuestionSixCheck(val.SixthAnswerModal);
-                setModalQuestionSevenCheck(val.SeventhAnswerModal);
-                setModalQuestionEightCheck(val.EighthAnswerModal);
+    //         modalData.filter(user => user.userId === activeUser).forEach((val) => {
+    //             setModalQuestionOneCheck(val.FirstQuestionModal);
+    //             setModalQuestionTwoCheck(val.SecondQuestionModal);
+    //             setModalQuestionThreeCheck(val.ThirdQuestionModal);
+    //             setModalQuestionFourCheck(val.FourthQuestionModal);
+    //             setModalQuestionFiveCheck(val.FifthAnswerModal);
+    //             setModalQuestionSixCheck(val.SixthAnswerModal);
+    //             setModalQuestionSevenCheck(val.SeventhAnswerModal);
+    //             setModalQuestionEightCheck(val.EighthAnswerModal);
 
-                setModalUpVoteOneCheck(val.FirstUpvoteModal);
-                setModalUpVoteTwoCheck(val.SecondUpvoteModal);
-                setModalUpVoteThreeCheck(val.ThirdUpvoteModal);
-                setModalUpVoteFourCheck(val.FourthUpvoteModal);
-                setModalUpVoteFiveCheck(val.FifthUpvoteModal);
-                setModalUpVoteSixCheck(val.SixthUpvoteModal);
-                setModalUpVoteSevenCheck(val.SeventhUpvoteModal);
-                setModalUpVoteEightCheck(val.EighthUpvoteModal);
+    //             setModalUpVoteOneCheck(val.FirstUpvoteModal);
+    //             setModalUpVoteTwoCheck(val.SecondUpvoteModal);
+    //             setModalUpVoteThreeCheck(val.ThirdUpvoteModal);
+    //             setModalUpVoteFourCheck(val.FourthUpvoteModal);
+    //             setModalUpVoteFiveCheck(val.FifthUpvoteModal);
+    //             setModalUpVoteSixCheck(val.SixthUpvoteModal);
+    //             setModalUpVoteSevenCheck(val.SeventhUpvoteModal);
+    //             setModalUpVoteEightCheck(val.EighthUpvoteModal);
 
-                setModalSilverCheck(val.SilverRankModal);
-                setModalGoldCheck(val.GoldRankModal);
-                // setModalPlatinumCheck(val.);
-                setModalDiamondCheck(val.DiamondRankModal);
+    //             setModalSilverCheck(val.SilverRankModal);
+    //             setModalGoldCheck(val.GoldRankModal);
+    //             // setModalPlatinumCheck(val.);
+    //             setModalDiamondCheck(val.DiamondRankModal);
 
-            });
+    //         });
 
-        })
-        .catch(err => console.log(err));
+    //     })
+    //     .catch(err => console.log(err));
 
 
     // Awarding Badges 
@@ -484,63 +471,18 @@ const ProfilePage = () => {
     if (questionAmmount > 0) {
         badgeOneCheck = true;
 
-        let payload = {
-            FirstQuestionModal: 'Active',
-        }
-
-        Axios.patch('http://localhost:5000/api/userAwardModalsUpdate/:id' + activeUser, payload)
-            .then((res) => {
-                if (res) {
-                    console.log("User Updated");
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
-        // console.log(questionAmmount);
+        // console.log(modalQuestionOneCheck);
     }
 
     if (questionAmmount >= 5) {
         badgeTwoCheck = true;
-        // console.log(questionAmmount);
- 
-        let payload = {
-            SecondQuestionModal: 'Active',
-        }
-
-        Axios.patch('http://localhost:5000/api/userAwardModalsUpdate/:id' + activeUser, payload)
-            .then((res) => {
-                if (res) {
-                    console.log("User Updated");
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
+        // console.log(modalQuestionOneCheck);
     }
 
 
     if (questionAmmount >= 10) {
         badgeThreeCheck = true;
         // console.log(questionAmmount);
-        
-        
-        
-        let payload = {
-            ThirdQuestionModal: 'Active'
-        }
-
-        Axios.patch('http://localhost:5000/api/userAwardModalsUpdate/:id' + activeUser, payload)
-            .then((res) => {
-                if (res) {
-                    console.log("User Updated");
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
 
     }
 
@@ -548,40 +490,11 @@ const ProfilePage = () => {
     if (questionAmmount >= 20) {
         badgeFourCheck = true;
         // console.log(questionAmmount);
-
-        let payload = {
-            FourthQuestionModal: 'Active'
-        }
-
-        Axios.patch('http://localhost:5000/api/userAwardModalsUpdate/:id' + activeUser, payload)
-            .then((res) => {
-                if (res) {
-                    console.log("User Updated");
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
     }
 
     if (questionAmmount >= 25) {
         badgeFiveCheck = true;
         // console.log(questionAmmount);
-
-        let payload = {
-            FifthAnswerModal: 'Active',
-        }
-
-        Axios.patch('http://localhost:5000/api/userAwardModalsUpdate/:id' + activeUser, payload)
-            .then((res) => {
-                if (res) {
-                    console.log("User Updated");
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
 
     }
 
@@ -589,19 +502,6 @@ const ProfilePage = () => {
         badgeSixCheck = true;
         // console.log(questionAmmount);
 
-        let payload = {
-            SixthAnswerModal: 'Active',
-        }
-
-        Axios.patch('http://localhost:5000/api/userAwardModalsUpdate/:id' + activeUser, payload)
-            .then((res) => {
-                if (res) {
-                    console.log("User Updated");
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
 
     }
 
@@ -609,39 +509,11 @@ const ProfilePage = () => {
         badgeSevenCheck = true;
         // console.log(questionAmmount);
 
-        let payload = {
-            SeventhAnswerModal: 'Active',
-        }
-
-        Axios.patch('http://localhost:5000/api/userAwardModalsUpdate/:id' + activeUser, payload)
-            .then((res) => {
-                if (res) {
-                    console.log("User Updated");
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
     }
 
     if (questionAmmount >= 100) {
         badgeEightCheck = true;
-        // console.log(questionAmmount);
 
-        let payload = {
-            EighthAnswerModal : 'Active',   
-        }
-
-        Axios.patch('http://localhost:5000/api/userAwardModalsUpdate/:id' + activeUser, payload)
-            .then((res) => {
-                if (res) {
-                    console.log("User Updated");
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
 
     }
 
@@ -652,39 +524,11 @@ const ProfilePage = () => {
         badgeNineCheck = true;
         // console.log(questionAmmount);
 
-        let payload = {
-            FirstQuestionModal: 'Active',
-        }
-
-        Axios.patch('http://localhost:5000/api/userAwardModalsUpdate/:id' + activeUser, payload)
-            .then((res) => {
-                if (res) {
-                    console.log("User Updated");
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
     }
 
     if (answerCount >= 5) {
         badgeTenCheck = true;
         // console.log(questionAmmount);
-
-        let payload = {
-            FirstQuestionModal: 'Active',
-        }
-
-        Axios.patch('http://localhost:5000/api/userAwardModalsUpdate/:id' + activeUser, payload)
-            .then((res) => {
-                if (res) {
-                    console.log("User Updated");
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
 
     }
 
@@ -692,122 +536,30 @@ const ProfilePage = () => {
     if (answerCount >= 10) {
         badgeElevenCheck = true;
         // console.log(questionAmmount);
-
-        let payload = {
-            FirstQuestionModal: 'Active',
-        }
-
-        Axios.patch('http://localhost:5000/api/userAwardModalsUpdate/:id' + activeUser, payload)
-            .then((res) => {
-                if (res) {
-                    console.log("User Updated");
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
     }
 
 
     if (answerCount >= 20) {
         badgeTwelveCheck = true;
         // console.log(questionAmmount);
-
-        let payload = {
-            FirstQuestionModal: 'Active',
-        }
-
-        Axios.patch('http://localhost:5000/api/userAwardModalsUpdate/:id' + activeUser, payload)
-            .then((res) => {
-                if (res) {
-                    console.log("User Updated");
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
     }
 
     if (answerCount >= 25) {
         badgeThirteenCheck = true;
-        // console.log(questionAmmount);
-
-        let payload = {
-            FirstQuestionModal: 'Active',
-        }
-
-        Axios.patch('http://localhost:5000/api/userAwardModalsUpdate/:id' + activeUser, payload)
-            .then((res) => {
-                if (res) {
-                    console.log("User Updated");
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
     }
 
     if (answerCount >= 50) {
         badgeFourteenCheck = true;
         // console.log(questionAmmount);
-
-        let payload = {
-            FirstQuestionModal: 'Active',
-        }
-
-        Axios.patch('http://localhost:5000/api/userAwardModalsUpdate/:id' + activeUser, payload)
-            .then((res) => {
-                if (res) {
-                    console.log("User Updated");
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
     }
 
     if (answerCount >= 75) {
         badgeFifteenCheck = true;
-        // console.log(questionAmmount);
-
-        let payload = {
-            FirstQuestionModal: 'Active',
-        }
-
-        Axios.patch('http://localhost:5000/api/userAwardModalsUpdate/:id' + activeUser, payload)
-            .then((res) => {
-                if (res) {
-                    console.log("User Updated");
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
     }
 
     if (answerCount >= 100) {
         badgeSixteenCheck = true;
         // console.log(questionAmmount);
-
-        let payload = {
-            FirstQuestionModal: 'Active',
-        }
-
-        Axios.patch('http://localhost:5000/api/userAwardModalsUpdate/:id' + activeUser, payload)
-            .then((res) => {
-                if (res) {
-                    console.log("User Updated");
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
     }
 
 
@@ -820,10 +572,40 @@ const ProfilePage = () => {
         setReliability(100)
     }
 
+    
 
     if (reliability > 100 && questionAmmount.length > 20) {
         setEligibility(true);
     }
+
+    
+
+// Test 
+    // if(reliability > 0){
+    //     setEligibility(true);
+    // }
+
+    // if (eligibility === true && usersRank === "Diamond") {
+
+    //     let adminPermissions = {
+    //         reliability: reliability,
+    //         requestStatus: false,
+    //         userId: activeUser,
+    //         userEmail: userEmail
+    //     }
+
+
+    //     Axios.post('http://localhost:5000/api/adminreq', adminPermissions)
+    //         .then((res) => {
+    //             if (res) {
+    //                 console.log("Added Admin Request");
+    //             }
+    //         })
+    //         .catch(function (error) {
+    //             console.log(error);
+    //         });
+
+    // }
 
 
     const deleteItem = () => {
@@ -836,30 +618,30 @@ const ProfilePage = () => {
 
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
 
-        Axios.get('http://localhost:5000/api/getadminreq')
-            .then(res => {
-                let data = res.data;
+    //     Axios.get('http://localhost:5000/api/getadminreq')
+    //         .then(res => {
+    //             let data = res.data;
 
-                // console.log(data);
+    //             // console.log(data);
 
-                data.filter(user => user.userId === activeUser).forEach((val) => {
-                    setAdminStatus(val.requestStatus);
-                    console.log(adminStatus);
-                });
-
-
-            })
-
-        // console.log(adminStatus);
+    //             data.filter(user => user.userId === activeUser).forEach((val) => {
+    //                 setAdminStatus(val.requestStatus);
+    //                 console.log(adminStatus);
+    //             });
 
 
-    }, []);
+    //         })
+
+    //     // console.log(adminStatus);
 
 
-    if (reliability === 100 && eligibility === true && usersRank === "Diamond") {
+    // }, []);
+
+
+    if (reliability === 100 && eligibility === true && usersRank === "Platinum") {
 
         let adminPermissions = {
             reliability: reliability,
@@ -902,8 +684,43 @@ const ProfilePage = () => {
     }
 
 
-    // if(badgeOneCheck === true && "Award === "inActive""){
-    //     Set Award Status to Seen
+    // if(badgeOneCheck === true && modalQuestionOneCheck === "inActive"){
+    //     let payload = {
+    //         userId: activeUser,
+    //         silver:'inActive',
+    //         gold: 'inActive',
+    //         platinum: 'inActive',
+    //         diamond: 'inActive',
+    //         FirstQuestionModal: 'Active',
+    //         SecondQuestionModal: 'inActive',
+    //         ThirdQuestionModal: 'inActive',
+    //         FourthQuestionModal: 'inActive',
+    //         FifthAnswerModal: 'inActive',
+    //         SixthAnswerModal: 'inActive',
+    //         SeventhAnswerModal: 'inActive',
+    //         EighthAnswerModal: 'inActive',
+    //         FirstUpvoteModal: 'inActive',
+    //         SecondUpvoteModal: 'inActive',
+    //         ThirdUpvoteModal: 'inActive',
+    //         FourthUpvoteModal: 'inActive',
+    //         FifthUpvoteModal: 'inActive',
+    //         SixthUpvoteModal: 'inActive',
+    //         SeventhUpvoteModal: 'inActive',
+    //         EighthUpvoteModal: 'inActive',
+    //         SilverRankModal: 'inActive',
+    //         GoldRankModal: 'inActive',
+    //         DiamondRankModal: 'inActive',
+    //     }
+
+    //     Axios.patch('http://localhost:5000/api/userAwardModalsUpdate/:id' + activeUser, payload)
+    //         .then((res) => {
+    //             if (res) {
+    //                 console.log("User Updated");
+    //             }
+    //         })
+    //         .catch(function (error) {
+    //             console.log(error);
+    //         });
     // }
 
 
@@ -912,13 +729,15 @@ const ProfilePage = () => {
 
         <div>
             {deleteModal}
-
+            {/* {modalQuestionOne} */}
+            
             {/* Modals */}
 
             {/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
             {/* Need to get Status From DB. Do if check to see status, is badge check runs */}
 
-            {modalQuestionOneCheck === "Active" ? modalQuestionOne : ""}
+
+            {/* {modalQuestionOneCheck === "Active" ? modalQuestionOne : ""}
             {modalQuestionTwoCheck === "Active" ? modalQuestionTwo : ""}
             {modalQuestionThreeCheck === "Active" ? modalQuestionThree : ""}
             {modalQuestionFourCheck === "Active" ? modalQuestionFour : ""}
@@ -938,8 +757,8 @@ const ProfilePage = () => {
 
             {modalSilverCheck === true ? modalSilver : ""}
             {modalGoldCheck === true ? modalGold : ""}
+            {modalDiamondCheck === true ? modalDiamond : ""} */}
             {/* {badgePlatinumnCheck === true ? modalPlatinum : ""} */}
-            {modalDiamondCheck === true ? modalDiamond : ""}
 
             {/* Modals  */}
 
@@ -948,6 +767,9 @@ const ProfilePage = () => {
                 animate={{ width: "76.8%" }}
                 exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
             >
+
+{/* {modalQuestionOne} */}
+                
                 <Helmet>
                     <title>Profile</title>
                 </Helmet>
@@ -980,7 +802,6 @@ const ProfilePage = () => {
                     <div className='pp_rank_con'>
                         <h2>Your Rank:</h2>
                         <div className='pp_rank_img_con'>
-
                             <div className='pp_rank'>
                                 {/* <div className='pp_rank_img'></div> */}
                                 <img src={bronze === true ? fishUnlockImage : fishLockImage} alt="img" className='pp_rank_img'></img>
@@ -1027,7 +848,6 @@ const ProfilePage = () => {
                 <div className='pp_badges_con'>
                     <h2>Your Badges:</h2>
                     <div className='pp_badge_card_slide'>
-
 
                         {badgeOneCheck === true ? badgeOne : ""}
                         {badgeTwoCheck === true ? badgeTwo : ""}

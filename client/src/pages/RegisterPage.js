@@ -118,43 +118,43 @@ console.log(userId);
     // =================================================================================
     // Modal Awards 
 
-    let awardModals = {
-        userId: userId,
-        silver: 'inActive',
-        gold: 'inActive',
-        platinum: 'inActive',
-        diamond: 'inActive',
-        FirstQuestionModal: 'inActive',
-        SecondQuestionModal: 'inActive',
-        ThirdQuestionModal: 'inActive',
-        FourthQuestionModal: 'inActive',
-        FifthAnswerModal: 'inActive',
-        SixthAnswerModal: 'inActive',
-        SeventhAnswerModal: 'inActive',
-        EighthAnswerModal : 'inActive',   
-        FirstUpvoteModal: 'inActive',
-        SecondUpvoteModal: 'inActive',
-        ThirdUpvoteModal: 'inActive',
-        FourthUpvoteModal: 'inActive',
-        FifthUpvoteModal: 'inActive',
-        SixthUpvoteModal: 'inActive',
-        SeventhUpvoteModal: 'inActive',
-        EighthUpvoteModal: 'inActive',
-        SilverRankModal: 'inActive',
-        GoldRankModal: 'inActive',
-        DiamondRankModal: 'inActive',
-    }
+    // let awardModals = {
+    //     userId: userId,
+    //     silver: 'inActive',
+    //     gold: 'inActive',
+    //     platinum: 'inActive',
+    //     diamond: 'inActive',
+    //     FirstQuestionModal: 'inActive',
+    //     SecondQuestionModal: 'inActive',
+    //     ThirdQuestionModal: 'inActive',
+    //     FourthQuestionModal: 'inActive',
+    //     FifthAnswerModal: 'inActive',
+    //     SixthAnswerModal: 'inActive',
+    //     SeventhAnswerModal: 'inActive',
+    //     EighthAnswerModal : 'inActive',   
+    //     FirstUpvoteModal: 'inActive',
+    //     SecondUpvoteModal: 'inActive',
+    //     ThirdUpvoteModal: 'inActive',
+    //     FourthUpvoteModal: 'inActive',
+    //     FifthUpvoteModal: 'inActive',
+    //     SixthUpvoteModal: 'inActive',
+    //     SeventhUpvoteModal: 'inActive',
+    //     EighthUpvoteModal: 'inActive',
+    //     SilverRankModal: 'inActive',
+    //     GoldRankModal: 'inActive',
+    //     DiamondRankModal: 'inActive',
+    // }
 
 
-    Axios.post('http://localhost:5000/api/userAwardModals', awardModals)
-        .then((res) => {
-            if (res) {
-                console.log("Users Award Modals Set");
-            }
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+    // Axios.post('http://localhost:5000/api/userAwardModals', awardModals)
+    //     .then((res) => {
+    //         if (res) {
+    //             console.log("Users Award Modals Set");
+    //         }
+    //     })
+    //     .catch(function (error) {
+    //         console.log(error);
+    //     });
 
         // ================================================================================
 
