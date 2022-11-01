@@ -934,7 +934,7 @@ const ProfilePage = () => {
             {modalUpVoteFiveCheck === "Active" ? modalUpVoteFive : ""}
             {modalUpVoteSixCheck === "Active" ? modalUpVoteSix : ""}
             {modalUpVoteSevenCheck === "Active" ? modalUpVoteSeven : ""}
-            {setmMdalUpVoteEightCheck === "Active" ? modalUpVoteEight : ""}
+            {modalUpVoteEightCheck === "Active" ? modalUpVoteEight : ""}
 
             {modalSilverCheck === true ? modalSilver : ""}
             {modalGoldCheck === true ? modalGold : ""}
