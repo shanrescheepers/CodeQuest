@@ -100,15 +100,67 @@ const addNewUser = (e) => {
         if(res){
         console.log("User Successfully Added");
         console.log(res);
+        setUserId(res.data._id);
         sessionStorage.setItem('id', res.data._id);
         sessionStorage.setItem('token', res.data.username);
         sessionStorage.setItem('email', formValues['email']);
-        window.location.href = 'https://mail.google.com/mail/u/0/#inbox'; 
+        // window.location.href = 'https://mail.google.com/mail/u/0/#inbox'; 
         }
     })
     .catch(function (error) {
         console.log("Could not add user: Error is:" + error);
     });
+
+
+console.log(userId);
+
+
+    // =================================================================================
+    // Modal Awards 
+
+    let awardModals = {
+        userId: userId,
+        silver: 'inActive',
+        gold: 'inActive',
+        platinum: 'inActive',
+        diamond: 'inActive',
+        FirstQuestionModal: 'inActive',
+        SecondQuestionModal: 'inActive',
+        ThirdQuestionModal: 'inActive',
+        FourthQuestionModal: 'inActive',
+        FifthAnswerModal: 'inActive',
+        SixthAnswerModal: 'inActive',
+        SeventhAnswerModal: 'inActive',
+        EighthAnswerModal : 'inActive',   
+        FirstUpvoteModal: 'inActive',
+        SecondUpvoteModal: 'inActive',
+        ThirdUpvoteModal: 'inActive',
+        FourthUpvoteModal: 'inActive',
+        FifthUpvoteModal: 'inActive',
+        SixthUpvoteModal: 'inActive',
+        SeventhUpvoteModal: 'inActive',
+        EighthUpvoteModal: 'inActive',
+        SilverRankModal: 'inActive',
+        GoldRankModal: 'inActive',
+        DiamondRankModal: 'inActive',
+    }
+
+
+    Axios.post('http://localhost:5000/api/userAwardModals', awardModals)
+        .then((res) => {
+            if (res) {
+                console.log("Users Award Modals Set");
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+        // ================================================================================
+
+
+
+
 } 
 //====================================================================================
 //To register
