@@ -45,6 +45,27 @@ import SixthAnswerAward from '../components/AnswerAwardBadges/SixthAnswerAward';
 import SeventhAnswerAward from '../components/AnswerAwardBadges/SeventhAnswerAward';
 import EighthAnswerAward from '../components/AnswerAwardBadges/EighthAnswerAward';
 
+import FirstQuestionModal from '../modals/AwardModals/QuestionAskedModals/FirstQuestionModal';
+import SecondQuestionModal from '../modals/AwardModals/QuestionAskedModals/SecondQuestionModal';
+import ThirdQuestionModal from '../modals/AwardModals/QuestionAskedModals/ThirdQuestionModal';
+import FourthQuestionModal from '../modals/AwardModals/QuestionAskedModals/FourthQuestionModal';
+import FifthAnswerModal from '../modals/AwardModals/QuestionAskedModals/FifthAnswerModal';
+import SixthAnswerModal from '../modals/AwardModals/QuestionAskedModals/SixthAnswerModal';
+import SeventhAnswerModal from '../modals/AwardModals/QuestionAskedModals/SeventhAnswerModal';
+import EighthAnswerModal from '../modals/AwardModals/QuestionAskedModals/EighthAnswerModal';
+
+import FirstUpvoteModal from '../modals/AwardModals/UpvoteModals/FirstUpvoteModal';
+import SecondUpvoteModal from '../modals/AwardModals/UpvoteModals/SecondUpvoteModal';
+import ThirdUpvoteModal from '../modals/AwardModals/UpvoteModals/ThirdUpvoteModal';
+import FourthUpvoteModal from '../modals/AwardModals/UpvoteModals/FourthUpvoteModal';
+import FifthUpvoteModal from '../modals/AwardModals/UpvoteModals/FifthUpvoteModal';
+import SixthUpvoteModal from '../modals/AwardModals/UpvoteModals/SixthUpvoteModal';
+import SeventhUpvoteModal from '../modals/AwardModals/UpvoteModals/SeventhUpvoteModal';
+import EighthUpvoteModal from '../modals/AwardModals/UpvoteModals/EighthUpvoteModal';
+
+import SilverRankModal from '../modals/AwardModals/RankAwardModal/SilverRankModal';
+import GoldRankModal from '../modals/AwardModals/RankAwardModal/GoldRankModal';
+import DiamondRankModal from '../modals/AwardModals/RankAwardModal/DiamondRankModal';
 
 import SilverAward from '../components/RankAwardBadges/SilverAward';
 import GoldAward from '../components/RankAwardBadges/GoldAward';
@@ -132,6 +153,61 @@ const ProfilePage = () => {
 
 
 
+    // Modals 
+    // ===========================================================================================
+
+
+    const modalQuestionOne = <FirstQuestionModal />
+    const modalQuestionTwo = <SecondQuestionModal />
+    const modalQuestionThree = <ThirdQuestionModal />
+    const modalQuestionFour = <FourthQuestionModal />
+    const modalQuestionFive = <FifthAnswerModal />
+    const modalQuestionSix = <SixthAnswerModal />
+    const modalQuestionSeven = <SeventhAnswerModal />
+    const modalQuestionEight = <EighthAnswerModal />
+
+    const modalUpVoteOne = <FirstUpvoteModal />
+    const modalUpVoteTwo = <SecondUpvoteModal />
+    const modalUpVoteThree = <ThirdUpvoteModal />
+    const modalUpVoteFour = <FourthUpvoteModal />
+    const modalUpVoteFive = <FifthUpvoteModal />
+    const modalUpVoteSix = <SixthUpvoteModal />
+    const modalUpVoteSeven = <SeventhUpvoteModal />
+    const modalUpVoteEight = <EighthUpvoteModal />
+
+    const modalSilver = <SilverRankModal />
+    const modalGold = <GoldRankModal />
+    const modalPlatinum = ""
+    const modalDiamond = <DiamondRankModal />
+
+
+    const [modalQuestionOneCheck, setModalQuestionOneCheck] = useState();
+    const [modalQuestionTwoCheck, setModalQuestionTwoCheck] = useState();
+    const [modalQuestionThreeCheck, setModalQuestionThreeCheck] = useState();
+    const [modalQuestionFourCheck, setModalQuestionFourCheck] = useState();
+    const [modalQuestionFiveCheck, setModalQuestionFiveCheck] = useState();
+    const [modalQuestionSixCheck, setModalQuestionSixCheck] = useState();
+    const [modalQuestionSevenCheck, setModalQuestionSevenCheck] = useState();
+    const [modalQuestionEightCheck, setModalQuestionEightCheck] = useState();
+
+    const [modalUpVoteOneCheck, setModalUpVoteOneCheck] = useState();
+    const [modalUpVoteTwoCheck, setModalUpVoteTwoCheck] = useState();
+    const [modalUpVoteThreeCheck, setModalUpVoteThreeCheck] = useState();
+    const [modalUpVoteFourCheck, setModalUpVoteFourCheck] = useState();
+    const [modalUpVoteFiveCheck, setModalUpVoteFiveCheck] = useState();
+    const [modalUpVoteSixCheck, setModalUpVoteSixCheck] = useState();
+    const [modalUpVoteSevenCheck, setModalUpVoteSevenCheck] = useState();
+    const [modalUpVoteEightCheck, setModalUpVoteEightCheck] = useState();
+
+    const [modalSilverCheck, setModalSilverCheck] = useState();
+    const [modalGoldCheck, setModalGoldCheck] = useState();
+    const [modalPlatinumCheck, setModalPlatinumCheck] = useState();
+    const [modalDiamondCheck, setModalDiamondCheck] = useState();
+
+    // ===========================================================================================
+
+
+
     const [questions, setQuestions] = useState();
     const [answers, setAnswers] = useState();
     const [answerCount, setAnswerCount] = useState();
@@ -198,10 +274,6 @@ const ProfilePage = () => {
             })
             .catch(err => console.log(err));
 
-        // Question Counter for Badges
-        // setQuestionCount(questions.length);
-        // console.log(questionCount);
-
         Axios.get('http://localhost:5000/api/readAllAnswers')
             .then(res => {
 
@@ -238,16 +310,7 @@ const ProfilePage = () => {
         totalUpVotes = upVotesQuestions + upVotesAnswers;
         totalDownVotes = downVotesQuestions + downVotesAnswers;
 
-        // Question Counter for Badges
-        //   setAnswerCount(answers.length);
-        //   console.log(questionCount);
-
-
         setReliability(totalUpVotes - totalDownVotes);
-        // console.log("Down Votes: " + totalDownVotes);
-        // console.log("Up Votes: " + totalUpVotes);
-        // console.log("Reliability Score: " + reliability);
-
 
         if (reliability > 20 && reliability < 40) {
             setBronze(false);
@@ -343,11 +406,11 @@ const ProfilePage = () => {
             setGold(false);
             setPlatinum(false);
             setDiamond(true);
+            
+            badgeSilverCheck = true;
+            badgeGoldCheck = true;
+            // badgeDiamondCheck = true;
         }
-
-        badgeSilverCheck = true;
-        badgeGoldCheck = true;
-        badgeDiamondCheck = true;
 
 
         Axios.get("http://localhost:5000/api/userInfo/" + activeUser).then((res) => {
@@ -360,6 +423,46 @@ const ProfilePage = () => {
 
     }, [questions]);
 
+
+    // Get Modal Values 
+
+    // Axios.get('http://localhost:5000/api/getmodalStatus')
+    //     .then(res => {
+
+    //         let modalData = res.data;
+
+
+
+    //         modalData.filter(user => user.userId === activeUser).forEach((val) => {
+    //             setModalQuestionOneCheck(val.FirstQuestionModal);
+    //             setModalQuestionTwoCheck(val.SecondQuestionModal);
+    //             setModalQuestionThreeCheck(val.ThirdQuestionModal);
+    //             setModalQuestionFourCheck(val.FourthQuestionModal);
+    //             setModalQuestionFiveCheck(val.FifthAnswerModal);
+    //             setModalQuestionSixCheck(val.SixthAnswerModal);
+    //             setModalQuestionSevenCheck(val.SeventhAnswerModal);
+    //             setModalQuestionEightCheck(val.EighthAnswerModal);
+
+    //             setModalUpVoteOneCheck(val.FirstUpvoteModal);
+    //             setModalUpVoteTwoCheck(val.SecondUpvoteModal);
+    //             setModalUpVoteThreeCheck(val.ThirdUpvoteModal);
+    //             setModalUpVoteFourCheck(val.FourthUpvoteModal);
+    //             setModalUpVoteFiveCheck(val.FifthUpvoteModal);
+    //             setModalUpVoteSixCheck(val.SixthUpvoteModal);
+    //             setModalUpVoteSevenCheck(val.SeventhUpvoteModal);
+    //             setModalUpVoteEightCheck(val.EighthUpvoteModal);
+
+    //             setModalSilverCheck(val.SilverRankModal);
+    //             setModalGoldCheck(val.GoldRankModal);
+    //             // setModalPlatinumCheck(val.);
+    //             setModalDiamondCheck(val.DiamondRankModal);
+
+    //         });
+
+    //     })
+    //     .catch(err => console.log(err));
+
+
     // Awarding Badges 
 
     // Rank Badges 
@@ -367,18 +470,20 @@ const ProfilePage = () => {
     // Questions 
     if (questionAmmount > 0) {
         badgeOneCheck = true;
-        // console.log(questionAmmount);
+
+        // console.log(modalQuestionOneCheck);
     }
 
     if (questionAmmount >= 5) {
         badgeTwoCheck = true;
-        // console.log(questionAmmount);
+        // console.log(modalQuestionOneCheck);
     }
 
 
     if (questionAmmount >= 10) {
         badgeThreeCheck = true;
         // console.log(questionAmmount);
+
     }
 
 
@@ -390,21 +495,26 @@ const ProfilePage = () => {
     if (questionAmmount >= 25) {
         badgeFiveCheck = true;
         // console.log(questionAmmount);
+
     }
 
     if (questionAmmount >= 50) {
         badgeSixCheck = true;
         // console.log(questionAmmount);
+
+
     }
 
     if (questionAmmount >= 75) {
         badgeSevenCheck = true;
         // console.log(questionAmmount);
+
     }
 
     if (questionAmmount >= 100) {
         badgeEightCheck = true;
-        // console.log(questionAmmount);
+
+
     }
 
 
@@ -413,11 +523,13 @@ const ProfilePage = () => {
     if (answerCount > 0) {
         badgeNineCheck = true;
         // console.log(questionAmmount);
+
     }
 
     if (answerCount >= 5) {
         badgeTenCheck = true;
         // console.log(questionAmmount);
+
     }
 
 
@@ -434,7 +546,6 @@ const ProfilePage = () => {
 
     if (answerCount >= 25) {
         badgeThirteenCheck = true;
-        // console.log(questionAmmount);
     }
 
     if (answerCount >= 50) {
@@ -444,7 +555,6 @@ const ProfilePage = () => {
 
     if (answerCount >= 75) {
         badgeFifteenCheck = true;
-        // console.log(questionAmmount);
     }
 
     if (answerCount >= 100) {
@@ -456,18 +566,46 @@ const ProfilePage = () => {
 
 
 
-
-
     // console.log(totalDownVotes / totalUpVotes * 100)
 
     if (reliability > 100) {
         setReliability(100)
     }
 
+    
 
     if (reliability > 100 && questionAmmount.length > 20) {
         setEligibility(true);
     }
+
+    
+
+// Test 
+    // if(reliability > 0){
+    //     setEligibility(true);
+    // }
+
+    // if (eligibility === true && usersRank === "Diamond") {
+
+    //     let adminPermissions = {
+    //         reliability: reliability,
+    //         requestStatus: false,
+    //         userId: activeUser,
+    //         userEmail: userEmail
+    //     }
+
+
+    //     Axios.post('http://localhost:5000/api/adminreq', adminPermissions)
+    //         .then((res) => {
+    //             if (res) {
+    //                 console.log("Added Admin Request");
+    //             }
+    //         })
+    //         .catch(function (error) {
+    //             console.log(error);
+    //         });
+
+    // }
 
 
     const deleteItem = () => {
@@ -480,76 +618,110 @@ const ProfilePage = () => {
 
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
 
-        Axios.get('http://localhost:5000/api/getadminreq')
-            .then(res => {
-                let data = res.data;
+    //     Axios.get('http://localhost:5000/api/getadminreq')
+    //         .then(res => {
+    //             let data = res.data;
 
-                // console.log(data);
+    //             // console.log(data);
 
-                data.filter(user => user.userId === activeUser).forEach((val) => {
-                    setAdminStatus(val.requestStatus);
-                    console.log(adminStatus);
-                });
+    //             data.filter(user => user.userId === activeUser).forEach((val) => {
+    //                 setAdminStatus(val.requestStatus);
+    //                 console.log(adminStatus);
+    //             });
 
 
+    //         })
+
+    //     // console.log(adminStatus);
+
+
+    // }, []);
+
+
+    if (reliability === 100 && eligibility === true && usersRank === "Platinum") {
+
+        let adminPermissions = {
+            reliability: reliability,
+            requestStatus: false,
+            userId: activeUser,
+            userEmail: userEmail
+        }
+
+
+        Axios.post('http://localhost:5000/api/adminreq', adminPermissions)
+            .then((res) => {
+                if (res) {
+                    console.log("Added Admin Request");
+                }
             })
+            .catch(function (error) {
+                console.log(error);
+            });
 
-        // console.log(adminStatus);
-
-
-
-
-
+    }
 
 
+    if (reliability === 100 && eligibility === true && adminStatus === true) {
 
-        if (reliability === 100 && eligibility === true && usersRank === "Diamond") {
-
-            let adminPermissions = {
-                reliability: reliability,
-                requestStatus: false,
-                userId: activeUser,
-                userEmail: userEmail
-            }
-
-
-            Axios.post('http://localhost:5000/api/adminreq', adminPermissions)
-                .then((res) => {
-                    if (res) {
-                        console.log("Added Admin Request");
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-
+        let payload = {
+            rank: usersRank
         }
 
 
-        if (reliability === 100 && eligibility === true && adminStatus === true) {
+        Axios.patch('http://localhost:5000/api/updateuser/:id' + activeUser, payload)
+            .then((res) => {
+                if (res) {
+                    console.log("User Updated");
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 
-            let payload = {
-                rank: usersRank
-            }
+    }
 
 
-            Axios.patch('http://localhost:5000/api/updateuser/:id' + activeUser, payload)
-                .then((res) => {
-                    if (res) {
-                        console.log("User Updated");
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+    // if(badgeOneCheck === true && modalQuestionOneCheck === "inActive"){
+    //     let payload = {
+    //         userId: activeUser,
+    //         silver:'inActive',
+    //         gold: 'inActive',
+    //         platinum: 'inActive',
+    //         diamond: 'inActive',
+    //         FirstQuestionModal: 'Active',
+    //         SecondQuestionModal: 'inActive',
+    //         ThirdQuestionModal: 'inActive',
+    //         FourthQuestionModal: 'inActive',
+    //         FifthAnswerModal: 'inActive',
+    //         SixthAnswerModal: 'inActive',
+    //         SeventhAnswerModal: 'inActive',
+    //         EighthAnswerModal: 'inActive',
+    //         FirstUpvoteModal: 'inActive',
+    //         SecondUpvoteModal: 'inActive',
+    //         ThirdUpvoteModal: 'inActive',
+    //         FourthUpvoteModal: 'inActive',
+    //         FifthUpvoteModal: 'inActive',
+    //         SixthUpvoteModal: 'inActive',
+    //         SeventhUpvoteModal: 'inActive',
+    //         EighthUpvoteModal: 'inActive',
+    //         SilverRankModal: 'inActive',
+    //         GoldRankModal: 'inActive',
+    //         DiamondRankModal: 'inActive',
+    //     }
 
-        }
-
-    }, []);
-
+    //     Axios.patch('http://localhost:5000/api/userAwardModalsUpdate/:id' + activeUser, payload)
+    //         .then((res) => {
+    //             if (res) {
+    //                 console.log("User Updated");
+    //             }
+    //         })
+    //         .catch(function (error) {
+    //             console.log(error);
+    //         });
+    // }
 
 
     return (
@@ -557,11 +729,47 @@ const ProfilePage = () => {
 
         <div>
             {deleteModal}
+            {/* {modalQuestionOne} */}
+            
+            {/* Modals */}
+
+            {/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */}
+            {/* Need to get Status From DB. Do if check to see status, is badge check runs */}
+
+
+            {/* {modalQuestionOneCheck === "Active" ? modalQuestionOne : ""}
+            {modalQuestionTwoCheck === "Active" ? modalQuestionTwo : ""}
+            {modalQuestionThreeCheck === "Active" ? modalQuestionThree : ""}
+            {modalQuestionFourCheck === "Active" ? modalQuestionFour : ""}
+            {modalQuestionFiveCheck === "Active" ? modalQuestionFive : ""}
+            {modalQuestionSixCheck === "Active" ? modalQuestionSix : ""}
+            {modalQuestionSevenCheck === "Active" ? modalQuestionSeven : ""}
+            {modalQuestionEightCheck === "Active" ? modalQuestionEight : ""}
+
+            {modalUpVoteOneCheck === "Active" ? modalUpVoteOne : ""}
+            {modalUpVoteTwoCheck === "Active" ? modalUpVoteTwo : ""}
+            {modalUpVoteThreeCheck === "Active" ? modalUpVoteThree : ""}
+            {modalUpVoteFourCheck === "Active" ? modalUpVoteFour : ""}
+            {modalUpVoteFiveCheck === "Active" ? modalUpVoteFive : ""}
+            {modalUpVoteSixCheck === "Active" ? modalUpVoteSix : ""}
+            {modalUpVoteSevenCheck === "Active" ? modalUpVoteSeven : ""}
+            {modalUpVoteEightCheck === "Active" ? modalUpVoteEight : ""}
+
+            {modalSilverCheck === true ? modalSilver : ""}
+            {modalGoldCheck === true ? modalGold : ""}
+            {modalDiamondCheck === true ? modalDiamond : ""} */}
+            {/* {badgePlatinumnCheck === true ? modalPlatinum : ""} */}
+
+            {/* Modals  */}
+
             <motion.div className='pp_main_card'
                 initial={{ width: 0 }}
                 animate={{ width: "76.8%" }}
                 exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
             >
+
+{/* {modalQuestionOne} */}
+                
                 <Helmet>
                     <title>Profile</title>
                 </Helmet>
@@ -594,7 +802,6 @@ const ProfilePage = () => {
                     <div className='pp_rank_con'>
                         <h2>Your Rank:</h2>
                         <div className='pp_rank_img_con'>
-
                             <div className='pp_rank'>
                                 {/* <div className='pp_rank_img'></div> */}
                                 <img src={bronze === true ? fishUnlockImage : fishLockImage} alt="img" className='pp_rank_img'></img>
@@ -641,7 +848,6 @@ const ProfilePage = () => {
                 <div className='pp_badges_con'>
                     <h2>Your Badges:</h2>
                     <div className='pp_badge_card_slide'>
-
 
                         {badgeOneCheck === true ? badgeOne : ""}
                         {badgeTwoCheck === true ? badgeTwo : ""}

@@ -85,7 +85,7 @@ function AnimatedRoutes() {
           <Route path="/Auth" element={<Auth funcNav={setShowNav} />} />
           <Route path="/PassReset" element={<PassReset funcNav={setShowNav} />} />
           <Route path="/UpdatePass" element={<UpdatePass funcNav={setShowNav} />} />
-          <Route path="*" element={<FourOhFour />} />
+          <Route path="*" element={<FourOhFour funcNav={setShowNav}/>} />
 
         </Routes>
       </AnimatePresence>

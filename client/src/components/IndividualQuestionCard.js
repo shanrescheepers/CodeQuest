@@ -16,6 +16,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import FlagModal from "../modals/FlagModal";
 import OutlinedFlagIcon from '@mui/icons-material/OutlinedFlag';
+import {Button} from "@mui/material";
 
 export const IndividualQuestionCard = (props) => {
   const [index, setIndex] = useState(0);
@@ -450,10 +451,26 @@ export const IndividualQuestionCard = (props) => {
   const downImgURL = ('Votes/' + arrowImgDown + '.png');
 
 
+//Style Button
+const buttonStyle = {
+  backgroundColor: '#FF7900',
+  borderRadius: '50px',
+  height: '48px',
+  marginTop: '16px',
+  width: 'auto',
+  padding: '16px 24px',
+  fontFamily: 'Open Sans',
+  textTransform: 'capitalize',
+  '&:hover': {
+      background: 'FF7900',
+      color: '#2B2B2B'
+  }
+}
+
 
   return (
 
-    <div>
+    <div className="IndividualQCard">
       {flagModal}
       <div className="qq_and_title">
         <div className="title_show">
@@ -542,12 +559,7 @@ export const IndividualQuestionCard = (props) => {
               <OutlinedFlagIcon fontSize="large" />
             </div>
           )}
-
-          <button
-            onClick={() => AnswerQuestion()}
-            className="btn_answer_question">
-            Answer Question
-          </button>
+        <Button   onClick={() => AnswerQuestion()} variant='contained' disableElevation style={buttonStyle}>Answer Question</Button>
         </div>
       </div>
     </div>
