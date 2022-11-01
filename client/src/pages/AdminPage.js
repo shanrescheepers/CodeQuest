@@ -27,7 +27,9 @@ import FlaggedAnswers from '../components/AdminComponents/FlaggedAnswers';
 
 
 
-const AdminPage = () => {
+const AdminPage = (props) => {
+    props.funcNav(true);
+
     // Links function
     const [value, setValue] = React.useState('1');
     const [valueTwo, setValueTwo] = React.useState('1');
@@ -94,47 +96,27 @@ const AdminPage = () => {
                     setTotalRenderedUsers(false)
 
                 }
-
-
             });
-
-
-
-             // Get The Admin Request 
-    // ============================================================================
-
-            Axios.get('http://localhost:5000/api/getadminreq')
-                .then(res => {
-                    let data = res.data;
-                    console.log(data);
-
-                })
-            
-            
-
-
 
     }, [totalRenderedUsers]);
 
 
-//  Button To Update the user requestStatus 
 
-    const AdminPermission = () => {
+    // const AdminPermission = () => {
+    //     let payload = {
+    //         requestStatus: "true"
+    //     }
 
-        let payload = {
-            requestStatus: "true"
-        }
-        
-        Axios.patch('/api/adminreqauth/:id' + activeUser, payload)
-            .then((res) => {
-                if (res) {
-                    console.log("User Updated");
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
+    //     Axios.patch('/api/adminreqauth/:id' + activeUser, payload)
+    //         .then((res) => {
+    //             if (res) {
+    //                 console.log("User Updated");
+    //             }
+    //         })
+    //         .catch(function (error) {
+    //             console.log(error);
+    //         });
+    // }
 
 
 

@@ -24,20 +24,25 @@ const columns = [
     { id: 'questionsAnswered', label: 'Questions Answered', minWidth: 20 },
     { id: 'yearlevel', label: 'Year Level', minWidth: 30 },
     { id: 'rank', label: 'Rank', minWidth: 30 },
+    // { id: 'status', label: 'Request Accepted', minWidth: 30 },
     { id: 'acceptRequest', label: 'Accept Request', minWidth: 100 },
+
 ];
 
 export default function PromotionRequestsTableView() {
 
     const [promotionAcceptedModal, setPromotionAcceptedModal] = useState();
     // Delete user
-    const promotionAccept = (id) => {
+    const promotionAccept = (id, userId, reliability, userEmail) => {
         // console.log(id);
         setPromotionAcceptedModal(<PromotionAccepted
-            close={setPromotionAcceptedModal} id={id}
+            close={setPromotionAcceptedModal} id={id} userId={userId} userEmail={userEmail} reliability={reliability}
         />)
     }
-
+    // userId: req.body.userId,
+    // userEmail: req.body.userEmail,
+    // reliability: +req.body.reliability,
+    // requestStatus: req.body.requestStatus,
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const handleChangePage = (event, newPage) => {
@@ -59,12 +64,21 @@ export default function PromotionRequestsTableView() {
                 console.log(res.data)
                 let data = res.data;
 
+
                 for (let i = 0; i < data.length; i++) {
                     Axios.get('http://localhost:5000/api/userInfo/' + data[i].userId)
                         .then(res1 => {
 
                             console.log(res1.data)
                             let data2 = res1.data
+                            // status can't handle a boolean
+                            console.log(data[i].requestStatus)
+                            if (data[i].requestStatus) {
+                                data2.status = "Request Accepted";
+                            } else {
+                                data2.status = "Request not yet accepted";
+                            }
+
                             let year = data2.yearlevel;
                             let bgColor = '';
                             if (year === 1) {
@@ -85,15 +99,20 @@ export default function PromotionRequestsTableView() {
                                         backgroundColor: '#FF7900',
                                     }
                                     // onClick= {() => {decreaseProduct(row.id)}}
+                                    //userEmail={userEmail} reliability={reliability} requestStatus={requestStatus}
                                 }} variant="contained" onClick={() =>
-                                    promotionAccept(data[i]._id)
+                                    promotionAccept(data[i]._id, data[i].userId, data[i].reliability, data[i].userEmail)
                                 }>
                                     <CheckCircleOutlineOutlinedIcon style={{ height: "15px", paddingRight: "8px" }} />ACCEPT
                                 </Button >
                             )
                             data2["acceptRequest"] = acceptButton;
 
-                            setRows(rows => [...rows, data2], [...rows, data]);
+
+
+                            if (!data[i].requestStatus) {
+                                setRows(rows => [...rows, data2], [...rows, data]);
+                            }
                         });
 
 

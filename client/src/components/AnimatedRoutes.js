@@ -75,7 +75,7 @@ function AnimatedRoutes() {
           <Route path="/FilterPage" element={<FilterPage />} />
 
           {getAdminPermission(rank) &&
-            <Route path="/AdminPage" element={<AdminPage />} />}
+            <Route path="/AdminPage" element={<AdminPage funcNav={setShowNav} />} />}
 
           <Route path="/FeedPage" element={<FeedPage funcNav={setShowNav} />} />
           <Route path="/ProfilePage" element={<ProfilePage />} />
@@ -85,7 +85,7 @@ function AnimatedRoutes() {
           <Route path="/Auth" element={<Auth funcNav={setShowNav} />} />
           <Route path="/PassReset" element={<PassReset funcNav={setShowNav} />} />
           <Route path="/UpdatePass" element={<UpdatePass funcNav={setShowNav} />} />
-          <Route path="*" element={<FourOhFour funcNav={setShowNav}/>} />
+          <Route path="*" element={<FourOhFour funcNav={setShowNav} />} />
 
         </Routes>
       </AnimatePresence>
