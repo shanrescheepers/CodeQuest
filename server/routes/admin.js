@@ -53,9 +53,9 @@ router.patch('/api/adminreqauth/:id', async (req, res) => {
             $set: {
                 requestStatus: req.body.requestStatus,
             }
-        }
+        })
         res.json(adminReq);
-    )
+    
 
    
 });
