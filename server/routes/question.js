@@ -6,6 +6,7 @@ const multer = require('multer');
 //link question schema 
 const newQuestionModel = require('../models/newQuestion');
 const VoteSchema = require('../models/votes');
+const newAnswerModel = require('../models/addAnswer');
 
 //multer middleware, make file for screenshot image storage
 const questionScreenshotStorage = multer.diskStorage({
@@ -209,5 +210,36 @@ router.get('/api/readvote', async (req, res) => {
     res.json(findVote);
 });
 
+
+router.get('/api/search/:search', async (req, res) => {
+    const question = await newQuestionModel.find();
+    const answers = await newAnswerModel.find();
+
+    console.log(req.params.search)
+    search = req.params.search
+    // forloop om eers deur die questions array te gaan. El = Element
+    let results = []
+    for (let i = 0; i < question.length; i++) {
+        const el = question[i];
+        title = el.title.toLowerCase();
+        code = el.code
+        desc = el.description.toLowerCase();
+        if (title.includes(search) || desc.includes(search) || code?.includes(search)) {
+            results.push(el)
+        }
+    }
+
+    for (let i = 0; i < answers.length; i++) {
+        const el = answers[i];
+        code = el.code
+        desc = el.description.toLowerCase();
+        if (code?.includes(search) || desc.includes(search)) {
+            el._id = el.questionId
+            results.push(el)
+        }
+    }
+
+    res.json(results);
+});
 
 module.exports = router;
