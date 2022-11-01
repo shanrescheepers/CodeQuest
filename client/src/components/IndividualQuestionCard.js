@@ -14,6 +14,8 @@ import Highlight from 'react-highlight';
 import "../css/code.css";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import FlagModal from "../modals/FlagModal";
+import OutlinedFlagIcon from '@mui/icons-material/OutlinedFlag';
 
 export const IndividualQuestionCard = (props) => {
   const [index, setIndex] = useState(0);
@@ -45,6 +47,29 @@ export const IndividualQuestionCard = (props) => {
     //send question id to session storage
     sessionStorage.setItem("questionId", props.questionId);
   };
+
+  // Flaf Funct
+  const [flagModal, setFlagModal] = useState()
+
+
+  const flagQuestion = () => {
+    setFlagModal(<FlagModal close={setFlagModal} id={props.id} questionId={props.questionId} userId={props.userId} />)
+  }
+  const [flagState, setFlagState] = useState(false)
+  const userId = sessionStorage.getItem("id");
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/reportedPost/' + props?.questionId + "/" + userId)
+      .then(res => {
+        let data = res.data;
+        console.log(data);
+        setFlagState(data)
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }, [flagModal]);
 
 
   //=====================================================================
@@ -427,7 +452,9 @@ export const IndividualQuestionCard = (props) => {
 
 
   return (
+
     <div>
+      {flagModal}
       <div className="qq_and_title">
         <div className="title_show">
           <h1 className="questionTitle">{props.title}</h1>
@@ -504,6 +531,17 @@ export const IndividualQuestionCard = (props) => {
               <small className='downvote-count vote-count'>{displayDownVote}</small>
             </ToggleButtonGroup>
           </div>
+
+          {/* FLAG COLOR HERE in div class: flag-button-red */}
+          {flagState ? (
+            <div className='flag-button-red question-card-icon' onClick={() => console.log("Already flagged")}>
+              <OutlinedFlagIcon fontSize="large" />
+            </div>
+          ) : (
+            <div className='flag-button question-card-icon' onClick={() => flagQuestion()}>
+              <OutlinedFlagIcon fontSize="large" />
+            </div>
+          )}
 
           <button
             onClick={() => AnswerQuestion()}

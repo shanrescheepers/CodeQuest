@@ -16,7 +16,7 @@
 .login-container{
     position: absolute;
     width: 400px;
-    height:420px;
+    height: auto;
     background-color: #F1F1FC;
     box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
     border-radius: 30px;
@@ -29,7 +29,7 @@
 .loginImg{
     position: absolute;
     width: 360px;
-    margin-top: 487px;
+    bottom: 0;
     margin-left: 990px;
 }
 

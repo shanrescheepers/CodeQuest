@@ -46,16 +46,18 @@ router.get('/api/adminrequser/:id', async (req, res) => {
 
 
 router.patch('/api/adminreqauth/:id', async (req, res) => {
-
+    console.log(req.params)
     const adminReq = await AdminSchema.updateOne(
         { _id: req.params.id },
         {
             $set: {
                 requestStatus: req.body.requestStatus,
             }
-        }
-    );
-    res.json(adminReq);
+        })
+        res.json(adminReq);
+    
+
+   
 });
 
 

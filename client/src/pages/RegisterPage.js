@@ -206,8 +206,6 @@ const toLogin =()=>{
                 id="outlined-basic" validators={['required']}
                 errorMessages={['this field is required']}  color='primary' onChange={getValues} name="username" label="Username" variant="outlined" />
 
-
-
                 <FormControl sx={{minWidth: '100%' }}>
                     <InputLabel id="demo-simple-select-autowidth-label">Subject</InputLabel>
                     <Select
@@ -227,7 +225,6 @@ const toLogin =()=>{
                     </Select>
                 </FormControl>
 
-                
                 <TextField sx={{
                     backgroundColor: '#ffffff',
                     border: '0',
@@ -256,8 +253,6 @@ const toLogin =()=>{
                 id="outlined-basic" name="password" validators={['required', 'matchRegexp:/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/']}
                 errorMessages={['this field is required', 'email is not valid']} onChange={getValues} type="password" color='primary' label="Password" variant="outlined" />
 
-  
-
             <Button type="submit" className='signInBtn' sx={{
                 backgroundColor: '#2b2b2b', borderRadius: '20px', marginTop: "20px", width: '100%', fontFamily: 'Open Sans', marginLeft: '0px',
                 '&:hover': {
@@ -267,7 +262,6 @@ const toLogin =()=>{
             </Button>
           
           <p className='signIn-Op' onClick={toLogin}>Already have an account? <b>Log in</b></p>
-
 
           </form>
              </div>

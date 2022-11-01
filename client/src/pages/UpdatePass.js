@@ -99,14 +99,14 @@ const sendPassReset = (e) => {
                 borderRadius: '30px',
                 width: '100%',
                 height: '50px',
-                marginTop: '30px'
+                marginTop: '24px'
 
               }}
                 id="outlined-basic" onChange={getValues} name="email" color='primary' label="Email Address" variant="outlined" />
 
             
               <Button sx={{
-                backgroundColor: '#2b2b2b', borderRadius: '20px', marginTop: "20px", width: '100%', fontFamily: 'Open Sans', marginLeft: '0px',
+                backgroundColor: '#2b2b2b', borderRadius: '20px', marginTop: "24px", width: '100%', fontFamily: 'Open Sans', marginLeft: '0px',
                 '&:hover': {
                   backgroundColor: '#FF983A',
                 }

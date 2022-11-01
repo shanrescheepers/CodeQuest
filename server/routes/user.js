@@ -25,6 +25,11 @@ router.get('/api/userInfo/:id', async (req, res) => {
     res.json(findUser);
 });
 
+//Get Current user info + total answers and quesions
+router.get('/api/userInfo/:id', async (req, res) => {
+    const findUser = await UserSchema.findById(req.params.id);
+    res.json(findUser);
+});
 
 
 //============================================================================================
@@ -272,14 +277,14 @@ router.post('/api/resetpass', async (req, res) => {
         email: req.body.email
     });
 
-    if(findUser){
+    if (findUser) {
 
         let userIdLink = 'http://localhost:3000/PassReset?id=' + findUser._id;
-        
 
-         //Mailer functionality
 
-         const transporter = nodemailer.createTransport({
+        //Mailer functionality
+
+        const transporter = nodemailer.createTransport({
             host: "thehandler.aserv.co.za",
             port: 465,
             secure: true,
@@ -339,11 +344,11 @@ router.post('/api/resetpass', async (req, res) => {
                 console.log(error);
             }
             console.log("message sent: ", info.messageId);
-            res.json({success: true, msg: "Message Sent"})
+            res.json({ success: true, msg: "Message Sent" })
         });
 
-    }else{
-        res.json({success: false, msg: "Could not locate user on Database"})
+    } else {
+        res.json({ success: false, msg: "Could not locate user on Database" })
     }
 
 });
@@ -353,7 +358,7 @@ router.post('/api/resetpass', async (req, res) => {
 router.patch('/api/updatepass/:id', async (req, res) => {
     let userId = req.params.id;
 
-    
+
     console.log(req.params.id);
     console.log(userId);
 
@@ -361,7 +366,7 @@ router.patch('/api/updatepass/:id', async (req, res) => {
         _id: userId
     });
 
-    if(findUser){
+    if (findUser) {
 
         try {
             const tokenDecrypt = jwt.verify(findUser.token, process.env.ACCESS_TOKEN_SECRET);
@@ -375,26 +380,26 @@ router.patch('/api/updatepass/:id', async (req, res) => {
             const salt = await bcrypt.genSalt(12);
             const hashPass = await bcrypt.hash(req.body.password, salt);
 
-            if(authUser){
+            if (authUser) {
 
                 const updatePassword = await UserSchema.updateOne(
-                    {_id: req.params.id},
-                    {$set: {password: hashPass}}
+                    { _id: req.params.id },
+                    { $set: { password: hashPass } }
                 );
 
-                res.json({user: authUser.username, success: true, msg: "Password Updated"})  
+                res.json({ user: authUser.username, success: true, msg: "Password Updated" })
 
-            }else{
-                res.json({success: false, msg: "Invalid user on database"})   
+            } else {
+                res.json({ success: false, msg: "Invalid user on database" })
             }
 
-            
+
         } catch (error) {
-            res.json({success: false, msg: "Invalid token"})           
+            res.json({ success: false, msg: "Invalid token" })
         }
 
-    }else{
-        res.json({success: false, msg: "Verification failed, please contact system admin"})
+    } else {
+        res.json({ success: false, msg: "Verification failed, please contact system admin" })
     }
 })
 

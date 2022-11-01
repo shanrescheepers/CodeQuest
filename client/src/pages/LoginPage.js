@@ -118,7 +118,7 @@ const loginUser = (e) => {
                 borderRadius: '30px',
                 width: '100%',
                 height: '50px',
-                marginTop: '30px'
+                marginTop: '16px'
 
               }}
                 id="outlined-basic" onChange={getValues} name="email" color='primary' label="Email Address" variant="outlined" />
@@ -130,7 +130,7 @@ const loginUser = (e) => {
                 borderRadius: '30px',
                 width: '100%',
                 height: '50px',
-                marginTop: '30px',
+                marginTop: '16px',
                 borderBlock: 'none',
                 borderBlockColor: '#f1f1f1'
               }}
@@ -139,7 +139,7 @@ const loginUser = (e) => {
               <a href='../UpdatePass' className='link'><p>Forgot your password?</p></a>
 
               <Button sx={{
-                backgroundColor: '#2b2b2b', borderRadius: '20px', marginTop: "20px", width: '100%', fontFamily: 'Open Sans', marginLeft: '0px',
+                backgroundColor: '#2b2b2b', borderRadius: '20px', marginTop: "24px", width: '100%', fontFamily: 'Open Sans', marginLeft: '0px',
                 '&:hover': {
                   backgroundColor: '#FF983A',
                 }

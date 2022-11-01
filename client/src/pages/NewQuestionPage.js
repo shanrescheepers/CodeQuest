@@ -10,35 +10,25 @@ import Helmet from "react-helmet";
 import { useEffect, useState } from 'react';
 import upload from '../assets/newQuestionAssets/upload.png';
 import QuestionAdded from '../modals/QuestionAdded';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const NewQuestionPage = () => {
-    
-    // const CssTextField = styled(TextField)({
-    //     marginTop: '16px',
-    //     width: '100%',
-    //     background: 'white',
-    //     borderRadius: '40px',
-    //     '& label.Mui-focused': {
-    //       color: '#2b2b2b',
-    //       borderRadius: '40px',
-    //       borderBottomColor: '#2b2b2b'
-    //     },
-    //     '& .MuiOutlinedInput-root': {
-    //       '& fieldset': {
-    //         borderColor: 'white',
-    //         borderRadius: '40px',
-    //       },
-    //       '&.Mui-focused fieldset': {
-    //         borderColor: '#2b2b2b',
-    //         borderRadius: '40px',
-    //       },
-    //     },
-    // });
+
+    const theme = createTheme({
+        palette: {
+          primary: {
+            main: '#2b2b2b',
+          },
+          secondary: {
+            main: '#11cb5f',
+          },
+        },
+      });
 
     const buttonStyle = {
         backgroundColor: '#FF7900', 
         borderRadius: '50px',
-        marginTop: '16px', 
+        marginTop: '24px', 
         width: '100%',
         padding: '16px 24px',
         fontFamily: 'Open Sans',
@@ -196,82 +186,91 @@ const NewQuestionPage = () => {
     return (  
         <div>
             {postConfirmation}
+
             <div className='new-question-con'>
-            <Helmet>
-                <title>Ask</title>
-            </Helmet>
+                <ThemeProvider theme={theme}>
+                    <Helmet>
+                        <title>Ask</title>
+                    </Helmet>
 
-            <div className='main-form-con'>
-                <div className='back-arrow' onClick={goBack}>
-                    <ArrowBackRounded sx={{fontSize:'40px'}}/>
-                </div>
-            
-                <img className='kitty-img' src={kitty}></img>
-
-                <form className='form-con'>
-                    <h1>Ask us Anything</h1>
-                    <p>Strictly related to dev though, questions deemed inappropriate will be removed</p>
-
-                    <TextField name='title' placeholder='Title' color='grey' fullWidth sx={{backgroundColor: 'white', borderRadius: '50px', marginTop: '16px'}} onChange={getFormValues}/>
-                    <TextField name='description' placeholder='Description' multiline color='grey' fullWidth sx={{backgroundColor: 'white', borderRadius: '50px', marginTop: '16px'}} onChange={getFormValues}/>
-
-                        <div className='screenshot-preview' id='screenshot-preview'>
-                            <div className='upload-image-con' id='upload-image-con'>
-                                <div className='things'>
-                                    <img className='img-picture' src={upload} alt='image placeholder'/>
-                                    <p>Click here to add your screenshots.</p>
-                                </div>
-
-                                <input name='screenshots' className='image-input' id='image-input' type="file"  accept='image/*' multiple onChange={getScreenshots}/>
-                            </div>
-
-                            <div className="slideshow">
-                                <div className="slideshow-slider" style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
-                                    {uploadedScreenshots.map((screenshot, index) => (
-                                        <div className="slide" key={index}>
-                                            <img src={screenshot} className="slide-img"/>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                <div className="slideshow-dots">
-                                    {uploadedScreenshots.map((_, idx) => (
-                                        <div key={idx} className={`slideshow-dot${index === idx ? " active" : ""}`}
-                                            onClick={() => {
-                                                setIndex(idx);
-                                            }}>    
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
+                    <div className='main-form-con'>
+                        <div className='back-arrow' onClick={goBack}>
+                            <ArrowBackRounded sx={{fontSize:'40px'}}/>
                         </div>
+                    
+                        <img className='kitty-img' src={kitty}></img>
 
-                    <TextField name='code' placeholder='Code' color='grey' multiline fullWidth sx={{backgroundColor: 'white', borderRadius: '50px', marginTop: '16px'}} onChange={getFormValues}/>
-                    <TextField name='tags' placeholder='Tags' color='grey' fullWidth sx={{backgroundColor: 'white', borderRadius: '50px', marginTop: '16px'}} onChange={getFormValues}/>
-                                        
-                    <Button type='submit' onClick={addNewQuestion} variant='contained' disableElevation style={buttonStyle}>Post Question</Button>
-                </form>
+                        <form className='form-con'>
+                            <h1>Ask us Anything</h1>
+                            <p>Strictly related to dev though, questions deemed inappropriate will be removed</p>
 
-                <div className='question-rules'>
-                    <div className='question-rules-title'>
-                        <h2>Things to consider before posting a new question: </h2>
+                            <TextField sx={{backgroundColor: '#ffffff', border: '0', outline: '0', borderRadius: '30px', width: '100%', height: '50px', marginTop: '16px', borderBlock: 'none', borderBlockColor: '#f1f1f1'}}
+                            id="outlined-basic" onChange={getFormValues} name="title" color='primary' label="Title" variant="outlined" />
+
+                            <TextField sx={{backgroundColor: '#ffffff', border: '0', outline: '0', borderRadius: '30px', width: '100%', height: 'auto', marginTop: '16px', borderBlock: 'none', borderBlockColor: '#f1f1f1'}}
+                            id="outlined-basic" onChange={getFormValues} name="description" color='primary' multiline label="Description" variant="outlined" />
+
+                            <div className='screenshot-preview' id='screenshot-preview'>
+                                <div className='upload-image-con' id='upload-image-con'>
+                                    <div className='things'>
+                                        <img className='img-picture' src={upload} alt='image placeholder'/>
+                                        <p>Click here to add your screenshots.</p>
+                                    </div>
+
+                                    <input name='screenshots' className='image-input' id='image-input' type="file"  accept='image/*' multiple onChange={getScreenshots}/>
+                                </div>
+
+                                <div className="slideshow">
+                                    <div className="slideshow-slider" style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}>
+                                        {uploadedScreenshots.map((screenshot, index) => (
+                                            <div className="slide" key={index}>
+                                                <img src={screenshot} className="slide-img"/>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    <div className="slideshow-dots">
+                                        {uploadedScreenshots.map((_, idx) => (
+                                            <div key={idx} className={`slideshow-dot${index === idx ? " active" : ""}`}
+                                                onClick={() => {
+                                                    setIndex(idx);
+                                                }}>    
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <TextField sx={{backgroundColor: '#ffffff', border: '0', outline: '0', borderRadius: '30px', width: '100%', height: 'auto', marginTop: '16px', borderBlock: 'none', borderBlockColor: '#f1f1f1'}}
+                            id="outlined-basic" onChange={getFormValues} name="code" color='primary' multiline label="Code" variant="outlined"/>
+                            
+                            <TextField sx={{backgroundColor: '#ffffff', border: '0', outline: '0', borderRadius: '30px', width: '100%', height: '50px', marginTop: '16px', borderBlock: 'none', borderBlockColor: '#f1f1f1'}}
+                            id="outlined-basic" onChange={getFormValues} name="tags" color='primary' label="Tags" placeholder='Please add a space or comma to separate your tags' variant="outlined"/>
+                                                
+                            <Button type='submit' onClick={addNewQuestion} variant='contained' disableElevation style={buttonStyle}>Post Question</Button>
+                        </form>
+
+                        <div className='question-rules'>
+                            <div className='question-rules-title'>
+                                <h2>Things to consider before posting a new question: </h2>
+                            </div>
+
+                            <div className='question-rules-list'>
+                                <ul>
+                                    <li> Make sure that a similar question hasn’t already been asked </li>
+                                    <li>Explain what you are trying to achieve and the issues you are experiencing</li>
+                                    <li>Provide a description result you are receiving</li>
+                                    <li>Include information about any errors if you are getting any</li>
+                                    <li>Describe or share screenshots of what you have already tried and explain why it doesn’t result in your desired outcome</li>
+                                    <li>Include the code you’ve tried to use so that others can reproduce your problem to help solve it</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
                     </div>
-
-                    <div className='question-rules-list'>
-                        <ul>
-                            <li> Make sure that a similar question hasn’t already been asked </li>
-                            <li>Explain what you are trying to achieve and the issues you are experiencing</li>
-                            <li>Provide a description result you are receiving</li>
-                            <li>Include information about any errors if you are getting any</li>
-                            <li>Describe or share screenshots of what you have already tried and explain why it doesn’t result in your desired outcome</li>
-                            <li>Include the code you’ve tried to use so that others can reproduce your problem to help solve it</li>
-                        </ul>
-                    </div>
-                </div>
-                
+                </ThemeProvider>
             </div>
-        </div>
         </div>
     );
 }
