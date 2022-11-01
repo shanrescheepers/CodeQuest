@@ -289,3 +289,7 @@
     text-align: left;
     margin: 0;
 }
+
+.IndividualQCard .flag-button{
+  margin-left: -450px;
+}
