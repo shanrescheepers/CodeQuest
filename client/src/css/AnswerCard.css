@@ -34,3 +34,30 @@
 justify-content: center;
     text-align: center;
 }
+
+code:empty{
+  display: none;
+  visibility: hidden;
+  background: none;
+}
+
+pre:empty{
+  display: none;
+  visibility: hidden;
+  background: none;
+}
+
+.code_text:empty{
+  display: none;
+  visibility: hidden;
+  background: none;
+  height: 0px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.code-converted-text:empty{
+  display: none;
+  visibility: hidden;
+  background: none;
+}

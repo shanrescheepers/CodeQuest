@@ -99,17 +99,32 @@ const AdminPage = () => {
             });
 
 
+
+             // Get The Admin Request 
+    // ============================================================================
+
+            Axios.get('http://localhost:5000/api/getadminreq')
+                .then(res => {
+                    let data = res.data;
+                    console.log(data);
+
+                })
+            
+            
+
+
+
     }, [totalRenderedUsers]);
 
 
+//  Button To Update the user requestStatus 
 
     const AdminPermission = () => {
 
         let payload = {
-            rank: "Diamond"
+            requestStatus: "true"
         }
-        // Need TO ADD THIS TO A CARD COMPONENT ---- GET THE USER ID TO UPDATE THE ADMIN PERMISSIONS 
-        // Change Rank to Diamond 
+        
         Axios.patch('/api/adminreqauth/:id' + activeUser, payload)
             .then((res) => {
                 if (res) {

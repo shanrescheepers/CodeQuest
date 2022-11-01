@@ -448,6 +448,21 @@ export const AnswerCard = (props) => {
 
     }, [flagModal]);
 
+
+const [showCode, setShowCode] = useState('');
+let code= props.code;
+useEffect(() => {
+if(props.code === undefined){
+    setShowCode('');
+}else if(props.code != undefined){
+    setShowCode(
+    <Highlight autodetect className="code-converted-text">
+    {code}
+</Highlight>
+)
+}
+}, [flagModal]);
+
     return (
         <>{flagModal}
             <div className="show_answered_con" style={{ backgroundColor: questionColor }}>
@@ -483,9 +498,10 @@ export const AnswerCard = (props) => {
                     </div>
 
                     <div className="code_text">
-                        <Highlight autodetect className="code-converted-text">
+                        {/* <Highlight autodetect className="code-converted-text">
                             {props.code}
-                        </Highlight>
+                        </Highlight> */}
+                        {showCode}
                     </div>
 
                     <div className='divider'></div>
@@ -516,6 +532,7 @@ export const AnswerCard = (props) => {
                             {/* <div className='flag-button question-card-icon' onClick={() => flagAnswer()}>
                                 <OutlinedFlagIcon fontSize="large" />
                             </div> */}
+                            
 
                             {flagState ? (
                                 <div className='answer-flag-button-red question-card-icon' onClick={() => console.log("Already flagged")}>

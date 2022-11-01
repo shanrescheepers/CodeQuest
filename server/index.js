@@ -10,6 +10,7 @@ const reportedUserRoute = require('./routes/reportedUser');
 
 const answerRoute = require('./routes/answer')
 const adminRoute = require('./routes/admin')
+const awardRoute = require('./routes/awardRoute')
 
 require('dotenv/config');
 
@@ -32,6 +33,7 @@ app.use(questionRoute);
 app.use(userRoute);
 app.use(answerRoute);
 app.use(adminRoute);
+app.use(awardRoute);
 
 
 

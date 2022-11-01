@@ -51,10 +51,18 @@ router.patch('/api/adminreqauth/:id', async (req, res) => {
         { _id: req.params.id },
         {
             $set: {
+                userId: req.body.userId,
                 requestStatus: req.body.requestStatus,
+                reliability: req.body.reliability,
+                userEmail: req.body.userEmail,
             }
+
         }
     )
+
+
+    
+
 
     res.json(adminReq);
 });

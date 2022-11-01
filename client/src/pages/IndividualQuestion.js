@@ -74,28 +74,38 @@ const IndividualQuestion = () => {
   useEffect(() => {
     Axios.get("http://localhost:5000/api/readQuestionAnswer/" + sessionStorage.getItem("questionId"))
       .then((res) => {
+        let filterAnswer = [];
         let questionData = res.data;
-        console.log(questionData);
-        let renderAnswers = questionData.map((item) => {
 
-          // if (item.questionId == sessionStorage.getItem("questionId")) {
-          console.log("Id", item._id);
-          return (
-            <AnswerCard
-              key={item._id}
-              questionId={item.questionId}
-              answerId={item._id}
-              date={item.datePosted}
-              code={item.code}
-              screenshots={item.screenshots}
-              description={item.description}
-              upvotes={item.upvotes}
-              downvotes={item.downvotes}
-              userId={item.userId}
-              editRender={setUpdateAnswers}
-            />
-          );
-          // }
+        questionData.map((item) => {
+          if (item.questionId == sessionStorage.getItem("questionId")) {
+            filterAnswer.push(item);
+          }
+        });
+         filterAnswer.sort((a, b) => {
+          return b.upvotes - a.upvotes;
+
+        }); 
+        
+        console.log(filterAnswer);
+        let renderAnswers = filterAnswer.map((item) => {
+            return (
+              <AnswerCard
+                key={item._id}
+                questionId={item._id}
+                date={item.datePosted}
+                code={item.code}
+                screenshots={item.screenshots}
+                description={item.description}
+                upvotes={item.upvotes}
+                downvotes={item.downvotes}
+                userId={item.userId}
+                editRender={setUpdateAnswers}
+              />
+            );
+          
+
+
         });
         setAnswer(renderAnswers);
         setUpdateAnswers(false);
