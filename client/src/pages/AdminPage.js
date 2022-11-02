@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
 import '../scss/adminPage.scss';
-import bosscatimage from '../assets/adminpage_cat.svg';
+import bosscatimage from '../assets/Admin.png';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import FlaggedPosts from '../components/AdminComponents/FlaggedPosts';
@@ -142,7 +142,7 @@ const AdminPage = (props) => {
                     }} variant="contained" href='#flaggedBTN'>View Flagged</Button>
                 </div>
                 <div className='admin__top__header__cat'>
-                    <img src={bosscatimage} alt="bosscatimage" className='admin__top__header__heyboss__maincatimage' style={{ height: "250px", paddingTop: "40px" }} />
+                    <img src={bosscatimage} alt="bosscatimage" className='admin__top__header__heyboss__maincatimage' style={{ height: "270px", paddingTop: "35px" }} />
                 </div>
             </div>
 
