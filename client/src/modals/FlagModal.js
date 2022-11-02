@@ -74,7 +74,7 @@ const FlagModal = (props) => {
                             '&:hover': {
                                 backgroundColor: '#4A4A4A',
                             }
-                        }} variant="contained" type="submit" backgroundColor="primary">Flag Question</Button>
+                        }} variant="contained" type="submit" backgroundColor="primary">Flag Post</Button>
                     </FormControl>
                 </Box>
 
