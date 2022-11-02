@@ -78,7 +78,6 @@ import SilverAward from '../components/RankAwardBadges/SilverAward';
 import GoldAward from '../components/RankAwardBadges/GoldAward';
 import DiamondAward from '../components/RankAwardBadges/DiamondAward';
 import PlatinumAward from '../components/RankAwardBadges/PlatinumAward';
-import ProfileQuestionDelete from '../modals/ProfileQuestionDelete';
 // import SliverAward from '../components/RankAwardBadges/SliverAward';
 // import { trusted } from 'mongoose';
 

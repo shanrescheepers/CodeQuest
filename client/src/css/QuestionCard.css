@@ -23,6 +23,9 @@
     text-align: center;
     cursor: pointer;
 }
+.IndividualQCard .flag-button-red{
+    margin-left: -450px;
+  }
 .question-con-content {
     width: 100%;
     height: auto;

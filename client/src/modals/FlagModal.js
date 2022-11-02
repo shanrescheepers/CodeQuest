@@ -47,7 +47,7 @@ const FlagModal = (props) => {
             <div className='modal deleteAccount'>
                 <div className='close' onClick={closeModal}><CloseIcon sx={{ fontSize: '40px' }} /></div>
                 <h1>Flag alert.</h1>
-                <h4>Uh-Oh! What was the problem with this question?</h4>
+                <h4>Uh-Oh! What was the problem with this post?</h4>
                 <div className='modal-img delete'><img src={picture}></img></div>
 
                 <Box sx={{ minWidth: 200, width: "100%", margin: "20px" }}>
@@ -74,7 +74,7 @@ const FlagModal = (props) => {
                             '&:hover': {
                                 backgroundColor: '#4A4A4A',
                             }
-                        }} variant="contained" type="submit" backgroundColor="primary">Flag Question</Button>
+                        }} variant="contained" type="submit" backgroundColor="primary">Flag Post</Button>
                     </FormControl>
                 </Box>
 

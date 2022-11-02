@@ -400,10 +400,15 @@ export const AnswerCard = (props) => {
                 .get("http://localhost:5000/api/userInfo/" + props.userId)
                 .then((res) => {
                     let data = res.data;
-                    setUsername(data.username);
-                    setRank(data.rank);
-                    setprofileImg(data.profileimage);
-                    setYear(data.yearlevel);
+                    if(data === null){
+                        setUsername('Deleted User');
+                    }else{
+                        setUsername(data.username);
+                        setRank(data.rank);
+                        setprofileImg(data.profileimage);
+                        setYear(data.yearlevel);
+                    }
+
                     //   console.log(data.rank);
 
                     let year = data.yearlevel;

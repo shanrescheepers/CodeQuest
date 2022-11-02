@@ -7,7 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 // import { useState, useEffect } from "react";
 import Axios from 'axios';
 
-const ProfileQuestionDelete = (props) => {
+const ProfileAnswerDelete = (props) => {
 
  
     const deleteQuestion = () => {
@@ -35,7 +35,7 @@ const ProfileQuestionDelete = (props) => {
             <div className='modal'>
                 <div className='close'><CloseIcon sx={{ fontSize: '40px' }} onClick={closeModal} /></div>
                 <h1>Are you sure?</h1>
-                <h4>Remember once you delete this question, it will be gone for good!</h4>
+                <h4>Remember once you delete this answer, it will be gone for good!</h4>
                 <div className='modal-img delete'><img src={picture} ></img></div>
 
                 <Button onClick={deleteQuestion} sx={{
@@ -57,4 +57,4 @@ const ProfileQuestionDelete = (props) => {
     );
 };
 
-export default ProfileQuestionDelete;
+export default ProfileAnswerDelete;
