@@ -210,4 +210,12 @@ router.get('/api/readvote', async (req, res) => {
 });
 
 
+
+router.delete('/api/deletequestion/:id', async (req, res) => {
+    const question = await newQuestionModel.remove({ _id: req.params.id });
+    res.json(question);
+});
+
+
+
 module.exports = router;

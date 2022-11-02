@@ -16,16 +16,20 @@ import UpVote from '../assets/profilePageAssets/upVote.png';
 import DownVote from '../assets/profilePageAssets/downVote.png';
 import Helmet from "react-helmet";
 import { motion } from "framer-motion";
-import QuestionCard from '../components/QuestionCard';
+import QuestionCardProfile from '../components/QuestionCardProfile';
 
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
+import { CircularProgress } from '@mui/material';
 import DeleteAccountModal from '../modals/DeleteAccountModal';
 import { AnswerCard } from '../components/AnswerCard'
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+import DeleteModal from '../modals/DeleteModal'
 
 import FirstQuestionAward from '../components/QuestionAwardBadges/FirstQuestionAward';
 import SecondQuestionAward from '../components/QuestionAwardBadges/SecondQuestionAward';
@@ -70,10 +74,22 @@ import DiamondRankModal from '../modals/AwardModals/RankAwardModal/DiamondRankMo
 import SilverAward from '../components/RankAwardBadges/SilverAward';
 import GoldAward from '../components/RankAwardBadges/GoldAward';
 import DiamondAward from '../components/RankAwardBadges/DiamondAward';
+import PlatinumAward from '../components/RankAwardBadges/PlatinumAward';
 // import SliverAward from '../components/RankAwardBadges/SliverAward';
 // import { trusted } from 'mongoose';
 
 const ProfilePage = () => {
+
+
+    const theme = createTheme({
+        palette: {
+            progress: {
+                main: '#FF7900',
+                contrastText: '#fff',
+            },
+        },
+    });
+
 
     const activeUser = sessionStorage.getItem("id");
 
@@ -144,7 +160,7 @@ const ProfilePage = () => {
     const badgeGold = <GoldAward />
 
     let badgePlatinumnCheck = false;
-    const badgePlatinum = ""
+    const badgePlatinum = <PlatinumAward />
 
     let badgeDiamondCheck = false;
     const badgeDiamond = <DiamondAward />
@@ -215,6 +231,8 @@ const ProfilePage = () => {
 
     const [deleteModal, setDeleteModal] = useState();
 
+    const [deleteQuestionModal, setDeleteQuestionModal] = useState();
+
     const [bronze, setBronze] = useState(true)
     const [silver, setSilver] = useState(false)
     const [gold, setGold] = useState(false)
@@ -247,7 +265,8 @@ const ProfilePage = () => {
 
                 // console.log(questionData)
                 let questions = questionData.filter(user => user.userId === activeUser).map((item) =>
-                    <QuestionCard
+                    <QuestionCardProfile
+                        delete={deleteQuestion}
                         key={item._id}
                         questionId={item._id}
                         date={item.datePosted}
@@ -380,6 +399,9 @@ const ProfilePage = () => {
 
             badgeSilverCheck = true;
             badgeGoldCheck = true;
+            badgePlatinumnCheck = true;
+            badgeDiamondCheck = false;
+
 
             let payload = {
                 rank: "Platinum"
@@ -409,7 +431,8 @@ const ProfilePage = () => {
 
             badgeSilverCheck = true;
             badgeGoldCheck = true;
-            // badgeDiamondCheck = true;
+            badgePlatinumnCheck = true;
+            badgeDiamondCheck = true;
         }
 
 
@@ -493,136 +516,135 @@ const ProfilePage = () => {
     // Rank Badges 
 
     useEffect(() => {
-   // Questions 
+        // Questions 
 
 
-if (reliability > 100) {
-    setReliability(100)
-}
+        if (reliability > 100) {
+            setReliability(100)
+        }
 
 
 
-if (reliability > 100 && questionAmmount.length > 20) {
-    setEligibility(true);
-}
+        if (reliability > 100 && questionAmmount.length > 20) {
+            setEligibility(true);
+        }
 
 
-if (reliability === 100 && eligibility === true && usersRank === "Platinum") {
-    setAdminButtonCheck("block");
+        if (reliability === 100 && eligibility === true && usersRank === "Platinum") {
+            setAdminButtonCheck("block");
 
-}
+        }
 
-if (reliability === 100 && eligibility === true && adminStatus === true) {
+        if (reliability === 100 && eligibility === true && adminStatus === true) {
 
-    let payload = {
-        rank: "Diamond"
-    }
-
-
-    Axios.patch('http://localhost:5000/api/updateuser/:id' + activeUser, payload)
-        .then((res) => {
-            if (res) {
-                console.log("User Updated");
+            let payload = {
+                rank: "Diamond"
             }
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
 
-}
+
+            Axios.patch('http://localhost:5000/api/updateuser/:id' + activeUser, payload)
+                .then((res) => {
+                    if (res) {
+                        console.log("User Updated");
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+        }
 
 
     }, [questions])
 
     if (questionAmmount > 0) {
         badgeOneCheck = true;
-    
+
         // console.log(modalQuestionOneCheck);
     }
-    
+
     if (questionAmmount >= 5) {
         badgeTwoCheck = true;
         // console.log(modalQuestionOneCheck);
     }
-    
-    
+
+
     if (questionAmmount >= 10) {
         badgeThreeCheck = true;
         // console.log(questionAmmount);
-    
+
     }
-    
-    
+
+
     if (questionAmmount >= 20) {
         badgeFourCheck = true;
         // console.log(questionAmmount);
     }
-    
+
     if (questionAmmount >= 25) {
         badgeFiveCheck = true;
         // console.log(questionAmmount);
-    
+
     }
-    
+
     if (questionAmmount >= 50) {
         badgeSixCheck = true;
         // console.log(questionAmmount);
-    
-    
+
+
     }
-    
+
     if (questionAmmount >= 75) {
         badgeSevenCheck = true;
         // console.log(questionAmmount);
-    
+
     }
-    
+
     if (questionAmmount >= 100) {
         badgeEightCheck = true;
-    
-    
+
+
     }
-    
-    
+
+
     // Answer Badges 
-    
+
     if (answerCount > 0) {
         badgeNineCheck = true;
         // console.log(questionAmmount);
-    
+
     }
-    
+
     if (answerCount >= 5) {
         badgeTenCheck = true;
         // console.log(questionAmmount);
-    
     }
-    
-    
+
+
     if (answerCount >= 10) {
         badgeElevenCheck = true;
         // console.log(questionAmmount);
     }
-    
-    
+
+
     if (answerCount >= 20) {
         badgeTwelveCheck = true;
         // console.log(questionAmmount);
     }
-    
+
     if (answerCount >= 25) {
         badgeThirteenCheck = true;
     }
-    
+
     if (answerCount >= 50) {
         badgeFourteenCheck = true;
         // console.log(questionAmmount);
     }
-    
+
     if (answerCount >= 75) {
         badgeFifteenCheck = true;
     }
-    
+
     if (answerCount >= 100) {
         badgeSixteenCheck = true;
         // console.log(questionAmmount);
@@ -638,32 +660,42 @@ if (reliability === 100 && eligibility === true && adminStatus === true) {
     }
 
 
+    const deleteQuestion = () => {
+        // console.log("Delete Question");
+
+        setDeleteQuestionModal(<DeleteModal
+            close={setDeleteQuestionModal}
+        />)
+
+    }
+
+
 
     const requestAdmin = () => {
 
 
-            if (window.confirm("Request Sent! Please Wait for update.") === true) {
-                let adminPermissions = {
-                    reliability: reliability,
-                    requestStatus: false,
-                    userId: activeUser,
-                    userEmail: userEmail
-                }
-        
-        
-                Axios.post('http://localhost:5000/api/adminreq', adminPermissions)
-                    .then((res) => {
-                        if (res) {
-                            console.log("Added Admin Request");
-                        }
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-              console.log("Confirmed");
+        if (window.confirm("Request Sent! Please Wait for update.") === true) {
+            let adminPermissions = {
+                reliability: reliability,
+                requestStatus: false,
+                userId: activeUser,
+                userEmail: userEmail
             }
 
-        
+
+            Axios.post('http://localhost:5000/api/adminreq', adminPermissions)
+                .then((res) => {
+                    if (res) {
+                        console.log("Added Admin Request");
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            console.log("Confirmed");
+        }
+
+
 
     }
 
@@ -791,8 +823,10 @@ if (reliability === 100 && eligibility === true && adminStatus === true) {
                         <p>Your</p>
                         <h2>Reliability Score:</h2>
                         <div className='pp_score_con_score'>
+                            <ThemeProvider theme={theme}>
+                                <CircularProgress color="progress" variant="determinate" size={120} value={reliability} />
+                            </ThemeProvider>
                             <h1>{reliability}</h1>
-                            <p>/100</p>
                         </div>
                     </div>
 
@@ -845,6 +879,7 @@ if (reliability === 100 && eligibility === true && adminStatus === true) {
 
                         <TabPanel value="1">
                             {questions}
+                            {deleteQuestionModal}
                         </TabPanel>
 
                         {/* Reported user Table */}

@@ -159,30 +159,31 @@ h2 {
     position: relative;
 }
 
-.pp_score_con p {
-    top: 10%;
-}
+
 
 .pp_score_con h2 {
-    top: 5%;
+    top: -5%;
     font-weight: bold;
 }
 
 .pp_score_con_score {
     position: absolute;
-    top: 45%;
+    top: 40%;
     left: 50%;
     transform: translateX(-50%);
 }
 
 .pp_score_con_score h1 {
-    font-size: 41pt;
+    font-size: 36pt;
     color: #FF7900;
     padding: 0%;
     margin: 0%;
     /* background-color: black; */
     display: inline-block;
-    position: relative;
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translateX(-50%);
 }
 
 .pp_score_con_score p {
@@ -561,4 +562,12 @@ h2 {
 .css-1gsv261 {
     border-bottom: 0px solid !important;
     border-color: rgba(0, 0, 0, 0) !important;
+}
+
+.deleteQuestion{
+    /* background-color: #FF7900; */
+    position: relative;
+    /* left: 55%; */
+    top: 0%;
+    cursor: pointer;
 }
