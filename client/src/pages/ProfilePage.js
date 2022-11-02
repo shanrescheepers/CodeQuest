@@ -16,7 +16,10 @@ import UpVote from '../assets/profilePageAssets/upVote.png';
 import DownVote from '../assets/profilePageAssets/downVote.png';
 import Helmet from "react-helmet";
 import { motion } from "framer-motion";
-import QuestionCardProfile from '../components/QuestionCardProfile';
+// import QuestionCardProfile from '../components/QuestionCardProfile';
+
+import ProfileQuestionCard from '../components/ProfileQuestionCard';
+import ProfileAnswerCard from '../components/ProfileAnswerCard';
 
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
@@ -232,7 +235,6 @@ const ProfilePage = () => {
 
     const [deleteModal, setDeleteModal] = useState();
 
-    const [deleteQuestionModal, setDeleteQuestionModal] = useState();
 
     const [bronze, setBronze] = useState(true)
     const [silver, setSilver] = useState(false)
@@ -257,6 +259,8 @@ const ProfilePage = () => {
 
     const [adminButtonCheck, setAdminButtonCheck] = useState("none");
 
+    const [username, setUsername] = useState();
+
     useEffect(() => {
 
         Axios.get('http://localhost:5000/api/readquestions')
@@ -266,8 +270,7 @@ const ProfilePage = () => {
 
                 // console.log(questionData)
                 let questions = questionData.filter(user => user.userId === activeUser).map((item) =>
-                    <QuestionCardProfile
-                        delete={deleteQuestion}
+                    <ProfileQuestionCard
                         key={item._id}
                         questionId={item._id}
                         date={item.datePosted}
@@ -299,9 +302,9 @@ const ProfilePage = () => {
 
                 let answerData = res.data;
                 let answers = answerData.filter(user => user.userId === activeUser).map((item) =>
-                    <AnswerCard
+                    <ProfileAnswerCard
                         key={item._id}
-                        questionId={item._id}
+                        answerId={item._id}
                         date={item.datePosted}
                         code={item.code}
                         screenshots={item.screenshots}
@@ -441,6 +444,7 @@ const ProfilePage = () => {
             let data = res.data;
             setUsersRank(data.rank);
             setUserEmail(data.email);
+            setUsername(data.username);
         });
 
 
@@ -661,16 +665,6 @@ const ProfilePage = () => {
     }
 
 
-    const deleteQuestion = () => {
-        // console.log("Delete Question");
-
-        setDeleteQuestionModal(<DeleteModal
-            close={setDeleteQuestionModal}
-        />)
-
-    }
-
-
 
     const requestAdmin = () => {
 
@@ -747,7 +741,6 @@ const ProfilePage = () => {
 
 <>
 {deleteModal}
-{deleteQuestionModal}
         <div>
             
 
@@ -765,7 +758,7 @@ const ProfilePage = () => {
                 </Helmet>
                 <div className='pp_welcome_con'>
                     <div className='pp_welcome_banner'>
-                        <h1>Hi Friend,</h1>
+                        <h1>Hi {username},</h1>
                         <p>We love that you've joined us! Lets take a look at all things YOU! View your rank, badges, questions and more! </p>
                         <Button sx={{
                             backgroundColor:
@@ -880,7 +873,7 @@ const ProfilePage = () => {
                             </Box>
                         </div>
 
-                        <TabPanel value="1">
+                        <TabPanel id='questions' value="1">
                             {questions}
                            
                         </TabPanel>

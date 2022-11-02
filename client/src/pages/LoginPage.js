@@ -13,6 +13,9 @@ import Helmet from "react-helmet";
 
 const LoginPage = (props) => {
 
+
+  const [loginButtonCheck, setLoginButtonCheck] = useState("block");
+
   //=====================================================================================
   //Hide Navigation
   props.funcNav(false);
@@ -63,7 +66,7 @@ const LoginPage = (props) => {
    // ======================Open Window Email Validation===========================
 
    const [emailValidStyling, setEmailValidStyling] = useState(false);
-   const [emailValidErrorText, setEmailValidErrorText] = useState("Email Address(Open Window Registered Email)");
+   const [emailValidErrorText, setEmailValidErrorText] = useState("Open Window Email");
  
    const [passValidStyling, setPassValidStyling] = useState(false);
    const [passValidErrorText, setPassValidErrorText] = useState("Password must contain");
@@ -74,11 +77,13 @@ const LoginPage = (props) => {
  
      if (!isValid.includes('virtualwindow.co.za')) {
        setEmailValidStyling(true);
-       setEmailValidErrorText("This is not a registered Open Window email address")
+       setEmailValidErrorText("This is not an Open Window email address")
+       setLoginButtonCheck('none');
        // alert("Please use an Open Window registered email address");
      } else {
        setEmailValidStyling(false);
        setEmailValidErrorText("Email Address")
+       setLoginButtonCheck('block');
      }
    }
    // ==============================================================================
@@ -92,10 +97,12 @@ const LoginPage = (props) => {
  
      if (!isValid.match(passRegex)) {
        setPassValidStyling(true);
-       setPassValidErrorText("Password invalid. ")
+       setPassValidErrorText("Password invalid!")
+       setLoginButtonCheck('none');
      } else {
        setPassValidStyling(false);
-       setPassValidErrorText("Password Valid. ")
+       setPassValidErrorText("Password Valid!")
+       setLoginButtonCheck('block');
      }
    }
  
@@ -179,11 +186,12 @@ const loginUser = (e) => {
                 borderBlock: 'none',
                 borderBlockColor: '#f1f1f1'
               }}
-                id="outlined-basic" onChange={getValues} name="password" color='primary' type="password" abel={passValidErrorText} variant="outlined" onBlur={ValidatePass} />
+                id="outlined-basic" onChange={getValues} name="password" color='primary' type="password" label={passValidErrorText} variant="outlined" onBlur={ValidatePass} />
 
               <a href='../UpdatePass' className='link'><p>Forgot your password?</p></a>
 
               <Button sx={{
+                display: loginButtonCheck,
                 backgroundColor: '#2b2b2b', borderRadius: '20px', marginTop: "24px", width: '100%', fontFamily: 'Open Sans', marginLeft: '0px',
                 '&:hover': {
                   backgroundColor: '#FF983A',

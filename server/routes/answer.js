@@ -241,4 +241,11 @@ router.get('/api/readanswervote', async (req, res) => {
 });
 
 
+
+router.delete('/api/deleteanswer/:id', async (req, res) => {
+    const answer = await newAnswerModel.remove({ _id: req.params.id });
+    res.json(answer);
+});
+
+
 module.exports = router;

@@ -91,7 +91,7 @@ const RegisterPage = (props) => {
     const [passValidStyling, setPassValidStyling] = useState(false);
     const [passValidErrorText, setPassValidErrorText] = useState("Password must contain");
 
-
+    const [registerButtonCheck, setRegisterButtonCheck] = useState("block");
 
     const ValidateEmail = () => {
         const mailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -100,10 +100,12 @@ const RegisterPage = (props) => {
         if (!isValid.includes('virtualwindow.co.za')) {
             setEmailValidStyling(true);
             setEmailValidErrorText("This is not a registered Open Window email address")
+            setRegisterButtonCheck('none');
             // alert("Please use an Open Window registered email address");
         } else {
             setEmailValidStyling(false);
             setEmailValidErrorText("Email Address Valid")
+            setRegisterButtonCheck('block');
         }
     }
     // ==============================================================================
@@ -117,10 +119,12 @@ const RegisterPage = (props) => {
 
         if (!isValid.match(passRegex)) {
             setPassValidStyling(true);
-            setPassValidErrorText("Password invalid. ")
+            setPassValidErrorText("Pssst... Umm your password is too weak!")
+            setRegisterButtonCheck('none');
         } else {
             setPassValidStyling(false);
-            setPassValidErrorText("Password Valid. ")
+            setPassValidErrorText("Great Password!")
+            setRegisterButtonCheck('block');
         }
     }
 
@@ -302,12 +306,13 @@ const toLogin =()=>{
                 id="outlined-basic" name="password" validators={['required', 'matchRegexp:/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/']}
                 errorMessages={['this field is required', 'email is not valid']} onChange={getValues} type="password" color='primary' label={passValidErrorText} variant="outlined" onBlur={ValidatePass} />
 
-            <Button type="submit" className='signInBtn' sx={{
+            <Button  type="submit" className='signInBtn' sx={{
+                display: registerButtonCheck,
                 backgroundColor: '#2b2b2b', borderRadius: '20px', marginTop: "20px", width: '100%', fontFamily: 'Open Sans', marginLeft: '0px',
                 '&:hover': {
                 backgroundColor: '#FF983A',
                 }}} variant="contained" backgroundColor="primary">
-                    Sign In
+                    Sign Up
             </Button>
           
           <p className='signIn-Op' onClick={toLogin}>Already have an account? <b>Log in</b></p>

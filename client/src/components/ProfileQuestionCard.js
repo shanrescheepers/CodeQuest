@@ -6,6 +6,9 @@ import moment from 'moment';
 import { useNavigate } from 'react-router';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+
+import DeleteModal from '../modals/DeleteModal';
+
 const ProfileQuestionCard = (props) => {
 
     const navigate = useNavigate();
@@ -81,6 +84,8 @@ const ProfileQuestionCard = (props) => {
             });
 
     }, []);
+
+
 
 
 
@@ -412,8 +417,22 @@ const ProfileQuestionCard = (props) => {
 
 
 
+    const [deleteQuestionModal, setDeleteQuestionModal] = useState();
+
+    const deleteQuestion = () => {
+        // console.log("Delete Question");
+
+        setDeleteQuestionModal(<DeleteModal
+            close={setDeleteQuestionModal}
+            questionId={props.questionId}
+        />)
+
+    }
+
+
     return (
         <>
+            {deleteQuestionModal}
             <div className='question-con' >
 
                 <div className='question-con-content'>
@@ -427,11 +446,11 @@ const ProfileQuestionCard = (props) => {
                         </div>
 
                         {/* FLAG COLOR HERE in div class: flag-button-red */}
-   
-                            <div className='flag-button question-card-icon'>
-                                <DeleteOutlineOutlinedIcon fontSize="large" />
-                            </div>
-                     
+
+                        <div className='flag-button question-card-icon' onClick={deleteQuestion}>
+                            <DeleteOutlineOutlinedIcon fontSize="large" />
+                        </div>
+
 
 
 
