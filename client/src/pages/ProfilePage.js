@@ -75,6 +75,7 @@ import SilverAward from '../components/RankAwardBadges/SilverAward';
 import GoldAward from '../components/RankAwardBadges/GoldAward';
 import DiamondAward from '../components/RankAwardBadges/DiamondAward';
 import PlatinumAward from '../components/RankAwardBadges/PlatinumAward';
+import ProfileQuestionDelete from '../modals/ProfileQuestionDelete';
 // import SliverAward from '../components/RankAwardBadges/SliverAward';
 // import { trusted } from 'mongoose';
 
@@ -744,9 +745,11 @@ const ProfilePage = () => {
 
     return (
 
-
+<>
+{deleteModal}
+{deleteQuestionModal}
         <div>
-            {deleteModal}
+            
 
 
             <motion.div className='pp_main_card'
@@ -879,7 +882,7 @@ const ProfilePage = () => {
 
                         <TabPanel value="1">
                             {questions}
-                            {deleteQuestionModal}
+                           
                         </TabPanel>
 
                         {/* Reported user Table */}
@@ -942,6 +945,7 @@ const ProfilePage = () => {
                 }} variant="contained" onClick={deleteItem}>Delete my Account</Button>
             </motion.div>
         </div>
+        </>
     );
 };
 

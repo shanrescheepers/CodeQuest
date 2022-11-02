@@ -92,3 +92,9 @@
     height:220px;
     width: auto;
   }
+
+  .pop-up.ProfileQuestionDelete{
+    position:absolute;
+    z-index: 999999999;
+    top:0;
+  }
