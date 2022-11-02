@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express();
+const mongoose = require('mongoose');
 const AdminSchema = require('../models/adminRequest');
 
 
@@ -47,6 +48,8 @@ router.get('/api/adminrequser/:id', async (req, res) => {
 
 router.patch('/api/adminreqauth/:id', async (req, res) => {
     console.log(req.params)
+    console.log(req.body)
+
     const adminReq = await AdminSchema.updateOne(
         { _id: req.params.id },
         {
@@ -56,11 +59,10 @@ router.patch('/api/adminreqauth/:id', async (req, res) => {
                 reliability: req.body.reliability,
                 userEmail: req.body.userEmail,
             }
-        })
-        res.json(adminReq);
-    
+        }
+    )
 
-   
+    res.json(adminReq);
 });
 
 

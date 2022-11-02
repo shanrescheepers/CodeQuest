@@ -9,36 +9,37 @@ import { useNavigate } from 'react-router-dom';
 
 const FourOhFour = (props) => {
 
-//=====================================================================================
-  //Hide Navigation
-  props.funcNav(false);
+    //=====================================================================================
+
+    //Hide Navigation
+    props.funcNav(false);
 
 
-//===============================================
-const buttonStyle = {
-    backgroundColor: '#FF7900',
-    borderRadius: '50px',
-    height: '42px',
-    marginTop: '16px',
-    width: '150px',
-    padding: '16px 24px',
-    fontFamily: 'Open Sans',
-    textTransform: 'capitalize',
-    '&:hover': {
-        background: 'FF7900',
-        color: '#2B2B2B'
+    //===============================================
+    const buttonStyle = {
+        backgroundColor: '#FF7900',
+        borderRadius: '50px',
+        height: '42px',
+        marginTop: '16px',
+        width: '150px',
+        padding: '16px 24px',
+        fontFamily: 'Open Sans',
+        textTransform: 'capitalize',
+        '&:hover': {
+            background: 'FF7900',
+            color: '#2B2B2B'
+        }
     }
-}
 
 
-//Go to feed page
+    //Go to feed page
 
-const navigate = useNavigate();
+    const navigate = useNavigate();
 
 
-const toHome = () => {
-    navigate('/FeedPage');
-  }
+    const toHome = () => {
+        navigate('/FeedPage');
+    }
 
     return (
         <div>
@@ -49,9 +50,9 @@ const toHome = () => {
                 exit={{ x: window.innerWidth, transition: { duration: 0.5 } }}
             >
 
-            <Helmet>
-                <title>404</title>
-            </Helmet>
+                <Helmet>
+                    <title>404</title>
+                </Helmet>
 
                 <div className="fourohfour">
                     <div className='fourohfour__coolcat'>
