@@ -1,19 +1,16 @@
 # CodeQuest
- CodeQuest - Team 4 App for DV200 created using the MERN stack and...
-
-
-
+ CodeQuest - Team 4 Full MERN stack application for DV200
 
 <br/>
 
 ![Github label](https://img.shields.io/badge/CodeQuest-2022-orange)
 <br/>
-![Github repo size](https://img.shields.io/github/repo-size/shanrescheepers/CodeQuest&color=<orange>)
-![Github watchers](https://img.shields.io/github/watchers/shanrescheepers/CodeQuest?style=social)
+![Github repo size](https://img.shields.io/github/repo-size/shanrescheepers/CodeQuest)
+![Github watchers](https://img.shields.io/github/watchers/shanrescheepers/CodeQuest)
 ![Github language count](https://img.shields.io/github/languages/count/shanrescheepers/CodeQuest)
 ![Github code size in bytes](https://img.shields.io/github/languages/code-size/shanrescheepers/CodeQuest)
-![Github repo stars](https://img.shields.io/github/stars/shanrescheepers/CodeQuest?style=social)
-![Github forks](https://img.shields.io/github/forks/shanrescheepers/CodeQuest?style=social)
+![Github repo stars](https://img.shields.io/github/stars/shanrescheepers/CodeQuest)
+![Github forks](https://img.shields.io/github/forks/shanrescheepers/CodeQuest)
 ![Github top language](https://img.shields.io/github/languages/top/shanrescheepers/CodeQuest)
 
 
@@ -48,6 +45,9 @@
 * [Contact](#contact)
 * [Acknowledgements](#acknowledgements)
 
+
+![image0](client/src/assets/mockups/MockupSeven.jpg)
+<br/>
 <!-- PROJECT DESCRIPTION -->
 ## About the Project
 We were tasked with creating a complete MERN Stack application that would allow Open Window students to ask and answer code-related questions. Students can rate these, and if their reliability score increases - they can move up in rank.
