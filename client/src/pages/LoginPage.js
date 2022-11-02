@@ -59,6 +59,51 @@ const LoginPage = (props) => {
   const [isClicked, setIsClicked] = useState(false);
 
 
+
+   // ======================Open Window Email Validation===========================
+
+   const [emailValidStyling, setEmailValidStyling] = useState(false);
+   const [emailValidErrorText, setEmailValidErrorText] = useState("Email Address(Open Window Registered Email)");
+ 
+   const [passValidStyling, setPassValidStyling] = useState(false);
+   const [passValidErrorText, setPassValidErrorText] = useState("Password must contain");
+ 
+ 
+   const ValidateEmail = () => {
+     let isValid = formValues['email'];
+ 
+     if (!isValid.includes('virtualwindow.co.za')) {
+       setEmailValidStyling(true);
+       setEmailValidErrorText("This is not a registered Open Window email address")
+       // alert("Please use an Open Window registered email address");
+     } else {
+       setEmailValidStyling(false);
+       setEmailValidErrorText("Email Address")
+     }
+   }
+   // ==============================================================================
+ 
+ 
+   // ======================Password Validation===========================
+ 
+   const ValidatePass = () => {
+     const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(\W|_)).{5,}$/;
+     let isValid = formValues['password'];
+ 
+     if (!isValid.match(passRegex)) {
+       setPassValidStyling(true);
+       setPassValidErrorText("Password invalid. ")
+     } else {
+       setPassValidStyling(false);
+       setPassValidErrorText("Password Valid. ")
+     }
+   }
+ 
+   // ==============================================================================
+ 
+
+
+
 //Login user function
 const loginUser = (e) => {
   e.preventDefault(); 
@@ -111,7 +156,7 @@ const loginUser = (e) => {
 
             <form onSubmit={loginUser} >
 
-              <TextField sx={{
+              <TextField error={emailValidStyling} sx={{
                 backgroundColor: '#ffffff',
                 border: 'none',
                 outlineColor: '#ffffff',
@@ -121,9 +166,9 @@ const loginUser = (e) => {
                 marginTop: '16px'
 
               }}
-                id="outlined-basic" onChange={getValues} name="email" color='primary' label="Email Address" variant="outlined" />
+                id="outlined-basic" onChange={getValues} name="email" color='primary' label={emailValidErrorText} variant="outlined" onBlur={ValidateEmail} />
 
-              <TextField sx={{
+              <TextField error={passValidStyling} sx={{
                 backgroundColor: '#ffffff',
                 border: '0',
                 outline: '0',
@@ -134,7 +179,7 @@ const loginUser = (e) => {
                 borderBlock: 'none',
                 borderBlockColor: '#f1f1f1'
               }}
-                id="outlined-basic" onChange={getValues} name="password" color='primary' type="password" label="Password" variant="outlined" />
+                id="outlined-basic" onChange={getValues} name="password" color='primary' type="password" abel={passValidErrorText} variant="outlined" onBlur={ValidatePass} />
 
               <a href='../UpdatePass' className='link'><p>Forgot your password?</p></a>
 

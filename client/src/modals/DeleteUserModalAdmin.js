@@ -4,6 +4,8 @@ import '../css/modals.css';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
 import Axios from 'axios';
+
+
 const DeleteUserModal = (props) => {
     console.log("Delete Modal");
     const closeModal = () => {

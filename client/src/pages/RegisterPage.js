@@ -80,6 +80,55 @@ const RegisterPage = (props) => {
     // if(formValues.name !== ''){setLastError();}
 }
 
+
+
+
+    // ======================Open Window Email Validation===========================
+
+    const [emailValidStyling, setEmailValidStyling] = useState(false);
+    const [emailValidErrorText, setEmailValidErrorText] = useState("Email Address(Open Window Registered Email)");
+
+    const [passValidStyling, setPassValidStyling] = useState(false);
+    const [passValidErrorText, setPassValidErrorText] = useState("Password must contain");
+
+
+
+    const ValidateEmail = () => {
+        const mailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+        let isValid = formValues['email'];
+
+        if (!isValid.includes('virtualwindow.co.za')) {
+            setEmailValidStyling(true);
+            setEmailValidErrorText("This is not a registered Open Window email address")
+            // alert("Please use an Open Window registered email address");
+        } else {
+            setEmailValidStyling(false);
+            setEmailValidErrorText("Email Address Valid")
+        }
+    }
+    // ==============================================================================
+
+
+    // ======================Password Validation===========================
+
+    const ValidatePass = () => {
+        const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(\W|_)).{5,}$/;
+        let isValid = formValues['password'];
+
+        if (!isValid.match(passRegex)) {
+            setPassValidStyling(true);
+            setPassValidErrorText("Password invalid. ")
+        } else {
+            setPassValidStyling(false);
+            setPassValidErrorText("Password Valid. ")
+        }
+    }
+
+    // ==============================================================================
+
+
+
+
 //Add new user
 
 const addNewUser = (e) => {
@@ -225,7 +274,7 @@ const toLogin =()=>{
                     </Select>
                 </FormControl>
 
-                <TextField sx={{
+                <TextField error={emailValidStyling} sx={{
                     backgroundColor: '#ffffff',
                     border: '0',
                     outline: '0',
@@ -237,9 +286,9 @@ const toLogin =()=>{
                     borderBlockColor: '#f1f1f1'
                 }}
                 id="outlined-basic" name="email" validators={['required', 'isEmail']}
-                errorMessages={['this field is required', 'email is not valid']} onChange={getValues} type="email" color='primary' label="Email Address" variant="outlined" />
+                errorMessages={['this field is required', 'email is not valid']} onChange={getValues} type="email" color='primary' label={emailValidErrorText} variant="outlined" onBlur={ValidateEmail} />
 
-                <TextField sx={{
+                <TextField error={passValidStyling} sx={{
                     backgroundColor: '#ffffff',
                     border: '0',
                     outline: '0',
@@ -251,7 +300,7 @@ const toLogin =()=>{
                     borderBlockColor: '#f1f1f1'
                 }}
                 id="outlined-basic" name="password" validators={['required', 'matchRegexp:/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/']}
-                errorMessages={['this field is required', 'email is not valid']} onChange={getValues} type="password" color='primary' label="Password" variant="outlined" />
+                errorMessages={['this field is required', 'email is not valid']} onChange={getValues} type="password" color='primary' label={passValidErrorText} variant="outlined" onBlur={ValidatePass} />
 
             <Button type="submit" className='signInBtn' sx={{
                 backgroundColor: '#2b2b2b', borderRadius: '20px', marginTop: "20px", width: '100%', fontFamily: 'Open Sans', marginLeft: '0px',
