@@ -33,7 +33,7 @@ const QuestionCard = (props) => {
         axios.get('http://localhost:5000/api/reportedPost/' + props?.questionId + "/" + userId)
             .then(res => {
                 let data = res.data;
-                console.log(data);
+                //console.log(data);
                 setFlagState(data)
 
             })
@@ -49,7 +49,7 @@ const QuestionCard = (props) => {
         axios.get('http://localhost:5000/api/readQuestionAnswerAmount/' + props?.questionId)
             .then(res => {
                 let data = res.data;
-                console.log(data);
+                //console.log(data);
                 setAnswersLength(data)
             })
             .catch(function (error) {
@@ -77,7 +77,7 @@ const QuestionCard = (props) => {
 
                         // console.log(user, data[i].userId);
                         if (user === data[i].userId) {
-                            console.log("should work");
+                           // console.log("should work");
                             if (data[i].vote === 'upvote') {
                                 setArrowImgUp('UpActive');
                                 setArrowImgDown('Down')
@@ -87,7 +87,7 @@ const QuestionCard = (props) => {
                                 setArrowImgUp('Up');
                                 setCategory('startDown')
                             };
-                            console.log("not happening");
+                           // console.log("not happening");
 
                         } else {
                             //    console.log('N/A');
@@ -171,10 +171,18 @@ const QuestionCard = (props) => {
             axios.get('http://localhost:5000/api/userInfo/' + props.userId)
                 .then(res => {
                     let data = res.data;
-                    setUsername(data.username);
-                    setRank(data.rank);
-                    setprofileImg(data.profileimage);
-                    setYear(data.yearlevel);
+                    if(data === null){
+                        setprofileImg(4);
+                        setUsername('Deleted Account');
+                        setYear(0);
+                    }else{
+                        console.log(data);
+                        setUsername(data.username);
+                        setRank(data.rank);
+                        setprofileImg(data.profileimage);
+                        setYear(data.yearlevel);
+                    }
+        
                     // console.log(data.rank)
                 })
         }
@@ -182,12 +190,14 @@ const QuestionCard = (props) => {
     }, []);
 
     //get profile image path
+
     const imgURL = ('Avatars/' + profileImg + '.png');
 
     // console.log(year);
     let bgColor = '';
-
-    if (year === 1) {
+    if (year === 0) {
+        bgColor = '#D0D4FD'
+    } else if (year === 1) {
         bgColor = '#6EEB83'
     } else if (year === 2) {
         bgColor = '#6CD4FF'
