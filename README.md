@@ -42,7 +42,8 @@
  * [Getting Started](#getting-started)  
     * [Prerequisites](#prerequisites)
     * [How To Install](#how-to-install)
-* [Conclusion](#conclusion)
+* [Development Process](#developmentProcess)
+* [Final Outcomes](#developmentProcess)
 * [License](#license)
 * [Contact](#contact)
 * [Acknowledgements](#acknowledgements)
@@ -85,7 +86,7 @@ alternatively
 ### `nodemon server.js`
 
 
-![image1](CodeQuest/client/src/assets/mockups/MockupTwo.jpg)
+![image1](client/src/assets/mockups/MockupTwo.jpg)
 
 ## Concept Process
 `Conceptual Process`
@@ -124,7 +125,7 @@ Integration of `MUI` for UI.
 * Used lotties during page load
 * React helmet was used to rename the page title and enhance user friendliness
 
-![image2](CodeQuest/client/src/assets/mockups/MockupThree.jpg)
+![image2](client/src/assets/mockups/MockupThree.jpg)
 
 ### The Functionality
 
@@ -193,15 +194,15 @@ In future, we would like to push Code Quest even further and explore more above 
 
 
 <!-- MOCKUPS -->
-## Final Outcome
+## Final Outcomes
 
 ### Mockups
 
-![image3](CodeQuest/client/src/assets/mockups/MockupFive.jpg)
+![image3](client/src/assets/mockups/MockupFive.jpg)
 <br/>
-![image4](CodeQuest/client/src/assets/mockups/MockupFour.jpg)
+![image4](client/src/assets/mockups/MockupFour.jpg)
 <br/>
-![image4](CodeQuest/client/src/assets/mockups/MockupOne.jpg)
+![image5](client/src/assets/mockups/MockupOne.jpg)
 
 See the [open issues](https://github.com/shanrescheepers/CodeQuestissues) for a list of proposed features (and known issues).
 
