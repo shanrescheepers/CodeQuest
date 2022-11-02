@@ -173,7 +173,7 @@ const QuestionCard = (props) => {
                     let data = res.data;
                     if(data === null){
                         setprofileImg(4);
-                        setUsername('Deleted Account');
+                        setUsername('Deleted User');
                         setYear(0);
                     }else{
                         console.log(data);
