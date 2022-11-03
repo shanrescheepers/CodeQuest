@@ -571,3 +571,10 @@ h2 {
     top: 0%;
     cursor: pointer;
 }
+
+/* .MuiTabPanel-root.css-13xfq8m-MuiTabPanel-root{
+    z-index: 2 !important;
+    overflow: visible !important;
+    width: 100%;
+    position: absolute !important
+} */

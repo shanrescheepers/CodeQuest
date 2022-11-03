@@ -98,3 +98,19 @@
     z-index: 999999999;
     top:0;
   }
+  .pop-up.deleteFlagged{
+    position:fixed;
+    z-index: 999999999;
+    top:0;
+  }
+
+
+  .pop-up.deleteQuestion{
+    top:0;
+    left:0;
+    padding: 0;
+    margin: 0;
+    position:absolute !important;
+    z-index: 999999999999999 !important;
+
+  }

@@ -34,7 +34,7 @@ const DeleteModal = (props) => {
         props.close();
     }
     return (
-        <div className='pop-up'>
+        <div className='pop-up deleteQuestion'>
             <div className='modal'>
                 <div className='close'><CloseIcon sx={{ fontSize: '40px' }} onClick={closeModal} /></div>
                 <h1>Are you sure?</h1>
