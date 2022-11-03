@@ -102,7 +102,7 @@ const sendPassReset = (e) => {
                 marginTop: '30px'
 
               }}
-                id="outlined-basic" onChange={getValues} name="password" color='primary' type="password" label="Password" variant="outlined" />
+                id="outlined-basic" onChange={getValues} name="password" color='primary' placeholder='Must contain letters,numbers & special character' type="password" label="Password" variant="outlined" />
 
               <TextField sx={{
                 backgroundColor: '#ffffff',
@@ -115,7 +115,7 @@ const sendPassReset = (e) => {
                 borderBlock: 'none',
                 borderBlockColor: '#f1f1f1'
               }}
-                id="outlined-basic" onChange={getValues} name="confirmPass" color='primary' type="password" label="Confirm Password" variant="outlined" />
+                id="outlined-basic" onChange={getValues} name="confirmPass" color='primary' type="password" placeholder='Must match previously entered' label="Confirm Password" variant="outlined" />
 
              
 

@@ -86,7 +86,7 @@ const RegisterPage = (props) => {
     // ======================Open Window Email Validation===========================
 
     const [emailValidStyling, setEmailValidStyling] = useState(false);
-    const [emailValidErrorText, setEmailValidErrorText] = useState("Email Address(Open Window Registered Email)");
+    const [emailValidErrorText, setEmailValidErrorText] = useState("Open Window Email");
 
     const [passValidStyling, setPassValidStyling] = useState(false);
     const [passValidErrorText, setPassValidErrorText] = useState("Password");
@@ -304,7 +304,7 @@ const toLogin =()=>{
                     borderBlockColor: '#f1f1f1'
                 }}
                 id="outlined-basic" name="password" validators={['required', 'matchRegexp:/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/']}
-                errorMessages={['this field is required', 'email is not valid']} onChange={getValues} type="password" color='primary' label={passValidErrorText} variant="outlined" onBlur={ValidatePass} />
+                errorMessages={['this field is required', 'email is not valid']} onChange={getValues} type="password" placeholder='Must contain letters,numbers & special character' color='primary' label={passValidErrorText} variant="outlined" onBlur={ValidatePass} />
 
             <Button  type="submit" className='signInBtn' sx={{
                 display: registerButtonCheck,

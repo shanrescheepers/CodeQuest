@@ -136,7 +136,7 @@ router.post('/api/addanswervote', async (req, res) => {
         //PLEASE DO NOT REMOVE! OR ELSE IT WILL BREAK! - Shanre
         console.log('FindAnswer', findAnswer);
         //****** ATTENTION ******
-
+       
         let upvote = findAnswer.upvotes;
         let downvote = findAnswer.downvotes;
 
