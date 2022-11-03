@@ -5,7 +5,7 @@
 
 ![Github label](https://img.shields.io/badge/CodeQuest-2022-orange)
 <br/>
-![Github repo size](https://img.shields.io/github/repo-size/shanrescheepers/CodeQuest)
+![Github repo size](https://img.shields.io/github/repo-size)
 ![Github watchers](https://img.shields.io/github/watchers/shanrescheepers/CodeQuest)
 ![Github language count](https://img.shields.io/github/languages/count/shanrescheepers/CodeQuest)
 ![Github code size in bytes](https://img.shields.io/github/languages/code-size/shanrescheepers/CodeQuest)
@@ -14,9 +14,19 @@
 ![Github top language](https://img.shields.io/github/languages/top/shanrescheepers/CodeQuest)
 
 
+![Maintained][maintained-badge]
+[![Make a pull request][prs-badge]][prs]
+[![License][license-badge]](LICENSE.md)
+
+[![Watch on GitHub][github-watch-badge]][github-watch]
+[![Star on GitHub][github-star-badge]][github-star]
+
+
+
+
 <!-- HEADER SECTION -->
 <h3 align="center" style="padding:1;margin:0;"> Designed & Developed by:</3>
-<h5 align="center" style="padding:1;margin:0;">Alexa Pettit</5>
+<h5 align="center" style="padding:1;margin:0;">Alexa Pettitt</5>
 <h5 align="center" style="padding:1;margin:0;">Shanré Scheepers</5>
 <h5 align="center" style="padding:1;margin:0;">Simon Riley</5>
 <h5 align="center" style="padding:1;margin:0;">Priscilla Tabethe</5>
