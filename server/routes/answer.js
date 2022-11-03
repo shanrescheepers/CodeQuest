@@ -258,7 +258,7 @@ router.get('/api/readanswervote', async (req, res) => {
 
 
 
-router.delete('/api/deleteanswer/:id', async (req, res) => {
+router.delete('/api/deleteansweronprofile/:id', async (req, res) => {
 
     const findAnswer= await newAnswerModel.findById(req.params.id);
     console.log("find a:", findAnswer);

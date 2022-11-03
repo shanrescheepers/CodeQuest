@@ -13,7 +13,7 @@ const DeleteAnswerModal = (props) => {
 
         console.log(props.answerId)
 
-        Axios.delete('http://localhost:5000/api/deleteanswer/' + props.answerId)
+        Axios.delete('http://localhost:5000/api/deleteansweronprofile/' + props.answerId)
             .then((res) => {
                 if (res) {
                     // props.render(true);
