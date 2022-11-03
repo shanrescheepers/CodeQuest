@@ -126,10 +126,12 @@ router.post('/api/addanswervote', async (req, res) => {
 
     //  const findQuestion = await newQuestionModel.findById(users[0].questionId);
 
-    if (users === 'undefined' || users.length === 0) {
+    if (users === 'undefined' || users.length === 0 || users === null) {
 
         // console.log("Users length:", users.length);
+        console.log("This is doing something");
         console.log(req.body.answerId);
+        console.log(req.body);
         const findAnswer = await newAnswerModel.findById(req.body.answerId);
 
         //****** ATTENTION ******

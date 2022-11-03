@@ -92,6 +92,7 @@ const IndividualQuestion = () => {
             return (
               <AnswerCard
                 key={item._id}
+                answerId={item._id}
                 questionId={item._id}
                 date={item.datePosted}
                 code={item.code}

@@ -94,7 +94,7 @@ router.patch('/api/updateUpvotes/:id', async (req, res) => {
 //Add Vote
 router.post('/api/addvote', async (req, res) => {
 
-    // console.log(req.body.vote);
+    console.log(req.body);
     const findVoteUser = await VoteSchema.find();
     //  console.log(findVoteUser);
 
@@ -188,8 +188,6 @@ router.post('/api/addvote', async (req, res) => {
                 upvote = upvote + 1;
                 voteState = 'upvote';
             }
-            // console.log(upvote);
-            // console.log(downvote);
 
             const updateQuestion = await newQuestionModel.updateOne(
                 { _id: users[0].questionId },

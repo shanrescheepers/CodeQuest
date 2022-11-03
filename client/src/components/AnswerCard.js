@@ -311,11 +311,13 @@ export const AnswerCard = (props) => {
     const addVote = () => {
         // console.log("It works, Whoopieee");
 
+        const answerId = props.answerId;
+        console.log(answerId);
         console.log(props.answerId);
         let payloadData = {
             vote: 'upvote',
             userId: sessionStorage.getItem('id'),
-            answerId: props.answerId
+            answerId: answerId
         }
 
         axios.post('http://localhost:5000/api/addanswervote', payloadData)
@@ -341,10 +343,13 @@ export const AnswerCard = (props) => {
 
         // console.log(props.answerId);
         // console.log(props.questionId);
+
+        const answerId = props.answerId;
+        console.log(answerId);
         let payloadData = {
             vote: 'downvote',
             userId: sessionStorage.getItem('id'),
-            answerId: props.answerId
+            answerId: answerId
         }
         console.log(payloadData);
 
