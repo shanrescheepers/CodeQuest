@@ -40,20 +40,49 @@
 .profile-section {
     text-align: center;
     margin: auto;
+
 }
 
 .profile-section h5{
     font-family: 'Open Sans';
     margin-top: 0px;
     font-weight: 300;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    float: left;
+   
 }
 
 .profile-section h3{
     font-family: 'Open Sans';
+    margin: 0 auto;
     margin-bottom: 5px;
     margin-top: 5px;
     font-size: 22px;
+    display: inline-block;
+
+
   
+}
+.editIcon{
+    margin: 0;
+    display: inline-block;
+    margin-left: 10px;
+    margin-top: 5px;
+    background-color: #FFFFFF;
+    padding: 5px;
+    width: 22px;
+    height: 22px;
+    border-radius:50px ;
+    color: #2b2b2b;
+  }
+
+
+
+.grouped{
+  display: inline-block;
+  text-align: center;
 }
 
 .profileCircle {
@@ -175,3 +204,12 @@ a {
    
  }
  
+ .navUsername{
+    float: left;
+    margin-left: 70px;
+  }
+
+  .rankNav{
+    float: left;
+      margin-left: 110PX;
+  }

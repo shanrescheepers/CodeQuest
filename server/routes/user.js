@@ -403,5 +403,23 @@ router.patch('/api/updatepass/:id', async (req, res) => {
     }
 })
 
+//============================================================================================
+router.patch('/api/updateUser', async (req, res) => {
+        console.log(req.body);
+
+        const findUser = await UserSchema.updateOne(
+            {_id:req.body.userId},
+            {$set: { 
+                username: req.body.username,
+                profileimage: req.body.profileImg,
+  
+                }
+            }
+        );
+        res.json(findUser);
+
+
+});
+
 
 module.exports = router;

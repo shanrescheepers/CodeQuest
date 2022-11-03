@@ -28,7 +28,7 @@ const DeleteAnswerModal = (props) => {
 
 
     return (
-        <div className='pop-up'>
+        <div className='pop-up deleteFlagged'>
             <div className='modal'>
                 <div className='close'><CloseIcon sx={{ fontSize: '40px' }} onClick={closeModal} /></div>
                 <h1>Are you sure?</h1>

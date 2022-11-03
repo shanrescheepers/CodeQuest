@@ -108,9 +108,19 @@
   .pop-up.deleteQuestion{
     top:0;
     left:0;
-    padding: 0;
-    margin: 0;
-    position:absolute !important;
-    z-index: 999999999999999 !important;
+    position:fixed !important;
+    z-index: 999999999999999999 !important;
 
+  }
+
+
+
+  .pop-up.updateUser .modal{
+      margin-top: 150px;
+      height: 340px;
+  }
+
+  .Dp.Styling{
+    margin-left: 50px;
+    margin-top: 15px;
   }

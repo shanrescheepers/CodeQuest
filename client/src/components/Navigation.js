@@ -17,6 +17,8 @@ import { useNavigate } from "react-router-dom";
 import LogOutModal from "../modals/LogOutModal";
 import FeedPage from "../pages/FeedPage";
 import QuestionCard from "../components/QuestionCard";
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import UpdateAccountInfoModal from "../modals/UpdateAccountInfoModal";
 
 const Navigation = ({ questions, setUpdateQuestions }) => {
   // const [loggedIn, setLoggedIn] = useState(false);
@@ -72,6 +74,7 @@ const Navigation = ({ questions, setUpdateQuestions }) => {
   //================================================================================================
   //Log out
   const navigate = useNavigate();
+  const [updateModal, setUpdateModal] = useState();
 
   const logOut = () => {
     setEditModal(<LogOutModal close={setEditModal} />);
@@ -81,6 +84,7 @@ const Navigation = ({ questions, setUpdateQuestions }) => {
     window.open("https://discord.gg/GpqtG8dHpn", "_blank");
   };
 
+ 
   //========================================
 
   // Search log
@@ -124,10 +128,12 @@ const Navigation = ({ questions, setUpdateQuestions }) => {
   const [rank, setRank] = useState();
   const [profileImg, setprofileImg] = useState();
   const [year, setYear] = useState();
+  const [userId, setuserId] = useState();
 
   useEffect(() => {
     const userId = sessionStorage.getItem("id");
 
+    setuserId(userId);
     if (userId == null) {
       // console.log("User not logged in");
     } else {
@@ -142,7 +148,7 @@ const Navigation = ({ questions, setUpdateQuestions }) => {
       });
     }
     // localStorage.clear();
-  }, []);
+  });
 
   //get profile image path
   const imgURL = "Avatars/" + profileImg + ".png";
@@ -191,9 +197,15 @@ const Navigation = ({ questions, setUpdateQuestions }) => {
     });
   };
 
+  const updatePopUp = () =>{
+    setUpdateModal(<UpdateAccountInfoModal close={setUpdateModal} username={username} profileImg={profileImg} userId={userId}/>);
+  };
+
+
   return (
     <div>
       {editModal}
+      {updateModal}
       <div className="navContainer">
         <div className="top-nav">
           <img src={logo} className="Logo"></img>
@@ -265,7 +277,7 @@ const Navigation = ({ questions, setUpdateQuestions }) => {
               <img src={imgURL} className="profile-Img"></img>
             </div>
 
-            <h3>{username}</h3>
+            <div className="grouped"><h3>{username}</h3><div className="editIcon"><ModeEditIcon fontSize="small" onClick={updatePopUp}/></div></div>
             <h5>{rank} </h5>
           </div>
 

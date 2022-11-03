@@ -577,4 +577,9 @@ h2 {
     overflow: visible !important;
     width: 100%;
     position: absolute !important
+}
+
+.TabOne{
+    z-index: 1;
+    position: absolute;
 } */
