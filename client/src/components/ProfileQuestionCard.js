@@ -432,9 +432,9 @@ const ProfileQuestionCard = (props) => {
 
     return (
         <>
-            {deleteQuestionModal}
+         {deleteQuestionModal}
             <div className='question-con' >
-
+    
                 <div className='question-con-content'>
                     <div className='top-block'>
                         <div className='user-info-block' onClick={() => goToIndividualQuestion()}>

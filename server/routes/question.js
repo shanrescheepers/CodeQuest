@@ -230,27 +230,28 @@ router.get('/api/readvote', async (req, res) => {
 router.delete('/api/deletequestion/:id', async (req, res) => {
 
     const findQuestion= await newQuestionModel.findById(req.params.id);
-    console.log("fint q:", findQuestion);
+    console.log("find q:", findQuestion);
 
     const question = await newQuestionModel.remove({ _id: req.params.id });
-    res.json(question);
+ 
 
-    // const findUser= await UserSchema.findById(data.userId);
-    // console.log("This is user:", findUser);
-    // console.log("asked:", findUser.questionsAsked);
+    const findUser= await UserSchema.findById(findQuestion.userId);
+    console.log("This is user:", findUser);
+    console.log("asked:", findUser.questionsAsked);
 
-    // let CurrentAsked = findUser.questionsAsked;
+    let CurrentAsked = findUser.questionsAsked;
 
-    // const updateQuestionsAsked = await UserSchema.updateOne(
-    //     { _id: data.userId },
-    //     {
-    //         $set: {
-    //             questionsAsked: CurrentAsked -1,
-    //         }
-    //     }
-    // );
+    const updateQuestionsAsked = await UserSchema.updateOne(
+        { _id: findQuestion.userId },
+        {
+            $set: {
+                questionsAsked: CurrentAsked -1,
+            }
+        }
+    );
 
-    // res.json(updateQuestionsAsked);
+
+    res.json([question, updateQuestionsAsked]);
 
 });
 

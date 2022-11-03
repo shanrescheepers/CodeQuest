@@ -473,7 +473,8 @@ const ProfilePage = () => {
 
 
 
-    }, [questions]);
+    // }, [questions]);
+}, []);
 
 
     // Get Modal Values 

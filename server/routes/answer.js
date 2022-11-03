@@ -259,8 +259,35 @@ router.get('/api/readanswervote', async (req, res) => {
 
 
 router.delete('/api/deleteanswer/:id', async (req, res) => {
-    const answer = await newAnswerModel.remove({ _id: req.params.id });
-    res.json(answer);
+
+    const findAnswer= await newAnswerModel.findById(req.params.id);
+    console.log("find a:", findAnswer);
+    if(findAnswer){
+
+        const findUser= await UserSchema.findById(findAnswer.userId);
+        console.log("This is user:", findUser);
+        console.log("Curerent answered:", findUser.questionsAnswered);
+
+        if(findUser){
+            let CurrentAnswered= findUser.questionsAnswered;
+            const updateQuestionsAnswered = await UserSchema.updateOne(
+                { _id: findAnswer.userId },
+                {
+                    $set: {
+                        questionsAnswered: CurrentAnswered -1,
+                    }
+                }
+            );
+
+
+            const answer = await newAnswerModel.remove({ _id: req.params.id }); 
+            res.json([answer, updateQuestionsAnswered]);
+        
+        }
+
+    }
+
+
 });
 
 
