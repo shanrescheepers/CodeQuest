@@ -107,8 +107,12 @@ router.get('/api/allReportedUsers', async (req, res) => {
             questionId: reportedUsers[i].questionId
         });
 
-        let pair = { reportingUsername: findUser.email, answerLenght: findQuestions.length }
-        newReported.push(pair);
+        if(findUser.email != null){
+            let pair = { reportingUsername: findUser.email, answerLenght: findQuestions.length }
+            newReported.push(pair);
+        }
+
+        
     }
 
 
