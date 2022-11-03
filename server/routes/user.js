@@ -165,7 +165,7 @@ router.post('/api/loginUser', async (req, res) => {
 
 
     if (findUser) {
-        if (findUser) {
+        if (findUser.accountStatus) {
             if (await bcrypt.compare(req.body.password, findUser.password)) {
 
                 const userToken = jwt.sign({

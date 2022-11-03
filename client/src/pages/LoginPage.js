@@ -10,6 +10,7 @@ import Axios from 'axios';
 import CantLoginModal from '../modals/CantLoginModal';
 import CatLottie from '../components/lotties/HeyCatLottie';
 import Helmet from "react-helmet";
+import NotVerified from '../modals/NotVerified';
 
 const LoginPage = (props) => {
 
@@ -125,8 +126,11 @@ const loginUser = (e) => {
   Axios.post('http://localhost:5000/api/loginUser', payload)
   .then((res) => {
     console.log(res.data);
+ let string = res.data;
+ console.log(string);
+
     if (!res.data) {
-      alert('Bad request');
+      console.log("bad request");
     } else {
       if (res.data.user) {
         // console.log(res);
@@ -136,15 +140,24 @@ const loginUser = (e) => {
         // navigate("/FeedPage");
         setIsClicked(!isClicked)
       } else {
-        setEditModal(
-          <CantLoginModal close={setEditModal} />
-        )
+
+        if(string== 'Your Account has not been verified'){
+          setEditModal(
+            <NotVerified close={setEditModal} />
+          )
+        }else{
+          setEditModal(
+            <CantLoginModal close={setEditModal} />
+          )
+        }
+
       // console.log("can't log in");
       }
     }
   })
   .catch(function(error){
     console.log(error);
+    
   })
 
 }

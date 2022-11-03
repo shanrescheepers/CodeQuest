@@ -872,7 +872,7 @@ const ProfilePage = () => {
                             </Box>
                         </div>
 
-                        <TabPanel id='questions' className='TabOne' value="1">
+                        <TabPanel id='questions' value="1">
                             {questions}
                            
                         </TabPanel>

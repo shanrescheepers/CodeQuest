@@ -157,7 +157,7 @@ const addNewUser = (e) => {
         sessionStorage.setItem('id', res.data._id);
         sessionStorage.setItem('token', res.data.username);
         sessionStorage.setItem('email', formValues['email']);
-        // window.location.href = 'https://mail.google.com/mail/u/0/#inbox'; 
+        window.location.href = 'https://mail.google.com/mail/u/0/#inbox'; 
         }
     })
     .catch(function (error) {
