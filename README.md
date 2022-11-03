@@ -5,21 +5,13 @@
 
 ![Github label](https://img.shields.io/badge/CodeQuest-2022-orange)
 <br/>
-![Github repo size](https://img.shields.io/github/repo-size)
+![Github repo size](https://img.shields.io/github/repo-size/shanrescheepers/CodeQuest)
 ![Github watchers](https://img.shields.io/github/watchers/shanrescheepers/CodeQuest)
 ![Github language count](https://img.shields.io/github/languages/count/shanrescheepers/CodeQuest)
 ![Github code size in bytes](https://img.shields.io/github/languages/code-size/shanrescheepers/CodeQuest)
 ![Github repo stars](https://img.shields.io/github/stars/shanrescheepers/CodeQuest)
 ![Github forks](https://img.shields.io/github/forks/shanrescheepers/CodeQuest)
 ![Github top language](https://img.shields.io/github/languages/top/shanrescheepers/CodeQuest)
-
-
-![Maintained][maintained-badge]
-[![Make a pull request][prs-badge]][prs]
-[![License][license-badge]](LICENSE.md)
-
-[![Watch on GitHub][github-watch-badge]][github-watch]
-[![Star on GitHub][github-star-badge]][github-star]
 
 
 
