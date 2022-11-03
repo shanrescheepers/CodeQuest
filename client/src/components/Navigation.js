@@ -211,12 +211,16 @@ const Navigation = ({ questions, setUpdateQuestions }) => {
           <img src={logo} className="Logo"></img>
 
           <div className="search-block">
-            <Search>
+            <Search >
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
 
-              <StyledInputBase
+              <StyledInputBase onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  SearchBtn()
+                }
+              }}
                 sx={{ display: 'block' }}
                 placeholder="What would you like to know?"
                 inputProps={{ "aria-label": "search" }}

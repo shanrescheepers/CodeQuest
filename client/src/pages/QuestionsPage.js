@@ -14,34 +14,47 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
+// System gets cleared, and useeffect is forced to update when a tag is selected : Shanre (busy redoing this entire thing)
 const QuestionsPage = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const askNewQuestion = () => {
-        navigate('/newquestion')
-    }
-
-  const [age, setAge] = React.useState("");
+  const askNewQuestion = () => {
+    navigate('/newquestion')
+  }
+  //Please use better descriptions. Age? Age for What? DateOrder makes much more sense.
+  const [dateOrder, setdateOrder] = React.useState("");
   const [tag, setTag] = React.useState("");
 
-  const tagHandleChange = (event) => {
-    setTag(event.target.value);
+  const tagHandleChange = (e) => {
+    setTag(e.target.value);
+    e.preventDefault()
 
-    sessionStorage.setItem("filter", event.target.value);
-    navigate("/FilterPage");
-    window.location.reload(false);
 
-    console.log(event.target.value);
+    // THISIS SO FAR FROM RIGHT  this is not what we've learnt, this is firstyear dev work.
+    // sessionStorage.setItem("filter", event.target.value);
+    // navigate("/FilterPage"); --> this just destroys the usestate???????
+    // window.location.reload(false);
+
+    // console.log(event.target.value);
+
+    setUpdateQuestions(true)
+    setQuestions()
+
   };
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  const handleChange = (e) => {
+    setdateOrder(e.target.value);
+    // page kept on reloading, how was this not seen and fixed before Thato?
+    e.preventDefault()
 
-    sessionStorage.setItem("filter", event.target.value);
-    navigate("/FilterPage");
-    window.location.reload(false);
+    // sessionStorage.setItem("filter", event.target.value);
+    // navigate("/FilterPage");
+    // window.location.reload(false);
 
-    console.log(event.target.value);
+    // console.log(event.target.value);
+
+    setUpdateQuestions(true)
+    setQuestions()
   };
 
   //========================================================================================
@@ -50,28 +63,118 @@ const QuestionsPage = () => {
   const [questions, setQuestions] = useState();
   const [updateQuestions, setUpdateQuestions] = useState();
 
+  // functions to sort by date
+  function sortNewest(a, b) {
+    var dateA = new Date(a.datePosted).getTime();
+    var dateB = new Date(b.datePosted).getTime();
+    return dateA < dateB ? 1 : -1;
+  }
+  function sortOldest(a, b) {
+    var dateA = new Date(a.datePosted).getTime();
+    var dateB = new Date(b.datePosted).getTime();
+    return dateA > dateB ? 1 : -1;
+  }
+
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/readquestions")
-      .then((res) => {
-        let questionData = res.data;
-        let renderQuestions = questionData.map((item) => (
-          <QuestionCard
-            key={item._id}
-            questionId={item._id}
-            date={item.datePosted}
-            title={item.title}
-            description={item.description}
-            upvotes={item.upvotes}
-            downvotes={item.downvotes}
-            userId={item.userId}
-            editRender={setUpdateQuestions}
-          />
-        ));
-        setQuestions(renderQuestions);
-        setUpdateQuestions(false);
-      })
-      .catch((err) => console.log(err));
+
+    if (tag == "" && dateOrder == "") {
+      axios
+        .get("http://localhost:5000/api/readquestions")
+        .then((res) => {
+          let questionData = res.data;
+          let renderQuestions = questionData.map((item) => (
+            <QuestionCard
+              key={item._id}
+              questionId={item._id}
+              date={item.datePosted}
+              title={item.title}
+              description={item.description}
+              upvotes={item.upvotes}
+              downvotes={item.downvotes}
+              userId={item.userId}
+              editRender={setUpdateQuestions}
+            />
+          ));
+          setQuestions(renderQuestions);
+          setUpdateQuestions(false);
+        })
+        .catch((err) => console.log(err));
+    } else if (tag != "") {
+      console.log(tag)
+      axios
+        .get("http://localhost:5000/api/questiontag/" + tag)
+        .then((res) => {
+          let questionData = res.data;
+          console.log(questionData)
+
+          if (dateOrder == "Oldest") {
+            questionData = questionData.sort(sortOldest);
+          } else if (dateOrder == "Newest") {
+            questionData = questionData.sort(sortNewest);
+          }
+
+          let renderQuestions = questionData.map((item) => (
+            <QuestionCard
+              key={item._id}
+              questionId={item._id}
+              date={item.datePosted}
+              title={item.title}
+              description={item.description}
+              upvotes={item.upvotes}
+              downvotes={item.downvotes}
+              userId={item.userId}
+              editRender={setUpdateQuestions}
+            />
+          ));
+          setQuestions(renderQuestions);
+          setUpdateQuestions(false);
+        })
+        .catch((err) => console.log(err));
+
+      console.log("Filter by tag")
+
+    }
+
+    if (dateOrder != "" && tag == "") {
+      axios
+        .get("http://localhost:5000/api/readquestions")
+        .then((res) => {
+          let questionData = res.data;
+
+          if (dateOrder == "Oldest") {
+            questionData = questionData.sort(sortOldest);
+          } else {
+            questionData = questionData.sort(sortNewest);
+          }
+
+          let renderQuestions = questionData.map((item) => (
+            <QuestionCard
+              key={item._id}
+              questionId={item._id}
+              date={item.datePosted}
+              title={item.title}
+              description={item.description}
+              upvotes={item.upvotes}
+              downvotes={item.downvotes}
+              userId={item.userId}
+              editRender={setUpdateQuestions}
+            />
+          ));
+
+          setUpdateQuestions(false);
+
+          setQuestions(renderQuestions);
+
+        })
+        .catch((err) => console.log(err));
+
+
+
+
+    }
+
+
+
   }, [updateQuestions]);
 
   return (
@@ -117,13 +220,13 @@ const QuestionsPage = () => {
         <div className="dropdown_con">
           <div className="dropdowns">
             <Box sx={{ minWidth: 200, width: "140px", margin: "20px" }}>
-              <FormControl fullWidth>
+              <FormControl fullWidth >
                 <InputLabel id="demo-simple-select-label">Posts</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={age}
-                  label="Age"
+                  value={dateOrder}
+                  label="dateOrder"
                   onChange={handleChange}
                   sx={{
                     background: "white",
@@ -151,10 +254,18 @@ const QuestionsPage = () => {
                     "border-radius": "40px",
                   }}
                 >
-                  <MenuItem value={"Java"}>Java</MenuItem>
+                  <MenuItem value={"Javascript"}>Javascript</MenuItem>
                   <MenuItem value={"Node"}>Node</MenuItem>
                   <MenuItem value={"Express"}>Express</MenuItem>
                   <MenuItem value={"React"}>React</MenuItem>
+                  <MenuItem value={"Python"}>Python</MenuItem>
+                  <MenuItem value={"C++"}>C++</MenuItem>
+                  <MenuItem value={"Swift"}>Swift</MenuItem>
+                  <MenuItem value={"Kotlin"}>Kotlin</MenuItem>
+                  <MenuItem value={"Chartjs"}>Chartjs</MenuItem>
+                  <MenuItem value={"Angular"}>Angular</MenuItem>
+                  <MenuItem value={"Bootstrap"}>Bootstrap</MenuItem>
+                  <MenuItem value={"MUI"}>MUI</MenuItem>
                 </Select>
               </FormControl>
             </Box>{" "}

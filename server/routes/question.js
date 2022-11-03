@@ -70,6 +70,38 @@ router.get('/api/readquestions', async (req, res) => {
     res.json(findQuestions);
 });
 
+// read questions by tag
+router.get('/api/questiontag/:tag', async (req, res) => {
+    const findQuestions = await newQuestionModel.find();
+    let filteredTags = [];
+    for (let i = 0; i < findQuestions.length; i++) {
+
+        const element = findQuestions[i];
+        let tagparameter = element.tags
+        let dataTrue = false
+        for (let s = 0; s < tagparameter.length; s++) {
+            console.log(tagparameter[s])
+            // params
+            let tag = req.params.tag.toLowerCase()
+            console.log(tag)
+            tagparameter = tagparameter[s].toLowerCase().includes(tag)
+            console.log(tagparameter)
+
+            if (tagparameter) {
+                dataTrue = true
+            }
+        }
+        if (dataTrue) {
+            filteredTags.push(element)
+        }
+
+
+
+    }
+    res.json(filteredTags);
+});
+
+
 
 //========================================================================================
 //Increase Upvote
