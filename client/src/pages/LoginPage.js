@@ -70,7 +70,7 @@ const LoginPage = (props) => {
    const [emailValidErrorText, setEmailValidErrorText] = useState("Open Window Email");
  
    const [passValidStyling, setPassValidStyling] = useState(false);
-   const [passValidErrorText, setPassValidErrorText] = useState("Password must contain");
+   const [passValidErrorText, setPassValidErrorText] = useState("Password");
  
  
    const ValidateEmail = () => {
@@ -92,20 +92,20 @@ const LoginPage = (props) => {
  
    // ======================Password Validation===========================
  
-   const ValidatePass = () => {
-     const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(\W|_)).{5,}$/;
-     let isValid = formValues['password'];
+  //  const ValidatePass = () => {
+  //    const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(\W|_)).{5,}$/;
+  //    let isValid = formValues['password'];
  
-     if (!isValid.match(passRegex)) {
-       setPassValidStyling(true);
-       setPassValidErrorText("Password invalid!")
-       setLoginButtonCheck('none');
-     } else {
-       setPassValidStyling(false);
-       setPassValidErrorText("Password Valid!")
-       setLoginButtonCheck('block');
-     }
-   }
+  //    if (!isValid.match(passRegex)) {
+  //      setPassValidStyling(true);
+  //      setPassValidErrorText("Password invalid!")
+  //      setLoginButtonCheck('none');
+  //    } else {
+  //      setPassValidStyling(false);
+  //      setPassValidErrorText("Password Valid!")
+  //      setLoginButtonCheck('block');
+  //    }
+  //  }
  
    // ==============================================================================
  
@@ -199,7 +199,7 @@ const loginUser = (e) => {
                 borderBlock: 'none',
                 borderBlockColor: '#f1f1f1'
               }}
-                id="outlined-basic" onChange={getValues} name="password" color='primary' type="password" label={passValidErrorText} variant="outlined" onBlur={ValidatePass} />
+                id="outlined-basic" onChange={getValues} name="password" color='primary' type="password" label='Password' variant="outlined"/>
 
               <a href='../UpdatePass' className='link'><p>Forgot your password?</p></a>
 

@@ -89,7 +89,7 @@ const RegisterPage = (props) => {
     const [emailValidErrorText, setEmailValidErrorText] = useState("Email Address(Open Window Registered Email)");
 
     const [passValidStyling, setPassValidStyling] = useState(false);
-    const [passValidErrorText, setPassValidErrorText] = useState("Password must contain");
+    const [passValidErrorText, setPassValidErrorText] = useState("Password");
 
     const [registerButtonCheck, setRegisterButtonCheck] = useState("block");
 
@@ -114,7 +114,7 @@ const RegisterPage = (props) => {
     // ======================Password Validation===========================
 
     const ValidatePass = () => {
-        const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(\W|_)).{5,}$/;
+        const passRegex = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/;
         let isValid = formValues['password'];
 
         if (!isValid.match(passRegex)) {

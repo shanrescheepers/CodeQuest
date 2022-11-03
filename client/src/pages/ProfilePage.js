@@ -260,79 +260,86 @@ const ProfilePage = () => {
 
     const [username, setUsername] = useState();
 
+
+
+    useEffect(()=> {
+        Axios.get('http://localhost:5000/api/readquestions')
+        .then(res => {
+
+            let questionData = res.data;
+
+            // console.log(questionData)
+            let questions = questionData.filter(user => user.userId === activeUser).map((item) =>
+                <ProfileQuestionCard
+                    key={item._id}
+                    questionId={item._id}
+                    date={item.datePosted}
+                    title={item.title}
+                    description={item.description}
+                    upvotes={item.upvotes}
+                    downvotes={item.downvotes}
+                    userId={item.userId} />)
+            setQuestions(questions);
+
+            setQuestionAmmount(questions.length);
+
+            questionData.filter(user => user.userId === activeUser).forEach((val) => {
+                numUpVotesQuestions += val.upvotes;
+                numDownVotesQuestions += val.downvotes;
+            });
+
+            // console.log(questions.length);
+
+            setUpVotesQuestions(numUpVotesQuestions)
+            setDownVotesQuestions(numDownVotesQuestions)
+            // console.log("Up Votes Questions: " + numUpVotesQuestions + " " + "Down Votes Questions: " + numDownVotesQuestions);
+
+        })
+        .catch(err => console.log(err));
+
+    Axios.get('http://localhost:5000/api/readAllAnswers')
+        .then(res => {
+
+            let answerData = res.data;
+            let answers = answerData.filter(user => user.userId === activeUser).map((item) =>
+                <ProfileAnswerCard
+                    key={item._id}
+                    answerId={item._id}
+                    date={item.datePosted}
+                    code={item.code}
+                    screenshots={item.screenshots}
+                    description={item.description}
+                    upvotes={item.upvotes}
+                    downvotes={item.downvotes}
+                    userId={item.userId}
+                />)
+            setAnswers(answers);
+
+            setAnswerCount(answers.length);
+
+            answerData.filter(user => user.userId === activeUser).forEach((val) => {
+                numUpVotesAnswers += val.upvotes;
+                numDownVotesAnswers += val.downvotes;
+            });
+
+            setUpVotesAnswers(numUpVotesAnswers)
+            setDownVotesAnswers(numDownVotesAnswers)
+            // console.log("Up Votes Answers: " + numUpVotesAnswers + " " + "Down Votes Answers: " + numDownVotesAnswers);
+
+        })
+        .catch(err => console.log(err));
+
+
+    totalUpVotes = upVotesQuestions + upVotesAnswers;
+    totalDownVotes = downVotesQuestions + downVotesAnswers;
+
+    setReliability(totalUpVotes - totalDownVotes);
+    },[questions])
+
+
     useEffect(() => {
 
-        Axios.get('http://localhost:5000/api/readquestions')
-            .then(res => {
-
-                let questionData = res.data;
-
-                // console.log(questionData)
-                let questions = questionData.filter(user => user.userId === activeUser).map((item) =>
-                    <ProfileQuestionCard
-                        key={item._id}
-                        questionId={item._id}
-                        date={item.datePosted}
-                        title={item.title}
-                        description={item.description}
-                        upvotes={item.upvotes}
-                        downvotes={item.downvotes}
-                        userId={item.userId} />)
-                setQuestions(questions);
-
-                setQuestionAmmount(questions.length);
-
-                questionData.filter(user => user.userId === activeUser).forEach((val) => {
-                    numUpVotesQuestions += val.upvotes;
-                    numDownVotesQuestions += val.downvotes;
-                });
-
-                // console.log(questions.length);
-
-                setUpVotesQuestions(numUpVotesQuestions)
-                setDownVotesQuestions(numDownVotesQuestions)
-                // console.log("Up Votes Questions: " + numUpVotesQuestions + " " + "Down Votes Questions: " + numDownVotesQuestions);
-
-            })
-            .catch(err => console.log(err));
-
-        Axios.get('http://localhost:5000/api/readAllAnswers')
-            .then(res => {
-
-                let answerData = res.data;
-                let answers = answerData.filter(user => user.userId === activeUser).map((item) =>
-                    <ProfileAnswerCard
-                        key={item._id}
-                        answerId={item._id}
-                        date={item.datePosted}
-                        code={item.code}
-                        screenshots={item.screenshots}
-                        description={item.description}
-                        upvotes={item.upvotes}
-                        downvotes={item.downvotes}
-                        userId={item.userId}
-                    />)
-                setAnswers(answers);
-
-                setAnswerCount(answers.length);
-
-                answerData.filter(user => user.userId === activeUser).forEach((val) => {
-                    numUpVotesAnswers += val.upvotes;
-                    numDownVotesAnswers += val.downvotes;
-                });
-
-                setUpVotesAnswers(numUpVotesAnswers)
-                setDownVotesAnswers(numDownVotesAnswers)
-                // console.log("Up Votes Answers: " + numUpVotesAnswers + " " + "Down Votes Answers: " + numDownVotesAnswers);
-
-            })
-            .catch(err => console.log(err));
-
-
-        totalUpVotes = upVotesQuestions + upVotesAnswers;
-        totalDownVotes = downVotesQuestions + downVotesAnswers;
-
-        setReliability(totalUpVotes - totalDownVotes);
+    
 
         if (reliability > 20 && reliability < 40) {
             setBronze(false);
@@ -474,7 +481,7 @@ const ProfilePage = () => {
 
 
     // }, [questions]);
-}, []);
+}, [reliability]);
 
 
     // Get Modal Values 
@@ -560,7 +567,9 @@ const ProfilePage = () => {
         }
 
 
-    }, [questions])
+    }, [reliability])
+
+
 
     if (questionAmmount > 0) {
         badgeOneCheck = true;
