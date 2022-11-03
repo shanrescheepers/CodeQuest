@@ -439,7 +439,7 @@ import DeleteAnswerModal from '../modals/DeleteAnswerModal';
 
     return (
         <>
-        {deleteAnswerModal}
+       
             <div className="show_answered_con" style={{ backgroundColor: questionColor }}>
                 <div className="show_answered_blue_con">
 
@@ -509,6 +509,7 @@ import DeleteAnswerModal from '../modals/DeleteAnswerModal';
                                 </div>
                         </div>
                     </div>
+                    {deleteAnswerModal}
 
                 </div>
             </div>

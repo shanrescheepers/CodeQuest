@@ -432,8 +432,9 @@ const ProfileQuestionCard = (props) => {
 
     return (
         <>
-         {deleteQuestionModal}
+         
             <div className='question-con' >
+       
     
                 <div className='question-con-content'>
                     <div className='top-block'>
@@ -488,6 +489,7 @@ const ProfileQuestionCard = (props) => {
 
                         <small><p>{answersLength} Answers</p></small>
                     </div>
+                    {deleteQuestionModal}
                 </div>
             </div>
         </>
