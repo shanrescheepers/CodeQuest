@@ -6,6 +6,7 @@ const multer = require('multer');
 //link answer schema 
 const newAnswerModel = require('../models/addAnswer');
 const AnswerVoteSchema = require('../models/answerVote');
+const UserSchema = require('../models/user');
 
 //multer middleware, make file for screenshot image storage
 const answerScreenshotStorage = multer.diskStorage({
@@ -20,7 +21,7 @@ const answerScreenshotStorage = multer.diskStorage({
 
 const uploadAnswerScreenshots = multer({ storage: answerScreenshotStorage });
 
-router.post('/api/addanswer', uploadAnswerScreenshots.array('screenshots'), (req, res, next) => {
+router.post('/api/addanswer', uploadAnswerScreenshots.array('screenshots'), async (req, res, next) => {
 
     const data = JSON.parse(req.body.information);
     // console.log(data);
@@ -37,9 +38,24 @@ router.post('/api/addanswer', uploadAnswerScreenshots.array('screenshots'), (req
         datePosted: data.datePosed,
     });
 
+    const findUser= await UserSchema.findById(data.userId);
+    // console.log("This is user:", findUser);
+    // console.log("asked:", findUser.questionsAsked);
+
+    let CurrentAnswered = findUser.questionsAnswered;
+
+    const updateQuestionsAnswered = await UserSchema.updateOne(
+        { _id: data.userId },
+        {
+            $set: {
+                questionsAnswered: CurrentAnswered +1,
+            }
+        }
+    );
+
     addAnswer.save()
         .then(item => {
-            res.json(item)
+            res.json([item, updateQuestionsAnswered])
         })
         .catch(err => {
             res.status(400).json({ msg: 'There was an error posting your answer.', err });

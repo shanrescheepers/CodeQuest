@@ -7,6 +7,7 @@ const multer = require('multer');
 const newQuestionModel = require('../models/newQuestion');
 const VoteSchema = require('../models/votes');
 const newAnswerModel = require('../models/addAnswer');
+const UserSchema = require('../models/user');
 
 //multer middleware, make file for screenshot image storage
 const questionScreenshotStorage = multer.diskStorage({
@@ -21,11 +22,10 @@ const questionScreenshotStorage = multer.diskStorage({
 
 const uploadQuestionScreenshots = multer({ storage: questionScreenshotStorage });
 
-router.post('/api/newquestion', uploadQuestionScreenshots.array('screenshots'), (req, res, next) => {
+router.post('/api/newquestion', uploadQuestionScreenshots.array('screenshots'), async (req, res, next) => {
 
     const data = JSON.parse(req.body.information);
-    // console.log(data);
-    // console.log(req.files);
+
 
     const newQuestion = new newQuestionModel({
         userId: data.userId,
@@ -39,9 +39,24 @@ router.post('/api/newquestion', uploadQuestionScreenshots.array('screenshots'), 
         screenshots: req.files,
     });
 
+    const findUser= await UserSchema.findById(data.userId);
+    // console.log("This is user:", findUser);
+    // console.log("asked:", findUser.questionsAsked);
+
+    let CurrentAsked = findUser.questionsAsked;
+
+    const updateQuestionsAsked = await UserSchema.updateOne(
+        { _id: data.userId },
+        {
+            $set: {
+                questionsAsked: CurrentAsked +1,
+            }
+        }
+    );
+
     newQuestion.save()
         .then(item => {
-            res.json(item)
+            res.json([item, updateQuestionsAsked])
         })
         .catch(err => {
             res.status(400).json({ msg: 'There was an error posting your question', err });
@@ -213,8 +228,30 @@ router.get('/api/readvote', async (req, res) => {
 
 
 router.delete('/api/deletequestion/:id', async (req, res) => {
+
+    const findQuestion= await newQuestionModel.findById(req.params.id);
+    console.log("fint q:", findQuestion);
+
     const question = await newQuestionModel.remove({ _id: req.params.id });
     res.json(question);
+
+    // const findUser= await UserSchema.findById(data.userId);
+    // console.log("This is user:", findUser);
+    // console.log("asked:", findUser.questionsAsked);
+
+    // let CurrentAsked = findUser.questionsAsked;
+
+    // const updateQuestionsAsked = await UserSchema.updateOne(
+    //     { _id: data.userId },
+    //     {
+    //         $set: {
+    //             questionsAsked: CurrentAsked -1,
+    //         }
+    //     }
+    // );
+
+    // res.json(updateQuestionsAsked);
+
 });
 
 
