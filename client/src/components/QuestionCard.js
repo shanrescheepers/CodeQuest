@@ -209,7 +209,11 @@ const QuestionCard = (props) => {
     const upImgURL = ('Votes/' + arrowImgUp + '.png');
     const downImgURL = ('Votes/' + arrowImgDown + '.png');
 
-
+    //takes user to a user's details page
+    const goToUserDeatilsPage =  () => {
+        navigate('/userprofile');
+        sessionStorage.setItem('userDetails', props.userId);
+    }
 
     return (
         <>{flagModal}
@@ -217,9 +221,9 @@ const QuestionCard = (props) => {
 
                 <div className='question-con-content'>
                     <div className='top-block'>
-                        <div className='user-info-block' onClick={() => goToIndividualQuestion()}>
-                            <div className='profile-circle question' style={{ backgroundColor: bgColor }}><img src={imgURL} className="profile-Img question"></img></div>
-                            <div className='user-info'>
+                        <div className='user-info-block'>
+                            <div className='profile-circle question' style={{ backgroundColor: bgColor }}><img src={imgURL} className="profile-Img question" onClick={goToUserDeatilsPage}></img></div>
+                            <div onClick={goToUserDeatilsPage} className='user-info'>
                                 <h4>{username}</h4>
                                 <p>{formatDate}</p>
                             </div>
@@ -235,9 +239,6 @@ const QuestionCard = (props) => {
                                 {/* <OutlinedFlagIcon fontSize="large" /> */}
                             </div>
                         )}
-
-
-
 
                     </div>
 

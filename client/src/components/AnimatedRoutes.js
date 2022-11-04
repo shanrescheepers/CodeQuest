@@ -24,6 +24,7 @@ import FilterPage from "../pages/FilterPage";
 import Auth from '../pages/Auth';
 import PassReset from '../pages/PassReset';
 import UpdatePass from '../pages/UpdatePass';
+import UserDeailsProfilePage from '../pages/UserDeailsProfilePage';
 
 function AnimatedRoutes() {
 
@@ -86,6 +87,7 @@ function AnimatedRoutes() {
           <Route path="/PassReset" element={<PassReset funcNav={setShowNav} />} />
           <Route path="/UpdatePass" element={<UpdatePass funcNav={setShowNav} />} />
           <Route path="*" element={<FourOhFour funcNav={setShowNav} />} />
+          <Route path= "/userprofile" element={<UserDeailsProfilePage/>}/>
 
         </Routes>
       </AnimatePresence>
