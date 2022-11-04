@@ -67,8 +67,21 @@
 }
 
 
+.profileDetailsCircle {
+    width: 300px;
+    height: 300px;
+    border-radius: 500px;
+    overflow: hidden;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
 
-
+.user-details-profile-pic {
+    width: 200px;
+    height: 200px;
+    margin: auto;
+}
 
 .pp_rank_score_con {
     width: 90%;
