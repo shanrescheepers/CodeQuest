@@ -7,8 +7,8 @@ const ThirdAnswerAward = () => {
             <div className='award-card-con'>
                 <div className='award-content'>
                     <img src={image} alt='third answer award' className='badge-img'/>
-                    <h4>10 Points</h4>
-                    <small><p>You are a gift! You received an award for earning ten points for your question.</p></small>
+                    <h4>10th Answer</h4>
+                    <small><p>You are a gift! You received an award for answering your tenth question.</p></small>
                 </div>
             </div>
         </div>
