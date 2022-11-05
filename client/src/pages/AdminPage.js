@@ -29,6 +29,7 @@ import FlaggedAnswers from '../components/AdminComponents/FlaggedAnswers';
 
 const AdminPage = (props) => {
     props.funcNav(true);
+    
 
     // Links function
     const [value, setValue] = React.useState('1');
@@ -118,7 +119,28 @@ const AdminPage = (props) => {
     //         });
     // }
 
+//verify User
 
+const navigate = useNavigate();
+useEffect(()=>{
+
+    let verifyUser = {token: sessionStorage.getItem('token')};
+    if(!verifyUser.token){
+      navigate('/');
+      sessionStorage.clear();
+    }else{
+      Axios.post('http://localhost:5000/api/verifytoken', verifyUser)
+      .then(res =>{
+        console.log(res.data);
+        if(res.data.verified === false){
+          navigate('/');
+          sessionStorage.clear();
+  
+        }
+      })
+    }
+  
+  }, []);
 
     return (
         <motion.div className='admin'
