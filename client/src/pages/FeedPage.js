@@ -60,6 +60,26 @@ const [updateQuestions, setUpdateQuestions] = useState();
 
 useEffect(()=>{
 
+        //verifyUser
+        let verifyUser = {token: sessionStorage.getItem('token')};
+        if(!verifyUser.token){
+          navigate('/');
+          sessionStorage.clear();
+        }else{
+          axios.post('http://localhost:5000/api/verifytoken', verifyUser)
+          .then(res =>{
+            console.log(res.data);
+            if(res.data.verified === false){
+              navigate('/');
+              sessionStorage.clear();
+      
+            }
+          })
+        }
+
+        
+        
+
   axios.get('http://localhost:5000/api/readquestions')
   .then(res =>{
 
